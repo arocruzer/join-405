@@ -10,32 +10,55 @@
 </head>
 <body>
     <header>
-        <img class="header-logo" src="../Assets/header_logo.png" alt="join-logo">
+        <img class="header-logo" src="./img/header_logo.png" alt="join-logo">
         <div class="user-button"> <!--user logo -->
             <div class="inside-radius">
                 <h5>G</h5>
             </div>
         </div>
     </header>
-    <section>
-        <h1>Board</h1>
-        <div>+</div>
-    </section>
-    <div>
-        <input type="text" id="search" placeholder="Find Task">
-        <button type="submit">Suchen</button>
-    </div>
-    <section>
-        <h2>To do</h2>
-        <div>+</div>
-    </section>
-    <section>
-        <h2>Await feedback</h2>
-        <div>+</div>
-    </section>
-    <section>
-        <h2>Done</h2>
-    </section>
-    
+    <main>
+        <div class="section">
+            <h1>Board</h1>
+            <div class="add-task-board">+</div>
+        </div>
+        <div class="search-container">
+            <input type="text" id="search" placeholder="Find Task">
+            <img class="search-icon" src="./img/search.png" alt="search">
+        </div>
+        <section class="task-section">
+            <div class="task-header">
+                <h2>To do</h2>
+                <div class="add-task">+</div>
+            </div>
+            <div class="task-list">
+                <div class="no-tasks">No tasks To do</div>
+            </div>
+        </section>
+        <section class="task-section">
+            <div class="task-header">
+                <h2>In progress</h2>
+                <div class="add-task">+</div>
+            </div>
+            <div class="task-list">
+                <div class="no-tasks">No tasks In progress</div>
+            </div>
+        </section>
+        <section class="task-section">
+            <div class="task-header">
+                <h2>Await feedback</h2>
+                <div class="add-task">+</div>
+            </div>
+            <div class="task-list">
+                <div class="no-tasks">No tasks Await feedback</div>
+            </div>
+        </section>
+        <section class="task-section">
+            <h2>Done</h2>
+            <div class="task-list">
+                <div class="no-tasks">No tasks Done</div>
+            </div>
+        </section>
+    </main>
 </body>
 </html>
