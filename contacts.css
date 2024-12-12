@@ -81,16 +81,12 @@
 }
 
 /* Contact Detail */
-.wrapper{
-    margin-top: 4px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    width: 100%;
-}
+
 .contact-details-wrapper{
+    margin-top: 4px;
     padding: 32px 16px;
     background-color: #F6F7F8;
-    height: 929px;
+    height: 926px;
 }
 
 .contact-detail-title-wrapper{
@@ -173,4 +169,10 @@
     font-weight: 400;
     line-height: 19.2px;
     color: #007CEE;
+}
+
+.three-points-menu{
+    position: fixed;
+    top: 70%;
+    left: 80%;
 }
