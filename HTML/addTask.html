@@ -3,10 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="../Assets/favIcon.png">
+    <link rel="stylesheet" href="../style.css">
     <title>Join</title>
 </head>
 <body>
-    
+    <header>
+        <img class="header-logo" src="../Assets/header_logo.png" alt="join-logo">
+        <div class="user-button"> <!--user logo -->
+            <div class="inside-radius">
+                <h5>G</h5>
+            </div>
+        </div>
+    </header>
+    <div class="hero">
+        <div class="title-arrow">
+            <h1>Add Task</h1>
+        </div>
+        <div class="input-containers">
+            <p>Title<span>*</span></p>
+            <input class="title-input" type="text" placeholder="Enter a title">
+        </div>
+        <div class="input-containers">
+            <p>Description</p>
+            <textarea class="description-input" placeholder="Enter a Description"></textarea>
+        </div>
+        <div class="input-containers">
+            <p>Assigned to</p>
+            <input class="assignTo-input" list="browsers" placeholder="Select contacts to assign">
+            <datalist id="browsers">
+                <option value="Internet Explorer">
+                <option value="Firefox">
+                <option value="Google Chrome">
+                <option value="Opera">
+                <option value="Safari">
+            </datalist>
+        </div>
+        <div class="input-containers">
+            <p>Due date<span>*</span></p>
+            <input class="date-input" type="date">
+        </div>
+        <div class="prio-container">
+            <p>Prio</p>
+            <div class="prio-btn-container">
+                <button class="btn-prio">Urgent <img src="../Assets/prio_urgent.png" alt="Urgent"></button>
+                <button class="btn-prio">Medium <img src="../Assets/prio_medium.png" alt="Medium"></button>
+                <button class="btn-prio">Low <img src="../Assets/prio_low.png" alt="Low"></button>
+            </div>
+        </div>
+        <div class="clear-addTask-container">
+            <button class="clear-btn">Clear <img src="../Assets/iconoir_cancel.png" alt=""></button>
+            <button class="creatTask-btn">Creat Task <img src="../Assets/check.png" alt=""></button>
+        </div>
 </body>
 </html>
