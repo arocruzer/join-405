@@ -79,3 +79,98 @@
     top: 80%;
     left: 80%;
 }
+
+/* Contact Detail */
+.wrapper{
+    margin-top: 4px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width: 100%;
+}
+.contact-details-wrapper{
+    padding: 32px 16px;
+    background-color: #F6F7F8;
+    height: 929px;
+}
+
+.contact-detail-title-wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 32px;
+}
+
+.page-title{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.page-title h1{
+    font-size: 47px;
+    font-weight: 700;
+}
+
+.page-title p{
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.blue-line{
+    height: 3px;
+    background-color: #29ABE2;
+    width: 90px;
+    display: flex;
+}
+
+.contact-detail-view{
+    display: flex;
+    flex-direction: column;
+    gap: 21px;
+
+}
+
+.contact-avatar-and-name{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.detail-contact-avatar{
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    background-color: rgb(255, 89, 0);
+    color: white;
+    font-size: 27px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-avatar-and-name h2{
+    font-size: 36px;
+    font-weight: 700;
+
+}
+
+.contact-detail-view p{
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.contact-detail-view h5{
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19.2px;
+    color: #000000;
+}
+
+.contact-detail-view a{
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2px;
+    color: #007CEE;
+}
