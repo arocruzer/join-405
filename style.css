@@ -46,43 +46,58 @@ h5 {
   font-size: 14px;
 }
 
-.hero{
-    padding-top: 32px;
-    padding-left: 16px;
-    padding-right: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+.hero {
+  padding-top: 32px;
+  padding-left: 16px;
+  padding-right: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-h1{
-    font-weight: 700;
-    font-size: 47px;
+h1 {
+  font-weight: 700;
+  font-size: 47px;
 }
 
-.title-arrow{
-    display: flex;
-    justify-content: space-between;
-    align-items: top;
+.title-arrow {
+  display: flex;
+  justify-content: space-between;
+  align-items: top;
 }
 
-.arrow-left{
-    height: 32px;
-    width: 32px;
+.arrow-left {
+  height: 32px;
+  width: 32px;
 }
 
-.imprint-title{
-    padding-bottom: 16px;
+.imprint-title {
+  padding-bottom: 16px;
 }
-.email-div{
-    padding-top: 16px;
+
+.email-div {
+  padding-top: 16px;
 }
-h2{
-    font-size: 16px;
-    font-weight: 800;
-    line-height: 19.2px;
-    text-align: left;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
-    
+
+h2 {
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 19.2px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 41px 1fr; 
+  padding: 16px 0;
+}
+
+.grid-container div {
+  padding: 0px;
+}
+
+.grid-container h1 {
+  font-size: 24px;
 }
