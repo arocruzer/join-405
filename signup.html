@@ -6,7 +6,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"/>
   <link rel="icon" type="image/x-icon" href="../Assets/favIcon.png" />
-  <link rel="stylesheet" href="./login.css" />
+  <link rel="stylesheet" href="./CSS/signup.css" />
+  <script src="./script.js"></script>
   <title>Join</title>
   <body>
     <header>
@@ -16,26 +17,27 @@
     <div class="hero">
       <div class="login-window">
         <div class="arrow-sigup-container">
-          <a href=""><img class="arrow" src="./Assets/arrow-left-line.png" alt=""></a>
+          <a href="./index.html"><img class="arrow" src="./Assets/arrow-left-line.png" alt=""></a>
           <div class="login-title">
             <h1>Sign up</h1>
             <hr width="88px" color="#29ABE2" size="3" />
           </div>
         </div>
+        <form onsubmit="addUser(); return false;">
         <div class="input-box">
           <input type="text" id="name" placeholder="Name" required />
           <img src="./Assets/person.png" alt="" />
         </div>
         <div class="input-box">
-          <input type="email" name="" id="email" placeholder="Email"  required/>
+          <input type="email" id="email" placeholder="Email"  required/>
           <img class="input-img" src="./Assets/mail (1).png" alt="" />
         </div>
         <div class="input-box">
-          <input type="password" name="" id="password" placeholder="Password"  required/>
+          <input type="password" id="password" placeholder="Password"  required/>
           <img src="./Assets/lock.png" alt="" />
         </div>
         <div class="input-box">
-          <input type="password" name="password-again" id="" placeholder=" Confirm Password" required />
+          <input type="password" id="repeat-password" placeholder=" Confirm Password" required />
           <img src="./Assets/lock.png" alt="" />
         </div>
         <div class="checkbox-container">
@@ -45,11 +47,12 @@
         <div class="login-signup-container">
           <button class="login-btn">Sign up</button>
         </div>
+      </form>
       </div>
 
       <footer>
-        <a href="">Privacy Policy</a>
-        <a href="">Legal notice</a>
+        <a href="./HTML/privacyPolicy.html">Privacy Policy</a>
+        <a href="./HTML/legalNotice.html">Legal notice</a>
       </footer>
     </div>
   </body>

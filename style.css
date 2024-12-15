@@ -17,7 +17,9 @@ header {
   height: 39px;
   width: 32px;
 }
-
+button{
+  cursor: pointer;
+}
 .user-button {
   display: flex;
   align-items: center;

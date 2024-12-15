@@ -25,7 +25,9 @@ h4{
 header {
   padding: 38px;
 }
-
+button{
+  cursor: pointer;
+}
 .login-logo {
   height: 78px;
   width: 64px;
@@ -120,6 +122,10 @@ header {
     gap: 35px;
 }
 
+.signup-btn a{
+  color: white;
+}
+
 footer{
     display: flex;
     justify-content: space-between;
@@ -136,24 +142,24 @@ a{
     font-weight: 400;
 }
 
-.checkbox-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    gap: 8px;
+form{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  gap: 24px;
 }
 
-.checkbox-container a{
-    color: #29ABE2;
-}
-
-.arrow-sigup-container{
-    display: flex;
-    align-items: flex-start;
-}
-
-.arrow-sigup-container a{
-    position: absolute;
-    left: 56px;
+.msg-box{
+  height: 74px;
+  width: 326px;
+  position: absolute;
+  top: 50%;
+  background-color: #2a3647;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 20px;
+  border-radius: 20px;
 }
