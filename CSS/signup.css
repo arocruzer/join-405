@@ -89,6 +89,8 @@
   }
   .input-box input {
     border: none;
+    height: 44px;
+    width: 100%;
   }
   .input-img {
     height: 24px;
