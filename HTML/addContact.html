@@ -7,8 +7,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="../Assets/favIcon.png">
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="../contacts.css">
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/contacts.css">
+
+    <script src="https://kit.fontawesome.com/c6f49530cb.js" crossorigin="anonymous"></script>
+
+
     <title>Join</title>
 </head>
 
@@ -16,21 +20,22 @@
     <div class="overlay-wrapper">
         <div class="overlay-edit-contact">
             <div class="middle-avatar">TW</div>
-            <div class="cross-close">X</div>
+
             <div class="upper-half">
+                <div class="cross-close">X</div>
                 <div class="edit-contact-title">
-                    <h1>Edit contact</h1>
+                    <h1>Add contact</h1>
                     <h6>Tasks are better with a team!</h6>
                     <div class="blue-line"></div>
                 </div>
             </div>
     
             <div class="lower-half">
-                <div class="input-fields">
+                <div class="input-fields-add">
                     <input class="input-person" placeholder="Name" type="text">
                     <input class="input-mail" placeholder="Email" type="email">
                     <input class="input-phone" placeholder="Phone" type="tel">
-                <button>Create contact</button>
+                <button class="create-button">Create contact<i class="fa-sharp-duotone fa-solid fa-check"></i></button>
             </div>
         </div>
     </div>
