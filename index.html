@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="./CSS/login.css">
   
   <title>Join</title>
-  <body id="body">
+  <body id="body" onload="init()">
     <header>
         <img class="login-logo" src="./Assets/favIcon.png" alt="">
   </header>
@@ -20,16 +20,22 @@
       <h1>Log in</h1>
       <hr width="88px" color="#29ABE2" size="3">
     </div>
+    <div>
     <div class="input-box">
       <input type="email" name="" id="email" placeholder="Email">
       <img class="input-img" src="./Assets/mail (1).png" alt="">
     </div>
+    <div class="erorr-msg" id="email-error"></div>
+    </div>
+    <div>
     <div class="input-box">
       <input type="password" name="" id="password" placeholder="Password">
       <img src="./Assets/lock.png" alt="">
     </div>
+    <div class="erorr-msg" id="password-error"></div>
+    </div>
     <div class="login-signup-container">
-      <button class="login-btn">Log in</button>
+      <button onclick="logIn()" class="login-btn">Log in</button>
       <button class="guest-login">Guest Log in</button>
     </div>
     </div>
@@ -39,10 +45,11 @@
     </div>
     <div class="msg-box" id="msgBox"></div>
   <footer>
-    <a href="">Privacy Policy</a>
-    <a href="">Legal notice</a>
+    <a href="./HTML/privacyPolicy.html" target="_blank">Privacy Policy</a>
+    <a href="./HTML/legalNotice.html" target="_blank">Legal notice</a>
   </footer>
 </div>
 <script src="./JS/template.js"></script>
+<script src="./JS/login.js"></script>
   </body>
 </html>

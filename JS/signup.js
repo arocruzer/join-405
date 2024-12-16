@@ -1,4 +1,4 @@
-let user = [];
+
 const BASE_URL = "https://join-405-43178-default-rtdb.europe-west1.firebasedatabase.app/"
 
 function addUser() {
@@ -7,8 +7,8 @@ function addUser() {
     let name = document.getElementById("name");
     let repeatPassword = document.getElementById("repeat-password");
 
-    user.push({name: name.value, email: email.value, password: password.value});
-    console.log(user);
+    users.push({name: name.value, email: email.value, password: password.value});
+    console.log(users);
     email.value = "";
     password.value = "";
     name.value = "";
