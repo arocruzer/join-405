@@ -1,6 +1,5 @@
 async function init() {
     await includeHTML();
-    document.getElementById('headline').innerHTML = 'Herzlich willkommen!';
 }
 
 async function includeHTML() {
@@ -16,3 +15,28 @@ async function includeHTML() {
         }
     }
 }
+
+async function loadSummary() {
+    console.log("Summary");
+    let element = document.getElementById("main-content");
+    let resp = await fetch("./HTML/summary.html");
+    if (resp.ok) {
+        element.innerHTML = await resp.text();
+    } else {
+        element.innerHTML = 'Page not found';
+    }
+}
+
+
+// const BASE_URL = "https://join-405-43178-default-rtdb.europe-west1.firebasedatabase.app/";
+
+
+// function init() {
+//     loadData();
+// }
+
+// async function loadData(path="") {
+//     let respons = await fetch(BASE_URL + path + ".json"); //+".json" muss immer damit man Datenbank finden kann
+//     let responsToJason = await respons.json();
+//     console.log(responsToJason.users);
+// }

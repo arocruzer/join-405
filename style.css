@@ -1,6 +1,7 @@
 * {
   margin: 0;
   font-family: inter;
+  cursor: pointer;
 }
 
 header {
@@ -116,7 +117,7 @@ footer {
   bottom: 0;
   background: #2A3647;
   color: #CDCDCD;
-  z-index: 1000;
+  z-index: 999;
 
   box-shadow: 0px 0px 4px 0px #0000001A;
 
@@ -129,7 +130,6 @@ footer {
   align-items: center;
   width: 80px;
   height: 76px;
-  border-radius: 16px;
 }
 
 .footer-button {
@@ -139,19 +139,16 @@ footer {
   align-items: center;
   width: 76px;
   height: 76px;
+
+}
+
+.footer-button :hover {
+  fill: #FFFFFF;
+}
+
+.footer-button:hover {
+  background-color: #091931;
   border-radius: 16px;
-}
-
-.footer-button-frame :hover {
-  background-color: #29abe2;
-}
-
-.footer-button p {
-  font-family: Open Sans;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 16.8px;
-  text-align: center;
 }
 
 footer svg {
