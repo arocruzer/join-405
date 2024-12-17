@@ -33,6 +33,7 @@ function renderContacts(){
         const groupElement = document.getElementById(`contact-container-${currentLetter}`);
         if (groupElement) {
             groupElement.innerHTML += renderCurrentContacts(index, initialien, vorname, nachname, );
+            addBackgrounds();
             // setUserTagColor(vorname, nachname, i);
         } else {
             console.warn(`Gruppe mit der ID 'contact-container-${currentLetter}' wurde nicht gefunden.`);
@@ -52,18 +53,47 @@ function renderCurrentLetter(currentLetter){
     </div>`;
 }
 
-function renderCurrentContacts(index, initialien){
-    return`
-    <div class="contact" id="contact-id-${index} onclick="openContactDetails()">
+function renderCurrentContacts(index, initialien) {
+    return `
+        <div class="contact" id="contact-id-${index}" onclick="openContactDetails(${index})">
             <div class="contact-avatar">${initialien}</div>
             <div class="contact-avatar-infos">
                 <span>${loadedContacts[index].name}</span>
-                <a href="#">${loadedContacts[index].email}</a>
+                <a href="mailto:${loadedContacts[index].email}">${loadedContacts[index].email}</a>
             </div>
-        </div>            
-    `
+        </div>
+    `;
 }
 
-function openContactDetails(){
-    console.log("Hi");
+function openContactDetails(index) {
+    console.log(`Kontakt ${index} wurde geklickt!`);
+    console.log(loadedContacts[index]);
 }
+
+// Fügt nach dem Rendern einen Hintergrund hinzu
+function addBackgrounds() {
+    const avatars = document.querySelectorAll('.contact-avatar');
+    avatars.forEach(avatar => {
+        avatar.style.backgroundColor = getRandomColor();
+    });
+}
+
+// Zufällige Hintergrundfarbe berechnen
+function getRandomColor() {
+    const colors = ['#FF5733', '#33FF57', '#3357FF', '#FF33A1', '#A133FF'];
+    return colors[Math.floor(Math.random() * colors.length)];
+}
+
+
+const colors = [
+    '#FF5733', // Warmes Orange
+    '#33FFBD', // Türkisgrün
+    '#FF33A6', // Pink
+    '#335BFF', // Blau
+    '#FFC300', // Sonnengelb
+    '#DAF7A6', // Hellgrün
+    '#C70039', // Dunkelrot
+    '#900C3F', // Aubergine
+    '#581845', // Dunkles Violett
+    '#6C757D'  // Grau-Blau
+];
