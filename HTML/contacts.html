@@ -7,8 +7,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="../Assets/favIcon.png">
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="../contacts.css">
+
+    <link rel="stylesheet" href="../CSS/contacts.css">
+    <link rel="stylesheet" href="../CSS/style.css">
+
+    <script src="../JS/contacts.js"></script>
+
     <title>Join</title>
 </head>
 
@@ -21,11 +25,11 @@
     </div>
 </header>
 
-<body>
+<body onload="loadAllContacts()">
 
-<div class="contact-wrapper">
+<div class="contact-wrapper" onclick="openContactDetails">
     <div class="contact-list-wrapper">
-        <div class="contacts-list">
+        <div class="contacts-list" id="contacts">
             <div class="contacts-section-header">
                 <h3>A</h3>
                 <div class="seperation-line"></div>
@@ -38,13 +42,7 @@
                         <a href="#">alex@muster.de</a>
                     </div>
                 </div>
-                <div class="contact">
-                    <div class="contact-avatar">A</div>
-                    <div class="contact-avatar-infos">
-                        <span>Andi Obst</span>
-                        <a href="#">andi@obst.de</a>
-                    </div>
-                </div>
+                
             </div>
 
         <!-- zu Demon zwecken -->
