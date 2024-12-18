@@ -16,10 +16,10 @@ async function includeHTML() {
     }
 }
 
-async function loadSummary() {
-    console.log("Summary");
+async function loadContent(page) {
+    console.log(page);
     let element = document.getElementById("main-content");
-    let resp = await fetch("./HTML/summary.html");
+    let resp = await fetch("./HTML/" + page + ".html");
     if (resp.ok) {
         element.innerHTML = await resp.text();
     } else {

@@ -1,7 +1,6 @@
 * {
   margin: 0;
   font-family: inter;
-  cursor: pointer;
 }
 
 header {
@@ -133,6 +132,13 @@ footer {
 }
 
 .footer-button {
+  background-color: unset;
+  border: none;
+  color: unset;
+  padding: unset;
+  cursor: pointer;
+
+
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -140,10 +146,30 @@ footer {
   width: 76px;
   height: 76px;
 
+  transition: color 0.3s, fill 0.3s;
 }
 
-.footer-button :hover {
-  fill: #FFFFFF;
+
+
+.footer-button:hover .footer-button-icon path {
+  fill: white; /* Icon weiß färben */
+  transition: fill 0.1s; /* Sanfter Übergang */
+}
+
+.footer-button:hover .footer-button-text {
+  color: white; /* Text weiß färben */
+  transition: color 0.1s; /* Sanfter Übergang */
+}
+
+.footer-button-icon {
+  fill: #cdcdcd; /* Standardfarbe für Icon */
+  transition: fill 0.1s; /* Sanfter Übergang */
+}
+
+.footer-button-text {
+  color: #cdcdcd; /* Standardfarbe für Text */
+  font-size: 14px;
+  transition: color 0.3s; /* Sanfter Übergang */
 }
 
 .footer-button:hover {
