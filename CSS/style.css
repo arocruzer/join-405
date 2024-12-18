@@ -47,42 +47,46 @@ h5 {
 }
 
 .hero{
-    padding-top: 32px;
-    padding-left: 16px;
-    padding-right: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  padding-top: 32px;
+  padding-left: 16px;
+  padding-right: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 h1{
-    font-weight: 700;
-    font-size: 47px;
+  font-weight: 700;
+  font-size: 47px;
 }
 
 .title-arrow{
-    display: flex;
-    justify-content: space-between;
-    align-items: top;
+  display: flex;
+  justify-content: space-between;
+  align-items: top;
 }
 
 .arrow-left{
-    height: 32px;
-    width: 32px;
+  height: 32px;
+  width: 32px;
+}
+
+.arrow-left:hover{
+
 }
 
 .imprint-title{
-    padding-bottom: 16px;
+  padding-bottom: 16px;
 }
 .email-div{
-    padding-top: 16px;
+  padding-top: 16px;
 }
 h2{
-    font-size: 16px;
-    font-weight: 800;
-    line-height: 19.2px;
-    text-align: left;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 19.2px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
     
 }

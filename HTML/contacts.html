@@ -13,6 +13,7 @@
 
     <script src="../JS/contacts.js"></script>
 
+
     <title>Join</title>
 </head>
 
@@ -27,73 +28,17 @@
 
 <body onload="loadAllContacts()">
 
-<div class="contact-wrapper" onclick="openContactDetails">
-    <div class="contact-list-wrapper">
-        <div class="contacts-list" id="contacts">
-            <div class="contacts-section-header">
-                <h3>A</h3>
-                <div class="seperation-line"></div>
-            </div>
-            <div class="contacts-container">
-                <div class="contact">
-                    <div class="contact-avatar">A</div>
-                    <div class="contact-avatar-infos">
-                        <span>Alex Muster</span>
-                        <a href="#">alex@muster.de</a>
-                    </div>
-                </div>
-                
-            </div>
+    <div class="content-wrapper">
+        
+        <div class="contact-list-wrapper" id="content-wrapper-id">
+            <div class="contacts-list" id="contacts"></div>
+            <img class="add-contact-button" src="../Assets/Property 1=Default.png" alt="add_contact">
+        </div>
 
-        <!-- zu Demon zwecken -->
-            <div class="contacts-section-header">
-                <h3>B</h3>
-                <div class="seperation-line"></div>
-            </div>
-            <div class="contacts-container">
-                <div class="contact">
-                    <div class="contact-avatar">B</div>
-                    <div class="contact-avatar-infos">
-                        <span>Bernd Maier</span>
-                        <a href="#">bernd@muster.de</a>
-                    </div>
-                </div>
-                <div class="contact">
-                    <div class="contact-avatar">B</div>
-                    <div class="contact-avatar-infos">
-                        <span>Betti Bauer</span>
-                        <a href="#">betti@bauer.de</a>
-                    </div>
-                </div>
-                <div class="contact">
-                    <div class="contact-avatar">B</div>
-                    <div class="contact-avatar-infos">
-                        <span>Beatrice Blabla</span>
-                        <a href="#">beatrice@blabla.de</a>
-                    </div>
-                </div>
-            </div>
-    
-            <div class="contacts-section-header">
-                <h3>C</h3>
-                <div class="seperation-line"></div>
-            </div>
-            <div class="contacts-container">
-                <div class="contact">
-                    <div class="contact-avatar">C</div>
-                    <div class="contact-avatar-infos">
-                        <span>Carl Muster</span>
-                        <a href="#">carl@muster.de</a>
-                    </div>
-                </div>
-            </div>
+        <div class="contact-details-wrapper d-none" id="contact-details-wrapper-id">Hallo
+            <img class="three-points-menu" src="../Assets/threePointsMenu.png" alt="threePointsMenu">
+        </div>
     </div>
-    <!-- zu Demon zwecken -->
-
-
-    <img class="add-contact-button" src="../Assets/Property 1=Default.png" alt="add_contact">
-    </div>
-</div>
 
 </body>
 </html>

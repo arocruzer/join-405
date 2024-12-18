@@ -10,7 +10,9 @@ async function loadAllContacts(path=""){
     loadedContacts = [];
     const usersArray = (Object.values(responsToJason.users));
     usersArray.forEach((x) => {
-        const user = {name: x.name, email: x.email, letter: x.name.trim().charAt(0)};
+        let [vorname, nachname] = x.name.split(" ");
+        let initialien = vorname[0] + nachname[0];
+        const user = {name: x.name, email: x.email, phone: x.phone, letter: x.name.trim().charAt(0), initialien: initialien};
         loadedContacts.push(user);   
     });
     renderContacts(loadedContacts);
@@ -32,30 +34,64 @@ function renderContacts(){
         }
         const groupElement = document.getElementById(`contact-container-${currentLetter}`);
         if (groupElement) {
-            groupElement.innerHTML += renderCurrentContacts(index, initialien, vorname, nachname, );
+            groupElement.innerHTML += renderCurrentContacts(index, initialien, vorname, nachname);
             addBackgrounds();
-            // setUserTagColor(vorname, nachname, i);
         } else {
             console.warn(`Gruppe mit der ID 'contact-container-${currentLetter}' wurde nicht gefunden.`);
         }
     }
 }
 
+function addBackgrounds() {
+    const avatars = document.querySelectorAll('.contact-avatar');
+    avatars.forEach(avatar => {
+        avatar.style.backgroundColor = getRandomColor();
+    });
+}
+
+function getRandomColor() {
+    const colors = ['#6A8EAE','#F4A261', '#2A9D8F', '#E76F51', '#264653', '#A2678A','#457B9D', '#D4A373', '#8A817C', '#BC6C25'];
+    return colors[Math.floor(Math.random() * colors.length)];
+}
+
+function openContactDetails(index) {
+    console.log(`Kontakt ${index} wurde geklickt!`);
+    console.log(loadedContacts[index]);
+}
+
+function openContactDetailsOverlay(index){
+    console.log(`Kontakt ${index} wurde geklickt!`);
+    console.log(loadedContacts[index]);
+
+    document.getElementById('content-wrapper-id').classList.add('d-none');
+    let contentRef = document.getElementById('contact-details-wrapper-id');
+    contentRef.classList.remove('d-none');
+    contentRef.innerHTML = HTMLopenContactDetailsOverlay(index);
+    
+}
+
+function closeContactDetailsOverlay(){
+    document.getElementById('content-wrapper-id').classList.remove('d-none');
+    let contentRef = document.getElementById('contact-details-wrapper-id');
+    contentRef.classList.add('d-none');
+    contentRef.innerHTML = "";
+}
+
+// Templates
+
 function renderCurrentLetter(currentLetter){
-    console.log(currentLetter);
     return `
     <div class="contacts-section-header">
         <h3>${currentLetter}</h3>
         <div class="seperation-line"></div>
     </div>
-    <div class="contacts-container" id="contact-container-${currentLetter}">
-        
+    <div class="contacts-container" id="contact-container-${currentLetter}">    
     </div>`;
 }
 
 function renderCurrentContacts(index, initialien) {
     return `
-        <div class="contact" id="contact-id-${index}" onclick="openContactDetails(${index})">
+        <div class="contact" id="contact-id-${index}" onclick="openContactDetailsOverlay(${index})">
             <div class="contact-avatar">${initialien}</div>
             <div class="contact-avatar-infos">
                 <span>${loadedContacts[index].name}</span>
@@ -65,35 +101,30 @@ function renderCurrentContacts(index, initialien) {
     `;
 }
 
-function openContactDetails(index) {
-    console.log(`Kontakt ${index} wurde geklickt!`);
-    console.log(loadedContacts[index]);
+
+function HTMLopenContactDetailsOverlay(index){
+    return`
+    <div class="contact-details-wrapper">
+        <div class="contact-detail-title-wrapper">
+            <div class="page-title">
+                <h1>Contacts</h1>
+                <p>Better with a team</p>
+                <div class="blue-line"></div>
+            </div>
+            <img class="arrow-left-contact-details" src="../Assets/arrow-left-line.png" alt="arrow_left" onclick="closeContactDetailsOverlay()">
+        </div>  
+        <div class="contact-detail-view">
+            <div class="contact-avatar-and-name">
+                <div class="detail-contact-avatar">${loadedContacts[index].initialien}</div>
+                <h2>${loadedContacts[index].name}</h2>
+            </div>
+            <p>Contact Information</p>
+            <h5>Email</h5>
+            <a href="#">${loadedContacts[index].email}</a>
+            <h5>Phone</h5>
+            <a href="#">${loadedContacts[index].phone}</a>
+        </div>
+        <img class="three-points-menu" src="../Assets/threePointsMenu.png" alt="threePointsMenu">
+    </div>
+    `;
 }
-
-// Fügt nach dem Rendern einen Hintergrund hinzu
-function addBackgrounds() {
-    const avatars = document.querySelectorAll('.contact-avatar');
-    avatars.forEach(avatar => {
-        avatar.style.backgroundColor = getRandomColor();
-    });
-}
-
-// Zufällige Hintergrundfarbe berechnen
-function getRandomColor() {
-    const colors = ['#FF5733', '#33FF57', '#3357FF', '#FF33A1', '#A133FF'];
-    return colors[Math.floor(Math.random() * colors.length)];
-}
-
-
-const colors = [
-    '#FF5733', // Warmes Orange
-    '#33FFBD', // Türkisgrün
-    '#FF33A6', // Pink
-    '#335BFF', // Blau
-    '#FFC300', // Sonnengelb
-    '#DAF7A6', // Hellgrün
-    '#C70039', // Dunkelrot
-    '#900C3F', // Aubergine
-    '#581845', // Dunkles Violett
-    '#6C757D'  // Grau-Blau
-];

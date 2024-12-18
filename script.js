@@ -9,5 +9,6 @@ function init() {
 async function loadData(path="") {
     let respons = await fetch(BASE_URL + path + ".json"); //+".json" muss immer damit man Datenbank finden kann
     let responsToJason = await respons.json();
-    console.log(responsToJason.users.user1.email);
+    console.log(responsToJason.users.user1);
 }
+

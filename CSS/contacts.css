@@ -1,9 +1,13 @@
 /* Contacts Overview */
 
-.contact-wrapper{
+.content-wrapper{
+
+    width: 100%;
+}
+
+.contacts-list-wrapper{
     overflow-y: scroll;
     overflow-x: hidden;
-    width: 100%;
 }
 
 .contacts-list{
@@ -44,6 +48,16 @@
     display: flex;
     align-items: center;
     padding: 17px 24px;
+    transition: all ease-in-out; 
+
+}
+
+.contact:hover{
+    /* background-color: rgba(69, 123, 157, 0.3); */
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    cursor: pointer;
 }
 
 .contact-avatar{
@@ -111,6 +125,18 @@
     font-weight: 400;
 }
 
+.arrow-left-contact-details{
+    height: 32px;
+    width: 32px;
+  }
+  
+  .arrow-left-contact-details:hover{
+    transform: translateY(-5px) scale(1.05); 
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    cursor: pointer;
+  }
+
 .blue-line{
     height: 3px;
     background-color: #29ABE2;
@@ -175,6 +201,10 @@
     position: fixed;
     top: 70%;
     left: 80%;
+}
+
+.d-none{
+    display: none;
 }
 
 /* EditContact AddContact Overlay */
