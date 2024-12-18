@@ -29,15 +29,16 @@
 <body onload="loadAllContacts()">
 
     <div class="content-wrapper">
-        
+
         <div class="contact-list-wrapper" id="content-wrapper-id">
             <div class="contacts-list" id="contacts"></div>
-            <img class="add-contact-button" src="../Assets/Property 1=Default.png" alt="add_contact">
+            <img onclick="OpenAddContactOverlay()" class="add-contact-button" src="../Assets/Property 1=Default.png" alt="add_contact" >
         </div>
 
         <div class="contact-details-wrapper d-none" id="contact-details-wrapper-id">Hallo
             <img class="three-points-menu" src="../Assets/threePointsMenu.png" alt="threePointsMenu">
         </div>
+        <div class="overlay-wrapper d-none" id="overlay-wrapper-id"></div>
     </div>
 
 </body>

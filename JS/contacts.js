@@ -54,11 +54,6 @@ function getRandomColor() {
     return colors[Math.floor(Math.random() * colors.length)];
 }
 
-function openContactDetails(index) {
-    console.log(`Kontakt ${index} wurde geklickt!`);
-    console.log(loadedContacts[index]);
-}
-
 function openContactDetailsOverlay(index){
     console.log(`Kontakt ${index} wurde geklickt!`);
     console.log(loadedContacts[index]);
@@ -75,6 +70,20 @@ function closeContactDetailsOverlay(){
     let contentRef = document.getElementById('contact-details-wrapper-id');
     contentRef.classList.add('d-none');
     contentRef.innerHTML = "";
+}
+
+function OpenAddContactOverlay(){
+    document.getElementById('content-wrapper-id').classList.add('d-none');
+    let contentRef = document.getElementById('overlay-wrapper-id');
+    contentRef.innerHTML = HTMLOpenAddContactOverlay();
+    contentRef.classList.remove('d-none');
+}
+
+function closeAddContactOverlay(){
+    document.getElementById('content-wrapper-id').classList.remove('d-none');
+    let contentRef = document.getElementById('overlay-wrapper-id');
+    contentRef.innerHTML = "";
+    contentRef.classList.add('d-none');
 }
 
 // Templates
@@ -125,6 +134,31 @@ function HTMLopenContactDetailsOverlay(index){
             <a href="#">${loadedContacts[index].phone}</a>
         </div>
         <img class="three-points-menu" src="../Assets/threePointsMenu.png" alt="threePointsMenu">
+    </div>
+    `;
+}
+
+function HTMLOpenAddContactOverlay(){
+    return`
+    <div class="overlay-edit-contact">
+        <div class="middle-avatar">TW</div>
+            <div class="upper-half">
+                <div class="cross-close" onclick="closeAddContactOverlay()">X</div>
+                <div class="edit-contact-title">
+                    <h1>Add contact</h1>
+                    <h6>Tasks are better with a team!</h6>
+                    <div class="blue-line"></div>
+                </div>
+            </div>
+            <div class="lower-half">
+                <div class="input-fields-add">
+                    <input class="input-person" placeholder="Name" type="text">
+                    <input class="input-mail" placeholder="Email" type="email">
+                    <input class="input-phone" placeholder="Phone" type="tel">
+                    <button class="create-button">Create contact<i class="fa-sharp-duotone fa-solid fa-check"></i></button>
+                </div>
+            </div>
+        </div>
     </div>
     `;
 }
