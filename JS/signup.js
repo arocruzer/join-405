@@ -1,17 +1,60 @@
+function checkSignUp(){
+    let repeatPassword = document.getElementById("repeat-password");
+    let repeatPasswordError = document.getElementById("repeat-password-error");
+    let passwordError = document.getElementById("password-error");
+  
+    repeatPasswordError.innerHTML = "";
+    passwordError.innerHTML = "";
+  
+    if (password.value.length < 8) {
+      passwordError.innerHTML = "Passwort muss Mindestens 8 zeichen haben";
+      return;
+    } else if (password.value !== repeatPassword.value) {
+      repeatPasswordError.innerHTML = "Passwörter stimmen nicht überein!";
+      return;
+    }
 
-const BASE_URL = "https://join-405-43178-default-rtdb.europe-west1.firebasedatabase.app/"
+    addUser();
+}
 
 function addUser() {
     let email = document.getElementById("email");
     let password = document.getElementById("password");
-    let name = document.getElementById("name");
-    let repeatPassword = document.getElementById("repeat-password");
+    let userName = document.getElementById("name");
 
-    users.push({name: name.value, email: email.value, password: password.value});
-    console.log(users);
-    email.value = "";
-    password.value = "";
-    name.value = "";
-    repeatPassword.value = "";
-    window.location.href = 'index.html?msg=You Signed Up successfully!';
+  const newUser = {
+    name: userName.value,
+    email: email.value,
+    password: password.value,
+    telefon: "",
+  };
+
+  postUser(newUser);
+
+  email.value = "";
+  password.value = "";
+  userName.value = "";
+  repeatPassword.value = "";
+}
+
+async function postUser(newUser) {
+  try {
+    let response = await fetch(BASE_URL + ".json");
+
+    const users = await response.json();
+    const userCount = users ? Object.keys(users).length : 0;
+
+    const userId = `user${userCount + 1}`;
+
+    response = await fetch(`${BASE_URL}/${userId}.json`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newUser),
+    });
+    window.location.href = "index.html?msg=You Signed Up successfully!";
+  } catch (error) {
+    console.error("Benutzer konnte nicht geladen werden", error);
+  }
 }
