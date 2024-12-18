@@ -5,12 +5,20 @@
 
 header {
   height: 80px;
+  width: auto;
   display: flex;
   align-items: center;
   padding-left: 16px;
   padding-right: 16px;
   box-shadow: 0px 4px 4px 0px #0000001A;
   justify-content: space-between;
+  position: fixed;
+  top: 0; /* Fixiert den Header oben */
+  left: 0; /* Fixiert den Header horizontal links */
+  width: 100%; /* Deckt die gesamte Breite ab */
+  z-index: 1000;
+  background-color: white;
+
 }
 
 .header-logo {
