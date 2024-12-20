@@ -7,7 +7,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="../Assets/favIcon.png">
   <link rel="stylesheet" href="./CSS/login.css">
-  <script src="./script.js"></script>
   
   <title>Join</title>
   <body id="body" onload="init()">
@@ -30,8 +29,8 @@
     </div>
     <div>
     <div class="input-box">
-      <input type="password" name="" id="password" placeholder="Password">
-      <img src="./Assets/lock.png" alt="">
+      <input oninput="changePasswordImg()" type="password" name="" id="password" placeholder="Password">
+      <img onclick="showPassword()" id="show-password-img" src="./Assets/lock.png" alt="">
     </div>
     <div class="erorr-msg" id="password-error"></div>
     </div>
@@ -50,6 +49,7 @@
     <a href="./HTML/legalNotice.html" target="_blank">Legal notice</a>
   </footer>
 </div>
+<script src="./script.js"></script>
 <script src="./JS/template.js"></script>
 <script src="./JS/login.js"></script>
   </body>

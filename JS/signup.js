@@ -1,20 +1,13 @@
-let email = document.getElementById("email");
-let password = document.getElementById("password");
-let userName = document.getElementById("name");
-let repeatPassword = document.getElementById("repeat-password");
-let repeatPasswordError = document.getElementById("repeat-password-error");
-let passwordError = document.getElementById("password-error");
-
 function checkSignUp(event) {
   event.preventDefault();
   repeatPasswordError.innerHTML = "";
   passwordError.innerHTML = "";
 
   if (password.value.length < 8) {
-    passwordError.innerHTML = "Passwort muss Mindestens 8 zeichen haben";
+    passwordError.innerHTML = "Password must have at least 8 characters";
     return;
   } else if (password.value !== repeatPassword.value) {
-    repeatPasswordError.innerHTML = "Passwörter stimmen nicht überein!";
+    repeatPasswordError.innerHTML = "Your passwords don't match. Please try again.";
     return;
   }
 

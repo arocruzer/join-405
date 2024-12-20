@@ -176,3 +176,7 @@ form {
   color: red;
   padding-left: 12px;
 }
+
+.show-password-img{
+  cursor: pointer;
+}
