@@ -1,18 +1,3 @@
-let users = [];
-
-function init() {
-    loadData();
-}
-
-async function loadData(path = "") {
-    let response = await fetch(BASE_URL + path + ".json");
-    let data = await response.json();
-
-    for (let key in data.users) {
-        users.push(data.users[key]);
-    }
-}
-
 function logIn() {
     let email = document.getElementById("email");
     let password = document.getElementById("password");

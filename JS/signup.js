@@ -1,27 +1,27 @@
-function checkSignUp(){
-    let repeatPassword = document.getElementById("repeat-password");
-    let repeatPasswordError = document.getElementById("repeat-password-error");
-    let passwordError = document.getElementById("password-error");
-  
-    repeatPasswordError.innerHTML = "";
-    passwordError.innerHTML = "";
-  
-    if (password.value.length < 8) {
-      passwordError.innerHTML = "Passwort muss Mindestens 8 zeichen haben";
-      return;
-    } else if (password.value !== repeatPassword.value) {
-      repeatPasswordError.innerHTML = "Passwörter stimmen nicht überein!";
-      return;
-    }
+let email = document.getElementById("email");
+let password = document.getElementById("password");
+let userName = document.getElementById("name");
+let repeatPassword = document.getElementById("repeat-password");
+let repeatPasswordError = document.getElementById("repeat-password-error");
+let passwordError = document.getElementById("password-error");
 
-    addUser();
+function checkSignUp(event) {
+  event.preventDefault();
+  repeatPasswordError.innerHTML = "";
+  passwordError.innerHTML = "";
+
+  if (password.value.length < 8) {
+    passwordError.innerHTML = "Passwort muss Mindestens 8 zeichen haben";
+    return;
+  } else if (password.value !== repeatPassword.value) {
+    repeatPasswordError.innerHTML = "Passwörter stimmen nicht überein!";
+    return;
+  }
+
+  addUser();
 }
 
 function addUser() {
-    let email = document.getElementById("email");
-    let password = document.getElementById("password");
-    let userName = document.getElementById("name");
-
   const newUser = {
     name: userName.value,
     email: email.value,
@@ -40,6 +40,9 @@ function addUser() {
 async function postUser(newUser) {
   try {
     let response = await fetch(BASE_URL + ".json");
+    if (!response.ok) {
+      throw new Error (`Fehler beim Laden der Benutzer: ${response.status}`);
+    }
 
     const users = await response.json();
     const userCount = users ? Object.keys(users).length : 0;

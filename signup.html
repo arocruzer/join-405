@@ -8,7 +8,6 @@
   <link rel="icon" type="image/x-icon" href="../Assets/favIcon.png" />
   <link rel="stylesheet" href="./CSS/signup.css" />
   <script src="./script.js"></script>
-  <script src="./JS/signup.js"></script>
   <title>Join</title>
   <body>
     <header>
@@ -24,7 +23,7 @@
             <hr width="88px" color="#29ABE2" size="3" />
           </div>
         </div>
-        <form onsubmit="checkSignUp(); return false;">
+        <form onsubmit="checkSignUp(event);">
         <div class="input-box">
           <input type="text" id="name" placeholder="Name" required />
           <img src="./Assets/person.png" alt="" />
@@ -65,5 +64,6 @@
         <a href="./HTML/legalNotice.html" target="_blank">Legal notice</a>
       </footer>
     </div>
+    <script src="./JS/signup.js"></script>
   </body>
 </html>
