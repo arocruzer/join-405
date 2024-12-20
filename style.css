@@ -3,46 +3,9 @@
   font-family: inter;
 }
 
-header {
-  height: 80px;
-  display: flex;
-  align-items: center;
-  padding-left: 16px;
-  padding-right: 16px;
-  box-shadow: 0px 4px 4px 0px #0000001A;
-  justify-content: space-between;
-  position: sticky;
-  top: 0;
-  background-color: white;
-  z-index: 1000;
-}
-
-.header-logo {
-  height: 39px;
-  width: 32px;
-}
-
-.user-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 40px;
-  width: 40px;
-  border-radius: 100%;
-  border: solid 2px black;
-}
-
-.user-button:hover {
-  cursor: pointer;
-}
-
-.inside-radius {
-  height: 32px;
-  width: 32px;
-  border-radius: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+body{
+  display: unset;
+  
 }
 
 h5 {
@@ -106,77 +69,9 @@ h2 {
   font-size: 24px;
 }
 
-footer {
-  height: 80px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 2px 16px;
-  position: sticky;
-  bottom: 0;
-  background: #2A3647;
-  color: #CDCDCD;
-  z-index: 999;
-
-  box-shadow: 0px 0px 4px 0px #0000001A;
-
-}
-
-.footer-button-frame {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  width: 80px;
-  height: 76px;
-}
-
-.footer-button {
-  background-color: unset;
-  border: none;
-  color: unset;
-  padding: unset;
-  cursor: pointer;
-
-
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  width: 76px;
-  height: 76px;
-
-  transition: color 0.3s, fill 0.3s;
-}
-
-
-
-.footer-button:hover .footer-button-icon path {
-  fill: white; /* Icon weiß färben */
-  transition: fill 0.1s; /* Sanfter Übergang */
-}
-
-.footer-button:hover .footer-button-text {
-  color: white; /* Text weiß färben */
-  transition: color 0.1s; /* Sanfter Übergang */
-}
-
-.footer-button-icon {
-  fill: #cdcdcd; /* Standardfarbe für Icon */
-  transition: fill 0.1s; /* Sanfter Übergang */
-}
-
-.footer-button-text {
-  color: #cdcdcd; /* Standardfarbe für Text */
-  font-size: 14px;
-  transition: color 0.3s; /* Sanfter Übergang */
-}
-
-.footer-button:hover {
-  background-color: #091931;
-  border-radius: 16px;
-}
-
-footer svg {
-  padding: 4px;
+@media screen and (min-width: 768px) {
+  body{
+    display: flex;
+    flex-direction: row-reverse;
+  }
 }
