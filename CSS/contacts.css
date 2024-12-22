@@ -104,10 +104,12 @@
 /* Contact Detail */
 
 .contact-details-wrapper{
+    overflow: hidden;
     margin-top: 4px;
     padding: 32px 16px;
     background-color: #F6F7F8;
-    height: 926px;
+    max-height: 926px;
+    
 }
 
 .contact-detail-title-wrapper{
