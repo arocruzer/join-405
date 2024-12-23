@@ -9,7 +9,7 @@ let passwordError = document.getElementById("password-error");
 let showPasswordImg = document.getElementById("show-password-img");
 let showRepeatPasswordImg = document.getElementById("show-repeat-password-img");
 
-function init() {
+async function init() {
   await includeHTML();
   loadData();
 }
