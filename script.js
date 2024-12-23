@@ -11,6 +11,7 @@ let showRepeatPasswordImg = document.getElementById("show-repeat-password-img");
 
 function init() {
   loadData();
+  addUserToTask();
 }
 
 async function loadData() {
