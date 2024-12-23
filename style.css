@@ -3,86 +3,88 @@
   font-family: inter;
 }
 
-header {
-  height: 80px;
+body {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  padding-left: 16px;
-  padding-right: 16px;
-  box-shadow: 0px 4px 4px 0px #0000001A;
-  justify-content: space-between;
 }
 
-.header-logo {
-  height: 39px;
-  width: 32px;
-}
-
-.user-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 40px;
-  width: 40px;
-  border-radius: 100%;
-  border: solid 2px black;
-}
-
-.user-button:hover {
-  cursor: pointer;
-}
-
-.inside-radius {
-  height: 32px;
-  width: 32px;
-  border-radius: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+#frame {
+  display: unset;
+  background-color: #F6F7F8;
+  max-width: 1440px;
 }
 
 h5 {
   color: #29abe2;
-  font-size: 14px;
+  font-size: 10px;
 }
 
-.hero{
-    padding-top: 32px;
-    padding-left: 16px;
-    padding-right: 16px;
+.hero {
+  padding-top: 32px;
+  padding-left: 16px;
+  padding-right: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 47px;
+}
+
+.title-arrow {
+  display: flex;
+  justify-content: space-between;
+  align-items: top;
+}
+
+.arrow-left {
+  height: 32px;
+  width: 32px;
+}
+
+.imprint-title {
+  padding-bottom: 16px;
+}
+
+.email-div {
+  padding-top: 16px;
+}
+
+h2 {
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 19.2px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 41px 1fr;
+  padding: 16px 0;
+}
+
+.grid-container div {
+  padding: 0px;
+}
+
+.grid-container h1 {
+  font-size: 24px;
+}
+
+@media screen and (min-width: 768px) {
+  #frame {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
+    flex-direction: row-reverse;
+  }
+
+  h5 {
+    font-size: 14px;
+  }
 }
 
-h1{
-    font-weight: 700;
-    font-size: 47px;
-}
 
-.title-arrow{
-    display: flex;
-    justify-content: space-between;
-    align-items: top;
-}
-
-.arrow-left{
-    height: 32px;
-    width: 32px;
-}
-
-.imprint-title{
-    padding-bottom: 16px;
-}
-.email-div{
-    padding-top: 16px;
-}
-h2{
-    font-size: 16px;
-    font-weight: 800;
-    line-height: 19.2px;
-    text-align: left;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
-    
-}
