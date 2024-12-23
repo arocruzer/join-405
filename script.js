@@ -10,6 +10,7 @@ let showPasswordImg = document.getElementById("show-password-img");
 let showRepeatPasswordImg = document.getElementById("show-repeat-password-img");
 
 function init() {
+  await includeHTML();
   loadData();
 }
 
@@ -52,5 +53,30 @@ function showPassword() {
   } else if (repeatPassword && repeatPassword.value.length >= 1) {
     repeatPassword.type = "password";
     showRepeatPasswordImg.src = "./Assets/visibility_off.png";
+  }
+}
+
+async function includeHTML() {
+  let includeElements = document.querySelectorAll('[w3-include-html]');
+  for (let i = 0; i < includeElements.length; i++) {
+      const element = includeElements[i];
+      file = element.getAttribute("w3-include-html"); // "includes/*.html"
+      let resp = await fetch(file);
+      if (resp.ok) {
+          element.innerHTML = await resp.text();
+      } else {
+          element.innerHTML = 'Page not found';
+      }
+  }
+}
+
+async function loadContent(page) {
+  console.log(page);
+  let element = document.getElementById("main-content");
+  let resp = await fetch("./HTML/" + page + ".html");
+  if (resp.ok) {
+      element.innerHTML = await resp.text();
+  } else {
+      element.innerHTML = 'Page not found';
   }
 }
