@@ -10,14 +10,15 @@ let showPasswordImg = document.getElementById("show-password-img");
 let showRepeatPasswordImg = document.getElementById("show-repeat-password-img");
 
 function init() {
-  await includeHTML();
+  /* await includeHTML(); */
   loadData();
 }
 
 async function loadData() {
   let response = await fetch(BASE_URL + ".json");
   let data = await response.json();
-  users.push(data);
+  
+  users = Object.values(data);
 }
 
 function changePasswordImg() {
