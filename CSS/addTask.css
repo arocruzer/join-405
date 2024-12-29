@@ -93,6 +93,7 @@ input::placeholder {
   padding: 0 16px;
 }
 .contact-list-container{
+  display: none;
     height: 288px;
 /*     background-color: white; */
     z-index: 1;

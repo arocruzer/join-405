@@ -12,7 +12,7 @@
     <script src="../script.js"></script>
     <title>Join</title>
 </head>
-<body onload="init()">
+<body onload="init(), addUserToTask()">
     <header>
         <img class="header-logo" src="../Assets/header_logo.png" alt="join-logo">
         <div class="user-button"> <!--user logo -->
@@ -35,13 +35,13 @@
         </div>
         <div class="input-containers">
             <p>Assigned to</p>
-            <div class="drop-down">
+            <div onclick="openDropDownMenu()" class="drop-down">
                 <div>Select contacts to assign</div>
                 <div>
-                    <img src="../Assets/arrow_drop_down.png" alt="">
+                    <img class="drop-down-arrow" id="drop-down-arrow" src="../Assets/arrow_drop_downaa (1).png" alt="">
                 </div>
             </div>
-            <div class="contact-list-container">
+            <div class="contact-list-container" id="contact-list">
                 <div class="contact">
                     <div class="name-and-img">
                         <img src="../Assets/Profile badge.png" alt="">
