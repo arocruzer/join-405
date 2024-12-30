@@ -1,3 +1,8 @@
+const urlParams = new URLSearchParams(window.location.search);
+const msg = urlParams.get("msg");
+let msgBox = document.getElementById("msgBox");
+let hero = document.getElementById("body");
+
 function logIn() {
   let emailError = document.getElementById("email-error");
   let passwordError = document.getElementById("password-error");
@@ -9,7 +14,7 @@ function logIn() {
 
   if (user) {
     if (user.password === password.value) {
-      console.log("Login erfolgreich:", user);
+      window.location.href = "../HTML/summary.html";
       email.value = "";
       password.value = "";
     } else {
@@ -17,4 +22,22 @@ function logIn() {
         "Check your email and password. Please try again.";
     }
   }
+}
+
+if (msg) {
+  msgBox.innerHTML = msg;
+} else {
+  msgBox.style.display = "none";
+}
+
+hero.onclick = function () {
+  msgBox.style.display = "none";
+};
+
+function getUserLogo() {
+  let userLogo = document.getElementById("user-button");
+
+  let initials = getInitials(users.name);
+
+  console.log(initials);
 }

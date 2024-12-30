@@ -20,6 +20,7 @@ function addUser() {
     email: email.value,
     password: password.value,
     telefon: "",
+    color: colors[Object.keys(users).length % colors.length], 
   };
 
   postUser(newUser);
@@ -34,7 +35,7 @@ async function postUser(newUser) {
   try {
     let response = await fetch(BASE_URL + ".json");
     if (!response.ok) {
-      throw new Error (`Fehler beim Laden der Benutzer: ${response.status}`);
+      throw new Error(`Fehler beim Laden der Benutzer: ${response.status}`);
     }
 
     const users = await response.json();
@@ -49,6 +50,7 @@ async function postUser(newUser) {
       },
       body: JSON.stringify(newUser),
     });
+
     window.location.href = "index.html?msg=You Signed Up successfully!";
   } catch (error) {
     console.error("Benutzer konnte nicht geladen werden", error);
