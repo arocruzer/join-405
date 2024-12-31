@@ -6,7 +6,7 @@ function renderAddToTaskContacts(color, initials, user, index, isChecked) {
                     </div>
                     <p>${user.name}</p>
                 </div>
-                <input onclick="checkBoxUserTask(${index})" type="checkbox" ${isChecked}>
+                <input onclick="checkBoxUserTask(${index})" type="checkbox" ${isChecked} name="checkbox">
             </div>`;
 }
 function renderAddedUsers(color, initials) {

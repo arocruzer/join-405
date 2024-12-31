@@ -1,7 +1,6 @@
 * {
   margin: 0;
   font-family: inter;
-  background-color: #F0F0F0;
 }
 
 header {
@@ -104,4 +103,8 @@ h2{
 .login-logo{
   height: 78px;
   width: 64px;
+}
+input:focus{
+  outline: none !important;
+  border: 1px solid #29ABE2;
 }
