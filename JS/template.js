@@ -1,14 +1,17 @@
-const urlParams = new URLSearchParams(window.location.search);
-const msg = urlParams.get('msg');
-let msgBox = document.getElementById("msgBox");
-let hero = document.getElementById("body")
-if(msg){
-    msgBox.innerHTML = msg;
-}else{
-    msgBox.style.display = "none";
+function renderAddToTaskContacts(color, initials, user, index, isChecked) {
+  return `<div class="contact">
+                <div class="name-and-img">
+                    <div class="initials-circle" style="background-color: ${color};">
+                        ${initials}
+                    </div>
+                    <p>${user.name}</p>
+                </div>
+                <input onclick="checkBoxUserTask(${index})" type="checkbox" ${isChecked} name="checkbox">
+            </div>`;
 }
-
-
-hero.onclick = function() {
-        msgBox.style.display = "none";
-    }
+function renderAddedUsers(color, initials) {
+  return `
+            <div class="initials-circle" style="background-color: ${color};">
+                ${initials}
+            </div>`;
+}

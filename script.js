@@ -8,16 +8,18 @@ let repeatPasswordError = document.getElementById("repeat-password-error");
 let passwordError = document.getElementById("password-error");
 let showPasswordImg = document.getElementById("show-password-img");
 let showRepeatPasswordImg = document.getElementById("show-repeat-password-img");
+let colors = ["#007bff", "#ffa500", "#800080", "#d8bfd8", "#ff69b4", "#28a745", "#ff6347", "#20b2aa"];
 
-async function init() {
-  await includeHTML();
+function init() {
+  /* await includeHTML(); */
   loadData();
 }
 
 async function loadData() {
   let response = await fetch(BASE_URL + ".json");
   let data = await response.json();
-  users.push(data);
+  
+  users = Object.values(data);
 }
 
 function changePasswordImg() {
