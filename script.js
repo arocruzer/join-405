@@ -1,4 +1,4 @@
-const BASE_URL = "https://join-405-43178-default-rtdb.europe-west1.firebasedatabase.app/users";
+// const BASE_URL = "https://join-405-43178-default-rtdb.europe-west1.firebasedatabase.app/users";
 let users = [];
 let email = document.getElementById("email");
 let password = document.getElementById("password");
@@ -12,13 +12,22 @@ let colors = ["#007bff", "#ffa500", "#800080", "#d8bfd8", "#ff69b4", "#28a745", 
 
 async function init() {
   await includeHTML();
+  loadScript("../JS/login.js");
   loadData();
+}
+
+function loadScript(scriptUrl) {
+  const script = document.createElement("script");
+  script.src = scriptUrl; // URL der JavaScript-Datei
+  script.type = "text/javascript";
+  script.async = true; // Asynchron laden (optional)
+  document.body.appendChild(script);
 }
 
 async function loadData() {
   let response = await fetch(BASE_URL + ".json");
   let data = await response.json();
-  
+
   users = Object.values(data);
 }
 
@@ -62,14 +71,14 @@ function showRepeatPassowrd() {
 async function includeHTML() {
   let includeElements = document.querySelectorAll('[w3-include-html]');
   for (let i = 0; i < includeElements.length; i++) {
-      const element = includeElements[i];
-      file = element.getAttribute("w3-include-html"); // "includes/*.html"
-      let resp = await fetch(file);
-      if (resp.ok) {
-          element.innerHTML = await resp.text();
-      } else {
-          element.innerHTML = 'Page not found';
-      }
+    const element = includeElements[i];
+    file = element.getAttribute("w3-include-html"); // "includes/*.html"
+    let resp = await fetch(file);
+    if (resp.ok) {
+      element.innerHTML = await resp.text();
+    } else {
+      element.innerHTML = 'Page not found';
+    }
   }
 }
 
@@ -78,8 +87,8 @@ async function loadContent(page) {
   let element = document.getElementById("main-content");
   let resp = await fetch("./HTML/" + page + ".html");
   if (resp.ok) {
-      element.innerHTML = await resp.text();
+    element.innerHTML = await resp.text();
   } else {
-      element.innerHTML = 'Page not found';
+    element.innerHTML = 'Page not found';
   }
 }
