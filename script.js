@@ -10,8 +10,8 @@ let showPasswordImg = document.getElementById("show-password-img");
 let showRepeatPasswordImg = document.getElementById("show-repeat-password-img");
 let colors = ["#007bff", "#ffa500", "#800080", "#d8bfd8", "#ff69b4", "#28a745", "#ff6347", "#20b2aa"];
 
-function init() {
-  /* await includeHTML(); */
+async function init() {
+  await includeHTML();
   loadData();
 }
 
@@ -48,7 +48,9 @@ function showPassword() {
     password.type = "password";
     showPasswordImg.src = "./Assets/visibility_off.png";
   }
+}
 
+function showRepeatPassowrd() {
   if (repeatPassword && repeatPassword.type === "password" && repeatPassword.value.length >= 1) {
     repeatPassword.type = "text";
     showRepeatPasswordImg.src = "./Assets/visibility.png";
@@ -57,7 +59,6 @@ function showPassword() {
     showRepeatPasswordImg.src = "./Assets/visibility_off.png";
   }
 }
-
 async function includeHTML() {
   let includeElements = document.querySelectorAll('[w3-include-html]');
   for (let i = 0; i < includeElements.length; i++) {
