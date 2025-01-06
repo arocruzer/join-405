@@ -3,10 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="../Assets/favIcon.png">
+
+    <link rel="stylesheet" href="../CSS/contacts.css">
+    <link rel="stylesheet" href="../CSS/style.css">
+
+    <script src="../JS/contacts.js"></script>
+
+
     <title>Join</title>
 </head>
-<body>
-    
+
+
+
+<body onload="loadAllContacts()">
+    <header>
+        <img class="header-logo" src="../Assets/header_logo.png" alt="join-logo">
+        <div class="user-button"> <!--user logo -->
+            <div class="inside-radius">
+                <h5>G</h5>
+            </div>
+        </div>
+    </header>
+    <div class="content-wrapper">
+
+        <div class="contact-list-wrapper" id="content-wrapper-id">
+            <div class="contacts-list" id="contacts"></div>
+            <img onclick="OpenAddContactOverlay()" class="add-contact-button" src="../Assets/Property 1=Default.png" alt="add_contact" >
+        </div>
+
+        <div class="contact-details-wrapper d-none" id="contact-details-wrapper-id">Hallo
+            <img class="three-points-menu" src="../Assets/threePointsMenu.png" alt="threePointsMenu">
+        </div>
+        <div class="overlay-wrapper d-none" id="overlay-wrapper-id"></div>
+    </div>
+
 </body>
 </html>
