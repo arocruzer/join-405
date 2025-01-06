@@ -5,12 +5,12 @@ const BASE_URL = "https://join-405-43178-default-rtdb.europe-west1.firebasedatab
 
 async function loadAllContacts(path=""){
     let response = await fetch (BASE_URL + path + ".json");
-    let responsToJason = await response.json();
+    let responseToJason = await response.json();
 
     loadedContacts = [];
-    const usersArray = (Object.values(responsToJason.users));
+    const usersArray = (Object.values(responseToJason.users));
     usersArray.forEach((x) => {
-        let [vorname, nachname] = x.name.split(" ");
+        let [vorname, nachname] = x.trim().name.split(" ");
         let initialien = vorname[0] + nachname[0];
         const user = {name: x.name, email: x.email, phone: x.phone, letter: x.name.trim().charAt(0), initialien: initialien};
         loadedContacts.push(user);   
@@ -86,6 +86,18 @@ function closeAddContactOverlay(){
     contentRef.classList.add('d-none');
 }
 
+function OpenEditContactOverlay(){
+    let contentRef = document.getElementById('contact-details-wrapper-id');
+    contentRef.innerHTML = ``;
+    contentRef.innerHTML = HTMLOpenEditContactOverlay();
+}
+
+function closeEditContactOverlay(){
+    let contentRef = document.getElementById('contact-details-wrapper-id');
+    contentRef.innerHTML = ``;
+    contentRef.innerHTML = HTMLopenContactDetailsOverlay(index);
+}
+
 // Templates
 
 function renderCurrentLetter(currentLetter){
@@ -133,7 +145,7 @@ function HTMLopenContactDetailsOverlay(index){
             <h5>Phone</h5>
             <a href="#">${loadedContacts[index].phone}</a>
         </div>
-        <img class="three-points-menu" src="../Assets/threePointsMenu.png" alt="threePointsMenu">
+        <img class="three-points-menu" src="../Assets/threePointsMenu.png" onclick="OpenEditContactOverlay()" alt="threePointsMenu">
     </div>
     `;
 }
@@ -160,5 +172,33 @@ function HTMLOpenAddContactOverlay(){
             </div>
         </div>
     </div>
+    `;
+}
+
+function HTMLOpenEditContactOverlay(){
+    return`
+    <div class="overlay-edit-contact">
+            <div class="middle-avatar">TW</div>
+
+            <div class="upper-half">
+                <div class="cross-close" onclick="closeEditContactOverlay()">X</div>
+                <div class="edit-contact-title">
+                    <h1>Edit contact</h1>
+                    <div class="blue-line"></div>
+                </div>
+            </div>
+    
+            <div class="lower-half">
+                <div class="input-fields">
+                    <input class="input-person" placeholder="Name" type="text">
+                    <input class="input-mail" placeholder="Email" type="email">
+                    <input class="input-phone" placeholder="Phone" type="tel">
+                </div>
+                <div class="delete-safe-buttons">
+                    <button class="delete-button">Delete</button>
+                    <button class="save-button">Save<i class="fa-sharp-duotone fa-solid fa-check save-padding"></i></button>
+                </div>
+            </div>
+        </div>
     `;
 }
