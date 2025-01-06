@@ -48,7 +48,9 @@ function showPassword() {
     password.type = "password";
     showPasswordImg.src = "./Assets/visibility_off.png";
   }
+}
 
+function showRepeatPassowrd() {
   if (repeatPassword && repeatPassword.type === "password" && repeatPassword.value.length >= 1) {
     repeatPassword.type = "text";
     showRepeatPasswordImg.src = "./Assets/visibility.png";
@@ -57,7 +59,6 @@ function showPassword() {
     showRepeatPasswordImg.src = "./Assets/visibility_off.png";
   }
 }
-
 async function includeHTML() {
   let includeElements = document.querySelectorAll('[w3-include-html]');
   for (let i = 0; i < includeElements.length; i++) {
