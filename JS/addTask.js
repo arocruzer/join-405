@@ -94,6 +94,9 @@ function clearTask() {
     document.getElementById("addedUers").innerHTML = "";
     document.getElementById("date-input").value = "";
     document.getElementById("subtask-input").value = "";
+    btnMedium.style.backgroundColor = '#FFA800';
+    btnLow.style.backgroundColor = '#ffffff';
+    btnUrgent.style.backgroundColor = '#ffffff';
 }
 
 function addTask() {
