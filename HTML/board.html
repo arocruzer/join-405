@@ -3,259 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style/board.css">
-    <title>Task Board</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../Assets/favIcon.png">
+
+    <link rel="stylesheet" href="../CSS/board.css">
+    <script src="../JS/board.js"></script>
+
+
+    <title>Join</title>
 </head>
-<body>
+
+
+
+<body onload="loadTasks()">
     <!-- Main Content -->
     <main>
         <!-- Title and Add Task Button -->
         <div class="section">
             <h1>Board</h1>
-            <div class="add-task-board">+</div>
+            <a href="../HTML/addTask.html" class="add-task-board" id="addTaskButton">+</a>
         </div>
 
         <!-- Search Bar -->
         <div class="search-container">
             <input type="text" id="search" placeholder="Find Task">
-            <img class="search-icon" src="./img/search.png" alt="search-icon">
+            <img class="search-icon" src="../Assets/search.png" alt="search-icon">
         </div>
-        <div>
              <!-- Weitere Task-Abschnitte -->
         <section class="task-section">
             <div class="task-header">
                 <h2>To do</h2>
-                <div class="add-task">+</div>
+                <a href="../HTML/addTask.html?category=to-do" class="add-task">+</a>
             </div>
-            <div class="task-list">
-                <div class="no-tasks">No tasks To do</div>
-            </div>
-            <div class="user-card">
-                <div class="user-story-card">
-                    <div class="progress-container">
-                        <h3>User Story</h5>
-                    </div>
-                    <h4>Kochwelt Page & Recipe Recommender</h4>
-                    <p>Build start page with recipe recommendation...</p>
-        
-                    <div class="progress-container">
-                        <div class="progress-bar">
-                            <div class="progress"></div>
-                        </div>
-                        <span class="subtasks">1/2 Subtasks</span>
-                    </div>
-        
-                    <!-- User Avatars -->
-                    <div class="user-container">
-                        <div class="user-avatar-container">
-                            <div class="user-avatar user-AM">AM</div>
-                            <div class="user-avatar user-EM">EM</div>
-                            <div class="user-avatar user-MB">MB</div>
-                        </div>
-                        <img class="avatar-symbol" src="./img/Prio media.png" alt="Prio media">
-                    </div>
-                    
+            <div>
+                <div class="task-list">
+                    <div class="no-tasks">No tasks available</div>
                 </div>
-                <div class="user-story-card">
-                    <div class="progress-container">
-                        <h3>User Story</h5>
-                    </div>
-                    <h4>Kochwelt Page & Recipe Recommender</h4>
-                    <p>Build start page with recipe recommendation...</p>
-        
-                    <div class="progress-container">
-                        <div class="progress-bar">
-                            <div class="progress"></div>
-                        </div>
-                        <span class="subtasks">1/2 Subtasks</span>
-                    </div>
-        
-                    <!-- User Avatars -->
-                    <div class="user-container">
-                        <div class="user-avatar-container">
-                            <div class="user-avatar user-AM">AM</div>
-                            <div class="user-avatar user-EM">EM</div>
-                            <div class="user-avatar user-MB">MB</div>
-                        </div>
-                        <img class="avatar-symbol" src="./img/Prio media.png" alt="Prio media">
-                    </div>
-                    
-                </div>
+                
+                <div class="user-card"> </div>
             </div>
-            
+           
         </section>
-
         <section class="task-section">
             <div class="task-header">
                 <h2>In progress</h2>
-                <div class="add-task">+</div>
+                <a href="../HTML/addTask.html?category=in-progress" class="add-task">+</a>
             </div>
-            <div class="task-list">
-                <div class="no-tasks">No tasks In progress</div>
-            </div>
-            <div class="user-card">
-                <div class="user-story-card">
-                    <div class="progress-container">
-                        <h3>User Story</h5>
-                    </div>
-                    <h4>Kochwelt Page & Recipe Recommender</h4>
-                    <p>Build start page with recipe recommendation...</p>
-        
-                    <div class="progress-container">
-                        <div class="progress-bar">
-                            <div class="progress"></div>
-                        </div>
-                        <span class="subtasks">1/2 Subtasks</span>
-                    </div>
-        
-                    <!-- User Avatars -->
-                    <div class="user-container">
-                        <div class="user-avatar-container">
-                            <div class="user-avatar user-AM">AM</div>
-                            <div class="user-avatar user-EM">EM</div>
-                            <div class="user-avatar user-MB">MB</div>
-                        </div>
-                        <img class="avatar-symbol" src="./img/Prio media.png" alt="Prio media">
-                    </div>
-                    
+            <div>
+                <div class="task-list">
+                    <div class="no-tasks">No tasks available</div>
                 </div>
-                <div class="user-story-card">
-                    <div class="progress-container">
-                        <h3>User Story</h5>
-                    </div>
-                    <h4>Kochwelt Page & Recipe Recommender</h4>
-                    <p>Build start page with recipe recommendation...</p>
-        
-                    <div class="progress-container">
-                        <div class="progress-bar">
-                            <div class="progress"></div>
-                        </div>
-                        <span class="subtasks">1/2 Subtasks</span>
-                    </div>
-        
-                    <!-- User Avatars -->
-                    <div class="user-container">
-                        <div class="user-avatar-container">
-                            <div class="user-avatar user-AM">AM</div>
-                            <div class="user-avatar user-EM">EM</div>
-                            <div class="user-avatar user-MB">MB</div>
-                        </div>
-                        <img class="avatar-symbol" src="./img/Prio media.png" alt="Prio media">
-                    </div>
-                    
-                </div>
+                
+                <div class="user-card"> </div>
             </div>
-        </section>
-
-        <section class="task-section">
+           
+        </section>     
+          <section class="task-section">
             <div class="task-header">
                 <h2>Await feedback</h2>
-                <div class="add-task">+</div>
+                <a href="../HTML/addTask.html?category=await-feedback" class="add-task">+</a>
             </div>
-            <div class="task-list">
-                <div class="no-tasks">No tasks Await feedback</div>
-            </div>
-            <div class="user-card">
-                <div class="user-story-card">
-                    <div class="progress-container">
-                        <h3>User Story</h5>
-                    </div>
-                    <h4>Kochwelt Page & Recipe Recommender</h4>
-                    <p>Build start page with recipe recommendation...</p>
-        
-                    <!-- User Avatars -->
-                    <div class="user-container">
-                        <div class="user-avatar-container">
-                            <div class="user-avatar user-AM">AM</div>
-                            <div class="user-avatar user-EM">EM</div>
-                            <div class="user-avatar user-MB">MB</div>
-                        </div>
-                        <img class="avatar-symbol" src="./img/Prio media.png" alt="Prio media">
-                    </div>
-                    
+            <div class="task-card">
+                <div class="task-list">
+                    <div class="no-tasks">No tasks available</div>
                 </div>
-                <div class="user-story-card">
-                    <div class="progress-container">
-                        <h3>User Story</h5>
-                    </div>
-                    <h4>Kochwelt Page & Recipe Recommender</h4>
-                    <p>Build start page with recipe recommendation...</p>
-
-                    <!-- User Avatars -->
-                    <div class="user-container">
-                        <div class="user-avatar-container">
-                            <div class="user-avatar user-AM">AM</div>
-                            <div class="user-avatar user-EM">EM</div>
-                            <div class="user-avatar user-MB">MB</div>
-                        </div>
-                        <img class="avatar-symbol" src="./img/Prio media.png" alt="Prio media">
-                    </div>
-                    
-                </div>
+                
+                <div class="user-card"> </div>
             </div>
-        </section>
-
+           
+        </section>      
         <section class="task-section">
-            <h2>Done</h2>
-            <div class="task-list">
-                <div class="no-tasks">No tasks Done</div>
+            <div class="task-header">
+                <h2>Done</h2>
+                <a href="../HTML/addTask.html" class="add-task">+</a>
             </div>
-            <div class="user-card">
-                <div class="user-story-card">
-                    <div class="progress-container">
-                        <h3>User Story</h5>
-                    </div>
-                    <h4>Kochwelt Page & Recipe Recommender</h4>
-                    <p>Build start page with recipe recommendation...</p>
+            <div>
+                <div class="task-list">
+                    <div class="no-tasks">No tasks available</div>
+                </div>
+                
+                <div class="user-card"> </div>
+            </div>
+           
+        </section>         
+        <div class="user-modal d-none" id="cardModal">
+          <div class="card-content">
+              <div class="header">
+                <span class="user-story-badge">User Story</span>
+                <span class="close-btn" onclick="toggleCardModal()">×</span>
+               </div>
         
-                    <div class="progress-container">
-                        <div class="progress-bar-div">
-                            <div class="progress-div"></div>
-                        </div>
-                        <span class="subtasks">2/2 Subtasks</span>
-                    </div>
+              <h1>Kochwelt Page &amp; Recipe Recommender</h1>
+              <p>Build start page with recipe recommendation.</p>
         
-                    <!-- User Avatars -->
-                    <div class="user-container">
-                        <div class="user-avatar-container">
-                            <div class="user-avatar user-AM">AM</div>
-                            <div class="user-avatar user-EM">EM</div>
-                            <div class="user-avatar user-MB">MB</div>
-                        </div>
-                        <img class="avatar-symbol" src="./img/Capa 2.png" alt="Capa 2">
+              <div class="details">
+                 <div class="due-date">Due date: <strong>10/05/2023</strong></div>
+                 <div class="priority">Priority: <span class="priority-badge medium">Medium</span></div>
+                 <div class="assigned-to">
+                    Assigned To:
+                    <div>
+                        <div class="user-avatar user-EM">EM</div>
+                        <span>Emmanuel Mauer</span>
+                    </div>
+                    <div>
+                        <div class="user-avatar user-MB">MB</div>
+                        <span>Emmanuel Mauer</span>
+                    </div>
+                    <div>
+                        <div class="user-avatar user-AM">AM</div>
+                        <span>Emmanuel Mauer</span>
                     </div>
                     
-                </div>
-                <div class="user-story-card">
-                    <div class="progress-container">
-                        <h3 class="h3-task">Technical Task</h5>
-                    </div>
-                    <h4>Kochwelt Page & Recipe Recommender</h4>
-                    <p>Build start page with recipe recommendation...</p>
-        
-                    <div class="progress-container">
-                        <div class="progress-bar-div">
-                            <div class="progress-div"></div>
-                        </div>
-                        <span class="subtasks">2/2 Subtasks</span>
-                    </div>
-        
-                    <!-- User Avatars -->
-                    <div class="user-container">
-                        <div class="user-avatar-container">
-                            <div class="user-avatar user-AM">AM</div>
-                            <div class="user-avatar user-EM">EM</div>
-                            <div class="user-avatar user-MB">MB</div>
-                        </div>
-                        <img class="avatar-symbol" src="./img/Prio baja.png" alt="Prio baja">
-                    </div>
                     
-                </div>
-            </div>
-        </section>
-        </div>
+                    
+                 </div>
+             </div>
+        
+             <div class="subtasks">
+                <h3>Subtasks:</h3>
+                <label>
+                   <input type="checkbox" checked />
+                   <span>Implement Recipe Recommendation</span>
+                </label>
+                <label>
+                   <input type="checkbox" />
+                   <span>Start Page Layout</span>
+                </label>
+             </div>
 
-       
+             <div class="actions">
+                <button class="delete-btn">Delete</button>
+                <button class="edit-btn">Edit</button>
+             </div>
+          </div>
+        </div>
     </main>
+
 </body>
 </html>
