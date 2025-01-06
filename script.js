@@ -12,15 +12,13 @@ let colors = ["#007bff", "#ffa500", "#800080", "#d8bfd8", "#ff69b4", "#28a745", 
 
 async function init() {
   await includeHTML();
-  loadScript("../JS/login.js");
+  loadScript("./JS/login.js");
   loadData();
 }
 
 function loadScript(scriptUrl) {
   const script = document.createElement("script");
   script.src = scriptUrl; // URL der JavaScript-Datei
-  script.type = "text/javascript";
-  script.async = true; // Asynchron laden (optional)
   document.body.appendChild(script);
 }
 
