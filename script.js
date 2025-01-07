@@ -16,6 +16,13 @@ async function init() {
   loadData();
 }
 
+function loadMainPage(){
+  showHeader(); 
+  loadContent(`addTask`, `main-content`); 
+  loadContent(`navBar`, `nav-bar`); 
+  loadContent(`header`, `header`)
+}
+
 function loadScript(scriptUrl) {
   const script = document.createElement("script");
   script.src = scriptUrl; // URL der JavaScript-Datei
@@ -78,7 +85,7 @@ async function includeHTML() {
       element.innerHTML = 'Page not found';
     }
   }
-  loadContent("navBar", "nav-bar"); // zum testen
+  // loadContent("navBar", "nav-bar"); // zum testen
 }
 
 async function loadContent(page, frame) {
@@ -92,3 +99,7 @@ async function loadContent(page, frame) {
   }
 }
 
+function showHeader() {
+  let header = document.getElementById("header");
+  header.style.display = "flex";
+}
