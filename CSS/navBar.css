@@ -3,6 +3,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 2px 16px;
+  width: calc(100% - 32px);
 }
 
 #nav-bar {

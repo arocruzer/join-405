@@ -90,7 +90,7 @@
 }
 
 .add-contact-button{
-    position: fixed;
+    position: absolute;
     top: 80%;
     left: 80%;
 }
