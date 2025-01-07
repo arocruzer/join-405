@@ -3,30 +3,16 @@
   font-family: inter;
 }
 
-header {
-  height: 80px;
-  width: auto;
+body {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  padding-left: 16px;
-  padding-right: 16px;
-  box-shadow: 0px 4px 4px 0px #0000001A;
-  justify-content: space-between;
-  position: fixed;
-  top: 0;
-  /* Fixiert den Header oben */
-  left: 0;
-  /* Fixiert den Header horizontal links */
-  width: 100%;
-  /* Deckt die gesamte Breite ab */
-  z-index: 1000;
-  background-color: white;
-
 }
 
-.header-logo {
-  height: 39px;
-  width: 32px;
+#frame {
+  display: unset;
+  background-color: #F6F7F8;
+  max-width: 1440px;
 }
 
 button {
@@ -47,20 +33,6 @@ button {
   cursor: pointer;
 }
 
-.inside-radius {
-  height: 32px;
-  width: 32px;
-  border-radius: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-h5 {
-  color: #29abe2;
-  font-size: 14px;
-}
-
 .hero {
   padding-top: 32px;
   padding-left: 16px;
@@ -69,11 +41,37 @@ h5 {
   flex-direction: column;
   gap: 20px;
   /* width: 100%; */
+  height: 100vh;
 }
 
 h1 {
   font-weight: 700;
   font-size: 47px;
+}
+
+h2 {
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 19.2px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+h4 {
+  font-size: 16px;
+  color: #a8a8a8;
+  font-weight: 400;
+}
+
+h5 {
+  color: #29abe2;
+  font-size: 10px;
 }
 
 .title-arrow {
@@ -95,26 +93,32 @@ h1 {
   padding-top: 16px;
 }
 
-h2 {
-  font-size: 16px;
-  font-weight: 800;
-  line-height: 19.2px;
-  text-align: left;
-  text-underline-position: from-font;
-  text-decoration-skip-ink: none;
-
-}
-
-.login-header {
-  padding: 37px 38px;
-}
-
-.login-logo {
-  height: 78px;
-  width: 64px;
-}
-
 input:focus {
   outline: none !important;
   border: 1px solid #29ABE2;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 41px 1fr;
+  padding: 16px 0;
+}
+
+.grid-container div {
+  padding: 0px;
+}
+
+.grid-container h1 {
+  font-size: 24px;
+}
+
+@media screen and (min-width: 768px) {
+  #frame {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+  h5 {
+    font-size: 14px;
+  }
 }

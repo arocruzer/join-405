@@ -78,11 +78,12 @@ async function includeHTML() {
       element.innerHTML = 'Page not found';
     }
   }
+  loadContent("navBar", "nav-bar"); // zum testen
 }
 
-async function loadContent(page) {
+async function loadContent(page, frame) {
   console.log(page);
-  let element = document.getElementById("main-content");
+  let element = document.getElementById(frame);
   let resp = await fetch("./HTML/" + page + ".html");
   if (resp.ok) {
     element.innerHTML = await resp.text();
@@ -90,3 +91,4 @@ async function loadContent(page) {
     element.innerHTML = 'Page not found';
   }
 }
+
