@@ -82,6 +82,12 @@ function closeAddContactOverlay(){
 }
 
 
+//Edit Contacts
+
+function toggleEditDeleteMenu(){
+    const contentRef = document.getElementById('edit-delete-div-id');
+    contentRef.classList.toggle(d-none);
+}
 
 
 
