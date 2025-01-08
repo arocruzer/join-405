@@ -25,7 +25,7 @@
   height: 39px;
   width: 32px;
 }
-button{
+button {
   cursor: pointer;
 }
 .user-button {
@@ -56,57 +56,56 @@ h5 {
   font-size: 14px;
 }
 
-.hero{
-    padding-top: 32px;
-    padding-left: 16px;
-    padding-right: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    /* width: 100%; */
+.hero {
+  padding-top: 32px;
+  padding-left: 16px;
+  padding-right: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  /* width: 100%; */
 }
 
-h1{
+h1 {
   font-weight: 700;
   font-size: 47px;
 }
 
-.title-arrow{
+.title-arrow {
   display: flex;
   justify-content: space-between;
   align-items: top;
 }
 
-.arrow-left{
+.arrow-left {
   height: 32px;
   width: 32px;
 }
 
-.imprint-title{
+.imprint-title {
   padding-bottom: 16px;
 }
-.email-div{
+.email-div {
   padding-top: 16px;
 }
-h2{
+h2 {
   font-size: 16px;
   font-weight: 800;
   line-height: 19.2px;
   text-align: left;
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
-    
 }
-.login-header{
+.login-header {
   padding: 37px 38px;
 }
-.login-logo{
+.login-logo {
   height: 78px;
   width: 64px;
 }
-input:focus{
+input:focus {
   outline: none !important;
-  border: 1px solid #29ABE2;
+  border: 1px solid #29abe2;
 }
 .input-box {
   position: relative;
@@ -132,12 +131,12 @@ input:focus{
   width: 24px;
 }
 
-.show-password-img{
+.show-password-img {
   cursor: pointer;
 }
-.input-box input:focus{
+.input-box input:focus {
   outline: none !important;
-  border: 1px solid #29ABE2 !important;
+  border: 1px solid #29abe2 !important;
 }
 
 .signup-btn {
