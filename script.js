@@ -16,19 +16,6 @@ async function init() {
   loadData();
 }
 
-function loadMainPage(){
-  showHeader(); 
-  loadContent(`addTask`, `main-content`); 
-  loadContent(`navBar`, `nav-bar`); 
-  loadContent(`header`, `header`)
-}
-
-function loadScript(scriptUrl) {
-  const script = document.createElement("script");
-  script.src = scriptUrl; // URL der JavaScript-Datei
-  document.body.appendChild(script);
-}
-
 async function loadData() {
   let response = await fetch(BASE_URL + ".json");
   let data = await response.json();
