@@ -86,7 +86,7 @@ function closeAddContactOverlay(){
 
 function toggleEditDeleteMenu(){
     const contentRef = document.getElementById('edit-delete-div-id');
-    contentRef.classList.toggle(d-none);
+    contentRef.classList.toggle('d-none');
 }
 
 
