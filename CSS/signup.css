@@ -69,36 +69,6 @@
     flex-direction: column;
     gap: 21px;
   }
-  .login-btn {
-    height: 51px;
-    width: 180px;
-    color: white;
-    background-color: #2a3647;
-    border: solid #2a3647;
-    border-radius: 10px;
-    font-size: 21px;
-  }
-  
-  .input-box {
-    height: 46px;
-    width: 342px;
-    border: solid 1px #d1d1d1;
-    border-radius: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 10px;
-  }
-  .input-box input {
-    border: none;
-    height: 44px;
-    width: 100%;
-    outline: none;
-  }
-  .input-img {
-    height: 24px;
-    width: 24px;
-  }
   .signup-btn{
       height: 59px;
       width: 104px;
