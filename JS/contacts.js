@@ -105,6 +105,10 @@ function createContact() {
     }
 }
 
+function validateContactForm(){
+    
+}
+
 // Templates
 
 function renderCurrentLetter(currentLetter){
