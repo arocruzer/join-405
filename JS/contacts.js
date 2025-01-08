@@ -65,28 +65,35 @@ function closeContactDetailsOverlay(){
     let contentRef = document.getElementById('contact-details-wrapper-id');
     contentRef.classList.add('d-none');
     contentRef.innerHTML = "";
+    document.getElementById('edit-delete-div-id').classList.add('d-none');
 }
 
 function OpenAddContactOverlay(){
-    document.getElementById('content-wrapper-id').classList.add('d-none');
-    let contentRef = document.getElementById('overlay-wrapper-id');
-    contentRef.innerHTML = HTMLOpenAddContactOverlay();
-    contentRef.classList.remove('d-none');
+    // document.getElementById('content-wrapper-id').classList.add('d-none');
+    // let contentRef = document.getElementById('overlay-wrapper-id');
+    // contentRef.innerHTML = HTMLOpenAddContactOverlay();
+    // contentRef.classList.remove('d-none');
+
+    document.getElementById('add-contact-div-test-id').classList.remove('d-none');
 }
 
 function closeAddContactOverlay(){
-    document.getElementById('content-wrapper-id').classList.remove('d-none');
-    let contentRef = document.getElementById('overlay-wrapper-id');
-    contentRef.innerHTML = "";
-    contentRef.classList.add('d-none');
+    document.getElementById('add-contact-div-test-id').classList.add('d-none');
 }
+
 
 
 //Edit Contacts
 
 function toggleEditDeleteMenu(){
+    console.log("ausgelöst!");
     const contentRef = document.getElementById('edit-delete-div-id');
-    contentRef.classList.toggle('d-none');
+    contentRef.classList.remove('d-none');
+}
+
+function openEditContactOverlay(){
+    let contentRef = document.getElementById('contact-details-wrapper-id');
+    contentRef.innerHTML = HTMLOpenEditContactDetailsOverlay();
 }
 
 
@@ -162,7 +169,7 @@ function HTMLopenContactDetailsOverlay(index){
             <h5>Phone</h5>
             <a href="#">${loadedContacts[index].phone}</a>
         </div>
-        <img class="three-points-menu" src="../Assets/threePointsMenu.png" alt="threePointsMenu">
+        <img class="three-points-menu" onclick="toggleEditDeleteMenu()" src="../Assets/threePointsMenu.png" alt="threePointsMenu">
     </div>
     `;
 }
@@ -186,6 +193,34 @@ function HTMLOpenAddContactOverlay(){
                     <input class="input-phone" placeholder="Phone" type="tel">
                     <button class="create-button">Create contact<i class="fa-sharp-duotone fa-solid fa-check"></i></button>
                 </div>
+            </div>
+        </div>
+    </div>
+    `;
+}
+
+function HTMLOpenEditContactDetailsOverlay(){
+    return`
+    <div class="overlay-edit-contact">
+        <div class="middle-avatar">TW</div>
+
+        <div class="upper-half">
+            <div class="cross-close">X</div>
+            <div class="edit-contact-title">
+                <h1>Edit contact</h1>
+                <div class="blue-line"></div>
+            </div>
+        </div>
+    
+        <div class="lower-half">
+            <div class="input-fields">
+                <input class="input-person" placeholder="Name" type="text">
+                <input class="input-mail" placeholder="Email" type="email">
+                <input class="input-phone" placeholder="Phone" type="tel">
+            </div>
+            <div class="delete-safe-buttons">
+                <button class="delete-button">Delete</button>
+                <button class="save-button">Save<i class="fa-sharp-duotone fa-solid fa-check save-padding"></i></button>
             </div>
         </div>
     </div>
