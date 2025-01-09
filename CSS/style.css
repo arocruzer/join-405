@@ -3,23 +3,15 @@
   font-family: inter;
 }
 
-/* header {
+header {
   height: 80px;
   width: auto;
   display: flex;
   align-items: center;
   padding-left: 16px;
   padding-right: 16px;
-  box-shadow: 0px 4px 4px 0px #0000001A;
   justify-content: space-between;
-  position: fixed;
-  top: 0; 
-  left: 0; 
-  width: 100%;
-  z-index: 1000;
-  background-color: white;
-
-} */
+}
 
 .header-logo {
   height: 39px;
@@ -109,8 +101,8 @@ input:focus {
 }
 .input-box {
   position: relative;
-  height: 46px;
-  width: 342px;
+  height: 48px;
+  width: 402px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -140,8 +132,8 @@ input:focus {
 }
 
 .signup-btn {
-  height: 59px;
-  width: 104px;
+  height: 49px;
+  width: 91px;
   color: white;
   background-color: #2a3647;
   border: solid #2a3647;
@@ -150,18 +142,4 @@ input:focus {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-.signup-container {
-  padding-top: 77px;
-  height: 49px;
-  width: 292px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  gap: 35px;
-}
-
-.signup-btn a {
-  color: white;
 }
