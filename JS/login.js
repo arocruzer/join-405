@@ -20,9 +20,11 @@ function logIn() {
           email.value = "";
           password.value = "";
       } else {
+          passwordError.style.display = "flex";
           passwordError.innerHTML = "Check your email and password. Please try again.";
       }
   } else {
+    emailError.style.display = "flex"
       emailError.innerHTML = "User not found. Please check your email.";
   }
 }

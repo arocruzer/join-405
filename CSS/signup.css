@@ -8,22 +8,9 @@ body {
   flex-direction: column;
   height: 100vh;
 }
-h1 {
-  font-weight: 700;
-  font-size: 47px;
-}
-
-h3 {
-  font-size: 20px;
-  font-weight: 400;
-}
-h4 {
-  font-size: 16px;
-  color: #a8a8a8;
-  font-weight: 400;
-}
 header {
-  padding: 38px;
+  padding-top: 80px;
+  padding-left: 77px;
 }
 button {
   cursor: pointer;
@@ -33,16 +20,9 @@ button {
   width: 64px;
 }
 
-.hero {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  height: 100vh;
-}
-
-.login-window {
-  width: 396px;
+.signup-window {
+  height: 630px;
+  width: 598px;
   background-color: white;
   display: flex;
   justify-content: center;
@@ -50,7 +30,6 @@ button {
   flex-direction: column;
   gap: 32px;
   border-radius: 30px;
-  padding: 32px 0;
   box-shadow: 0px 0px 14px 3px #0000000a;
 }
 
@@ -128,6 +107,7 @@ a {
   justify-content: flex-start;
 }
 form {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -138,4 +118,17 @@ form {
   font-size: 12px;
   color: red;
   padding-left: 12px;
+}
+
+@media (max-width: 680px){
+  header{
+    padding: 38px 37px !important;
+  }
+  .login-logo{
+    height: 78px !important;
+    width: 64px !important;
+  }
+  .signup-window{
+    width: calc(100% - 32px);
+  }
 }
