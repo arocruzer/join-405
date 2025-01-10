@@ -118,8 +118,10 @@ function time() {
 }
 
 let animation = document.getElementById("animation");
+if(animation){
 animation.addEventListener("animationend", (event) => {
     if (event.animationName === "fadeOutBackground") {
         animation.style.display = "none";
     }
 });
+}
