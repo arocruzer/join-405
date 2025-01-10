@@ -133,6 +133,58 @@ form {
   color: white;
 }
 
+.test {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: #2a3647;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeOutBackground 5s forwards;
+}
+
+.welcome-img {
+  position: absolute;
+  height: 122px;
+  width: 100px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: mymove 2s linear forwards;
+}
+
+@keyframes mymove {
+  0% {
+      transform: translate(-50%, -50%);
+  }
+  100% {
+      top: 5%; 
+      left: 6.5%;
+      transform: translate(0, 0);
+      opacity: 0;
+  }
+}
+
+@keyframes fadeOutBackground {
+  0% {
+      background-color: #2a3647;
+  }
+  100% {
+      background-color: transparent;
+  }
+}
+
+@keyframes fadeOutBackground {
+  0% {
+      background-color: #2a3647;
+  }
+  100% {
+      background-color: transparent;
+  }
+}
+
 @media (max-width: 680px){
   header{
     padding: 38px 37px;
@@ -149,6 +201,10 @@ form {
   }
   .login-window{
     width: calc(100% - 32px);
+  }
+  .welcome-img{
+    height: 78px;
+    width: 64px;
   }
 }
 
