@@ -2,8 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2px 16px;
-  width: calc(100% - 32px);
+  padding: 2px;
 }
 
 #nav-bar {
@@ -15,7 +14,7 @@
   box-shadow: 0px 0px 4px 0px #0000001A;
 }
 
-#frame-bottom-nav-bar {
+#frame-nav-bar {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -26,6 +25,7 @@
 #logo-nav-bar {
   display: none;
   padding: 64px 0;
+  width: 232px;
 }
 
 #logo-nav-bar svg {
@@ -33,20 +33,10 @@
   padding: 0 66px;
 }
 
-.footer-button-frame {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  height: 76px;
-}
-
-.footer-button {
+.nav-button {
   background-color: unset;
   border: none;
-  color: unset;
   padding: unset;
-  cursor: pointer;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -54,44 +44,14 @@
   width: 76px;
   height: 76px;
   transition: color 0.3s, fill 0.3s;
-}
-
-.footer-button:hover .footer-button-icon path {
-  fill: white;
-  /* Icon weiß färben */
-  transition: fill 0.1s;
-  /* Sanfter Übergang */
-}
-
-.footer-button:hover .footer-button-text {
-  color: white;
-  /* Text weiß färben */
-  transition: color 0.1s;
-  /* Sanfter Übergang */
-}
-
-.footer-button-icon {
-  fill: #cdcdcd;
-  /* Standardfarbe für Icon */
-  transition: fill 0.1s;
-  /* Sanfter Übergang */
-}
-
-.footer-button-text {
   color: #cdcdcd;
-  /* Standardfarbe für Text */
   font-size: 14px;
-  transition: color 0.3s;
-  /* Sanfter Übergang */
 }
 
-.footer-button:hover {
+.nav-button:hover {
+  color: white;
   background-color: #091931;
   border-radius: 16px;
-}
-
-footer svg {
-  padding: 4px;
 }
 
 #legal-documents {
@@ -103,11 +63,17 @@ footer svg {
   padding: 8px;
 }
 
-#legal-documents p:hover {
-  cursor: pointer;
+.legal-documents-button {
+  width: 120px;
 }
 
+
 @media screen and (min-width: 768px) {
+  #menu {
+    flex-direction: column;
+    align-items: center;
+  }
+
   #nav-bar {
     height: 100vh;
     display: flex;
@@ -117,6 +83,29 @@ footer svg {
     top: 0;
   }
 
+  .nav-button {
+    width: 232px;
+    height: 46px;
+    display: flex;
+    flex-direction: unset;
+    gap: 8px;
+  }
+
+  .nav-button-img {
+    width: 32px;
+    justify-content: center;
+  }
+
+  .nav-button-p {
+    width: 80px;
+    display: flex;
+    justify-content: start;
+  }
+
+  .nav-button:hover {
+    border-radius: unset;
+  }
+
   #logo-nav-bar {
     display: flex;
     justify-content: center;
@@ -124,15 +113,10 @@ footer svg {
 
   #legal-documents {
     display: flex;
-    justify-content: center;
-  }
-
-  #menu {
-    display: flex;
-    justify-content: space-between;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    box-shadow: none;
+    width: 100%;
   }
 
   .footer-button {

@@ -9,15 +9,18 @@ body {
   align-items: center;
 }
 
+a {
+  text-decoration: none;
+}
+
 #main-container {
   margin: 0 auto;
 }
 
-#main-content{
+#main-content {
   width: calc(100vw - 234px);
   max-width: calc(1440px - 234px);
   display: flex;
-  
 }
 
 #frame {

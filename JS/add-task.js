@@ -6,6 +6,7 @@ let btnMedium = document.getElementById("btn-medium");
 let btnLow = document.getElementById("btn-low");
 let selectedUsers = [];
 let state = 1;
+let page = "add-task";
 
 function openDropDownMenuUser() {
     switch (state) {

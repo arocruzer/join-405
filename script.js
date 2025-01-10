@@ -12,14 +12,12 @@ let colors = ["#007bff", "#ffa500", "#800080", "#d8bfd8", "#ff69b4", "#28a745", 
 
 async function init() {
   await includeHTML();
-  loadScript("./JS/login.js");
   loadData();
 }
 
 async function loadData() {
   let response = await fetch(BASE_URL + ".json");
   let data = await response.json();
-
   users = Object.values(data);
 }
 
@@ -72,21 +70,4 @@ async function includeHTML() {
       element.innerHTML = 'Page not found';
     }
   }
-  // loadContent("navBar", "nav-bar"); // zum testen
-}
-
-async function loadContent(page, frame) {
-  console.log(page);
-  let element = document.getElementById(frame);
-  let resp = await fetch("./HTML/" + page + ".html");
-  if (resp.ok) {
-    element.innerHTML = await resp.text();
-  } else {
-    element.innerHTML = 'Page not found';
-  }
-}
-
-function showHeader() {
-  let header = document.getElementById("header");
-  header.style.display = "flex";
 }

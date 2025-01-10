@@ -11,28 +11,68 @@
   <link rel="icon" type="image/x-icon" href="../Assets/favIcon.png" />
 
   <link rel="stylesheet" href="./style.css" />
-  <link rel="stylesheet" href="./CSS/header.css" />
-  <link rel="stylesheet" href="./CSS/nav-bar.css" />
-  <link rel="stylesheet" href="./CSS/signup.css" />
-  <link rel="stylesheet" href="./CSS/contacts.css" />
-  <link rel="stylesheet" href="./CSS/add-task.css" />
   <link rel="stylesheet" href="./CSS/login.css" />
+  <link rel="stylesheet" href="./CSS/signup.css" />
 
-  <script src="./JS/add-task.js"></script>
   <script src="./script.js"></script>
-  <script src="./JS/template.js"></script>
-  <script src="./JS/signup.js"></script>
-  <script src="./JS/contacts.js"></script>
+  
+  <!-- Weitere am Ende -->
 
   <title>Join-405</title>
 
   <body id="body" onload="init()">
-    <div id="frame">
-      <div id="main-container">
-        <header id="header"></header>
-        <div id="main-content" w3-include-html="./HTML/board.html"></div>
+    <div class="hero">
+      <div class="login-window">
+        <div class="login-title">
+          <h1>Log in</h1>
+          <hr width="88px" color="#29ABE2" size="3" />
+        </div>
+        <div>
+          <div class="input-box">
+            <input type="email" name="" id="email" placeholder="Email" />
+            <img class="input-img" src="../Assets/mail (1).png" alt="" />
+          </div>
+          <div class="erorr-msg" id="email-error"></div>
+        </div>
+        <div>
+          <div class="input-box">
+            <input
+              oninput="changePasswordImg()"
+              type="password"
+              name=""
+              id="password"
+              placeholder="Password"
+            />
+            <img
+              onclick="showPassword()"
+              id="show-password-img"
+              src="../Assets/lock.png"
+              alt=""
+            />
+          </div>
+          <div class="erorr-msg" id="password-error"></div>
+        </div>
+        <div class="login-signup-container">
+          <button onclick="logIn()" class="login-btn">Log in</button>
+          <button
+            class="guest-login"
+            onclick="window.location.href='./HTML/summary.html'"
+          >
+            Guest Log in
+          </button>
+        </div>
       </div>
-      <div id="nav-bar" w3-include-html="./HTML/nav_bar.html"></div>
+      <div class="signup-container">
+        <h3>Not a Join user?</h3>
+        <a class="signup-btn" href="./HTML/signup.html">Sign up</a>
+      </div>
+      <div class="msg-box" id="msgBox"></div>
+      <footer>
+        <a href="./HTML/privacyPolicy.html" target="_blank">Privacy Policy</a>
+        <a href="./HTML/legalNotice.html" target="_blank">Legal notice</a>
+      </footer>
     </div>
   </body>
+  <script src="./JS/login.js"></script>
+  <script src="./JS/signup.js"></script>
 </html>

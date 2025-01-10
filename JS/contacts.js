@@ -1,5 +1,6 @@
 let contacts = [];
 let loadedContacts = [];
+let page = "contacts";
 
 async function loadAllContacts(path=""){
     let response = await fetch (BASE_URL + path + ".json");

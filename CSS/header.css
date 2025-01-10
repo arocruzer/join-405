@@ -1,6 +1,6 @@
-header {
+#header {
   height: 80px;
-  display: none;
+  /* display: none; */
   align-items: center;
   padding-left: 16px;
   padding-right: 16px;
@@ -64,7 +64,7 @@ header {
     display: unset;
   }
 
-  header {
+  #header {
     justify-content: space-between !important;
   }
 }
@@ -74,7 +74,7 @@ header {
     display: none;
   }
 
-  header {
+  #header {
     position: sticky;
     height: 56px;
     box-shadow: none;

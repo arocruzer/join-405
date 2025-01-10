@@ -26,41 +26,84 @@
   </svg>
 </div>
 
-<div id="frame-bottom-nav-bar">
+<div id="frame-nav-bar">
   <div id="menu">
-    <div class="footer-button-frame" onclick="loadContent(`summary`, `main-content`)">
-      <button class="footer-button">
-        <img src="../Assets/summary_g_L.png" alt="" />
-        <p class="footer-button-text">Summary</p>
-      </button>
-    </div>
+    <a href="./summary.html">
+      <div>
+        <button id="summary-button" class="nav-button">
+          <div class="nav-button-img">
+            <img
+              id="summary-img"
+              onload="hoverButton(`summary`)"
+              src="../Assets/img/summary_g_L.png"
+              alt=""
+            />
+          </div>
+          <div class="nav-button-p"><p>Summary</p></div>
+        </button>
+      </div>
+    </a>
 
-    <div class="footer-button-frame" onclick="loadContent(`board`, `main-content`)">
-      <button class="footer-button">
-        <img src="../Assets/board_g_L.png" alt="" />
-        <p class="footer-button-text">Board</p>
-      </button>
-    </div>
+    <a href="./board.html">
+      <div>
+        <button id="board-button" class="nav-button">
+          <div class="nav-button-img">
+            <img
+              id="board-img"
+              onload="hoverButton(`board`)"
+              src="../Assets/img/board_g_L.png"
+              alt=""
+            />
+          </div>
+          <div class="nav-button-p"><p>Board</p></div>
+        </button>
+      </div>
+    </a>
 
-    <div class="footer-button-frame" onclick="loadContent(`addTask`, `main-content`)">
-      <button class="footer-button">
-        <img src="../Assets/add-tasks_g_L.png" alt="" />
-        <p class="footer-button-text">Add Task</p>
-      </button>
-    </div>
+    <a href="./add-task.html">
+      <div>
+        <button id="add-task-button" class="nav-button">
+          <div class="nav-button-img">
+            <img
+              id="add-task-img"
+              onload="hoverButton(`add-task`)"
+              src="../Assets/img/add-task_g_L.png"
+              alt=""
+            />
+          </div>
+          <div class="nav-button-p"><p>Add Task</p></div>
+        </button>
+      </div>
+    </a>
 
-    <div class="footer-button-frame" onclick="loadContent(`contacts`, `main-content`)">
-      <button class="footer-button">
-        <img src="../Assets/contacts_g_L.png" alt="" />
-        <p class="footer-button-text">Contacts</p>
-      </button>
-    </div>
+    <a href="./contacts.html">
+      <div>
+        <button id="contacts-button" class="nav-button">
+          <div class="nav-button-img">
+            <img
+              id="contacts-img"
+              onload="hoverButton(`contacts`)"
+              src="../Assets/img/contacts_g_L.png"
+              alt=""
+            />
+          </div>
+          <div class="nav-button-p"><p>Cotacts</p></div>
+        </button>
+      </div>
+    </a>
   </div>
 
   <div id="legal-documents">
-    <div>
-      <p onclick="loadContent(`privacyPolicy`, `main-content`)">Privacy Policy</p>
-      <p onclick="loadContent(`legalNotice`, `main-content`)">Legal Notice</p>
-    </div>
+    <a href="./privacy-policy.html" class="nav-button">
+      <div class="legal-documents-button">
+        <p>Privacy Policy</p>
+      </div>
+    </a>
+
+    <a href="./legal-notice.html" class="nav-button">
+      <div class="legal-documents-button">
+        <p>Legal notice</p>
+      </div>
+    </a>
   </div>
 </div>
