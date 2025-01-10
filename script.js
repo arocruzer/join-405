@@ -116,3 +116,10 @@ function time() {
     regardsUser.innerHTML = `${greeting}, ${userName}`;
   }
 }
+
+let animation = document.getElementById("animation");
+animation.addEventListener("animationend", (event) => {
+    if (event.animationName === "fadeOutBackground") {
+        animation.style.display = "none";
+    }
+});

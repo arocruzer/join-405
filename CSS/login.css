@@ -142,7 +142,7 @@ form {
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: fadeOutBackground 5s forwards;
+  animation: fadeOutBackground 2s forwards;
 }
 
 .welcome-img {
@@ -164,15 +164,6 @@ form {
       left: 6.5%;
       transform: translate(0, 0);
       opacity: 0;
-  }
-}
-
-@keyframes fadeOutBackground {
-  0% {
-      background-color: #2a3647;
-  }
-  100% {
-      background-color: transparent;
   }
 }
 
