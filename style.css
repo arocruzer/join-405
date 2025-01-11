@@ -6,7 +6,6 @@
 body {
   display: flex;
   flex-direction: column;
-  align-items: center;
   cursor: pointer;
 }
 
@@ -45,6 +44,14 @@ h4 {
   font-size: 16px;
   color: #a8a8a8;
   font-weight: 400;
+}
+header {
+  height: 80px;
+  width: auto;
+  display: flex;
+  align-items: center;
+  padding: 67px 122px;
+  justify-content: space-between;
 }
 
 .header-logo {
