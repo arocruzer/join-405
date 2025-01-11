@@ -14,6 +14,7 @@ let colors = ["#007bff", "#ffa500", "#800080", "#d8bfd8", "#ff69b4", "#28a745", 
 async function init() {
   await includeHTML();
   loadData();
+  welcomeAnimation();
 }
 
 async function loadData() {
@@ -116,7 +117,7 @@ function time() {
     regardsUser.innerHTML = `${greeting}, ${userName}`;
   }
 }
-
+function welcomeAnimation() {
 let animation = document.getElementById("animation");
 if(animation){
 animation.addEventListener("animationend", (event) => {
@@ -124,4 +125,5 @@ animation.addEventListener("animationend", (event) => {
         animation.style.display = "none";
     }
 });
+}
 }

@@ -28,14 +28,6 @@ function logIn() {
       emailError.innerHTML = "User not found. Please check your email.";
   }
 }
-function guestLogin() {
-  let guestUser = {
-      name: "Guest",
-      email: null
-  };
-  localStorage.setItem("loggedInUser", JSON.stringify(guestUser));
-  window.location.href = "../HTML/summary.html";
-}
 
 if (msg) {
   msgBox.innerHTML = msg;
