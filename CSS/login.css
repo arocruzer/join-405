@@ -8,29 +8,14 @@ body {
   flex-direction: column;
   height: 100vh;
 }
-h1 {
-  font-weight: 700;
-  font-size: 47px;
-}
-
-h3 {
-  font-size: 20px;
-  font-weight: 400;
-}
-h4 {
-  font-size: 16px;
-  color: #a8a8a8;
-  font-weight: 400;
-}
-header {
-  padding: 38px;
+.signup-container{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 35px;
 }
 button {
   cursor: pointer;
-}
-.login-logo {
-  height: 78px;
-  width: 64px;
 }
 
 .hero {
@@ -42,7 +27,8 @@ button {
 }
 
 .login-window {
-  width: 396px;
+  width: 652px;
+  height: 451px;
   background-color: white;
   display: flex;
   justify-content: center;
@@ -61,13 +47,15 @@ button {
   flex-direction: column;
   gap: 16px;
 }
+
 .login-signup-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
   gap: 21px;
 }
+
 .login-btn {
   height: 51px;
   width: 180px;
@@ -77,6 +65,7 @@ button {
   border-radius: 10px;
   font-size: 21px;
 }
+
 .guest-login {
   height: 51px;
   width: 180px;
@@ -85,54 +74,6 @@ button {
   border-radius: 10px;
   font-size: 21px;
 }
-
-.input-box {
-  height: 46px;
-  width: 342px;
-  border: solid 1px #d1d1d1;
-  border-radius: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 10px;
-}
-.input-box input {
-  border: none;
-  height: 44px;
-  width: 100%;
-  outline: none;
-}
-.input-img {
-  height: 24px;
-  width: 24px;
-}
-.signup-btn {
-  height: 59px;
-  width: 104px;
-  color: white;
-  background-color: #2a3647;
-  border: solid #2a3647;
-  border-radius: 8px;
-  font-size: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.signup-container {
-  padding-top: 77px;
-  height: 49px;
-  width: 292px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  gap: 35px;
-}
-
-.signup-btn a {
-  color: white;
-}
-
 footer {
   display: flex;
   justify-content: space-between;
@@ -149,14 +90,6 @@ a {
   font-weight: 400;
 }
 
-form {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: column;
-  gap: 24px;
-}
-
 .msg-box {
   height: 74px;
   width: 326px;
@@ -171,16 +104,98 @@ form {
   border-radius: 20px;
 }
 
-.erorr-msg {
-  font-size: 12px;
-  color: red;
-  padding-left: 12px;
+.logo {
+  width: 100px;
+  height: 100px;
+  background-image: url('../Assets/Join_logo.png'); /* Replace with your logo path */
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: moveLogo 2s ease-out forwards;
 }
 
-.show-password-img{
-  cursor: pointer;
+.signup-container-mobile {
+  padding-top: 77px;
+  height: 49px;
+  width: 292px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 35px;
 }
-.input-box input:focus{
-  outline: none !important;
-  border: 1px solid #29ABE2 !important;
+
+.signup-btn a {
+  color: white;
+}
+
+.test {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: #2a3647;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeOutBackground 2s forwards;
+}
+
+.welcome-img {
+  position: absolute;
+  height: 122px;
+  width: 100px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: mymove 2s linear forwards;
+}
+
+@keyframes mymove {
+  0% {
+      transform: translate(-50%, -50%);
+  }
+  100% {
+      top: 5%; 
+      left: 6.5%;
+      transform: translate(0, 0);
+      opacity: 0;
+  }
+}
+
+@keyframes fadeOutBackground {
+  0% {
+      background-color: #2a3647;
+  }
+  100% {
+      background-color: transparent;
+  }
+}
+
+@media (max-width: 680px){
+  header{
+    padding: 38px 37px;
+  }
+  .login-logo{
+    height: 78px;
+    width: 64px;
+  }
+  .signup-container{
+    display: none;
+  }
+  .signup-container-mobile{
+    display: flex;
+  }
+  .login-window{
+    width: calc(100% - 32px);
+  }
+  .welcome-img{
+    height: 78px;
+    width: 64px;
+  }
+}
+
+@media (max-width: 500px){
+  .login-signup-container{
+    flex-direction: column;
+  }
 }

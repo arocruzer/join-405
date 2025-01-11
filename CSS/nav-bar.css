@@ -1,0 +1,189 @@
+#menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px;
+}
+
+#nav-bar {
+  position: sticky;
+  bottom: 0;
+  background: #2a3647;
+  color: #cdcdcd;
+  z-index: 999;
+  box-shadow: 0px 0px 4px 0px #0000001a;
+}
+
+#frame-nav-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+#logo-nav-bar {
+  display: none;
+  padding: 64px 0;
+  width: 232px;
+}
+
+#logo-nav-bar svg {
+  height: 122px;
+}
+
+.nav-button {
+  background-color: unset;
+  border: none;
+  padding: unset;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 76px;
+  height: 76px;
+  transition: color 0.3s, fill 0.3s;
+  color: #cdcdcd;
+  font-size: 14px;
+  border-radius: 16px;
+}
+
+#summary-button:hover #summary-img {
+  background-image: url(../Assets/img/summary_w_L.png);
+}
+
+#board-button:hover #board-img {
+  background-image: url(../Assets/img/board_w_L.png);
+}
+
+#add-task-button:hover #add-task-img {
+  background-image: url(../Assets/img/add-task_w_L.png);
+}
+
+#contacts-button:hover #contacts-img {
+  background-image: url(../Assets/img/contacts_w_L.png);
+}
+
+.nav-button:hover {
+  background-color: #091931;
+  color: white;
+}
+
+#legal-documents {
+  display: none;
+  padding-bottom: 64px;
+}
+
+#legal-documents p {
+  padding: 8px;
+  width: 120px;
+}
+
+.nav-button-img {
+  width: 24px;
+  height: 24px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 24px;
+}
+
+#summary-img {
+  background-image: url(../Assets/img/summary_g_L.png);
+}
+
+#board-img {
+  background-image: url(../Assets/img/board_g_L.png);
+}
+
+#add-task-img {
+  background-image: url(../Assets/img/add-task_g_L.png);
+}
+
+#contacts-img {
+  background-image: url(../Assets/img/contacts_g_L.png);
+}
+
+
+@media screen and (min-width: 768px) {
+  #menu {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #nav-bar {
+    height: 100vh;
+    width: 232px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+  }
+
+  .nav-button {
+    width: 232px;
+    height: 46px;
+    display: flex;
+    flex-direction: unset;
+    gap: 8px;
+  }
+
+  .nav-button-img {
+    width: 32px;
+    height: 32px;
+    background-size: 32px;
+    justify-content: center;
+  }
+
+  .nav-button p {
+    width: 80px;
+    display: flex;
+    justify-content: start;
+    font-size: 16px;
+  }
+
+  .nav-button:hover {
+    border-radius: unset;
+  }
+
+  #logo-nav-bar {
+    display: flex;
+    justify-content: center;
+  }
+
+  #legal-documents {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .footer-button {
+    padding: unset;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: start;
+
+    align-items: center;
+    width: 100%;
+    height: 76px;
+    transition: color 0.3s, fill 0.3s;
+  }
+
+  .footer-button-frame {
+    display: flex;
+    justify-content: center;
+    flex-direction: unset;
+    align-items: start;
+    height: 76px;
+    width: calc(232 - (2 * 53));
+  }
+
+  .footer-button svg {
+    width: 30px;
+    height: 30px;
+  }
+}
