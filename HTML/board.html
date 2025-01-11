@@ -17,129 +17,103 @@
 
 
 
-<body onload="loadTasks()">
-    <!-- Main Content -->
-    <main>
-        <!-- Title and Add Task Button -->
-        <div class="section">
-            <h1>Board</h1>
-            <a href="../HTML/addTask.html" class="add-task-board" id="addTaskButton">+</a>
-        </div>
+<body>
+    <div class="board-container">
+        <header>
+            <div class="section">
+                <h1>Board</h1>
+                <div onclick="openInputPage('todo')" class="add-task-board">+</div>
+            </div>
+    
+            <!-- Search Bar -->
+            <div class="search-container">
+                <input type="text" id="search" placeholder="Find Task" oninput="searchTasks()">
+                <img class="search-icon" src="../Assets" alt="search-icon">
+            </div>
+        </header>
 
-        <!-- Search Bar -->
-        <div class="search-container">
-            <input type="text" id="search" placeholder="Find Task">
-            <img class="search-icon" src="../Assets/search.png" alt="search-icon">
+        <div class="board">
+            <div class="column" id="todo" ondragover="allowDrop(event)" ondrop="drop(event)">
+                <div class="column-header">
+                    <h2>To Do</h2>
+                    <button onclick="openInputPage('todo')" class="add-task">+</button>
+                </div>
+                <div class="task-list" id="taskList">
+                    <div class="no-tasks">No tasks To do</div>
+                </div>
+                <div class="task-container" id="todo-tasks">
+                </div>
+            </div>
+            <div class="column" id="in-progress" ondragover="allowDrop(event)" ondrop="drop(event)">
+                <div class="column-header">
+                    <h2>In Progress</h2>
+                    <button onclick="openInputPage('in-progress')" class="add-task">+</button>
+                </div>
+                <div class="task-list">
+                    <div class="no-tasks">No tasks In progress</div>
+                </div>
+                <div class="task-container" id="in-progress-tasks">
+                </div>
+            </div>
+            <div class="column" id="await-feedback" ondragover="allowDrop(event)" ondrop="drop(event)">
+                <div class="column-header">
+                    <h2>Await Feedback</h2>
+                    <button onclick="openInputPage('await-feedback')" class="add-task">+</button>
+                </div>
+                <div class="task-list">
+                    <div class="no-tasks">No tasks Await feedback</div>
+                </div>
+                <div class="task-container" id="await-feedback-tasks"></div>
+            </div>
+            <div class="column" id="done" ondragover="allowDrop(event)" ondrop="drop(event)">
+                <div class="column-header">
+                    <h2>Done</h2>
+                </div>
+                <div class="task-list">
+                    <div class="no-tasks">No tasks Done</div>
+                </div>
+                <div class="task-container" id="done-tasks">
+                </div>
+            </div>
         </div>
-             <!-- Weitere Task-Abschnitte -->
-        <section class="task-section">
-            <div class="task-header">
-                <h2>To do</h2>
-                <a href="../HTML/addTask.html?category=to-do" class="add-task">+</a>
-            </div>
-            <div>
-                <div class="task-list">
-                    <div class="no-tasks">No tasks available</div>
-                </div>
-                
-                <div class="user-card"> </div>
-            </div>
-           
-        </section>
-        <section class="task-section">
-            <div class="task-header">
-                <h2>In progress</h2>
-                <a href="../HTML/addTask.html?category=in-progress" class="add-task">+</a>
-            </div>
-            <div>
-                <div class="task-list">
-                    <div class="no-tasks">No tasks available</div>
-                </div>
-                
-                <div class="user-card"> </div>
-            </div>
-           
-        </section>     
-          <section class="task-section">
-            <div class="task-header">
-                <h2>Await feedback</h2>
-                <a href="../HTML/addTask.html?category=await-feedback" class="add-task">+</a>
-            </div>
-            <div class="task-card">
-                <div class="task-list">
-                    <div class="no-tasks">No tasks available</div>
-                </div>
-                
-                <div class="user-card"> </div>
-            </div>
-           
-        </section>      
-        <section class="task-section">
-            <div class="task-header">
-                <h2>Done</h2>
-                <a href="../HTML/addTask.html" class="add-task">+</a>
-            </div>
-            <div>
-                <div class="task-list">
-                    <div class="no-tasks">No tasks available</div>
-                </div>
-                
-                <div class="user-card"> </div>
-            </div>
-           
-        </section>         
-        <div class="user-modal d-none" id="cardModal">
-          <div class="card-content">
-              <div class="header">
-                <span class="user-story-badge">User Story</span>
-                <span class="close-btn" onclick="toggleCardModal()">×</span>
-               </div>
+    </div>
+    <!-- Modal for Task Details -->
+   <div id="taskModal" class="modal">
+      <div class="modal-content">
+        <span class="close-button" onclick="closeTaskModal()">&times;</span>
         
-              <h1>Kochwelt Page &amp; Recipe Recommender</h1>
-              <p>Build start page with recipe recommendation.</p>
-        
-              <div class="details">
-                 <div class="due-date">Due date: <strong>10/05/2023</strong></div>
-                 <div class="priority">Priority: <span class="priority-badge medium">Medium</span></div>
-                 <div class="assigned-to">
-                    Assigned To:
-                    <div>
-                        <div class="user-avatar user-EM">EM</div>
-                        <span>Emmanuel Mauer</span>
-                    </div>
-                    <div>
-                        <div class="user-avatar user-MB">MB</div>
-                        <span>Emmanuel Mauer</span>
-                    </div>
-                    <div>
-                        <div class="user-avatar user-AM">AM</div>
-                        <span>Emmanuel Mauer</span>
-                    </div>
-                    
-                    
-                    
-                 </div>
-             </div>
-        
-             <div class="subtasks">
-                <h3>Subtasks:</h3>
-                <label>
-                   <input type="checkbox" checked />
-                   <span>Implement Recipe Recommendation</span>
-                </label>
-                <label>
-                   <input type="checkbox" />
-                   <span>Start Page Layout</span>
-                </label>
-             </div>
+        <!-- Kategorie als Label -->
+        <div class="modal-category" id="modalCategory">User Story</div>
 
-             <div class="actions">
-                <button class="delete-btn">Delete</button>
-                <button class="edit-btn">Edit</button>
-             </div>
-          </div>
+        <!-- Titel -->
+        <h2 id="modalTitle"></h2>
+        
+        <!-- Beschreibung -->
+        <p id="modalDescription"></p>
+        
+        <!-- Fälligkeitsdatum und Priorität -->
+        <p><strong>Due date:</strong> <span id="modalDueDate"></span></p>
+        <p><strong>Priority:</strong> <span id="modalPriority"></span></p>
+    
+        
+        <!-- Zugewiesene Benutzer -->
+        <p><strong>Assigned To:</strong></p>
+        <div id="modalAssignedUsers"></div>
+
+        <p><strong>Subtasks:</strong></p>
+        <div id="modalSubtasks"></div>
+
+        <!-- Edit und Delete Buttons -->
+        <div class="modal-footer">
+            <button onclick="deleteTask()" class="delete-button"><img src="../Assets/delete-icon.png" alt="Delete Icon"> Delete</button>
+            <button onclick="editTask()" class="edit-button"><img src="../Assets/edit-icon.png" alt="Edit Icon"> Edit</button>
         </div>
-    </main>
+      </div>
+   </div>
+
+</div>
+
+
 
 </body>
 </html>

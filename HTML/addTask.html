@@ -14,14 +14,6 @@
     <title>Join</title>
 </head>
 <body onload="init()">
-    <header>
-        <img class="header-logo" src="../Assets/header_logo.png" alt="join-logo">
-        <div class="user-button" id="user-button">
-            <div class="inside-radius">
-                <h5>G</h5>
-            </div>
-        </div>
-    </header>
     <div class="hero">
         <div class="title-arrow">
             <h1>Add Task</h1>
@@ -36,10 +28,10 @@
         </div>
         <div class="input-containers">
             <p>Assigned to</p>
-            <div onclick="openDropDownMenu(), addUserToTask()" class="drop-down">
+            <div onclick="openDropDownMenuUser(), addUserToTask()" class="drop-down">
                 <div>Select contacts to assign</div>
                 <div>
-                    <img class="drop-down-arrow" id="drop-down-arrow" src="../Assets/arrow_drop_downaa (1).png" alt="">
+                    <img class="drop-down-arrow" id="drop-down-arrow" src="../Assets/arrow_drop_downaa (1).png" alt="Arrow down">
                 </div>
             </div>
             <div class="contact-list-container" id="contact-list">
@@ -54,14 +46,43 @@
         <div class="prio-container">
             <p>Prio</p>
             <div class="prio-btn-container">
-                <button class="btn-prio">Urgent <img src="../Assets/prio_urgent.png" alt="Urgent"></button>
-                <button class="btn-prio">Medium <img src="../Assets/prio_medium.png" alt="Medium"></button>
-                <button class="btn-prio">Low <img src="../Assets/prio_low.png" alt="Low"></button>
+                <button onclick="changeColorPrioBtn('urgent')" id="btn-urgent" class="btn-prio-urgent">Urgent <img src="../Assets/prio_urgent.png" alt="Urgent"></button>
+                <button onclick="changeColorPrioBtn('medium')" id="btn-medium" class="btn-prio-medium">Medium <img src="../Assets/prio_medium.png" alt="Medium"></button>
+                <button onclick="changeColorPrioBtn('low')" id="btn-low" class="btn-prio-low">Low <img src="../Assets/prio_low.png" alt="Low"></button>       
+
             </div>
+        </div>
+        <div class="input-containers">
+            <p>Category<span>*</span></p>
+            <div class="drop-down" onclick="toggleCategorySelect()">
+                <div id="selected-category">Select task category</div>
+                <img class="drop-down-arrow" id="drop-down" src="../Assets/arrow_drop_downaa (1).png" alt="Arrow down">
+            </div>
+            <div class="category-options hidden" id="categorySelect">
+                <div onclick="selectCategory('Technical Task')">Technical Task</div>
+                <div onclick="selectCategory('User Story')">User Story</div>
+            </div>
+        </div>
+        
+        
+        
+        <div class="input-containers">
+            <p>Subtasks</p>
+            <div class="subtask-container">
+               <input oninput="toggleButtonVisibility()" class="title-input" type="text" placeholder="Add new subtask" id="newSubtask">
+              <img onclick="toggleButtonVisibility(true)" id="plusButton" class="plus-img" src="../Assets/Subtasks +.png" alt="">
+              <button id="confirmButton" onclick="addSubtask()">✔️</button>
+              <button id="cancelButton" onclick="cancelSubtask()">❌</button>
+            </div>
+            <div id="subtaskLabels" class="subtask-label-container"></div>
+
+        </div>
+        <div>
+            <p>This field is required<span>*</span></p>
         </div>
         <div class="clear-addTask-container">
             <button onclick="clearTask()" class="clear-btn">Clear <img src="../Assets/iconoir_cancel.png" alt=""></button>
-            <button class="creatTask-btn" onclick="createTask()">Creat Task <img src="../Assets/check.png" alt=""></button>
+            <button onclick="addTask()" class="creatTask-btn">Creat Task <img src="../Assets/check.png" alt=""></button>
         </div>
         <script src="../JS/addTask.js"></script>
 </body>

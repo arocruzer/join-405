@@ -1,324 +1,481 @@
-/* Grundlegende Einstellungen */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-  }
-  
-  body {
-    background-color: #f4f5f7;
-    color: #2d3e50;
-  }
-  main {
-    padding: 20px;
-  }
-  
-  h3 {
-    color: white;
-    font-size: 14px;
-    background-color: #0038ff;
-    padding: 5px 15px;
-    border-radius: 8px;
-    font-weight: normal;
-  }
-  .h3-task {
-    background-color: #1fd7c1;
-  }
-  
-  /* Main Layout Styling */
-  .section {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 16px;
-  }
-  
-  h1 {
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  .add-task-board {
-    background: #2a3647;
-    color: white;
-    font-size: 24px;
-    height: 40px;
-    width: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    cursor: pointer;
-    text-decoration: none;
-  }
-  
-  .search-container {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 8px 10px;
-    margin-bottom: 16px;
-  }
-  
-  #search {
-    flex-grow: 1;
-    border: none;
-    outline: none;
-    background: transparent;
-    font-size: 14px;
-    color: #666;
-  }
-  
-  .search-icon {
-    width: 26px;
-    height: 16px;
-    cursor: pointer;
-    border-left: 1px solid #ccc;
-    padding-left: 8px;
-  }
-  
-  /* User Story Card Styling */
-  .user-card {
-    display: flex;
-    overflow-x: auto;
-    gap: 24px;
-  }
-  .user-story-card {
-    flex: none;
-    background: white;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 12px;
-    padding: 16px;
-    margin: 16px 0;
-    width: 280px;
-  }
-  
-  .user-story-card h4 {
-    color: #2d3e50;
-    font-size: 16px;
-    margin-bottom: 4px;
-    font-weight: bold;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    word-wrap: break-word;
-  }
-  
-  .user-story-card p {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 16px;
-    display: -webkit-box;
-    -webkit-line-clamp: 2; 
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    word-wrap: break-word;
-  }
-  
-  .progress-container {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 8px;
-  }
-  
-  .progress-bar {
-    width: 68%;
-    height: 8px;
-    background: #e6e6e6;
-    border-radius: 4px;
-    position: relative;
-  }
-  .progress-bar-div {
-    width: 100%;
-    height: 8px;
-    background: #e6e6e6;
-    border-radius: 4px;
-    position: relative;
-  }
-  
-  .progress-bar .progress {
-    height: 100%;
-    background: #29abe2;
-    border-radius: 4px;
-    width: 50%; /* Fortschrittsanzeige - Passe dies entsprechend an */
-  }
-  .progress-bar-div .progress-div {
-    height: 100%;
-    background: #29abe2;
-    border-radius: 4px;
-  }
-  
-  .subtasks {
-    font-size: 12px;
-    color: #666;
-  }
-  .user-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  /* Benutzer-Avatare */
-  .user-avatar-container {
-    display: flex;
-    align-items: center;
-    position: relative;
-  }
-  
-  .user-avatar {
-    height: 32px;
-    width: 32px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    color: white;
-    border: 2px solid white; /* Weißer Rand um die Avatare */
-    position: relative;
-    margin-left: -8px; /* Überlappungseffekt */
-  }
-  .user-avatar:first-child {
-    margin-left: 0; /* Entferne den negativen Abstand beim ersten Avatar */
-  }
-  
-  .user-AM {
-    background-color: #ff9f43;
-  }
-  .user-EM {
-    background-color: #1dd1a1;
-  }
-  .user-MB {
-    background-color: #5f27cd;
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  background-color: #f8f9fa;
+}
 
-  /* Task Section Styling */
-  .task-section {
-    margin-bottom: 24px;
+.board-container {
+  width: 90%;
+  max-width: 1200px;
+}
+
+header {
+  display: flex;
+  padding-bottom: 16px;
+  flex-direction: column;
+}
+.section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 16px;
+}
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+}
+.add-task-board {
+  background: #2a3647;
+  color: white;
+  font-size: 24px;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin-bottom: 16px;
+}
+#search {
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  color: #666;
+}
+.search-icon {
+  width: 26px;
+  height: 16px;
+  cursor: pointer;
+  border-left: 1px solid #ccc;
+  padding-left: 8px;
+}
+
+.add-task-button {
+  padding: 10px 15px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.board {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.column {
+ padding: 10px;
+}
+
+.column-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.add-task {
+  /* background: none; */
+  /* color: #2d3e50; */
+  /* font-size: 16px; */
+  height: 24px;
+  width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #2d3e50;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.task-list {
+  background: #e7e7e7;
+  border: 1px dashed #d1d1d2;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.no-tasks {
+  color: #c7c7c7;
+  font-style: italic;
+}
+
+.task-container {
+  min-height: 200px;
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+}
+
+.column h2 {
+  margin-top: 0;
+}
+
+.task:active {
+  cursor: grabbing;
+}
+
+.highlight {
+  border: 2px dashed #dbdbdb;
+}
+
+.user-card {
+  display: flex;
+  gap: 24px;
+}
+.user-story-card {
+  flex: none;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  padding: 16px;
+  margin: 16px 0;
+  width: 280px;
+}
+
+.user-story-card h4 {
+  color: #2d3e50;
+  font-size: 16px;
+  margin-bottom: 4px;
+  font-weight: bold;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Maximal zwei Zeilen */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Mit "..." abschneiden */
+  word-wrap: break-word;
+}
+
+.user-story-card p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 16px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Maximal zwei Zeilen */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Mit "..." abschneiden */
+  word-wrap: break-word;
+}
+.progress-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.progress-bar {
+  width: 65%;
+  height: 8px;
+  background: #e6e6e6;
+  border-radius: 4px;
+  position: relative;
+}
+.progress-bar-div {
+  width: 100%;
+  height: 8px;
+  background: #e6e6e6;
+  border-radius: 4px;
+  position: relative;
+}
+
+.progress-bar .progress {
+  height: 100%;
+  background: #29abe2;
+  border-radius: 4px;
+  width: 50%; /* Fortschrittsanzeige - Passe dies entsprechend an */
+}
+.progress-bar-div .progress-div {
+  height: 100%;
+  background: #29abe2;
+  border-radius: 4px;
+}
+
+.subtasks {
+  font-size: 12px;
+  color: #666;
+}
+.user-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Benutzer-Avatare */
+.user-avatar-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.user-avatar {
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: white;
+  border: 2px solid white; /* Weißer Rand um die Avatare */
+  position: relative;
+  margin-left: -8px; /* Überlappungseffekt */
+}
+.user-avatar:first-child {
+  margin-left: 0; /* Entferne den negativen Abstand beim ersten Avatar */
+}
+
+h3 {
+  color: white;
+  font-size: 14px;
+  background-color: #0038ff;
+  padding: 5px 15px;
+  border-radius: 8px;
+  font-weight: normal;
+}
+
+/* Stil für User Story */
+.category-label.user-story {
+  background-color: blue;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 8px;
+  font-weight: bold;
+  display: inline-block;
+}
+
+/* Stil für Technical Task */
+.category-label.technical-task {
+  background-color: #20e3b2;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 8px;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.user-container img {
+  vertical-align: middle;
+  margin-left: 5px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Modal Hintergrund und Animation */
+/* Modal Container */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+  padding: 20px;
+}
+
+/* Modal Content (Zentriert) */
+.modal-content {
+  background-color: white;
+  padding: 32px;
+  border-radius: 20px;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  font-family: 'Inter', sans-serif;
+  animation: fadeInRight 0.5s ease-out;
+  overflow-y: auto;
+  max-height: 90vh;
+  position: relative;
+  transform: translate(-50%, -50%); /* Zentralisiert */
+  top: 50%;
+  left: 50%;
+}
+
+
+/* Modal Animation */
+@keyframes fadeInRight {
+  from {
+      opacity: 0;
+      transform: translate(0, -50%); /* Startet etwas höher als die Mitte */
   }
-  
-  .task-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 16px;
+  to {
+      opacity: 1;
+      transform: translate(-50%, -50%); /* Perfekt zentriert */
   }
-  
-  .task-section h2 {
-    font-size: 18px;
-    font-weight: bold;
-    color: #2d3e50;
-  }
-  
-  .add-task {
-    background: none;
-    color: #2d3e50;
-    font-size: 16px;
-    height: 24px;
-    width: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #2d3e50;
-    border-radius: 4px;
-    cursor: pointer;
-    text-decoration: none;
-  }
-  
-  .task-list {
-    background: #e7e7e7;
-    border: 1px dashed #d1d1d2;
-    border-radius: 8px;
-    padding: 16px;
-    text-align: center;
-    font-size: 14px;
-  }
-  
-  .no-tasks {
-    color: #c7c7c7;
-    font-style: italic;
-  }
-  .user-modal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.2);
-    z-index: 999;
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
-    transform: translateX(0) translateY(0);
-    opacity: 1;
-    transition: all 0.2s ease-in-out;
-  }
-  .card-content {
-    position: fixed;
-    padding: 20px;
-    height: 80%;
-    width: 40%;
-    background-color: white;
-    border: 1px solid lightgrey;
-    border-radius: 10px;
-    overflow-y: auto;
-  }
-  .d-none {
-    transform: translateX(100%) translateY(0);
-    opacity: 0;
-  }
-  
-  .card-content h1 {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  .card-content p {
-    margin: 10px 0;
-    color: #666;
-  }
-  
-  .card-content .details {
-    margin: 10px 0;
-    font-size: 16px;
-  }
-  
-  .card-content .priority {
-    color: green;
-    font-weight: bold;
-  }
-  
-  .card-content .assigned-to {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 10px;
-  }
-  
-  .card-content .user-avatar {
-    height: 40px;
-    width: 40px;
-    font-size: 14px;
-    font-weight: bold;
-  }
-  
-  .card-content .close-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 20px;
-    cursor: pointer;
-  }
-  
-  .d-none{
-    display: none !important;
-  }
+}
+
+/* Kategorie Label */
+.modal-category {
+  background-color: #0038FF;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Titel */
+.modal-content h2 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  word-wrap: break-word;
+}
+
+/* Beschreibung */
+#modalDescription {
+  font-size: 16px;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+/* Due Date und Priority */
+#modalDueDate, #modalPriority {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+/* Subtasks */
+#modalSubtasks li {
+  list-style-type: none;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#modalSubtasks li::before {
+  content: '✔️';
+  color: #28a745;
+  font-size: 18px;
+}
+
+/* Container für Benutzer (Name neben Avatar) */
+#modalAssignedUsers {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+/* Einzelner Benutzer (Avatar + Name) */
+.user-item {
+  display: flex;
+  align-items: center;  /* Horizontale Ausrichtung */
+  gap: 12px;  /* Abstand zwischen Avatar und Name */
+}
+
+/* Avatar-Stil */
+.user-avatar {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  border: 2px solid white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-transform: uppercase;
+}
+
+/* Name soll rechts neben dem Avatar stehen */
+.user-name {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  white-space: nowrap;  /* Verhindert Zeilenumbrüche */
+}
+
+/* Modal Footer */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.delete-button, .edit-button {
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.delete-button {
+  background-color: #FF4D4D;
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #cc0000;
+}
+
+.edit-button {
+  background-color: #007BFF;
+  color: white;
+}
+
+.edit-button:hover {
+  background-color: #0056b3;
+}
+
+/* Close Button */
+.close-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 28px;
+  cursor: pointer;
+  color: #333;
+}
+#modalSubtasks{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

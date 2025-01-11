@@ -1,9 +1,18 @@
 let dropDownArrow = document.getElementById("drop-down-arrow");
 let concatList = document.getElementById("contact-list");
+let categoryList = document.getElementById("category-list");
+let btnUrgent = document.getElementById("btn-urgent");
+let btnMedium = document.getElementById("btn-medium");
+let btnLow = document.getElementById("btn-low");
+let subtaskInput = document.getElementById("subtask-input");
+let addSubtaskBtn = document.getElementById("add-subtask-btn");
+let subtaskList = [];
 let selectedUsers = [];
+let selectedPriority = '';
 let state = 1;
 
-function openDropDownMenu() {
+renderSubtasks();
+function openDropDownMenuUser() {
     switch (state) {
         case 1:
             concatList.style.display = 'block';
@@ -13,6 +22,21 @@ function openDropDownMenu() {
             break;
         case 2:
             concatList.style.display = 'none';
+            dropDownArrow.src = "../Assets/arrow_drop_downaa (1).png";
+            state = 1;
+            break;
+    }
+}
+
+function openDropDownMenuCategory() {
+    switch (state) {
+        case 1:
+            categoryList.style.display = 'block';
+            dropDownArrow.src = "../Assets/arrow_drop_downaa.png";
+            state = 2;
+            break;
+        case 2:
+            categoryList.style.display = 'none';
             dropDownArrow.src = "../Assets/arrow_drop_downaa (1).png";
             state = 1;
             break;
@@ -69,51 +93,186 @@ function addedUsers() {
   });
 }
 
-/*function clearTask() {
-    document.getElementById("title-input").value = "";
-    document.getElementById("description").value = "";
-    document.getElementById("addedUers").innerHTML = "";
-    document.getElementById("date-input").value = "";
-}*/
-// Funktion zum Erstellen einer neuen Aufgabe
-// Kategorie aus der URL auslesen und im Formular speichern
-window.onload = function () {
-    const urlParams = new URLSearchParams(window.location.search);
-    const category = urlParams.get('category');
-    
-    if (category) {
-        localStorage.setItem("currentCategory", category);
+let selectedCategory = "";
+const categorySelect = document.getElementById('categorySelect');
+const selectedCategoryElement = document.getElementById('selected-category');
+let dropDownArow = document.getElementById("drop-down");
+
+
+// Öffnen und Schließen des Dropdowns
+function toggleCategorySelect() {
+    categorySelect.classList.toggle('hidden');
+    dropDownArow.classList.toggle('rotated');
+}
+
+// Auswahl der Kategorie und Dropdown schließen
+function selectCategory(category) {
+    selectedCategory = category;
+    selectedCategoryElement.innerText = category;
+    categorySelect.classList.add('hidden');
+    dropDownArow.classList.remove('rotated');
+}
+
+
+
+document.addEventListener('DOMContentLoaded', initCategorySelect);
+
+subtaskInput.addEventListener('input', () => {
+    if (subtaskInput.value.trim()) {
+        addSubtaskBtn.style.display = 'none';
+        document.getElementById('confirm-subtask-btn').style.display = 'inline';
+        document.getElementById('cancel-subtask-btn').style.display = 'inline';
+    } else {
+        addSubtaskBtn.style.display = 'inline';
+        document.getElementById('confirm-subtask-btn').style.display = 'none';
+        document.getElementById('cancel-subtask-btn').style.display = 'none';
     }
-};
+});
 
-// Aufgabe mit der gespeicherten Kategorie speichern
-function createTask() {
-    const title = document.getElementById("title-input").value;
-    const description = document.getElementById("description").value;
-    const dueDate = document.getElementById("date-input").value;
-    const priority = document.querySelector(".btn-prio.active")?.textContent || "Low";
-
-    // Kategorie aus dem localStorage auslesen
-    const category = localStorage.getItem("currentCategory") || "to-do";
-
-    if (!title || !dueDate) {
-        alert("Please fill out all required fields!");
-        return;
+function confirmSubtask() {
+    const subtaskText = subtaskInput.value.trim();
+    if (subtaskText) {
+        subtaskList.push(subtaskText);
+        subtaskInput.value = '';
+        renderSubtasks();
     }
+}
 
-    const newTask = {
+function cancelSubtask() {
+    subtaskInput.value = '';
+    addSubtaskBtn.style.display = 'inline';
+    document.getElementById('confirm-subtask-btn').style.display = 'none';
+    document.getElementById('cancel-subtask-btn').style.display = 'none';
+}
+
+function deleteSubtask(index) {
+    subtaskList.splice(index, 1);
+    renderSubtasks();
+}
+
+function changeColorPrioBtn(priority) {
+    selectedPriority = priority;  // Priorität wird korrekt gespeichert
+    if (priority === 'urgent') {
+        btnUrgent.style.backgroundColor = '#FF3B30';
+        btnMedium.style.backgroundColor = '#ffffff';
+        btnLow.style.backgroundColor = '';
+    } else if (priority === 'medium') {
+        btnMedium.style.backgroundColor = '#FFA800';
+        btnUrgent.style.backgroundColor = '';
+        btnLow.style.backgroundColor = '';
+    } else if (priority === 'low') {
+        btnLow.style.backgroundColor = '#4CD964';
+        btnMedium.style.backgroundColor = '#ffffff';
+        btnUrgent.style.backgroundColor = '';
+    }
+}
+
+function toggleButtonVisibility(forceShow) {
+    const taskInput = document.getElementById('newSubtask');
+    const confirmButton = document.getElementById('confirmButton');
+    const cancelButton = document.getElementById('cancelButton');
+    const plusButton = document.getElementById('plusButton');
+    confirmButton.style.display = 'none';
+    cancelButton.style.display = 'none';
+    plusButton.style.display = 'inline';
+
+    if (forceShow || taskInput.value.trim()) {
+        confirmButton.style.display = 'inline';
+        cancelButton.style.display = 'inline';
+        plusButton.style.display = 'none';
+    } 
+}
+
+function addSubtask() {
+    const taskInput = document.getElementById('newSubtask');
+    const taskValue = taskInput.value.trim();
+    if (taskValue === '') return;
+
+    subtaskList.push(taskValue);
+    renderSubtasks();
+
+    taskInput.value = '';
+    toggleButtonVisibility();
+}
+
+function cancelSubtask() {
+    document.getElementById('newSubtask').value = '';
+    toggleButtonVisibility();
+}
+
+function editSubtask(button) {
+    const listItem = button.parentElement;
+    const inputField = listItem.querySelector('input');
+    inputField.removeAttribute('readonly');
+    inputField.focus();
+    button.innerText = '✔️';
+    button.onclick = function () {
+        const index = Array.from(listItem.parentElement.children).indexOf(listItem);
+        subtaskList[index] = inputField.value.trim();
+        inputField.setAttribute('readonly', true);
+        button.innerText = '✏️';
+        button.onclick = function () { editSubtask(button); };
+    };
+}
+function renderSubtasks() {
+    const subtaskContainer = document.getElementById("subtaskLabels");
+    subtaskContainer.innerHTML = '';
+    subtaskList.forEach((subtask, index) => {
+        subtaskContainer.innerHTML += `
+            <div class="subtask-label">
+                <input type="text" value="${subtask}" readonly>
+                <button onclick="editSubtask(this)">✏️</button>
+                <button onclick="deleteSubtask(${index})">🗑️</button>
+            </div>
+        `;
+    });
+}
+
+
+function getFormInputValue(inputId) {
+    return document.getElementById(inputId).value.trim();
+}
+
+function countSubtasks(subtaskList) {
+    const totalSubtasks = subtaskList.length;
+    const completedSubtasks = subtaskList.filter(subtask => subtask.completed).length;
+    return { completedSubtasks, totalSubtasks };
+}
+
+function createNewTask(title, description, dueDate, priority, category, subtaskList, selectedUsers) {
+    const { completedSubtasks, totalSubtasks } = countSubtasks(subtaskList);
+    return {
         id: `task-${Date.now()}`,
         title,
         description,
         dueDate,
         priority,
-        category
+        category,
+        subtasks: subtaskList,
+        completedSubtasks,
+        totalSubtasks,
+        assignedUsers: selectedUsers
     };
+}
 
-    const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    tasks.push(newTask);
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+function saveTaskToLocalStorage(columnId, task) {
+    const tasks = JSON.parse(localStorage.getItem(columnId)) || [];
+    tasks.push(task);
+    localStorage.setItem(columnId, JSON.stringify(tasks));
+}
 
-    // Zurück zum Board mit aktualisierter Liste
-    window.location.href = "board.html";
+function addTask() {
+    const title = getFormInputValue('title-input');
+    const description = getFormInputValue('description');
+    const dueDate = getFormInputValue('date-input');
+    const priority = selectedPriority || 'medium';
+    const category = selectedCategory;
+    if (!title || !dueDate || !priority || !category) {
+        alert('Bitte füllen Sie alle Pflichtfelder aus.');
+        return;
+    }
+    const newTask = createNewTask(title, description, dueDate, priority, category, subtaskList, selectedUsers);
+    const currentColumn = localStorage.getItem('currentColumn') || 'todo';
+    saveTaskToLocalStorage(currentColumn, newTask);
+    window.location.href = 'board.html';
 }
