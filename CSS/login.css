@@ -47,6 +47,7 @@ button {
   flex-direction: column;
   gap: 16px;
 }
+
 .login-signup-container {
   display: flex;
   justify-content: center;
@@ -54,6 +55,7 @@ button {
   flex-direction: row;
   gap: 21px;
 }
+
 .login-btn {
   height: 51px;
   width: 180px;
@@ -63,6 +65,7 @@ button {
   border-radius: 10px;
   font-size: 21px;
 }
+
 .guest-login {
   height: 51px;
   width: 180px;
@@ -85,14 +88,6 @@ a {
   font-size: 16px;
   color: #a8a8a8;
   font-weight: 400;
-}
-
-form {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: column;
-  gap: 24px;
 }
 
 .msg-box {

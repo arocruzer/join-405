@@ -13,7 +13,6 @@ let colors = ["#007bff", "#ffa500", "#800080", "#d8bfd8", "#ff69b4", "#28a745", 
 
 async function init() {
   await includeHTML();
-  loadScript("./JS/login.js");
   loadData();
   welcomeAnimation();
 }
@@ -27,7 +26,6 @@ function loadScript(scriptUrl) {
 async function loadData() {
   let response = await fetch(BASE_URL + ".json");
   let data = await response.json();
-
   users = Object.values(data);
 }
 

@@ -87,10 +87,10 @@
   color: #007cee;
 }
 
-.add-contact-button {
-  position: fixed;
-  top: 80%;
-  left: 80%;
+.add-contact-button{
+    position: absolute;
+    top: 80%;
+    left: 80%;
 }
 
 .add-contact-button:hover {
@@ -406,3 +406,18 @@
   gap: 8px;
   height: 51px;
 }
+
+#contacts-img{
+    background-image: url(../Assets/img/contacts_w_L.png);
+  }
+  
+  #contacts-button {
+    background-color: #091931;
+    color: white;
+  }
+  
+  @media screen and (min-width: 768px) {
+    #contacts-button {
+        border-radius: unset;
+      }
+  }

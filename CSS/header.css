@@ -1,13 +1,13 @@
-header {
+#header {
   height: 80px;
-  display: flex;
+  /* display: none; */
   align-items: center;
   padding-left: 16px;
   padding-right: 16px;
   box-shadow: 0px 4px 4px 0px #0000001a;
   justify-content: space-between;
   position: sticky;
-  top: 0;
+  top: -1px;
   background-color: white;
   z-index: 1000;
 }
@@ -64,7 +64,7 @@ header {
     display: unset;
   }
 
-  header {
+  #header {
     justify-content: space-between !important;
   }
 }
@@ -74,12 +74,12 @@ header {
     display: none;
   }
 
-  header {
+  #header {
     position: sticky;
     height: 56px;
     box-shadow: none;
     padding: 20px 40px 20px 116px;
-    box-shadow: 0px 4px 4px 0px #0000001a;
+    /* box-shadow: 0px 4px 4px 0px #0000001a; */
     justify-content: flex-end;
   }
 
