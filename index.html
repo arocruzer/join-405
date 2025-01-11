@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="./CSS/signup.css" />
 
   <script src="./script.js"></script>
-  
+
   <!-- Weitere am Ende -->
 
   <title>Join-405</title>
@@ -54,17 +54,17 @@
         </div>
         <div class="login-signup-container">
           <button onclick="logIn()" class="login-btn">Log in</button>
-          <button
-            class="guest-login"
-            onclick="window.location.href='./HTML/summary.html'"
-          >
-            Guest Log in
-          </button>
+
+          <a href="./HTML/summary.html"
+            ><button class="guest-login">
+              Guest Log in
+            </button>
+          </a>
         </div>
       </div>
       <div class="signup-container">
         <h3>Not a Join user?</h3>
-        <a class="signup-btn" href="./HTML/signup.html">Sign up</a>
+        <a class="signup-btn" href="./HTML/signup.html"  target="_top">Sign up</a>
       </div>
       <div class="msg-box" id="msgBox"></div>
       <footer>

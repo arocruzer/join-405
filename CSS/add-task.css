@@ -186,3 +186,18 @@ input::placeholder {
   background: #A8A8A8;
   border-radius: 10px;
 }
+
+#add-task-img{
+  background-image: url(../Assets/img/add-task_w_L.png);
+}
+
+#add-task-button {
+  background-color: #091931;
+  color: white;
+}
+
+@media screen and (min-width: 768px) {
+  #add-task-button {
+      border-radius: unset;
+    }
+}

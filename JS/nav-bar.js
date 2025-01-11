@@ -1,21 +1,12 @@
-// Funktion zum Hinzufügen von Hover-Effekten
-function hoverButton(page) {
-    const img = document.getElementById(page + "-img");
-    const button = document.getElementById(page + "-button");
+function loadHTML() {
 
-    button.addEventListener("mouseenter", () => {
-        img.src = "../Assets/img/" + page + "_w_L.png"; // Bild bei Hover
-    });
-
-    button.addEventListener("mouseleave", () => {
-        img.src = "../Assets/img/" + page + "_g_L.png"; // Standardbild
-    });
-
-    console.log(page);
 }
 
+async function loadLegalDocument(page) {
+    const response = await fetch('../HTML/legal-notice.html');
+    const htmlContent = await response.text();
 
-function bgMenuButton() {
-    console.log(page);
-
+    document.getElementById("main-content").innerHTML = /*html*/`
+        ${htmlContent}
+    `;
 }

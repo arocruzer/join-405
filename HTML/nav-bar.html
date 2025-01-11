@@ -28,34 +28,21 @@
 
 <div id="frame-nav-bar">
   <div id="menu">
+
     <a href="./summary.html">
       <div>
         <button id="summary-button" class="nav-button">
-          <div class="nav-button-img">
-            <img
-              id="summary-img"
-              onload="hoverButton(`summary`)"
-              src="../Assets/img/summary_g_L.png"
-              alt=""
-            />
-          </div>
-          <div class="nav-button-p"><p>Summary</p></div>
+          <div class="nav-button-img" id="summary-img"></div>
+          <p>Summary</p>
         </button>
       </div>
     </a>
 
-    <a href="./board.html">
+    <a id="test" href="./board.html">
       <div>
         <button id="board-button" class="nav-button">
-          <div class="nav-button-img">
-            <img
-              id="board-img"
-              onload="hoverButton(`board`)"
-              src="../Assets/img/board_g_L.png"
-              alt=""
-            />
-          </div>
-          <div class="nav-button-p"><p>Board</p></div>
+          <div class="nav-button-img" id="board-img"></div>
+          <p>Board</p>
         </button>
       </div>
     </a>
@@ -63,15 +50,8 @@
     <a href="./add-task.html">
       <div>
         <button id="add-task-button" class="nav-button">
-          <div class="nav-button-img">
-            <img
-              id="add-task-img"
-              onload="hoverButton(`add-task`)"
-              src="../Assets/img/add-task_g_L.png"
-              alt=""
-            />
-          </div>
-          <div class="nav-button-p"><p>Add Task</p></div>
+          <div class="nav-button-img" id="add-task-img"></div>
+          <p>Add Task</p>
         </button>
       </div>
     </a>
@@ -79,28 +59,22 @@
     <a href="./contacts.html">
       <div>
         <button id="contacts-button" class="nav-button">
-          <div class="nav-button-img">
-            <img
-              id="contacts-img"
-              onload="hoverButton(`contacts`)"
-              src="../Assets/img/contacts_g_L.png"
-              alt=""
-            />
-          </div>
-          <div class="nav-button-p"><p>Cotacts</p></div>
+          <div class="nav-button-img" id="contacts-img"></div>
+          <p>Contacts</p>
         </button>
       </div>
     </a>
+    
   </div>
 
   <div id="legal-documents">
-    <a href="./privacy-policy.html" class="nav-button">
+    <a onclick="loadLegalDocument(`privacy-policy`)" class="nav-button">
       <div class="legal-documents-button">
         <p>Privacy Policy</p>
       </div>
     </a>
 
-    <a href="./legal-notice.html" class="nav-button">
+    <a onclick="loadLegalDocument(`legal-notice`)" class="nav-button">
       <div class="legal-documents-button">
         <p>Legal notice</p>
       </div>
