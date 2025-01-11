@@ -12,9 +12,12 @@
 
     <link rel="stylesheet" href="../CSS/contacts.css">
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../CSS/header.css">
+    <link rel="stylesheet" href="../CSS/nav-bar.css">
 
     <script src="../JS/contacts.js"></script>
     <script src="../script.js"></script>
+    <script src="../JS/nav-bar.js"></script>
 
 
     <title>Join</title>
@@ -23,22 +26,19 @@
 
 
 <body onload="loadAllContacts()">
-    <header>
-        <img class="header-logo" src="../Assets/header_logo.png" alt="join-logo">
-        <div class="user-button"> <!--user logo -->
-            <div class="inside-radius">
-                <h5>G</h5>
-            </div>
-        </div>
-    </header>
+    <!-- <header>
+        <div id="header" w3-include-html="../HTML/header.html"></div>
+    </header> -->
 
-    <div class="content-wrapper">
+
+
+        <div id="header" w3-include-html="../HTML/header.html"></div>
 
         <div class="contact-list-wrapper" id="content-wrapper-id">
             <div class="contacts-list" id="contacts"></div>
             <img onclick="OpenAddContactOverlay()" class="add-contact-button" src="../Assets/Property 1=Default.png" alt="add_contact" >
             <div class="add-contact-div-test d-none" id="add-contact-div-test-id">
-                <div class="overlay-edit-contact">
+                <!-- <div class="overlay-edit-contact">
                     <div class="middle-avatar">TW</div>
                         <div class="upper-half">
                             <div class="cross-close" onclick="closeAddContactOverlay()">X</div>
@@ -57,7 +57,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
 
@@ -74,7 +74,9 @@
                 <span>Delete</span>
             </div> 
         </div>
-        <div class="overlay-wrapper d-none" id="overlay-wrapper-id"></div>
-    </div>
+
+        <div id="nav-bar" w3-include-html="../HTML/nav-bar.html"></div>
+
+    
   </body>
 </html>

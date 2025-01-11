@@ -1,16 +1,18 @@
+const BASE_URL_2 = "https://join-405-43178-default-rtdb.europe-west1.firebasedatabase.app/";
+
 let contacts = [];
 let loadedContacts = [];
 let page = "contacts";
 
 async function loadAllContacts(path=""){
-    let response = await fetch (BASE_URL + path + ".json");
-    let responseToJason = await response.json();
+    let response = await fetch (BASE_URL_2 + path + ".json");
+    let responsToJason = await response.json();
 
     loadedContacts = [];
-    const usersArray = (Object.values(responseToJason.users));
+    const usersArray = (Object.values(responsToJason.users));
     usersArray.forEach((x) => {
-        let [vorname, nachname] = x.trim().name.split(" ");
-        let initialien = vorname[0] + nachname[0];
+        let [vorname, nachname] = x.name.split(" ");
+        let initialien = vorname[0] + (nachname ? nachname[0] : "");
         const user = {name: x.name, email: x.email, phone: x.phone, letter: x.name.trim().charAt(0), initialien: initialien};
         loadedContacts.push(user);   
     });
@@ -74,6 +76,7 @@ function OpenAddContactOverlay(){
     // contentRef.classList.remove('d-none');
 
     document.getElementById('add-contact-div-test-id').classList.remove('d-none');
+    document.getElementById('add-contact-div-test-id').innerHTML = HTMLOpenAddContactOverlay();
 }
 
 function closeAddContactOverlay(){
