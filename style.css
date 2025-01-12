@@ -209,6 +209,20 @@ input:focus {
   top: 50px;
 }
 
+.initials-circle-logo {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: #29abe2;
+  font-weight: bold;
+  font-size: 16px;
+  margin: 5px;
+  text-transform: uppercase;
+}
+
 @media (max-width: 680px){
   h1{
     font-size: 47px;
