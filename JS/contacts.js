@@ -74,7 +74,6 @@ function closeContactDetailsOverlay(){
     let contentRef = document.getElementById('contact-details-wrapper-id');
     contentRef.classList.add('contact-detail-hidden');
     contentRef.innerHTML = "";
-    document.getElementById('edit-delete-div-id').classList.add('d-none');
 }
 
 // Add Contact
@@ -97,16 +96,11 @@ function closeAddContactOverlay(){
 
 //Edit Contacts
 
-function toggleEditDeleteMenu(){
-    console.log("ausgelöst!");
-    const contentRef = document.getElementById('edit-delete-div-id');
+function openEditContactOverlay(){
+    let contentRef = document.getElementById('edit-contact-details-overlay-id');
     contentRef.classList.remove('d-none');
 }
 
-function openEditContactOverlay(){
-    let contentRef = document.getElementById('contact-details-wrapper-id');
-    contentRef.innerHTML = HTMLOpenEditContactDetailsOverlay();
-}
 
 
 
@@ -134,17 +128,7 @@ function validateContactForm(){
     
 }
 
-function OpenEditContactOverlay(){
-    let contentRef = document.getElementById('contact-details-wrapper-id');
-    contentRef.innerHTML = ``;
-    contentRef.innerHTML = HTMLOpenEditContactOverlay();
-}
 
-function closeEditContactOverlay(){
-    let contentRef = document.getElementById('contact-details-wrapper-id');
-    contentRef.innerHTML = ``;
-    contentRef.innerHTML = HTMLopenContactDetailsOverlay(index);
-}
 
 // Templates
 
@@ -193,10 +177,16 @@ function HTMLopenContactDetailsOverlay(index){
             <h5>Phone</h5>
             <a href="#">${loadedContacts[index].phone}</a>
         </div>
-        <img class="three-points-menu" src="../Assets/threePointsMenu.png" onclick="OpenEditContactOverlay()" alt="threePointsMenu">
+        <img class="three-points-menu" src="../Assets/threePointsMenu.png" onclick="openEditContactOverlay()" alt="threePointsMenu">
     </div>
     `;
+
+
+
+    
 }
+
+
 
 function HTMLOpenAddContactOverlay(){
     return`

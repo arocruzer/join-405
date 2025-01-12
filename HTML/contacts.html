@@ -66,6 +66,7 @@
 <!-- Contact Details  -->
 
             <div class="contact-details-wrapper contact-detail-hidden" id="contact-details-wrapper-id">
+
                     <div class="contact-detail-title-wrapper">
                         <div class="page-title">
                             <h1>Contacts</h1>
@@ -85,12 +86,37 @@
                         <h5>Phone</h5>
                         <a href="#">${loadedContacts[index].phone}</a>
                     </div>
-                    <img class="three-points-menu" src="../Assets/threePointsMenu.png" onclick="OpenEditContactOverlay()" alt="threePointsMenu">
-                <!-- <img class="three-points-menu" src="../Assets/threePointsMenu.png" alt="threePointsMenu"> -->
+                    <img class="three-points-menu" src="../Assets/threePointsMenu.png" onclick="openEditContactOverlay()" alt="threePointsMenu">
+                <div class="edit-contact-details-overlay d-none" id="edit-contact-details-overlay-id">
+                    <div class="overlay-edit-contact">
+                        <div class="middle-avatar">TW</div>
+            
+                        <div class="upper-half">
+                            <div class="cross-close" onclick="closeEditContactOverlay()">X</div>
+                            <div class="edit-contact-title">
+                                <h1>Edit contact</h1>
+                                <div class="blue-line"></div>
+                            </div>
+                        </div>
+                
+                        <div class="lower-half">
+                            <div class="input-fields">
+                                <input class="input-person" placeholder="Name" type="text">
+                                <input class="input-mail" placeholder="Email" type="email">
+                                <input class="input-phone" placeholder="Phone" type="tel">
+                            </div>
+                            <div class="delete-safe-buttons">
+                                <button class="delete-button">Delete</button>
+                                <button class="save-button">Save<i class="fa-sharp-duotone fa-solid fa-check save-padding"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
 
-            <div class="edit-delete-div d-none" id="edit-delete-div-id">
+            <!-- <div class="edit-delete-div d-none" id="edit-delete-div-id">
                 <div class="edit-delete-flex-div">
                     <img onclick="openEditContactOverlay()" src="" alt="Edit-Pic">
                     <span>Edit</span>
@@ -99,7 +125,7 @@
                     <img src="" alt="Delete-Pic">
                     <span>Delete</span>
                 </div> 
-            </div>
+            </div> -->
             
 
 <!-- Nav Bar -->

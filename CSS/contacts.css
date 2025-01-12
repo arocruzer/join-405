@@ -270,6 +270,19 @@
   z-index: 1000; /* Stellt sicher, dass es über allem liegt */
 }
 
+.edit-contact-details-overlay {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8); /* Halbtransparentes Schwarz */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Stellt sicher, dass es über allem liegt */
+}
+
 .overlay-edit-contact{
   width: 396px;
   height: 760px;
