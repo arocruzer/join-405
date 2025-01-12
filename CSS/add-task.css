@@ -3,6 +3,7 @@
   flex-direction: column;
   gap: 10px;
 }
+
 .btn-prio-urgent {
   height: 41px;
   width: 121px;
@@ -10,6 +11,7 @@
   border: none;
   box-shadow: 0px 0px 4px 0px #0000001a;
 }
+
 .btn-prio-medium {
   height: 41px;
   width: 121px;
@@ -17,6 +19,7 @@
   border: none;
   box-shadow: 0px 0px 4px 0px #0000001a;
 }
+
 .btn-prio-low {
   height: 41px;
   width: 121px;
@@ -24,6 +27,7 @@
   border: none;
   box-shadow: 0px 0px 4px 0px #0000001a;
 }
+
 .clear-addTask-container {
   display: flex;
   flex-direction: row;
@@ -44,6 +48,7 @@
   gap: 4px;
   font-size: 21px;
 }
+
 .creatTask-btn {
   height: 56px;
   width: 183px;
@@ -80,7 +85,12 @@ input::placeholder {
   gap: 8px;
   width: 396px;
   padding-bottom: 16px;
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  font-family: Arial, sans-serif;
 }
+
 .description-input {
   height: 88px;
   width: 386px;
@@ -89,6 +99,7 @@ input::placeholder {
   padding: 18px 21px;
   font-size: 16px;
 }
+
 .date-input {
   height: 40px;
   width: 364px;
@@ -96,103 +107,15 @@ input::placeholder {
   border-radius: 10px;
   padding: 0 21px;
 }
+
 .drop-down {
   height: 48px;
   width: 396px;
   border: 1px solid #d1d1d1;
-  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
-}
-.contact-list-container{
-  display: none;
-    height: 288px;
-/*     background-color: white; */
-    z-index: 1;
-    position: relative;
-    overflow: auto;
-    overflow-x: hidden;
-    width: 430px;
-}
-.contact{
-    width: 396px;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 16px;
-    z-index: 5;
-}
-.name-and-img{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 16px;
-}
-.initials-circle {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 40px; 
-  height: 40px;
-  border-radius: 50%; 
-  color: white; 
-  font-weight: bold; 
-  font-size: 16px; 
-  margin: 5px; 
-  text-transform: uppercase; 
-}
-
-.subtask-container{
-  display: flex;
-  align-items: center;
-  border: solid 1px #d1d1d1;
-  border-radius: 10px;
-  padding-right: 10px;
-}
-.subtask-container input{
-  border: none;
-}
-#confirmButton{
-  display: none;
-}
-#cancelButton{
-  display: none;
-}
-.plus-img{
-  height: 24px;
-  width: 24px;
-}
-
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  border-radius: 10px;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #A8A8A8;
-  border-radius: 10px;
-}
-
-/* Container Styling */
-.input-containers {
-  position: relative;
-  width: 100%;
-  max-width: 300px;
-  font-family: Arial, sans-serif;
-}
-
-/* Hauptdropdown-Styling */
-.drop-down {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border: 1px solid #ccc;
   border-radius: 8px;
   padding: 10px;
   cursor: pointer;
@@ -200,7 +123,6 @@ input::placeholder {
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-/* Pfeilsymbol Styling */
 .drop-down-arrow {
   width: 20px;
   height: 20px;
@@ -261,4 +183,99 @@ input::placeholder {
   cursor: pointer;
   font-size: 12px;
   color: #ff0000;
+}
+
+.contact-list-container {
+  display: none;
+  height: 288px;
+  /*     background-color: white; */
+  z-index: 1;
+  position: relative;
+  overflow: auto;
+  overflow-x: hidden;
+  width: 430px;
+}
+
+.contact {
+  width: 396px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 16px;
+  z-index: 5;
+}
+
+.name-and-img {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+
+.initials-circle {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  margin: 5px;
+  text-transform: uppercase;
+}
+
+.subtask-container {
+  display: flex;
+  align-items: center;
+  border: solid 1px #d1d1d1;
+  border-radius: 10px;
+  padding-right: 10px;
+}
+
+.subtask-container input {
+  border: none;
+}
+
+.plus-img {
+  height: 24px;
+  width: 24px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #A8A8A8;
+  border-radius: 10px;
+}
+
+#add-task-img{
+  background-image: url(../Assets/img/add-task_w_L.png);
+}
+
+#add-task-button {
+  background-color: #091931;
+  color: white;
+}
+
+#confirmButton{
+  display: none;
+}
+
+#cancelButton{
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  #add-task-button {
+      border-radius: unset;
+    }
 }

@@ -1,7 +1,6 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
   font-family: Arial, sans-serif;
 }
 body {
@@ -16,11 +15,10 @@ body {
 }
 
 .board-container {
-  width: 90%;
   max-width: 1200px;
 }
 
-header {
+.header-board {
   display: flex;
   padding-bottom: 16px;
   flex-direction: column;
@@ -322,6 +320,25 @@ h3 {
   top: 50%;
   left: 50%;
 }
+.section-board{
+  display: flex;
+    gap: 30px;
+}
+.add-task-board-plus {
+    text-overflow: ellipsis;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 48px;
+    font-weight: 700;
+    font-size: 21px;
+    border-radius: 8px;
+    color: #ffffff;
+    background-color: #2a3647;
+    padding: 0px 24px;
+}
 
 
 /* Modal Animation */
@@ -478,4 +495,29 @@ h3 {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+
+@media screen and (min-width: 768px){
+  h2{
+    font-size: 12px;
+  }
+  .board{
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+  }
+  .task-container{
+    display: flex;
+    flex-direction: column;
+  }
+  .user-story-card{
+    width: 200px;
+  }
+  .header-board {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
 }

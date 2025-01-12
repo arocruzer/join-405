@@ -1,0 +1,15 @@
+#summary-img {
+  background-image: url(../Assets/img/summary_w_L.png);
+}
+
+#summary-button {
+  background-color: #091931;
+  color: white;
+  border-radius: 16px;
+}
+
+@media screen and (min-width: 768px) {
+  #summary-button {
+    border-radius: unset;
+  }
+}

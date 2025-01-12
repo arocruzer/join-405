@@ -26,41 +26,58 @@
   </svg>
 </div>
 
-<div id="frame-bottom-nav-bar">
+<div id="frame-nav-bar">
   <div id="menu">
-    <div class="footer-button-frame" onclick="loadContent(`summary`)">
-      <button class="footer-button">
-        <img src="../Assets/summary_g_L.png" alt="" />
-        <p class="footer-button-text">Summary</p>
-      </button>
-    </div>
 
-    <div class="footer-button-frame" onclick="loadContent(`board`)">
-      <button class="footer-button">
-        <img src="../Assets/board_g_L.png" alt="" />
-        <p class="footer-button-text">Board</p>
-      </button>
-    </div>
+    <a href="./summary.html">
+      <div>
+        <button id="summary-button" class="nav-button">
+          <div class="nav-button-img" id="summary-img"></div>
+          <p>Summary</p>
+        </button>
+      </div>
+    </a>
 
-    <div class="footer-button-frame" onclick="loadContent(`addTask`)">
-      <button class="footer-button">
-        <img src="../Assets/add-tasks_g_L.png" alt="" />
-        <p class="footer-button-text">Add Task</p>
-      </button>
-    </div>
+    <a id="test" href="./board.html">
+      <div>
+        <button id="board-button" class="nav-button">
+          <div class="nav-button-img" id="board-img"></div>
+          <p>Board</p>
+        </button>
+      </div>
+    </a>
 
-    <div class="footer-button-frame" onclick="loadContent(`contacts`)">
-      <button class="footer-button">
-        <img src="../Assets/contacts_g_L.png" alt="" />
-        <p class="footer-button-text">Contacts</p>
-      </button>
-    </div>
+    <a href="./add-task.html">
+      <div>
+        <button id="add-task-button" class="nav-button">
+          <div class="nav-button-img" id="add-task-img"></div>
+          <p>Add Task</p>
+        </button>
+      </div>
+    </a>
+
+    <a href="./contacts.html">
+      <div>
+        <button id="contacts-button" class="nav-button">
+          <div class="nav-button-img" id="contacts-img"></div>
+          <p>Contacts</p>
+        </button>
+      </div>
+    </a>
+    
   </div>
 
   <div id="legal-documents">
-    <div>
-      <p onclick="loadContent(`privacyPolicy`)">Privacy Policy</p>
-      <p onclick="loadContent(`legalNotice`)">Legal Notice</p>
-    </div>
+    <a onclick="loadLegalDocument(`privacy-policy`)" class="nav-button">
+      <div class="legal-documents-button">
+        <p>Privacy Policy</p>
+      </div>
+    </a>
+
+    <a onclick="loadLegalDocument(`legal-notice`)" class="nav-button">
+      <div class="legal-documents-button">
+        <p>Legal notice</p>
+      </div>
+    </a>
   </div>
 </div>

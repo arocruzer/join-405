@@ -1,15 +1,18 @@
+const BASE_URL_2 = "https://join-405-43178-default-rtdb.europe-west1.firebasedatabase.app/";
+
 let contacts = [];
 let loadedContacts = [];
+let page = "contacts";
 
 async function loadAllContacts(path=""){
-    let response = await fetch (BASE_URL + path + ".json");
+    let response = await fetch (BASE_URL_2 + path + ".json");
     let responsToJason = await response.json();
 
     loadedContacts = [];
     const usersArray = (Object.values(responsToJason.users));
     usersArray.forEach((x) => {
         let [vorname, nachname] = x.name.split(" ");
-        let initialien = vorname[0] + nachname[0];
+        let initialien = vorname[0] + (nachname ? nachname[0] : "");
         const user = {name: x.name, email: x.email, phone: x.phone, letter: x.name.trim().charAt(0), initialien: initialien};
         loadedContacts.push(user);   
     });
@@ -17,26 +20,22 @@ async function loadAllContacts(path=""){
 }
 
 function renderContacts(){
+    console.table(loadedContacts);
     let contentRef = document.getElementById('contacts');
     contentRef.innerHTML = "";
     let currentLetter = "";
     loadedContacts.sort((a, b) => a.name.localeCompare(b.name));
 
     for (let index = 0; index < loadedContacts.length; index++) {
-        let [vorname, nachname] = loadedContacts[index].name.split(" ");
-        let initialien = vorname[0] + nachname[0];
+        let initialien = loadedContacts[index].initialien;
         let firstLetter = loadedContacts[index].name.slice(0, 1);
         if (firstLetter !== currentLetter) {
             currentLetter = firstLetter;
             contentRef.innerHTML += renderCurrentLetter(currentLetter);
         }
         const groupElement = document.getElementById(`contact-container-${currentLetter}`);
-        if (groupElement) {
-            groupElement.innerHTML += renderCurrentContacts(index, initialien, vorname, nachname);
-            addBackgrounds();
-        } else {
-            console.warn(`Gruppe mit der ID 'contact-container-${currentLetter}' wurde nicht gefunden.`);
-        }
+        groupElement.innerHTML += renderCurrentContacts(index, initialien);
+        addBackgrounds();
     }
 }
 
@@ -59,8 +58,7 @@ function openContactDetailsOverlay(index){
     document.getElementById('content-wrapper-id').classList.add('d-none');
     let contentRef = document.getElementById('contact-details-wrapper-id');
     contentRef.classList.remove('d-none');
-    contentRef.innerHTML = HTMLopenContactDetailsOverlay(index);
-    
+    contentRef.innerHTML = HTMLopenContactDetailsOverlay(index);   
 }
 
 function closeContactDetailsOverlay(){
@@ -68,20 +66,74 @@ function closeContactDetailsOverlay(){
     let contentRef = document.getElementById('contact-details-wrapper-id');
     contentRef.classList.add('d-none');
     contentRef.innerHTML = "";
+    document.getElementById('edit-delete-div-id').classList.add('d-none');
 }
 
 function OpenAddContactOverlay(){
-    document.getElementById('content-wrapper-id').classList.add('d-none');
-    let contentRef = document.getElementById('overlay-wrapper-id');
-    contentRef.innerHTML = HTMLOpenAddContactOverlay();
-    contentRef.classList.remove('d-none');
+    // document.getElementById('content-wrapper-id').classList.add('d-none');
+    // let contentRef = document.getElementById('overlay-wrapper-id');
+    // contentRef.innerHTML = HTMLOpenAddContactOverlay();
+    // contentRef.classList.remove('d-none');
+
+    document.getElementById('add-contact-div-test-id').classList.remove('d-none');
+    document.getElementById('add-contact-div-test-id').innerHTML = HTMLOpenAddContactOverlay();
 }
 
 function closeAddContactOverlay(){
-    document.getElementById('content-wrapper-id').classList.remove('d-none');
-    let contentRef = document.getElementById('overlay-wrapper-id');
-    contentRef.innerHTML = "";
-    contentRef.classList.add('d-none');
+    document.getElementById('add-contact-div-test-id').classList.add('d-none');
+}
+
+
+
+//Edit Contacts
+
+function toggleEditDeleteMenu(){
+    console.log("ausgelöst!");
+    const contentRef = document.getElementById('edit-delete-div-id');
+    contentRef.classList.remove('d-none');
+}
+
+function openEditContactOverlay(){
+    let contentRef = document.getElementById('contact-details-wrapper-id');
+    contentRef.innerHTML = HTMLOpenEditContactDetailsOverlay();
+}
+
+
+
+// Kontakte hinzufügen
+
+function addNewContact(){
+    let name = document.getElementById('').value;
+}
+
+function createContact() {
+    if (validateContactForm()) {
+      const newContact = gatherContactFormData();
+      saveNewContact(newContact)
+        .then(() => {
+          closeAddContactOverlay();
+          renderContacts();
+        })
+        .catch((error) => {
+          console.error("Fehler beim Hinzufügen des Kontakts:", error);
+        });
+    }
+}
+
+function validateContactForm(){
+    
+}
+
+function OpenEditContactOverlay(){
+    let contentRef = document.getElementById('contact-details-wrapper-id');
+    contentRef.innerHTML = ``;
+    contentRef.innerHTML = HTMLOpenEditContactOverlay();
+}
+
+function closeEditContactOverlay(){
+    let contentRef = document.getElementById('contact-details-wrapper-id');
+    contentRef.innerHTML = ``;
+    contentRef.innerHTML = HTMLopenContactDetailsOverlay(index);
 }
 
 // Templates
@@ -131,7 +183,7 @@ function HTMLopenContactDetailsOverlay(index){
             <h5>Phone</h5>
             <a href="#">${loadedContacts[index].phone}</a>
         </div>
-        <img class="three-points-menu" src="../Assets/threePointsMenu.png" alt="threePointsMenu">
+        <img class="three-points-menu" src="../Assets/threePointsMenu.png" onclick="OpenEditContactOverlay()" alt="threePointsMenu">
     </div>
     `;
 }
@@ -158,5 +210,33 @@ function HTMLOpenAddContactOverlay(){
             </div>
         </div>
     </div>
+    `;
+}
+
+function HTMLOpenEditContactOverlay(){
+    return`
+    <div class="overlay-edit-contact">
+            <div class="middle-avatar">TW</div>
+
+            <div class="upper-half">
+                <div class="cross-close" onclick="closeEditContactOverlay()">X</div>
+                <div class="edit-contact-title">
+                    <h1>Edit contact</h1>
+                    <div class="blue-line"></div>
+                </div>
+            </div>
+    
+            <div class="lower-half">
+                <div class="input-fields">
+                    <input class="input-person" placeholder="Name" type="text">
+                    <input class="input-mail" placeholder="Email" type="email">
+                    <input class="input-phone" placeholder="Phone" type="tel">
+                </div>
+                <div class="delete-safe-buttons">
+                    <button class="delete-button">Delete</button>
+                    <button class="save-button">Save<i class="fa-sharp-duotone fa-solid fa-check save-padding"></i></button>
+                </div>
+            </div>
+        </div>
     `;
 }

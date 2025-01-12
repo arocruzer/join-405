@@ -15,3 +15,4 @@ function renderAddToTaskContacts(color, initials, user, index, isChecked) {
                   ${initials}
               </div>`;
   }
+  

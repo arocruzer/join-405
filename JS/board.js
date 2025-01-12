@@ -54,10 +54,6 @@ function renderTask(task) {
 
 function allowDrop(event) {
     event.preventDefault();
-    if (event.target.closest('.task-container')) {
-        event.target.closest('.task-container').classList.add("highlight");
-        setTimeout(() => event.target.closest('.task-container').classList.remove("highlight"), 300);
-    }
 }
 
 function drop(event, columnId) {
@@ -75,8 +71,6 @@ function drop(event, columnId) {
     updateTaskVisibilityById(columnElement.id);
     updateTaskVisibilityById(previousColumnId);
     loadTasks(columnElement.id);
-
-    openTaskDetails(taskId);
 }
 
 function moveTask(event, columnId){
@@ -154,16 +148,27 @@ function drag(event) {
 
 function openInputPage(columnId) {
     localStorage.setItem('currentColumn', columnId);
-    window.location.href = "addTask.html";
+    window.location.href = "/HTML/add-task.html";
 }
 
 function searchTasks() {
-    let searchText = document.getElementById('search').value.trim().toLowerCase();
+    let searchText = '';
+    
+    // Überprüfen, welches Input-Feld aktiv ist
+    const searchInputs = document.querySelectorAll('#search');
+    searchInputs.forEach(input => {
+        if (input.offsetParent !== null) { // Nur sichtbares Inputfeld nutzen
+            searchText = input.value.trim().toLowerCase();
+        }
+    });
+
     let tasks = document.querySelectorAll('.user-card');
+    
     if (searchText.length < 3) {
         tasks.forEach(task => task.style.display = "block");
         return;
     }
+
     tasks.forEach(task => {
         let taskTitle = task.querySelector('h4') ? task.querySelector('h4').textContent.toLowerCase() : '';
         if (taskTitle.includes(searchText)) {
@@ -174,15 +179,28 @@ function searchTasks() {
     });
 }
 
+
 window.addEventListener("load", function () {
     ['todo', 'in-progress', 'await-feedback', 'done'].forEach(loadTasks);
 });
 
 let currentTaskId = null;
 function formatDate(dateString) {
-    const [year, month, day] = dateString.split('-'); 
-    return `${day}/${month}/${year}`;  // Ändert das Format zu dd/mm/yyyy
+    if (!dateString) {
+        console.warn('Kein Datum übergeben.');
+        return 'Datum nicht verfügbar'; // Rückgabewert bei fehlendem Datum
+    }
+
+    const [year, month, day] = dateString.split('-');
+
+    if (!year || !month || !day) {
+        console.warn('Ungültiges Datumsformat:', dateString);
+        return 'Ungültiges Datum'; // Rückgabewert bei falschem Format
+    }
+
+    return `${day}/${month}/${year}`; // Ändert das Format zu dd/mm/yyyy
 }
+
 
 function formatPriority(priorityText) {
     let priorityIcon;
@@ -225,22 +243,24 @@ function openTaskDetails(taskId) {
         currentTaskId = taskId;
         document.getElementById('modalTitle').innerText = task.title;
         document.getElementById('modalDescription').innerText = task.description;
-        document.getElementById('modalDueDate').innerText = formatDate(task.dueDate);
+        const dueDateElement = document.getElementById('modalDueDate');
+        dueDateElement.innerText = task.dueDate ? formatDate(task.dueDate) : 'Kein Fälligkeitsdatum';
         document.getElementById('modalPriority').innerHTML = formatPriority(task.priority);
         document.getElementById('modalAssignedUsers').innerHTML = renderAssignedUsers(task.assignedUsers);
         const subtaskList = document.getElementById('modalSubtasks');
-        subtaskList.innerHTML = task.subtasks.map((subtask, index) => `
-            <label class="subtask-label">
-                <input type="checkbox" id="subtask-${taskId}-${index}" 
-                       ${task.completedSubtasks > index ? 'checked' : ''} 
-                       onchange="updateSubtaskCompletion('${taskId}', ${index})">
-                ${subtask}
-            </label>
-        `).join('');
+        if (Array.isArray(task.subtasks) && task.subtasks.length > 0) {
+            subtaskList.innerHTML = task.subtasks.map((subtask, index) => `
+                <label class="subtask-label">
+                    <input type="checkbox" id="subtask-${taskId}-${index}"
+                           ${task.completedSubtasks > index ? 'checked' : ''}
+                           onchange="updateSubtaskCompletion('${taskId}', ${index})">
+                    ${subtask}
+                </label>
+            `).join('');
+        } else {
+            subtaskList.innerHTML = '<p>Keine Subtasks verfügbar</p>';
+        }
         
-        
-
-
         document.getElementById('taskModal').style.display = 'block';
         updateProgressBar(task);
     }
@@ -279,7 +299,38 @@ function updateSubtaskCompletion(taskId, index) {
         }
     }
 }
-
+function openTaskDetails(taskId) {
+    const tasks = [...JSON.parse(localStorage.getItem('todo') || "[]"), 
+                   ...JSON.parse(localStorage.getItem('in-progress') || "[]"),
+                   ...JSON.parse(localStorage.getItem('await-feedback') || "[]"),
+                   ...JSON.parse(localStorage.getItem('done') || "[]")];
+    const task = tasks.find(task => task.id === taskId);
+    if (task) {
+        currentTaskId = taskId;
+        document.getElementById('modalTitle').innerText = task.title;
+        document.getElementById('modalDescription').innerText = task.description;
+        const dueDateElement = document.getElementById('modalDueDate');
+        dueDateElement.innerText = task.dueDate ? formatDate(task.dueDate) : 'Kein Fälligkeitsdatum';
+        document.getElementById('modalPriority').innerHTML = formatPriority(task.priority);
+        document.getElementById('modalAssignedUsers').innerHTML = renderAssignedUsers(task.assignedUsers);
+        const subtaskList = document.getElementById('modalSubtasks');
+        if (Array.isArray(task.subtasks) && task.subtasks.length > 0) {
+            subtaskList.innerHTML = task.subtasks.map((subtask, index) => `
+                <label class="subtask-label">
+                    <input type="checkbox" id="subtask-${taskId}-${index}"
+                           ${task.completedSubtasks > index ? 'checked' : ''}
+                           onchange="updateSubtaskCompletion('${taskId}', ${index})">
+                    ${subtask}
+                </label>
+            `).join('');
+        } else {
+            subtaskList.innerHTML = '<p>Keine Subtasks verfügbar</p>';
+        }
+        
+        document.getElementById('taskModal').style.display = 'block';
+        updateProgressBar(task);
+    }
+}
 
 
 function deleteTask() {
@@ -294,10 +345,167 @@ function deleteTask() {
     window.location.reload();
 }
 
-function editTask() {
-    window.location.href = `addTask.html?edit=${currentTaskId}`;
+
+function closeTaskModal() {
+    document.getElementById('taskModal').style.display = 'none';
 }
 
+function addButton() {
+    const headerBoard = document.getElementById('sectionBoard');
+    const headerBoardPlus = document.getElementById('sectionBoardPlus');
+    
+    if (window.innerWidth < 768) {
+        headerBoard.classList.remove('hidden');  // Korrekt geschrieben
+        headerBoardPlus.classList.add('hidden'); // Korrekt geschrieben
+    } else {
+        headerBoard.classList.add('hidden');     // Umgekehrt für größere Bildschirme
+        headerBoardPlus.classList.remove('hidden');
+    }
+}
+
+// Event Listener für die Anpassung der Ansicht basierend auf der Bildschirmgröße
+window.addEventListener('resize', addButton);
+window.addEventListener('DOMContentLoaded', addButton);
+
+// Globale Variable für die aktuelle Aufgabe
+let task = null;
+
+// Funktion zum Bearbeiten der Aufgabe mit der Benutzeroberfläche wie im Bild
+function editTask() {
+    const allColumns = ['todo', 'in-progress', 'await-feedback', 'done'];
+    task = null;
+
+    for (const column of allColumns) {
+        const tasks = JSON.parse(localStorage.getItem(column)) || [];
+        task = tasks.find(t => t.id === currentTaskId);
+        if (task) break;
+    }
+
+    if (!task) {
+        alert('Task not found.');
+        return;
+    }
+
+    // Titel und Beschreibung aktualisieren
+    document.getElementById('title-input').value = task.title;
+    document.getElementById('description').value = task.description;
+
+    // Fälligkeitsdatum setzen
+    document.getElementById('date-input').value = task.dueDate;
+
+    // Priorität mit farbigen Buttons aktualisieren
+    changeColorPrioBtn(task.priority);
+
+    // Kategorieauswahl aktualisieren
+    document.getElementById('selected-category').innerText = task.category;
+
+    // Benutzer hinzufügen (Dropdown wie im Bild)
+    const assignedUserContainer = document.getElementById('addedUers');
+    assignedUserContainer.innerHTML = task.assignedUsers.map((user, index) => `
+        <div class="user-badge">
+            ${user.name} 
+            <button onclick="removeAssignedUser(${index})">❌</button>
+        </div>
+    `).join('');
+
+    // Subtasks anzeigen und verwalten
+    const subtaskContainer = document.getElementById('subtaskLabels');
+    subtaskContainer.innerHTML = task.subtasks.map((subtask, index) => `
+        <div class="subtask-item">
+            <input type="checkbox" ${task.completedSubtasks > index ? 'checked' : ''} onchange="toggleSubtask(${index})">
+            ${subtask} 
+            <button onclick="removeSubtask(${index})">🗑️</button>
+        </div>
+    `).join('');
+}
+
+// Funktion zum Setzen der Priorität mit farbigen Buttons
+function changeColorPrioBtn(priority) {
+    task.priority = priority;
+    document.getElementById('btn-urgent').classList.remove('selected');
+    document.getElementById('btn-medium').classList.remove('selected');
+    document.getElementById('btn-low').classList.remove('selected');
+
+    document.getElementById(`btn-${priority}`).classList.add('selected');
+}
+
+// Kategorieauswahl verwalten
+function selectCategory(category) {
+    task.category = category;
+    document.getElementById('selected-category').innerText = category;
+    toggleCategorySelect();
+}
+
+// Kategorie-Dropdown umschalten
+function toggleCategorySelect() {
+    document.getElementById('categorySelect').classList.toggle('hidden');
+}
+
+// Benutzer hinzufügen (Dropdown Auswahl)
+function addUserToTask() {
+    const userSelect = document.getElementById('assignedUserSelect').value;
+    if (userSelect) {
+        task.assignedUsers.push({ name: userSelect, color: '#007BFF' });
+        editTask();
+    }
+}
+
+// Benutzer entfernen
+function removeAssignedUser(index) {
+    task.assignedUsers.splice(index, 1);
+    editTask();
+}
+
+// Subtask hinzufügen
+function addSubtask() {
+    const newSubtask = document.getElementById('newSubtask').value;
+    if (newSubtask.trim()) {
+        task.subtasks.push(newSubtask);
+        task.totalSubtasks++;
+        editTask();
+    }
+}
+
+// Subtask entfernen
+function removeSubtask(index) {
+    task.subtasks.splice(index, 1);
+    task.totalSubtasks--;
+    editTask();
+}
+
+// Subtask-Status aktualisieren
+function toggleSubtask(index) {
+    const checkboxElement = document.getElementById(`subtask-${task.id}-${index}`);
+    if (checkboxElement.checked) {
+        task.completedSubtasks++;
+    } else {
+        task.completedSubtasks--;
+    }
+}
+
+// Änderungen speichern
+function saveTaskChanges() {
+    task.title = document.getElementById('title-input').value;
+    task.description = document.getElementById('description').value;
+    task.dueDate = document.getElementById('date-input').value;
+
+    const allColumns = ['todo', 'in-progress', 'await-feedback', 'done'];
+    for (const column of allColumns) {
+        let tasks = JSON.parse(localStorage.getItem(column)) || [];
+        const index = tasks.findIndex(t => t.id === task.id);
+        if (index !== -1) {
+            tasks[index] = task;
+            localStorage.setItem(column, JSON.stringify(tasks));
+            break;
+        }
+    }
+
+    alert('Task successfully updated!');
+    closeTaskModal();
+    window.location.reload();
+}
+
+// Modal schließen
 function closeTaskModal() {
     document.getElementById('taskModal').style.display = 'none';
 }

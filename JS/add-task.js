@@ -10,8 +10,16 @@ let subtaskList = [];
 let selectedUsers = [];
 let selectedPriority = '';
 let state = 1;
+let page = "add-task";
+let selectedCategory = "";
+const categorySelect = document.getElementById('categorySelect');
+const selectedCategoryElement = document.getElementById('selected-category');
+let dropDownArow = document.getElementById("drop-down");
+
 
 renderSubtasks();
+
+
 function openDropDownMenuUser() {
     switch (state) {
         case 1:
@@ -92,12 +100,6 @@ function addedUsers() {
       addedUsers.innerHTML += renderAddedUsers(color, initials);
   });
 }
-
-let selectedCategory = "";
-const categorySelect = document.getElementById('categorySelect');
-const selectedCategoryElement = document.getElementById('selected-category');
-let dropDownArow = document.getElementById("drop-down");
-
 
 // Öffnen und Schließen des Dropdowns
 function toggleCategorySelect() {
@@ -205,12 +207,12 @@ function editSubtask(button) {
     const inputField = listItem.querySelector('input');
     inputField.removeAttribute('readonly');
     inputField.focus();
-    button.innerText = '✔️';
+    button.innerText = `<img src="../Assets/check.png" alt="check Icon">`;
     button.onclick = function () {
         const index = Array.from(listItem.parentElement.children).indexOf(listItem);
         subtaskList[index] = inputField.value.trim();
         inputField.setAttribute('readonly', true);
-        button.innerText = '✏️';
+        button.innerText =`<img src="../Assets/edit.png" alt="Edit Icon">`;
         button.onclick = function () { editSubtask(button); };
     };
 }
@@ -221,8 +223,8 @@ function renderSubtasks() {
         subtaskContainer.innerHTML += `
             <div class="subtask-label">
                 <input type="text" value="${subtask}" readonly>
-                <button onclick="editSubtask(this)">✏️</button>
-                <button onclick="deleteSubtask(${index})">🗑️</button>
+                <img onclick="editSubtask(this)" src="../Assets/edit.png" alt="Edit Icon">
+                <button onclick="deleteSubtask(${index})"><img src="../Assets/delete.png" alt="delete Icon"></button>
             </div>
         `;
     });
