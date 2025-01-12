@@ -137,7 +137,7 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: fadeOutBackground 2s forwards;
+  animation: fadeOutBackground 1s forwards;
 }
 
 .welcome-img {
@@ -147,7 +147,7 @@ a {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  animation: mymove 2s linear forwards;
+  animation: mymove 1s linear forwards;
 }
 
 @keyframes mymove {

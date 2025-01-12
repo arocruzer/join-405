@@ -7,7 +7,166 @@
   color: white;
   border-radius: 16px;
 }
+.hero {
+  align-items: flex-start;
+  padding-top: 110px;
+  padding-left: 96px;
+}
 
+h2 {
+  font-size: 27px;
+  font-family: Inter;
+  font-size: 27px;
+  font-weight: 400;
+  line-height: 50px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+hr {
+  border: 3px solid #29abe2;
+  height: 59px;
+}
+
+.title-summary {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+.info{
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.info-regards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+  padding-top: 56px;
+}
+.info-todo {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+}
+.info-container {
+  background-color: #ffffff;
+  height: 168px;
+  width: 264px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  border-radius: 30px;
+}
+h3{
+font-size: 21px;
+font-weight: 400;
+line-height: 24px;
+text-align: center;
+}
+h4{
+font-size: 64px;
+font-weight: 600;
+color: #000000;
+}
+span{
+  font-size: 47px;
+}
+.status {
+  text-align: center;
+}
+.task-date-info{
+  height: 168px;
+  width: 560px;
+  background-color: #ffffff;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.prio{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+}
+.task-info{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 61px;
+}
+.date{
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+.date p{
+font-size: 16px;
+font-weight: 400;
+color: #2A3647;
+}
+h5{
+font-size: 21px;
+font-weight: 700;
+color: #2A3647;
+}
+.tasks-status-container{
+  display: flex;
+  flex-direction: row;
+  gap: 28px;
+}
+.task-status{
+  height: 168px;
+  width: 168px;
+  background-color: #ffffff;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.task-status{
+  display: flex;
+  flex-direction: column;
+}
+.regards{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.regards h1{
+font-size: 64px;
+font-weight: 700;
+color: #29abe2;
+}
+.regards h2{
+font-size: 47px;
+font-weight: 500;
+}
+
+
+.name-and-img {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+
+.initials-circle-logo {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: #29abe2;
+  font-weight: bold;
+  font-size: 16px;
+  margin: 5px;
+  text-transform: uppercase;
+}
 @media screen and (min-width: 768px) {
   #summary-button {
     border-radius: unset;

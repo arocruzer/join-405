@@ -118,8 +118,8 @@ input::placeholder {
 .contact-list-container {
   display: none;
   height: 288px;
-  /*     background-color: white; */
-  z-index: 1;
+  background-color: white;
+  z-index: 1000;
   position: relative;
   overflow: auto;
   overflow-x: hidden;
@@ -196,6 +196,42 @@ input::placeholder {
   color: white;
 }
 
+.add-task-form{
+  padding-top: 38px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 48px;
+}
+.form-field-left{
+  width: 440px;
+}
+.form-field-right{
+  width: 440px;
+}
+
+.hero{
+  align-items: flex-start;
+  padding-top: 110px;
+  padding-left: 96px;
+}
+hr{
+  border: 1px solid #D1D1D1;
+  height: 424px;
+}
+.text-buttons{
+  padding-top: 146px;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.form-containers{
+  display: flex;
+  flex-direction: row;
+  gap: 48px;
+}
 @media screen and (min-width: 768px) {
   #add-task-button {
       border-radius: unset;

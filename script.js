@@ -15,6 +15,8 @@ async function init() {
   await includeHTML();
   loadData();
   welcomeAnimation();
+  time();
+  getUserLogo();
 }
 
 function loadScript(scriptUrl) {
@@ -90,14 +92,23 @@ async function loadContent(page) {
     element.innerHTML = 'Page not found';
   }
 }
+function getInitials(name) {
+  return name
+      .split(' ')                
+      .map(word => word[0])      
+      .join('')                  
+      .toUpperCase();            
+}
 
 function guestLogin() {
   let guestUser = {
       name: "Guest",
-      email: null
+      email: null,
+      color: "#95a5a6",
   };
   localStorage.setItem("loggedInUser", JSON.stringify(guestUser));
   window.location.href = "../HTML/summary.html";
+  getUserLogo()
 }
 
 function time() {
@@ -105,21 +116,21 @@ function time() {
   let hour = date.getHours();
   let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
   let userName = loggedInUser ? loggedInUser.name : "Guest";
+  let regardsUser = document.getElementById("regardsUser");
 
-  let greeting;
+  let greeting = document.getElementById("greeting");
   if (hour >= 19) {
-    greeting = "Good Evening";
+    greeting = "Good Evening,";
   } else if (hour >= 12) {
-    greeting = "Good Afternoon";
+    greeting = "Good Afternoon,";
   } else if (hour >= 6) {
-    greeting = "Good Morning";
+    greeting = "Good Morning,";
   } else {
-    greeting = "Hello";
+    greeting = "Hello,";
   }
 
-  let regardsUser = document.getElementById("regardsUser");
   if (regardsUser) {
-    regardsUser.innerHTML = `${greeting}, ${userName}`;
+    regardsUser.innerHTML = regardsUserTemplate(greeting, userName);
   }
 }
 function welcomeAnimation() {
@@ -131,4 +142,20 @@ animation.addEventListener("animationend", (event) => {
     }
 });
 }
+}
+
+function getUserLogo() {
+  let userLogo = document.getElementById("user-button");
+  let user = JSON.parse(localStorage.getItem("loggedInUser")); // Benutzer aus localStorage holen
+  
+  if (!user) {
+    console.error("Kein Benutzer im localStorage gefunden.");
+    return;
+  }
+
+  let initials = getInitials(user.name);
+  let color = user.color || "#3498db";
+  if (userLogo) {
+    userLogo.innerHTML = renderUserLogo(initials, color, user);
+  }
 }

@@ -29,6 +29,9 @@
                 <div class="title-arrow">
                     <h1>Add Task</h1>
                 </div>
+                <form class="add-task-form">
+                <div class="form-containers">
+                <div class="form-field-left">
                 <div class="input-containers">
                     <p>Title<span>*</span></p>
                     <input class="title-input" type="text" placeholder="Enter a title" id="title-input">
@@ -50,6 +53,11 @@
                     <div id="addedUers">
                     </div>
                 </div>
+            </div>
+            <div>
+                <hr>
+            </div>
+            <div class="form-field-right">
                 <div class="input-containers">
                     <p>Due date<span>*</span></p>
                     <input class="date-input" type="date" id="date-input">
@@ -82,19 +90,25 @@
                     <img class="plus-img" src="../Assets/Subtasks +.png" alt="">
                 </div>
                 </div>
-                <div>
-                    <p>This field is required<span>*</span></p>
-                </div>
-                <div class="clear-addTask-container">
-                    <button onclick="clearTask()" class="clear-btn">Clear <img src="../Assets/iconoir_cancel.png" alt=""></button>
-                    <button onclick="addTask()" class="creatTask-btn">Creat Task <img src="../Assets/check.png" alt=""></button>
-                </div>
+            </div>
+        </div>
+        <div class="text-buttons">
+            <div>
+                <p>This field is required<span>*</span></p>
+            </div>
+            <div class="clear-addTask-container">
+                <button onclick="clearTask()" class="clear-btn">Clear <img src="../Assets/iconoir_cancel.png" alt=""></button>
+                <button onclick="addTask()" class="creatTask-btn">Creat Task <img src="../Assets/check.png" alt=""></button>
+            </div>
+        </div>
+            </form>
             </div>
         </div>
       </div>
       <div id="nav-bar" w3-include-html="../HTML/nav-bar.html"></div>
     </div>
     <script src="../JS/add-task.js"></script>
+    <script src="../JS/template.js"></script>
   </body>
   
 </html>

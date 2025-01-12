@@ -19,8 +19,8 @@ a {
 }
 
 #main-content {
-/*   width: calc(100vw - 234px);
-  max-width: calc(1440px - 234px); */
+  width: calc(100vw - 234px);
+  max-width: calc(1440px - 234px);
   display: flex;
   flex-direction: column;
 }
@@ -71,7 +71,7 @@ button {
   height: 40px;
   width: 40px;
   border-radius: 100%;
-  border: solid 2px black;
+  border: solid 3px #2A3647;
 }
 
 .user-button:hover {
