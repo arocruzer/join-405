@@ -51,23 +51,33 @@ function getRandomColor() {
     return colors[Math.floor(Math.random() * colors.length)];
 }
 
+// Open Contact Details
+
 function openContactDetailsOverlay(index){
     console.log(`Kontakt ${index} wurde geklickt!`);
     console.log(loadedContacts[index]);
 
-    document.getElementById('content-wrapper-id').classList.add('d-none');
-    let contentRef = document.getElementById('contact-details-wrapper-id');
-    contentRef.classList.remove('d-none');
-    contentRef.innerHTML = HTMLopenContactDetailsOverlay(index);   
+
+    if (window.innerWidth < 920) {
+        document.getElementById('contacts').classList.add('d-none');
+        let contentRef = document.getElementById('contact-details-wrapper-id');
+        contentRef.classList.remove('contact-detail-hidden');
+        contentRef.innerHTML = HTMLopenContactDetailsOverlay(index);  
+    }else{
+        let contentRef = document.getElementById('contact-details-wrapper-id');
+        contentRef.innerHTML = HTMLopenContactDetailsOverlay(index);  
+    } 
 }
 
 function closeContactDetailsOverlay(){
-    document.getElementById('content-wrapper-id').classList.remove('d-none');
+    document.getElementById('contacts').classList.remove('d-none');
     let contentRef = document.getElementById('contact-details-wrapper-id');
-    contentRef.classList.add('d-none');
+    contentRef.classList.add('contact-detail-hidden');
     contentRef.innerHTML = "";
     document.getElementById('edit-delete-div-id').classList.add('d-none');
 }
+
+// Add Contact
 
 function OpenAddContactOverlay(){
     // document.getElementById('content-wrapper-id').classList.add('d-none');
@@ -75,12 +85,12 @@ function OpenAddContactOverlay(){
     // contentRef.innerHTML = HTMLOpenAddContactOverlay();
     // contentRef.classList.remove('d-none');
 
-    document.getElementById('add-contact-div-test-id').classList.remove('d-none');
-    document.getElementById('add-contact-div-test-id').innerHTML = HTMLOpenAddContactOverlay();
+    document.getElementById('add-contact-div-overlay-id').classList.remove('d-none');
+    document.getElementById('add-contact-div-overlay-id').innerHTML = HTMLOpenAddContactOverlay();
 }
 
 function closeAddContactOverlay(){
-    document.getElementById('add-contact-div-test-id').classList.add('d-none');
+    document.getElementById('add-contact-div-overlay-id').classList.add('d-none');
 }
 
 
