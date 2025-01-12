@@ -85,7 +85,6 @@ button {
   flex-direction: column;
   gap: 20px;
   height: 100%;
-  margin: 0 auto;
 }
 
 h1 {
