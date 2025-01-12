@@ -14,21 +14,23 @@ a {
 }
 
 #main-container {
-  margin: 0 auto;
+  /* margin: 0 auto; Mihael */
+  width: 100%; /* Mihael */
 }
 
 #main-content {
-  width: calc(100vw - 234px);
-  max-width: calc(1440px - 234px);
+/*   width: calc(100vw - 234px);
+  max-width: calc(1440px - 234px); */
   display: flex;
+  flex-direction: column;
 }
 
 #frame {
   display: unset;
   background-color: #F6F7F8;
   width: 100%;
-  max-width: 1440px;
-  padding: 67px 122px;
+/*   max-width: 1440px;  Mihael */
+  /* padding: 67px 122px;  von Mihael auskommentieret*/
   justify-content: space-between;
 }
 h1 {

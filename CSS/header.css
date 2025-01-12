@@ -10,6 +10,7 @@
   top: -1px;
   background-color: white;
   z-index: 1000;
+  display: flex; /* Mihael */
 }
 
 .header-logo {
