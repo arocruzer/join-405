@@ -155,35 +155,81 @@ function renderCurrentContacts(index, initialien) {
 }
 
 
+// function HTMLopenContactDetailsOverlay(index){
+//     return`
+//     <div class="contact-details-wrapper">
+//         <div class="contact-detail-title-wrapper">
+//             <div class="page-title">
+//                 <h1>Contacts</h1>
+//                 <p>Better with a team</p>
+//                 <div class="blue-line"></div>
+//             </div>
+//             <img class="arrow-left-contact-details" src="../Assets/arrow-left-line.png" alt="arrow_left" onclick="closeContactDetailsOverlay()">
+//         </div>  
+//         <div class="contact-detail-view">
+//             <div class="contact-avatar-and-name">
+//                 <div class="detail-contact-avatar">${loadedContacts[index].initialien}</div>
+//                 <h2>${loadedContacts[index].name}</h2>
+//             </div>
+//             <p>Contact Information</p>
+//             <h5>Email</h5>
+//             <a href="#">${loadedContacts[index].email}</a>
+//             <h5>Phone</h5>
+//             <a href="#">${loadedContacts[index].phone}</a>
+//         </div>
+//         <img class="three-points-menu" src="../Assets/threePointsMenu.png" onclick="openEditContactOverlay()" alt="threePointsMenu">
+//     </div>
+//     `;  
+// }
+
 function HTMLopenContactDetailsOverlay(index){
     return`
-    <div class="contact-details-wrapper">
-        <div class="contact-detail-title-wrapper">
-            <div class="page-title">
-                <h1>Contacts</h1>
-                <p>Better with a team</p>
-                <div class="blue-line"></div>
+    <div class="contact-details-wrapper" id="contact-details-wrapper-id">
+            <div class="contact-detail-title-wrapper">
+                <div class="page-title">
+                    <h1>Contacts</h1>
+                    <p>Better with a team</p>
+                    <div class="blue-line"></div>
+                </div>
+                <img class="arrow-left-contact-details" src="../Assets/arrow-left-line.png" alt="arrow_left" onclick="closeContactDetailsOverlay()">
+            </div>  
+            <div class="contact-detail-view">
+                <div class="contact-avatar-and-name">
+                    <div class="detail-contact-avatar">${loadedContacts[index].initialien}</div>
+                    <h2>${loadedContacts[index].name}</h2>
+                </div>
+                <p>Contact Information</p>
+                <h5>Email</h5>
+                <a href="#">${loadedContacts[index].email}</a>
+                <h5>Phone</h5>
+                <a href="#">${loadedContacts[index].phone}</a>
             </div>
-            <img class="arrow-left-contact-details" src="../Assets/arrow-left-line.png" alt="arrow_left" onclick="closeContactDetailsOverlay()">
-        </div>  
-        <div class="contact-detail-view">
-            <div class="contact-avatar-and-name">
-                <div class="detail-contact-avatar">${loadedContacts[index].initialien}</div>
-                <h2>${loadedContacts[index].name}</h2>
+            <img class="three-points-menu" src="../Assets/threePointsMenu.png" onclick="openEditContactOverlay()" alt="threePointsMenu">
+        <div class="edit-contact-details-overlay d-none" id="edit-contact-details-overlay-id">
+            <div class="overlay-edit-contact">
+                <div class="middle-avatar">TW</div>
+                <div class="upper-half">
+                    <div class="cross-close" onclick="closeEditContactOverlay()">X</div>
+                    <div class="edit-contact-title">
+                        <h1>Edit contact</h1>
+                        <div class="blue-line"></div>
+                    </div>
+                </div>
+                <div class="lower-half">
+                    <div class="input-fields">
+                        <input class="input-person" placeholder="Name" type="text">
+                        <input class="input-mail" placeholder="Email" type="email">
+                        <input class="input-phone" placeholder="Phone" type="tel">
+                    </div>
+                    <div class="delete-safe-buttons">
+                        <button class="delete-button">Delete</button>
+                        <button class="save-button">Save<i class="fa-sharp-duotone fa-solid fa-check save-padding"></i></button>
+                    </div>
+                </div>
             </div>
-            <p>Contact Information</p>
-            <h5>Email</h5>
-            <a href="#">${loadedContacts[index].email}</a>
-            <h5>Phone</h5>
-            <a href="#">${loadedContacts[index].phone}</a>
         </div>
-        <img class="three-points-menu" src="../Assets/threePointsMenu.png" onclick="openEditContactOverlay()" alt="threePointsMenu">
     </div>
     `;
-
-
-
-    
 }
 
 
