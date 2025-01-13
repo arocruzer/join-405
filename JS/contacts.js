@@ -1,11 +1,121 @@
-const BASE_URL_2 = "https://join-405-43178-default-rtdb.europe-west1.firebasedatabase.app/";
+const BASE_URL_zwei = "https://join-405-43178-default-rtdb.europe-west1.firebasedatabase.app/";
 
 let contacts = [];
-let loadedContacts = [];
+let loadedContacts = 
+[
+    {
+      "name": "Anna Schmidt",
+      "email": "anna.schmidt@example.com",
+      "phone": "+491701234567",
+      "letter": "A",
+      "initialien": "AS"
+    },
+    {
+      "name": "Peter Müller",
+      "email": "peter.mueller@example.com",
+      "phone": "+491702345678",
+      "letter": "P",
+      "initialien": "PM"
+    },
+    {
+      "name": "Julia Fischer",
+      "email": "julia.fischer@example.com",
+      "phone": "+491703456789",
+      "letter": "J",
+      "initialien": "JF"
+    },
+    {
+      "name": "Markus Becker",
+      "email": "markus.becker@example.com",
+      "phone": "+491704567890",
+      "letter": "M",
+      "initialien": "MB"
+    },
+    {
+      "name": "Sabine Wagner",
+      "email": "sabine.wagner@example.com",
+      "phone": "+491705678901",
+      "letter": "S",
+      "initialien": "SW"
+    },
+    {
+      "name": "Thomas Weber",
+      "email": "thomas.weber@example.com",
+      "phone": "+491706789012",
+      "letter": "T",
+      "initialien": "TW"
+    },
+    {
+      "name": "Laura Hoffmann",
+      "email": "laura.hoffmann@example.com",
+      "phone": "+491707890123",
+      "letter": "L",
+      "initialien": "LH"
+    },
+    {
+      "name": "Daniel Schröder",
+      "email": "daniel.schroeder@example.com",
+      "phone": "+491708901234",
+      "letter": "D",
+      "initialien": "DS"
+    },
+    {
+      "name": "Katrin Neumann",
+      "email": "katrin.neumann@example.com",
+      "phone": "+491709012345",
+      "letter": "K",
+      "initialien": "KN"
+    },
+    {
+      "name": "Stefan Braun",
+      "email": "stefan.braun@example.com",
+      "phone": "+491701234678",
+      "letter": "S",
+      "initialien": "SB"
+    },
+    {
+      "name": "Nina Hofmann",
+      "email": "nina.hofmann@example.com",
+      "phone": "+491702345789",
+      "letter": "N",
+      "initialien": "NH"
+    },
+    {
+      "name": "Michael Schäfer",
+      "email": "michael.schaefer@example.com",
+      "phone": "+491703456890",
+      "letter": "M",
+      "initialien": "MS"
+    },
+    {
+      "name": "Katharina Lehmann",
+      "email": "katharina.lehmann@example.com",
+      "phone": "+491704567901",
+      "letter": "K",
+      "initialien": "KL"
+    },
+    {
+      "name": "Tobias Schmid",
+      "email": "tobias.schmid@example.com",
+      "phone": "+491705678912",
+      "letter": "T",
+      "initialien": "TS"
+    },
+    {
+      "name": "Sandra Keller",
+      "email": "sandra.keller@example.com",
+      "phone": "+491706789023",
+      "letter": "S",
+      "initialien": "SK"
+    }
+  ]
+  
 let page = "contacts";
 
+
+
 async function loadAllContacts(path=""){
-    let response = await fetch (BASE_URL_2 + path + ".json");
+    let response = await fetch (BASE_URL_zwei + path + ".json");
     let responsToJason = await response.json();
 
     loadedContacts = [];
@@ -79,11 +189,6 @@ function closeContactDetailsOverlay(){
 // Add Contact
 
 function OpenAddContactOverlay(){
-    // document.getElementById('content-wrapper-id').classList.add('d-none');
-    // let contentRef = document.getElementById('overlay-wrapper-id');
-    // contentRef.innerHTML = HTMLOpenAddContactOverlay();
-    // contentRef.classList.remove('d-none');
-
     document.getElementById('add-contact-div-overlay-id').classList.remove('d-none');
     document.getElementById('add-contact-div-overlay-id').innerHTML = HTMLOpenAddContactOverlay();
 }
@@ -99,6 +204,11 @@ function closeAddContactOverlay(){
 function openEditContactOverlay(){
     let contentRef = document.getElementById('edit-contact-details-overlay-id');
     contentRef.classList.remove('d-none');
+}
+
+function closeEditContactOverlay(){
+    let contentRef = document.getElementById('edit-contact-details-overlay-id');
+    contentRef.classList.add('d-none');
 }
 
 

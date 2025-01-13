@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="../CSS/nav-bar.css">
 
     <script src="../JS/contacts.js"></script>
-    <script src="../script.js"></script>
+    <!-- <script src="../script.js"></script> -->
     <!-- <script src="../JS/nav-bar.js"></script> -->
 
 
@@ -25,7 +25,7 @@
 
 
 
-<body onload="loadAllContacts()">
+<body onload="renderContacts()">
     <!-- <header>
         <div id="header" w3-include-html="../HTML/header.html"></div>
     </header> -->
@@ -39,7 +39,7 @@
 
         <div class="content-wrapper" id="content-wrapper-id">
             <div class="contacts-list" id="contacts"></div>
-            <img onclick="OpenAddContactOverlay()" class="add-contact-button" src="../Assets/Property 1=Default.png" alt="add_contact" >
+            <img onclick="OpenAddContactOverlay()" class="add-contact-button" src="../Assets/Property 1=Default.svg" alt="add_contact" >
             <div class="add-contact-div-overlay d-none" id="add-contact-div-overlay-id">
                 <!-- <div class="overlay-edit-contact">
                     <div class="middle-avatar">TW</div>
@@ -72,7 +72,7 @@
                             <p>Better with a team</p>
                             <div class="blue-line"></div>
                         </div>
-                        <img class="arrow-left-contact-details" src="../Assets/arrow-left-line.png" alt="arrow_left" onclick="closeContactDetailsOverlay()">
+                        <img class="arrow-left-contact-details" src="../Assets/arrow-left-line.svg" alt="arrow_left" onclick="closeContactDetailsOverlay()">
                     </div>  
                     <div class="contact-detail-view">
                         <div class="contact-avatar-and-name">
