@@ -167,6 +167,20 @@ font-weight: 500;
   margin: 5px;
   text-transform: uppercase;
 }
+
+.info-container:hover{
+  background-color: #2A3647;
+  color: white;
+}
+.task-date-info:hover{
+  background-color: #2A3647;
+  color: white;
+}
+.task-status:hover{
+  background-color: #2A3647;
+  color: white;
+}
+
 @media screen and (min-width: 768px) {
   #summary-button {
     border-radius: unset;

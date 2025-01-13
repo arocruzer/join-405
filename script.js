@@ -146,7 +146,7 @@ animation.addEventListener("animationend", (event) => {
 
 function getUserLogo() {
   let userLogo = document.getElementById("user-button");
-  let user = JSON.parse(localStorage.getItem("loggedInUser")); // Benutzer aus localStorage holen
+  let user = JSON.parse(localStorage.getItem("loggedInUser"));
   
   if (!user) {
     console.error("Kein Benutzer im localStorage gefunden.");

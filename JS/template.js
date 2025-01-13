@@ -24,7 +24,7 @@ function renderUserLogo(initials, color, user) {
     return `<div>
                 <div class="name-and-img">
                     <div class="initials-circle-logo">
-                        ${initials}
+                        <h3>${initials}</h3>
                     </div>
                 </div>
             </div>`;
