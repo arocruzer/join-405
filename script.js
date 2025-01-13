@@ -137,7 +137,7 @@ function welcomeAnimation() {
 let animation = document.getElementById("animation");
 if(animation){
 animation.addEventListener("animationend", (event) => {
-    if (event.animationName === "fadeOutBackground") {
+    if (event.animationName === "fadeOutBackground" || "fadeOutBackgorundMobile") {
         animation.style.display = "none";
     }
 });

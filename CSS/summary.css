@@ -69,7 +69,6 @@ text-align: center;
 h4{
 font-size: 64px;
 font-weight: 600;
-color: #000000;
 }
 span{
   font-size: 47px;
@@ -106,12 +105,10 @@ span{
 .date p{
 font-size: 16px;
 font-weight: 400;
-color: #2A3647;
 }
-h5{
+.date h5{
 font-size: 21px;
 font-weight: 700;
-color: #2A3647;
 }
 .tasks-status-container{
   display: flex;
@@ -179,6 +176,24 @@ font-weight: 500;
 .task-status:hover{
   background-color: #2A3647;
   color: white;
+}
+.hover-pen-img{
+  display: none;
+}
+.info-container:hover .pen-img{
+  display: none;
+}
+.info-container:hover .hover-pen-img{
+  display: block;
+}
+.done-img-hover{
+  display: none;
+}
+.info-container:hover .done-img{
+  display: none;
+}
+.info-container:hover .done-img-hover{
+  display: block;
 }
 
 @media screen and (min-width: 768px) {
