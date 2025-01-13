@@ -130,7 +130,6 @@ async function loadAllContacts(path=""){
 }
 
 function renderContacts(){
-    console.table(loadedContacts);
     let contentRef = document.getElementById('contacts');
     contentRef.innerHTML = "";
     let currentLetter = "";
@@ -146,7 +145,9 @@ function renderContacts(){
         const groupElement = document.getElementById(`contact-container-${currentLetter}`);
         groupElement.innerHTML += renderCurrentContacts(index, initialien);
         addBackgrounds();
+        
     }
+    addContactButtonAdden();
 }
 
 function addBackgrounds() {
@@ -159,6 +160,11 @@ function addBackgrounds() {
 function getRandomColor() {
     const colors = ['#6A8EAE','#F4A261', '#2A9D8F', '#E76F51', '#264653', '#A2678A','#457B9D', '#D4A373', '#8A817C', '#BC6C25'];
     return colors[Math.floor(Math.random() * colors.length)];
+}
+
+function addContactButtonAdden(){
+    let contentRef = document.getElementById('contacts');
+    contentRef.innerHTML += `<img onclick="OpenAddContactOverlay()" class="add-contact-button" src="../Assets/Property 1=Default.svg" alt="add_contact" >`;
 }
 
 // Open Contact Details
@@ -217,7 +223,38 @@ function closeEditContactOverlay(){
 // Kontakte hinzufügen
 
 function addNewContact(){
-    let name = document.getElementById('').value;
+    let nameInput = document.getElementById('add-input-name-id').value;
+    let mailInput = document.getElementById('add-input-mail-id').value
+    let phoneInput = document.getElementById('add-input-phone-id').value;
+    let [vorname, nachname] = nameInput.split(" ");
+    let initialien = vorname[0] + (nachname ? nachname[0] : "");
+
+    validateName(nameInput);
+
+  
+
+    let newContact = 
+        {
+            name: nameInput,
+            email: mailInput,
+            phone: phoneInput,
+            letter: vorname[0],
+            initialien: initialien
+        };
+    
+    loadedContacts.push(newContact);
+    renderContacts();
+    closeAddContactOverlay();
+}
+
+function validateName(name){
+    let isValid = true;
+    if (!name.includes(" ") || name.split(" ").length < 2) {
+        isValid = false;
+        console.log(isValid);
+    }else{
+        console.log("Correct");
+    }
 }
 
 function createContact() {
@@ -234,9 +271,7 @@ function createContact() {
     }
 }
 
-function validateContactForm(){
-    
-}
+
 
 
 
@@ -358,10 +393,10 @@ function HTMLOpenAddContactOverlay(){
             </div>
             <div class="lower-half">
                 <div class="input-fields-add">
-                    <input class="input-person" placeholder="Name" type="text">
-                    <input class="input-mail" placeholder="Email" type="email">
-                    <input class="input-phone" placeholder="Phone" type="tel">
-                    <button class="create-button">Create contact<i class="fa-sharp-duotone fa-solid fa-check"></i></button>
+                    <input class="input-person" placeholder="Name" type="text" id="add-input-name-id">
+                    <input class="input-mail" placeholder="Email" type="email" id="add-input-mail-id">
+                    <input class="input-phone" placeholder="Phone" type="tel" id="add-input-phone-id">
+                    <button onclick="addNewContact()" class="create-button">Create contact<i class="fa-sharp-duotone fa-solid fa-check"></i></button>
                 </div>
             </div>
         </div>
