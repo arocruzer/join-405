@@ -305,9 +305,9 @@ function HTMLopenContactDetailsOverlay(index){
                 </div>
                 <div class="lower-half">
                     <div class="input-fields">
-                        <input class="input-person" placeholder="Name" type="text" id="edit-input-name-id">
-                        <input class="input-mail" placeholder="Email" type="email" id="edit-input-mail-id">
-                        <input class="input-phone" placeholder="Phone" type="tel" id="edit-input-phone-id">
+                        <input class="input-person" value="${loadedContacts[index].name}" placeholder="Name" type="text" id="edit-input-name-id">
+                        <input class="input-mail" value="${loadedContacts[index].email}" placeholder="Email" type="email" id="edit-input-mail-id">
+                        <input class="input-phone" value="${loadedContacts[index].phone}" placeholder="Phone" type="tel" id="edit-input-phone-id">
                     </div>
                     <div class="delete-safe-buttons">
                         <button onclick="deleteContact(${index})" class="delete-button">Delete</button>
