@@ -109,7 +109,6 @@ function selectCategory(category) {
 
 
 
-document.addEventListener('DOMContentLoaded', initCategorySelect);
 
 subtaskInput.addEventListener('input', () => {
     if (subtaskInput.value.trim()) {
@@ -166,6 +165,8 @@ function toggleButtonVisibility(forceShow) {
     const confirmButton = document.getElementById('confirmButton');
     const cancelButton = document.getElementById('cancelButton');
     const plusButton = document.getElementById('plusButton');
+    const linie = document.getElementById('linie');
+    linie.style.display='none';
     confirmButton.style.display = 'none';
     cancelButton.style.display = 'none';
     plusButton.style.display = 'inline';
@@ -173,6 +174,7 @@ function toggleButtonVisibility(forceShow) {
     if (forceShow || taskInput.value.trim()) {
         confirmButton.style.display = 'inline';
         cancelButton.style.display = 'inline';
+        linie.style.display='inline';
         plusButton.style.display = 'none';
     } 
 }
