@@ -98,12 +98,14 @@ function closeAddContactOverlay(){
 
 function addNewContact(){
     let nameInput = document.getElementById('add-input-name-id').value;
+    validateName(nameInput);
     let mailInput = document.getElementById('add-input-mail-id').value
+    validateEmail(mailInput);
     let phoneInput = document.getElementById('add-input-phone-id').value;
     let [vorname, nachname] = nameInput.split(" ");
     let initialien = vorname[0] + (nachname ? nachname[0] : "");
 
-    validateName(nameInput);
+    
 
   
 
@@ -121,13 +123,27 @@ function addNewContact(){
     closeAddContactOverlay();
 }
 
+// Validation Functions
+
 function validateName(name){
     let isValid = true;
     if (!name.includes(" ") || name.split(" ").length < 2) {
         isValid = false;
         console.log(isValid);
     }else{
-        console.log("Correct");
+        console.log(isValid);
+    }
+}
+
+function validateEmail(mail){
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    let isValid = emailRegex.test(mail);
+
+    if(isValid){
+        console.log("hi");
+    }else{
+        console.log("fuck off");
+        alert("Mail Falsch");
     }
 }
 
@@ -249,7 +265,7 @@ function renderCurrentContacts(index, initialien) {
 
 function HTMLopenContactDetailsOverlay(index){
     return`
-    <div class="contact-details-wrapper" id="contact-details-wrapper-id">
+
             <div class="contact-detail-title-wrapper">
                 <div class="page-title">
                     <h1>Contacts</h1>
@@ -293,7 +309,7 @@ function HTMLopenContactDetailsOverlay(index){
                 </div>
             </div>
         </div>
-    </div>
+
     `;
 }
 
