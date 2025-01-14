@@ -3,6 +3,45 @@
   font-family: inter;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+/*   cursor: pointer; */
+}
+
+a {
+  text-decoration: none;
+}
+
+#main-container {
+  /* margin: 0 auto; Mihael */
+  width: 100%; /* Mihael */
+}
+
+#main-content {
+  width: calc(100vw - 234px);
+  max-width: calc(1440px - 234px);
+  display: flex;
+  flex-direction: column;
+}
+
+#frame {
+  display: unset;
+  background-color: #F6F7F8;
+  width: 100%;
+/*   max-width: 1440px;  Mihael */
+  /* padding: 67px 122px;  von Mihael auskommentieret*/
+  justify-content: space-between;
+}
+h1 {
+  font-weight: 700;
+  font-size: 61px;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 400;
+}
 header {
   height: 80px;
   width: auto;
@@ -27,7 +66,7 @@ button {
   height: 40px;
   width: 40px;
   border-radius: 100%;
-  border: solid 2px black;
+  border: solid 3px #2A3647;
 }
 
 .user-button:hover {
@@ -42,8 +81,6 @@ button {
   align-items: center;
   flex-direction: column;
   gap: 20px;
-  height: 100%;
-  margin: 0 auto;
 }
 
 h1 {
@@ -60,19 +97,7 @@ h2 {
   text-decoration-skip-ink: none;
 }
 
-h3 {
-  font-size: 20px;
-  font-weight: 400;
-}
-
-h4 {
-  font-size: 16px;
-  color: #a8a8a8;
-  font-weight: 400;
-}
-
 h5 {
-  color: #29abe2;
   font-size: 10px;
 }
 
@@ -166,6 +191,24 @@ input:focus {
   top: 50px;
 }
 
+.initials-circle-logo {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: #29abe2;
+  font-weight: bold;
+  font-size: 16px;
+  margin: 5px;
+  text-transform: uppercase;
+}
+.initials-circle-logo h3{
+  font-size: 20px;
+  font-weight: 600;
+}
+
 @media (max-width: 680px){
   h1{
     font-size: 47px;
@@ -202,7 +245,7 @@ input:focus {
   font-size: 24px;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 830px) {
   #frame {
     display: flex;
     flex-direction: row-reverse;

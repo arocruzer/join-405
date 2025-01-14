@@ -15,3 +15,17 @@ function renderAddedUsers(color, initials) {
                 ${initials}
             </div>`;
 }
+
+function regardsUserTemplate(greeting, userName) {
+  return `<h2>${greeting}</h2> <h1>${userName}</h1>`;
+}
+
+function renderUserLogo(initials, color, user) {
+    return `<div>
+                <div class="name-and-img">
+                    <div class="initials-circle-logo">
+                        <h3>${initials}</h3>
+                    </div>
+                </div>
+            </div>`;
+  }

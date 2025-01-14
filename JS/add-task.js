@@ -51,14 +51,6 @@ function openDropDownMenuCategory() {
     }
 }
 
-function getInitials(name) {
-    return name
-        .split(' ')                
-        .map(word => word[0])      
-        .join('')                  
-        .toUpperCase();            
-}
-
 function addUserToTask() {
     concatList.innerHTML = ""; 
 

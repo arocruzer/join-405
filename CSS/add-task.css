@@ -188,8 +188,8 @@ input::placeholder {
 .contact-list-container {
   display: none;
   height: 288px;
-  /*     background-color: white; */
-  z-index: 1;
+  background-color: white;
+  z-index: 1000;
   position: relative;
   overflow: auto;
   overflow-x: hidden;

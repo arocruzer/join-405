@@ -94,7 +94,11 @@ a {
   flex-direction: row;
   gap: 8px;
 }
-
+.checkbox-container h4{
+  font-size: 16px;
+  color: #a8a8a8;
+  font-weight: 400;
+}
 .checkbox-container a {
   color: #29abe2;
 }

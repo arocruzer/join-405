@@ -38,11 +38,3 @@ if (msg) {
 hero.onclick = function () {
   msgBox.style.display = "none";
 };
-
-function getUserLogo() {
-  let userLogo = document.getElementById("user-button");
-
-  let initials = getInitials(users.name);
-
-  console.log(initials);
-}

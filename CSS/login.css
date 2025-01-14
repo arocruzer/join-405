@@ -128,16 +128,16 @@ a {
   color: white;
 }
 
-.test {
+.animation {
   position: absolute;
   height: 100%;
   width: 100%;
-  background-color: #2a3647;
+  background-color: #f6f7f8;
   z-index: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: fadeOutBackground 2s forwards;
+  animation: fadeOutBackground 1s forwards;
 }
 
 .welcome-img {
@@ -147,7 +147,11 @@ a {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  animation: mymove 2s linear forwards;
+  animation: mymove 1s linear forwards;
+}
+.welcome-img-mobile{
+  position: absolute;
+  display: none;
 }
 
 @keyframes mymove {
@@ -163,6 +167,26 @@ a {
 }
 
 @keyframes fadeOutBackground {
+  0% {
+      background-color: #f6f7f8;
+  }
+  100% {
+      background-color: transparent;
+  }
+}
+@keyframes mymoveMobile {
+  0% {
+      transform: translate(-50%, -50%);
+  }
+  100% {
+      top: 5%; 
+      left: 6.5%;
+      transform: translate(0, 0);
+      opacity: 0;
+  }
+}
+
+@keyframes fadeOutBackgroundMobile {
   0% {
       background-color: #2a3647;
   }
@@ -189,8 +213,20 @@ a {
     width: calc(100% - 32px);
   }
   .welcome-img{
+    display: none;
+  }
+  .welcome-img-mobile{
+    display: block;
     height: 78px;
     width: 64px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: mymoveMobile 1s linear forwards;
+  }
+  .animation{
+    background-color: #2a3647;
+    animation: fadeOutBackgroundMobile 1s forwards;
   }
 }
 
