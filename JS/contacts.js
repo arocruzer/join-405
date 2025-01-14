@@ -338,7 +338,7 @@ function HTMLopenContactDetailsOverlay(index){
                 </div>
                 <img class="arrow-left-contact-details" src="../Assets/arrow-left-line.png" alt="arrow_left" onclick="closeContactDetailsOverlay()">
             </div>  
-            <div class="contact-detail-view">
+            <div class="contact-detail-view d-none">
                 <div class="contact-avatar-and-name">
                     <div class="detail-contact-avatar">${loadedContacts[index].initialien}</div>
                     <h2>${loadedContacts[index].name}</h2>
