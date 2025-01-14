@@ -41,6 +41,7 @@ function renderContacts(){
         
     }
     addContactButtonAdden();
+    renderContactDetailPage();
 }
 
 function addBackgrounds() {
@@ -82,7 +83,7 @@ function closeContactDetailsOverlay(){
     document.getElementById('contacts').classList.remove('d-none');
     let contentRef = document.getElementById('contact-details-wrapper-id');
     contentRef.classList.add('contact-detail-hidden');
-    contentRef.innerHTML = "";
+    renderContactDetailPage();
 }
 
 // Add Contact
@@ -204,6 +205,7 @@ function editContact(index){
 function deleteContact(index){
     loadedContacts.splice(index, 1);
     renderContacts();
+    // renderContactDetailPage();
     closeEditContactOverlay();
     closeContactDetailsOverlay();
 }
@@ -242,33 +244,21 @@ function renderCurrentContacts(index, initialien) {
     `;
 }
 
-
-// function HTMLopenContactDetailsOverlay(index){
-//     return`
-//     <div class="contact-details-wrapper">
-//         <div class="contact-detail-title-wrapper">
-//             <div class="page-title">
-//                 <h1>Contacts</h1>
-//                 <p>Better with a team</p>
-//                 <div class="blue-line"></div>
-//             </div>
-//             <img class="arrow-left-contact-details" src="../Assets/arrow-left-line.png" alt="arrow_left" onclick="closeContactDetailsOverlay()">
-//         </div>  
-//         <div class="contact-detail-view">
-//             <div class="contact-avatar-and-name">
-//                 <div class="detail-contact-avatar">${loadedContacts[index].initialien}</div>
-//                 <h2>${loadedContacts[index].name}</h2>
-//             </div>
-//             <p>Contact Information</p>
-//             <h5>Email</h5>
-//             <a href="#">${loadedContacts[index].email}</a>
-//             <h5>Phone</h5>
-//             <a href="#">${loadedContacts[index].phone}</a>
-//         </div>
-//         <img class="three-points-menu" src="../Assets/threePointsMenu.png" onclick="openEditContactOverlay()" alt="threePointsMenu">
-//     </div>
-//     `;  
-// }
+function renderContactDetailPage(){
+    let contentRef = document.getElementById('contact-details-wrapper-id');
+    contentRef.innerHTML = ``;
+    contentRef.innerHTML = `
+    <div class="contact-detail-title-wrapper">
+                    <div class="page-title">
+                        <h1>Contacts</h1>
+                        <p>Better with a team</p>
+                        <div class="blue-line"></div>
+                    </div>
+                </div>  
+                <div class="edit-contact-details-overlay d-none" id="edit-contact-details-overlay-id">
+                </div>
+    `;
+}
 
 function HTMLopenContactDetailsOverlay(index){
     return`
@@ -279,7 +269,7 @@ function HTMLopenContactDetailsOverlay(index){
                     <p>Better with a team</p>
                     <div class="blue-line"></div>
                 </div>
-                <img class="arrow-left-contact-details" src="../Assets/arrow-left-line.png" alt="arrow_left" onclick="closeContactDetailsOverlay()">
+                <img class="arrow-left-contact-details" src="../Assets/left-arrow-blue.svg" alt="arrow_left" onclick="closeContactDetailsOverlay()">
             </div>  
             <div class="contact-detail-view">
                 <div class="contact-avatar-and-name">
