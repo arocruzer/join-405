@@ -103,11 +103,7 @@ function addNewContact(){
     validateEmail(mailInput);
     let phoneInput = document.getElementById('add-input-phone-id').value;
     let [vorname, nachname] = nameInput.split(" ");
-    let initialien = vorname[0] + (nachname ? nachname[0] : "");
-
-    
-
-  
+    let initialien = vorname[0] + (nachname ? nachname[0] : ""); 
 
     let newContact = 
         {
@@ -128,8 +124,7 @@ function addNewContact(){
 function validateName(name){
     let isValid = true;
     if (!name.includes(" ") || name.split(" ").length < 2) {
-        isValid = false;
-        console.log(isValid);
+        
     }else{
         console.log(isValid);
     }
@@ -146,6 +141,31 @@ function validateEmail(mail){
         alert("Mail Falsch");
     }
 }
+
+
+
+function createContact() {
+    if (validateName()) {
+      const newContact = gatherContactFormData();
+      saveNewContact(newContact)
+        .then(() => {
+          closeAddContactOverlay();
+          renderContacts();
+        })
+        .catch((error) => {
+          console.error("Fehler beim Hinzufügen des Kontakts:", error);
+        });
+    }
+}
+
+function createContact(){
+    if(validateName){
+
+    }
+}
+
+
+
 
 //Edit Contacts
 
@@ -189,23 +209,10 @@ function deleteContact(index){
 }
 
 
-// Kontakte hinzufügen Backup
 
 
 
-function createContact() {
-    if (validateContactForm()) {
-      const newContact = gatherContactFormData();
-      saveNewContact(newContact)
-        .then(() => {
-          closeAddContactOverlay();
-          renderContacts();
-        })
-        .catch((error) => {
-          console.error("Fehler beim Hinzufügen des Kontakts:", error);
-        });
-    }
-}
+
 
 
 
