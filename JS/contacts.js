@@ -1,115 +1,8 @@
 const BASE_URL_zwei = "https://join-405-43178-default-rtdb.europe-west1.firebasedatabase.app/";
 
 let contacts = [];
-let loadedContacts = 
-[
-    {
-      "name": "Anna Schmidt",
-      "email": "anna.schmidt@example.com",
-      "phone": "+491701234567",
-      "letter": "A",
-      "initialien": "AS"
-    },
-    {
-      "name": "Peter Müller",
-      "email": "peter.mueller@example.com",
-      "phone": "+491702345678",
-      "letter": "P",
-      "initialien": "PM"
-    },
-    {
-      "name": "Julia Fischer",
-      "email": "julia.fischer@example.com",
-      "phone": "+491703456789",
-      "letter": "J",
-      "initialien": "JF"
-    },
-    {
-      "name": "Markus Becker",
-      "email": "markus.becker@example.com",
-      "phone": "+491704567890",
-      "letter": "M",
-      "initialien": "MB"
-    },
-    {
-      "name": "Sabine Wagner",
-      "email": "sabine.wagner@example.com",
-      "phone": "+491705678901",
-      "letter": "S",
-      "initialien": "SW"
-    },
-    {
-      "name": "Thomas Weber",
-      "email": "thomas.weber@example.com",
-      "phone": "+491706789012",
-      "letter": "T",
-      "initialien": "TW"
-    },
-    {
-      "name": "Laura Hoffmann",
-      "email": "laura.hoffmann@example.com",
-      "phone": "+491707890123",
-      "letter": "L",
-      "initialien": "LH"
-    },
-    {
-      "name": "Daniel Schröder",
-      "email": "daniel.schroeder@example.com",
-      "phone": "+491708901234",
-      "letter": "D",
-      "initialien": "DS"
-    },
-    {
-      "name": "Katrin Neumann",
-      "email": "katrin.neumann@example.com",
-      "phone": "+491709012345",
-      "letter": "K",
-      "initialien": "KN"
-    },
-    {
-      "name": "Stefan Braun",
-      "email": "stefan.braun@example.com",
-      "phone": "+491701234678",
-      "letter": "S",
-      "initialien": "SB"
-    },
-    {
-      "name": "Nina Hofmann",
-      "email": "nina.hofmann@example.com",
-      "phone": "+491702345789",
-      "letter": "N",
-      "initialien": "NH"
-    },
-    {
-      "name": "Michael Schäfer",
-      "email": "michael.schaefer@example.com",
-      "phone": "+491703456890",
-      "letter": "M",
-      "initialien": "MS"
-    },
-    {
-      "name": "Katharina Lehmann",
-      "email": "katharina.lehmann@example.com",
-      "phone": "+491704567901",
-      "letter": "K",
-      "initialien": "KL"
-    },
-    {
-      "name": "Tobias Schmid",
-      "email": "tobias.schmid@example.com",
-      "phone": "+491705678912",
-      "letter": "T",
-      "initialien": "TS"
-    },
-    {
-      "name": "Sandra Keller",
-      "email": "sandra.keller@example.com",
-      "phone": "+491706789023",
-      "letter": "S",
-      "initialien": "SK"
-    }
-  ]
-  
+let loadedContacts = [];
+
 let page = "contacts";
 
 
@@ -173,7 +66,6 @@ function openContactDetailsOverlay(index){
     console.log(`Kontakt ${index} wurde geklickt!`);
     console.log(loadedContacts[index]);
 
-
     if (window.innerWidth < 920) {
         document.getElementById('contacts').classList.add('d-none');
         let contentRef = document.getElementById('contact-details-wrapper-id');
@@ -186,6 +78,7 @@ function openContactDetailsOverlay(index){
 }
 
 function closeContactDetailsOverlay(){
+
     document.getElementById('contacts').classList.remove('d-none');
     let contentRef = document.getElementById('contact-details-wrapper-id');
     contentRef.classList.add('contact-detail-hidden');
@@ -203,33 +96,16 @@ function closeAddContactOverlay(){
     document.getElementById('add-contact-div-overlay-id').classList.add('d-none');
 }
 
-
-
-//Edit Contacts
-
-function openEditContactOverlay(){
-    let contentRef = document.getElementById('edit-contact-details-overlay-id');
-    contentRef.classList.remove('d-none');
-}
-
-function closeEditContactOverlay(){
-    let contentRef = document.getElementById('edit-contact-details-overlay-id');
-    contentRef.classList.add('d-none');
-}
-
-
-
-
-// Kontakte hinzufügen
-
 function addNewContact(){
     let nameInput = document.getElementById('add-input-name-id').value;
+    validateName(nameInput);
     let mailInput = document.getElementById('add-input-mail-id').value
+    validateEmail(mailInput);
     let phoneInput = document.getElementById('add-input-phone-id').value;
     let [vorname, nachname] = nameInput.split(" ");
     let initialien = vorname[0] + (nachname ? nachname[0] : "");
 
-    validateName(nameInput);
+    
 
   
 
@@ -247,15 +123,75 @@ function addNewContact(){
     closeAddContactOverlay();
 }
 
+// Validation Functions
+
 function validateName(name){
     let isValid = true;
     if (!name.includes(" ") || name.split(" ").length < 2) {
         isValid = false;
         console.log(isValid);
     }else{
-        console.log("Correct");
+        console.log(isValid);
     }
 }
+
+function validateEmail(mail){
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    let isValid = emailRegex.test(mail);
+
+    if(isValid){
+        console.log("hi");
+    }else{
+        console.log("fuck off");
+        alert("Mail Falsch");
+    }
+}
+
+//Edit Contacts
+
+function openEditContactOverlay(){
+    let contentRef = document.getElementById('edit-contact-details-overlay-id');
+    contentRef.classList.remove('d-none');
+}
+
+function closeEditContactOverlay(){
+    let contentRef = document.getElementById('edit-contact-details-overlay-id');
+    contentRef.classList.add('d-none');
+}
+
+function editContact(index){
+    let nameInput = document.getElementById('edit-input-name-id').value;
+    let mailInput = document.getElementById('edit-input-mail-id').value
+    let phoneInput = document.getElementById('edit-input-phone-id').value;
+    let [vorname, nachname] = nameInput.split(" ");
+    let initialien = vorname[0] + (nachname ? nachname[0] : "");
+
+    let newContact = 
+    {
+        name: nameInput,
+        email: mailInput,
+        phone: phoneInput,
+        letter: vorname[0],
+        initialien: initialien
+    };
+    loadedContacts[index] = newContact;
+
+    renderContacts();
+    closeEditContactOverlay();
+    closeContactDetailsOverlay();
+}
+
+function deleteContact(index){
+    loadedContacts.splice(index, 1);
+    renderContacts();
+    closeEditContactOverlay();
+    closeContactDetailsOverlay();
+}
+
+
+// Kontakte hinzufügen Backup
+
+
 
 function createContact() {
     if (validateContactForm()) {
@@ -329,7 +265,7 @@ function renderCurrentContacts(index, initialien) {
 
 function HTMLopenContactDetailsOverlay(index){
     return`
-    <div class="contact-details-wrapper" id="contact-details-wrapper-id">
+
             <div class="contact-detail-title-wrapper">
                 <div class="page-title">
                     <h1>Contacts</h1>
@@ -362,18 +298,18 @@ function HTMLopenContactDetailsOverlay(index){
                 </div>
                 <div class="lower-half">
                     <div class="input-fields">
-                        <input class="input-person" placeholder="Name" type="text">
-                        <input class="input-mail" placeholder="Email" type="email">
-                        <input class="input-phone" placeholder="Phone" type="tel">
+                        <input class="input-person" placeholder="Name" type="text" id="edit-input-name-id">
+                        <input class="input-mail" placeholder="Email" type="email" id="edit-input-mail-id">
+                        <input class="input-phone" placeholder="Phone" type="tel" id="edit-input-phone-id">
                     </div>
                     <div class="delete-safe-buttons">
-                        <button class="delete-button">Delete</button>
-                        <button class="save-button">Save<i class="fa-sharp-duotone fa-solid fa-check save-padding"></i></button>
+                        <button onclick="deleteContact(${index})" class="delete-button">Delete</button>
+                        <button onclick="editContact(${index})" class="save-button">Save<i class="fa-sharp-duotone fa-solid fa-check save-padding"></i></button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+
     `;
 }
 

@@ -18,6 +18,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  flex: 1;
   height: 1156px;
   scrollbar-width: 27px;
   padding-top: 24px;
@@ -268,11 +269,11 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.8); /* Halbtransparentes Schwarz */
+  background: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* Stellt sicher, dass es über allem liegt */
+  z-index: 1000;
 }
 
 .edit-contact-details-overlay {
@@ -281,11 +282,11 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.8); /* Halbtransparentes Schwarz */
+  background: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* Stellt sicher, dass es über allem liegt */
+  z-index: 1000;
 }
 
 .overlay-edit-contact{
@@ -501,6 +502,11 @@
   }
   .contacts-list {
     max-width: 350px;
+
+  }
+
+  .contacts-container {
+    flex: 1;
   }
   .contact-details-wrapper {
     position: sticky;
