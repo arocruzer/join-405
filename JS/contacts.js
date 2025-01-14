@@ -173,7 +173,6 @@ function openContactDetailsOverlay(index){
     console.log(`Kontakt ${index} wurde geklickt!`);
     console.log(loadedContacts[index]);
 
-
     if (window.innerWidth < 920) {
         document.getElementById('contacts').classList.add('d-none');
         let contentRef = document.getElementById('contact-details-wrapper-id');
@@ -186,6 +185,7 @@ function openContactDetailsOverlay(index){
 }
 
 function closeContactDetailsOverlay(){
+
     document.getElementById('contacts').classList.remove('d-none');
     let contentRef = document.getElementById('contact-details-wrapper-id');
     contentRef.classList.add('contact-detail-hidden');
@@ -202,25 +202,6 @@ function OpenAddContactOverlay(){
 function closeAddContactOverlay(){
     document.getElementById('add-contact-div-overlay-id').classList.add('d-none');
 }
-
-
-
-//Edit Contacts
-
-function openEditContactOverlay(){
-    let contentRef = document.getElementById('edit-contact-details-overlay-id');
-    contentRef.classList.remove('d-none');
-}
-
-function closeEditContactOverlay(){
-    let contentRef = document.getElementById('edit-contact-details-overlay-id');
-    contentRef.classList.add('d-none');
-}
-
-
-
-
-// Kontakte hinzufügen
 
 function addNewContact(){
     let nameInput = document.getElementById('add-input-name-id').value;
@@ -256,6 +237,25 @@ function validateName(name){
         console.log("Correct");
     }
 }
+
+//Edit Contacts
+
+function openEditContactOverlay(){
+    let contentRef = document.getElementById('edit-contact-details-overlay-id');
+    contentRef.classList.remove('d-none');
+}
+
+function closeEditContactOverlay(){
+    let contentRef = document.getElementById('edit-contact-details-overlay-id');
+    contentRef.classList.add('d-none');
+}
+
+
+
+
+// Kontakte hinzufügen
+
+
 
 function createContact() {
     if (validateContactForm()) {
@@ -338,7 +338,7 @@ function HTMLopenContactDetailsOverlay(index){
                 </div>
                 <img class="arrow-left-contact-details" src="../Assets/arrow-left-line.png" alt="arrow_left" onclick="closeContactDetailsOverlay()">
             </div>  
-            <div class="contact-detail-view d-none">
+            <div class="contact-detail-view">
                 <div class="contact-avatar-and-name">
                     <div class="detail-contact-avatar">${loadedContacts[index].initialien}</div>
                     <h2>${loadedContacts[index].name}</h2>
