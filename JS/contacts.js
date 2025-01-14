@@ -1,11 +1,121 @@
-const BASE_URL_2 = "https://join-405-43178-default-rtdb.europe-west1.firebasedatabase.app/";
+const BASE_URL_zwei = "https://join-405-43178-default-rtdb.europe-west1.firebasedatabase.app/";
 
 let contacts = [];
-let loadedContacts = [];
+let loadedContacts = 
+[
+    {
+      "name": "Anna Schmidt",
+      "email": "anna.schmidt@example.com",
+      "phone": "+491701234567",
+      "letter": "A",
+      "initialien": "AS"
+    },
+    {
+      "name": "Peter Müller",
+      "email": "peter.mueller@example.com",
+      "phone": "+491702345678",
+      "letter": "P",
+      "initialien": "PM"
+    },
+    {
+      "name": "Julia Fischer",
+      "email": "julia.fischer@example.com",
+      "phone": "+491703456789",
+      "letter": "J",
+      "initialien": "JF"
+    },
+    {
+      "name": "Markus Becker",
+      "email": "markus.becker@example.com",
+      "phone": "+491704567890",
+      "letter": "M",
+      "initialien": "MB"
+    },
+    {
+      "name": "Sabine Wagner",
+      "email": "sabine.wagner@example.com",
+      "phone": "+491705678901",
+      "letter": "S",
+      "initialien": "SW"
+    },
+    {
+      "name": "Thomas Weber",
+      "email": "thomas.weber@example.com",
+      "phone": "+491706789012",
+      "letter": "T",
+      "initialien": "TW"
+    },
+    {
+      "name": "Laura Hoffmann",
+      "email": "laura.hoffmann@example.com",
+      "phone": "+491707890123",
+      "letter": "L",
+      "initialien": "LH"
+    },
+    {
+      "name": "Daniel Schröder",
+      "email": "daniel.schroeder@example.com",
+      "phone": "+491708901234",
+      "letter": "D",
+      "initialien": "DS"
+    },
+    {
+      "name": "Katrin Neumann",
+      "email": "katrin.neumann@example.com",
+      "phone": "+491709012345",
+      "letter": "K",
+      "initialien": "KN"
+    },
+    {
+      "name": "Stefan Braun",
+      "email": "stefan.braun@example.com",
+      "phone": "+491701234678",
+      "letter": "S",
+      "initialien": "SB"
+    },
+    {
+      "name": "Nina Hofmann",
+      "email": "nina.hofmann@example.com",
+      "phone": "+491702345789",
+      "letter": "N",
+      "initialien": "NH"
+    },
+    {
+      "name": "Michael Schäfer",
+      "email": "michael.schaefer@example.com",
+      "phone": "+491703456890",
+      "letter": "M",
+      "initialien": "MS"
+    },
+    {
+      "name": "Katharina Lehmann",
+      "email": "katharina.lehmann@example.com",
+      "phone": "+491704567901",
+      "letter": "K",
+      "initialien": "KL"
+    },
+    {
+      "name": "Tobias Schmid",
+      "email": "tobias.schmid@example.com",
+      "phone": "+491705678912",
+      "letter": "T",
+      "initialien": "TS"
+    },
+    {
+      "name": "Sandra Keller",
+      "email": "sandra.keller@example.com",
+      "phone": "+491706789023",
+      "letter": "S",
+      "initialien": "SK"
+    }
+  ]
+  
 let page = "contacts";
 
+
+
 async function loadAllContacts(path=""){
-    let response = await fetch (BASE_URL_2 + path + ".json");
+    let response = await fetch (BASE_URL_zwei + path + ".json");
     let responsToJason = await response.json();
 
     loadedContacts = [];
@@ -20,7 +130,6 @@ async function loadAllContacts(path=""){
 }
 
 function renderContacts(){
-    console.table(loadedContacts);
     let contentRef = document.getElementById('contacts');
     contentRef.innerHTML = "";
     let currentLetter = "";
@@ -36,7 +145,9 @@ function renderContacts(){
         const groupElement = document.getElementById(`contact-container-${currentLetter}`);
         groupElement.innerHTML += renderCurrentContacts(index, initialien);
         addBackgrounds();
+        
     }
+    addContactButtonAdden();
 }
 
 function addBackgrounds() {
@@ -49,6 +160,11 @@ function addBackgrounds() {
 function getRandomColor() {
     const colors = ['#6A8EAE','#F4A261', '#2A9D8F', '#E76F51', '#264653', '#A2678A','#457B9D', '#D4A373', '#8A817C', '#BC6C25'];
     return colors[Math.floor(Math.random() * colors.length)];
+}
+
+function addContactButtonAdden(){
+    let contentRef = document.getElementById('contacts');
+    contentRef.innerHTML += `<img onclick="OpenAddContactOverlay()" class="add-contact-button" src="../Assets/Property 1=Default.svg" alt="add_contact" >`;
 }
 
 // Open Contact Details
@@ -79,11 +195,6 @@ function closeContactDetailsOverlay(){
 // Add Contact
 
 function OpenAddContactOverlay(){
-    // document.getElementById('content-wrapper-id').classList.add('d-none');
-    // let contentRef = document.getElementById('overlay-wrapper-id');
-    // contentRef.innerHTML = HTMLOpenAddContactOverlay();
-    // contentRef.classList.remove('d-none');
-
     document.getElementById('add-contact-div-overlay-id').classList.remove('d-none');
     document.getElementById('add-contact-div-overlay-id').innerHTML = HTMLOpenAddContactOverlay();
 }
@@ -101,13 +212,49 @@ function openEditContactOverlay(){
     contentRef.classList.remove('d-none');
 }
 
+function closeEditContactOverlay(){
+    let contentRef = document.getElementById('edit-contact-details-overlay-id');
+    contentRef.classList.add('d-none');
+}
+
 
 
 
 // Kontakte hinzufügen
 
 function addNewContact(){
-    let name = document.getElementById('').value;
+    let nameInput = document.getElementById('add-input-name-id').value;
+    let mailInput = document.getElementById('add-input-mail-id').value
+    let phoneInput = document.getElementById('add-input-phone-id').value;
+    let [vorname, nachname] = nameInput.split(" ");
+    let initialien = vorname[0] + (nachname ? nachname[0] : "");
+
+    validateName(nameInput);
+
+  
+
+    let newContact = 
+        {
+            name: nameInput,
+            email: mailInput,
+            phone: phoneInput,
+            letter: vorname[0],
+            initialien: initialien
+        };
+    
+    loadedContacts.push(newContact);
+    renderContacts();
+    closeAddContactOverlay();
+}
+
+function validateName(name){
+    let isValid = true;
+    if (!name.includes(" ") || name.split(" ").length < 2) {
+        isValid = false;
+        console.log(isValid);
+    }else{
+        console.log("Correct");
+    }
 }
 
 function createContact() {
@@ -124,9 +271,7 @@ function createContact() {
     }
 }
 
-function validateContactForm(){
-    
-}
+
 
 
 
@@ -248,10 +393,10 @@ function HTMLOpenAddContactOverlay(){
             </div>
             <div class="lower-half">
                 <div class="input-fields-add">
-                    <input class="input-person" placeholder="Name" type="text">
-                    <input class="input-mail" placeholder="Email" type="email">
-                    <input class="input-phone" placeholder="Phone" type="tel">
-                    <button class="create-button">Create contact<i class="fa-sharp-duotone fa-solid fa-check"></i></button>
+                    <input class="input-person" placeholder="Name" type="text" id="add-input-name-id">
+                    <input class="input-mail" placeholder="Email" type="email" id="add-input-mail-id">
+                    <input class="input-phone" placeholder="Phone" type="tel" id="add-input-phone-id">
+                    <button onclick="addNewContact()" class="create-button">Create contact<i class="fa-sharp-duotone fa-solid fa-check"></i></button>
                 </div>
             </div>
         </div>
