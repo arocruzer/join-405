@@ -51,23 +51,32 @@ function getRandomColor() {
     return colors[Math.floor(Math.random() * colors.length)];
 }
 
+// Open Contact Details
+
 function openContactDetailsOverlay(index){
     console.log(`Kontakt ${index} wurde geklickt!`);
     console.log(loadedContacts[index]);
 
-    document.getElementById('content-wrapper-id').classList.add('d-none');
-    let contentRef = document.getElementById('contact-details-wrapper-id');
-    contentRef.classList.remove('d-none');
-    contentRef.innerHTML = HTMLopenContactDetailsOverlay(index);   
+
+    if (window.innerWidth < 920) {
+        document.getElementById('contacts').classList.add('d-none');
+        let contentRef = document.getElementById('contact-details-wrapper-id');
+        contentRef.classList.remove('contact-detail-hidden');
+        contentRef.innerHTML = HTMLopenContactDetailsOverlay(index);  
+    }else{
+        let contentRef = document.getElementById('contact-details-wrapper-id');
+        contentRef.innerHTML = HTMLopenContactDetailsOverlay(index);  
+    } 
 }
 
 function closeContactDetailsOverlay(){
-    document.getElementById('content-wrapper-id').classList.remove('d-none');
+    document.getElementById('contacts').classList.remove('d-none');
     let contentRef = document.getElementById('contact-details-wrapper-id');
-    contentRef.classList.add('d-none');
+    contentRef.classList.add('contact-detail-hidden');
     contentRef.innerHTML = "";
-    document.getElementById('edit-delete-div-id').classList.add('d-none');
 }
+
+// Add Contact
 
 function OpenAddContactOverlay(){
     // document.getElementById('content-wrapper-id').classList.add('d-none');
@@ -75,28 +84,23 @@ function OpenAddContactOverlay(){
     // contentRef.innerHTML = HTMLOpenAddContactOverlay();
     // contentRef.classList.remove('d-none');
 
-    document.getElementById('add-contact-div-test-id').classList.remove('d-none');
-    document.getElementById('add-contact-div-test-id').innerHTML = HTMLOpenAddContactOverlay();
+    document.getElementById('add-contact-div-overlay-id').classList.remove('d-none');
+    document.getElementById('add-contact-div-overlay-id').innerHTML = HTMLOpenAddContactOverlay();
 }
 
 function closeAddContactOverlay(){
-    document.getElementById('add-contact-div-test-id').classList.add('d-none');
+    document.getElementById('add-contact-div-overlay-id').classList.add('d-none');
 }
 
 
 
 //Edit Contacts
 
-function toggleEditDeleteMenu(){
-    console.log("ausgelöst!");
-    const contentRef = document.getElementById('edit-delete-div-id');
+function openEditContactOverlay(){
+    let contentRef = document.getElementById('edit-contact-details-overlay-id');
     contentRef.classList.remove('d-none');
 }
 
-function openEditContactOverlay(){
-    let contentRef = document.getElementById('contact-details-wrapper-id');
-    contentRef.innerHTML = HTMLOpenEditContactDetailsOverlay();
-}
 
 
 
@@ -124,17 +128,7 @@ function validateContactForm(){
     
 }
 
-function OpenEditContactOverlay(){
-    let contentRef = document.getElementById('contact-details-wrapper-id');
-    contentRef.innerHTML = ``;
-    contentRef.innerHTML = HTMLOpenEditContactOverlay();
-}
 
-function closeEditContactOverlay(){
-    let contentRef = document.getElementById('contact-details-wrapper-id');
-    contentRef.innerHTML = ``;
-    contentRef.innerHTML = HTMLopenContactDetailsOverlay(index);
-}
 
 // Templates
 
@@ -161,32 +155,84 @@ function renderCurrentContacts(index, initialien) {
 }
 
 
+// function HTMLopenContactDetailsOverlay(index){
+//     return`
+//     <div class="contact-details-wrapper">
+//         <div class="contact-detail-title-wrapper">
+//             <div class="page-title">
+//                 <h1>Contacts</h1>
+//                 <p>Better with a team</p>
+//                 <div class="blue-line"></div>
+//             </div>
+//             <img class="arrow-left-contact-details" src="../Assets/arrow-left-line.png" alt="arrow_left" onclick="closeContactDetailsOverlay()">
+//         </div>  
+//         <div class="contact-detail-view">
+//             <div class="contact-avatar-and-name">
+//                 <div class="detail-contact-avatar">${loadedContacts[index].initialien}</div>
+//                 <h2>${loadedContacts[index].name}</h2>
+//             </div>
+//             <p>Contact Information</p>
+//             <h5>Email</h5>
+//             <a href="#">${loadedContacts[index].email}</a>
+//             <h5>Phone</h5>
+//             <a href="#">${loadedContacts[index].phone}</a>
+//         </div>
+//         <img class="three-points-menu" src="../Assets/threePointsMenu.png" onclick="openEditContactOverlay()" alt="threePointsMenu">
+//     </div>
+//     `;  
+// }
+
 function HTMLopenContactDetailsOverlay(index){
     return`
-    <div class="contact-details-wrapper">
-        <div class="contact-detail-title-wrapper">
-            <div class="page-title">
-                <h1>Contacts</h1>
-                <p>Better with a team</p>
-                <div class="blue-line"></div>
+    <div class="contact-details-wrapper" id="contact-details-wrapper-id">
+            <div class="contact-detail-title-wrapper">
+                <div class="page-title">
+                    <h1>Contacts</h1>
+                    <p>Better with a team</p>
+                    <div class="blue-line"></div>
+                </div>
+                <img class="arrow-left-contact-details" src="../Assets/arrow-left-line.png" alt="arrow_left" onclick="closeContactDetailsOverlay()">
+            </div>  
+            <div class="contact-detail-view">
+                <div class="contact-avatar-and-name">
+                    <div class="detail-contact-avatar">${loadedContacts[index].initialien}</div>
+                    <h2>${loadedContacts[index].name}</h2>
+                </div>
+                <p>Contact Information</p>
+                <h5>Email</h5>
+                <a href="#">${loadedContacts[index].email}</a>
+                <h5>Phone</h5>
+                <a href="#">${loadedContacts[index].phone}</a>
             </div>
-            <img class="arrow-left-contact-details" src="../Assets/arrow-left-line.png" alt="arrow_left" onclick="closeContactDetailsOverlay()">
-        </div>  
-        <div class="contact-detail-view">
-            <div class="contact-avatar-and-name">
-                <div class="detail-contact-avatar">${loadedContacts[index].initialien}</div>
-                <h2>${loadedContacts[index].name}</h2>
+            <img class="three-points-menu" src="../Assets/threePointsMenu.png" onclick="openEditContactOverlay()" alt="threePointsMenu">
+        <div class="edit-contact-details-overlay d-none" id="edit-contact-details-overlay-id">
+            <div class="overlay-edit-contact">
+                <div class="middle-avatar">TW</div>
+                <div class="upper-half">
+                    <div class="cross-close" onclick="closeEditContactOverlay()">X</div>
+                    <div class="edit-contact-title">
+                        <h1>Edit contact</h1>
+                        <div class="blue-line"></div>
+                    </div>
+                </div>
+                <div class="lower-half">
+                    <div class="input-fields">
+                        <input class="input-person" placeholder="Name" type="text">
+                        <input class="input-mail" placeholder="Email" type="email">
+                        <input class="input-phone" placeholder="Phone" type="tel">
+                    </div>
+                    <div class="delete-safe-buttons">
+                        <button class="delete-button">Delete</button>
+                        <button class="save-button">Save<i class="fa-sharp-duotone fa-solid fa-check save-padding"></i></button>
+                    </div>
+                </div>
             </div>
-            <p>Contact Information</p>
-            <h5>Email</h5>
-            <a href="#">${loadedContacts[index].email}</a>
-            <h5>Phone</h5>
-            <a href="#">${loadedContacts[index].phone}</a>
         </div>
-        <img class="three-points-menu" src="../Assets/threePointsMenu.png" onclick="OpenEditContactOverlay()" alt="threePointsMenu">
     </div>
     `;
 }
+
+
 
 function HTMLOpenAddContactOverlay(){
     return`

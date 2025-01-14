@@ -3,49 +3,6 @@
   font-family: inter;
 }
 
-body {
-  display: flex;
-  flex-direction: column;
-  cursor: pointer;
-}
-
-a {
-  text-decoration: none;
-}
-
-#main-container {
-  margin: 0 auto;
-  width: 100%;
-}
-
-#main-content {
-  width: calc(100vw - 234px);
-  max-width: calc(1440px - 234px);
-  display: flex;
-}
-
-#frame {
-  display: unset;
-  background-color: #F6F7F8;
-  width: 100%;
-  max-width: 1440px;
-  /*padding: 67px 122px;*/
-  justify-content: space-between;
-}
-h1 {
-  font-weight: 700;
-  font-size: 61px;
-}
-
-h3 {
-  font-size: 20px;
-  font-weight: 400;
-}
-h4 {
-  font-size: 16px;
-  color: #a8a8a8;
-  font-weight: 400;
-}
 header {
   height: 80px;
   width: auto;
