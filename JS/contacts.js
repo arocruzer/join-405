@@ -20,6 +20,7 @@ async function loadAllContacts(path=""){
         loadedContacts.push(user);   
     });
     renderContacts(loadedContacts);
+    includeHTML();
 }
 
 function renderContacts(){
@@ -262,7 +263,6 @@ function renderContactDetailPage(){
 
 function HTMLopenContactDetailsOverlay(index){
     return`
-
             <div class="contact-detail-title-wrapper">
                 <div class="page-title">
                     <h1>Contacts</h1>
@@ -306,7 +306,6 @@ function HTMLopenContactDetailsOverlay(index){
                 </div>
             </div>
         </div>
-
     `;
 }
 

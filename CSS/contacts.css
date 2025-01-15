@@ -8,11 +8,6 @@
   overflow: hidden;
 }
 
-.contacts-list-wrapper {
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
-
 .contacts-list {
   position: relative;
   display: flex;
@@ -29,6 +24,7 @@
   padding-bottom: 24px;
   overflow-y: auto;
   overflow-x: hidden;
+  
 }
 
 .contacts-section-header {
@@ -237,8 +233,6 @@
   align-items: flex-start;
   justify-content: center;
   z-index: 200;
-
-
 }
 
 .edit-delete-flex-div{
@@ -497,7 +491,7 @@
 
 /* Responsive */
 
-@media screen and (min-width: 920px) {
+@media screen and (min-width: 1050px) {
   .contact-detail-hidden {
       display: block;
   }

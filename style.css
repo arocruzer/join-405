@@ -32,6 +32,8 @@ a {
 /*   max-width: 1440px;  Mihael */
   /* padding: 67px 122px;  von Mihael auskommentieret*/
   justify-content: space-between;
+  overflow-y: hidden; /*von Martin */
+  height: 100vh; /*von Martin */
 }
 h1 {
   font-weight: 700;
