@@ -6,7 +6,7 @@
 body {
   display: flex;
   flex-direction: column;
-/*   cursor: pointer; */
+  /*   cursor: pointer; */
 }
 
 a {
@@ -27,22 +27,26 @@ a {
 
 #frame {
   display: unset;
-  background-color: #F6F7F8;
+  background-color: #f6f7f8;
   width: 100%;
-/*   max-width: 1440px;  Mihael */
+  /*   max-width: 1440px;  Mihael */
   /* padding: 67px 122px;  von Mihael auskommentieret*/
   justify-content: space-between;
   overflow-y: hidden; /*von Martin */
   height: 100vh; /*von Martin */
 }
 h1 {
-  font-weight: 700;
+  font-family: Inter;
   font-size: 61px;
+  font-weight: 700;
+  line-height: 73.2px;
 }
 
 h3 {
-  font-size: 20px;
+  font-size: 21px;
   font-weight: 400;
+  line-height: 24px;
+  text-align: center;
 }
 header {
   height: 80px;
@@ -68,7 +72,7 @@ button {
   height: 40px;
   width: 40px;
   border-radius: 100%;
-  border: solid 3px #2A3647;
+  border: solid 3px #2a3647;
 }
 
 .user-button:hover {
@@ -76,27 +80,13 @@ button {
 }
 
 .hero {
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-left: 96px;
+  padding-top: 110px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   flex-direction: column;
   gap: 20px;
-}
-
-h1 {
-  font-weight: 700;
-  font-size: 47px;
-}
-
-h2 {
-  font-size: 16px;
-  font-weight: 800;
-  line-height: 19.2px;
-  text-align: left;
-  text-underline-position: from-font;
-  text-decoration-skip-ink: none;
 }
 
 h5 {
@@ -206,32 +196,31 @@ input:focus {
   margin: 5px;
   text-transform: uppercase;
 }
-.initials-circle-logo h3{
+.initials-circle-logo h3 {
   font-size: 20px;
   font-weight: 600;
 }
 
-@media (max-width: 680px){
-  h1{
+@media (max-width: 680px) {
+  h1 {
     font-size: 47px;
   }
 }
 
-@media (max-width: 500px){
+@media (max-width: 500px) {
   .input-box {
     width: calc(100% - 32px);
   }
-  .input-box input{
+  .input-box input {
     width: 100%;
   }
 }
 
-@media (max-width: 340px){
-  h1{
+@media (max-width: 340px) {
+  h1 {
     font-size: 32px;
   }
 }
-
 
 .grid-container {
   display: grid;

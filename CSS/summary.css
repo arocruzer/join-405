@@ -7,23 +7,11 @@
   color: white;
   border-radius: 16px;
 }
-.hero {
-  padding-left: 96px;
-  padding-top: 110px;
-}
 
-h2 {
+.title-summary h2 {
   font-size: 27px;
   font-family: Inter;
-  font-size: 27px;
   font-weight: 400;
-  line-height: 50px;
-  text-align: left;
-  text-underline-position: from-font;
-  text-decoration-skip-ink: none;
-}
-h1{
-  font-size: 64px;
 }
 hr {
   border: 3px solid #29abe2;
@@ -66,12 +54,6 @@ hr {
   align-items: center;
   gap: 18px;
   border-radius: 30px;
-}
-h3{
-font-size: 21px;
-font-weight: 400;
-line-height: 24px;
-text-align: center;
 }
 h4{
 font-size: 64px;
@@ -130,9 +112,6 @@ font-weight: 700;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-.task-status{
-  display: flex;
   flex-direction: column;
 }
 .regards{
@@ -148,28 +127,6 @@ color: #29abe2;
 .regards h2{
 font-size: 47px;
 font-weight: 500;
-}
-
-
-.name-and-img {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 16px;
-}
-
-.initials-circle-logo {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  color: #29abe2;
-  font-weight: bold;
-  font-size: 16px;
-  margin: 5px;
-  text-transform: uppercase;
 }
 
 .info-container:hover{
