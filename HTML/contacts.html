@@ -16,8 +16,9 @@
     <link rel="stylesheet" href="../CSS/nav-bar.css">
 
     <script src="../JS/contacts.js"></script>
-    <!-- <script src="../script.js"></script> -->
-    <!-- <script src="../JS/nav-bar.js"></script> -->
+    <script src="../script.js"></script>
+    <script src="../JS/nav-bar.js"></script>
+    <script src="../JS/template.js"></script>
 
 
     <title>Join</title>
@@ -26,67 +27,28 @@
 
 
 <body onload="loadAllContacts()">
-<!-- Header -->
-
-        <!-- <div id="header" w3-include-html="../HTML/header.html"></div> -->
-
-<!-- Main Content  -->
-
-        <div class="content-wrapper" id="content-wrapper-id">
+    <div id="frame">
+        <div id="header" w3-include-html="../HTML/header.html"></div>
+        <div class="content-wrapper" id="content-wrapper-id">            
             <div class="contacts-list" id="contacts">
                 <img onclick="OpenAddContactOverlay()" class="add-contact-button" src="../Assets/Property 1=Default.svg" alt="add_contact" >
             </div>
-
             <div class="add-contact-div-overlay d-none" id="add-contact-div-overlay-id"></div>
-
-<!-- Contact Details  -->
-
             <div class="contact-details-wrapper contact-detail-hidden" id="contact-details-wrapper-id">
-                    <div class="contact-detail-title-wrapper">
-                        <div class="page-title">
-                            <h1>Contacts</h1>
-                            <p>Better with a team</p>
-                            <div class="blue-line"></div>
-                        </div>
-                        <img class="arrow-left-contact-details" src="../Assets/arrow-left-line.svg" alt="arrow_left" onclick="closeContactDetailsOverlay()">
-                    </div>  
-                <div class="edit-contact-details-overlay d-none" id="edit-contact-details-overlay-id">
-                    <div class="overlay-edit-contact">
-                        <div class="middle-avatar">TW</div>
-                        <div class="upper-half">
-                            <div class="cross-close" onclick="closeEditContactOverlay()">X</div>
-                            <div class="edit-contact-title">
-                                <h1>Edit contact</h1>
-                                <div class="blue-line"></div>
-                            </div>
-                        </div>
-                        <div class="lower-half">
-                            <div class="input-fields">
-                                <input class="input-person" placeholder="Name" type="text" id="edit-input-name-id">
-                                <input class="input-mail" placeholder="Email" type="email" id="edit-input-mail-id">
-                                <input class="input-phone" placeholder="Phone" type="tel" id="edit-input-phone-id">
-                            </div>
-                            <div class="delete-safe-buttons">
-                                <button class="delete-button">Delete</button>
-                                <button class="save-button">Save<i class="fa-sharp-duotone fa-solid fa-check save-padding"></i></button>
-                            </div>
-                        </div>
+                <!-- <div class="contact-detail-title-wrapper">
+                    <div class="page-title">
+                        <h1>Contacts</h1>
+                        <p>Better with a team</p>
+                        <div class="blue-line"></div>
                     </div>
-                </div>
+                    <img class="arrow-left-contact-details" src="../Assets/left-arrow-blue.svg" alt="arrow_left" onclick="closeContactDetailsOverlay()">
+                </div>  
+                <div class="edit-contact-details-overlay d-none" id="edit-contact-details-overlay-id">
+                </div> -->
             </div>
             
-
-            <!-- Nav Bar -->
-
-            <!-- <div id="nav-bar" w3-include-html="../HTML/nav-bar.html"></div> -->
-
-
-
-
         </div>
-
-        
-
-    
+        <div id="nav-bar" w3-include-html="../HTML/nav-bar.html"></div>
+    </div>
   </body>
 </html>
