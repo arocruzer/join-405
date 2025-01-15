@@ -19,7 +19,7 @@ button {
   height: 78px;
   width: 64px;
 }
-.hero{
+.hero {
   align-items: center !important;
   padding: 0 !important;
 }
@@ -97,7 +97,7 @@ a {
   flex-direction: row;
   gap: 8px;
 }
-.checkbox-container h4{
+.checkbox-container h4 {
   font-size: 16px;
   color: #a8a8a8;
   font-weight: 400;
@@ -127,15 +127,15 @@ form {
   padding-left: 12px;
 }
 
-@media (max-width: 680px){
-  header{
+@media (max-width: 680px) {
+  header {
     padding: 38px 37px !important;
   }
-  .login-logo{
+  .login-logo {
     height: 78px !important;
     width: 64px !important;
   }
-  .signup-window{
+  .signup-window {
     width: calc(100% - 32px);
   }
 }

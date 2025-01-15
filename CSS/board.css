@@ -29,10 +29,6 @@ body {
   align-items: center;
   padding-bottom: 16px;
 }
-h1 {
-  font-size: 24px;
-  font-weight: bold;
-}
 .add-task-board {
   background: #2a3647;
   color: white;
@@ -88,7 +84,7 @@ h1 {
 }
 
 .column {
- padding: 10px;
+  padding: 10px;
 }
 
 .column-header {
@@ -164,7 +160,7 @@ h1 {
   margin-bottom: 4px;
   font-weight: bold;
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* Maximal zwei Zeilen */
+/*   -webkit-line-clamp: 2;  *//* Maximal zwei Zeilen */
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis; /* Mit "..." abschneiden */
@@ -176,7 +172,7 @@ h1 {
   color: #666;
   margin-bottom: 16px;
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* Maximal zwei Zeilen */
+/*   -webkit-line-clamp: 2; */ /* Maximal zwei Zeilen */
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis; /* Mit "..." abschneiden */
@@ -302,7 +298,7 @@ h1 {
   max-width: 600px;
   width: 100%;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   animation: fadeInRight 0.5s ease-out;
   overflow-y: auto;
   position: relative;
@@ -310,42 +306,41 @@ h1 {
   top: 50%;
   left: 50%;
 }
-.section-board{
+.section-board {
   display: flex;
-    gap: 30px;
+  gap: 30px;
 }
 .add-task-board-plus {
-    text-overflow: ellipsis;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    height: 48px;
-    font-weight: 700;
-    font-size: 21px;
-    border-radius: 8px;
-    color: #ffffff;
-    background-color: #2a3647;
-    padding: 0px 24px;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 48px;
+  font-weight: 700;
+  font-size: 21px;
+  border-radius: 8px;
+  color: #ffffff;
+  background-color: #2a3647;
+  padding: 0px 24px;
 }
-
 
 /* Modal Animation */
 @keyframes fadeInRight {
   from {
-      opacity: 0;
-      transform: translate(0, -50%); /* Startet etwas höher als die Mitte */
+    opacity: 0;
+    transform: translate(0, -50%); /* Startet etwas höher als die Mitte */
   }
   to {
-      opacity: 1;
-      transform: translate(-50%, -50%); /* Perfekt zentriert */
+    opacity: 1;
+    transform: translate(-50%, -50%); /* Perfekt zentriert */
   }
 }
 
 /* Kategorie Label */
 .modal-category {
-  background-color: #0038FF;
+  background-color: #0038ff;
   color: white;
   padding: 10px 20px;
   border-radius: 20px;
@@ -371,7 +366,8 @@ h1 {
 }
 
 /* Due Date und Priority */
-#modalDueDate, #modalPriority {
+#modalDueDate,
+#modalPriority {
   font-size: 16px;
   font-weight: 500;
   margin-bottom: 12px;
@@ -390,7 +386,7 @@ h1 {
 }
 
 #modalSubtasks li::before {
-  content: '✔️';
+  content: "✔️";
   color: #28a745;
   font-size: 18px;
 }
@@ -406,8 +402,8 @@ h1 {
 /* Einzelner Benutzer (Avatar + Name) */
 .user-item {
   display: flex;
-  align-items: center;  /* Horizontale Ausrichtung */
-  gap: 12px;  /* Abstand zwischen Avatar und Name */
+  align-items: center; /* Horizontale Ausrichtung */
+  gap: 12px; /* Abstand zwischen Avatar und Name */
 }
 
 /* Avatar-Stil */
@@ -422,7 +418,7 @@ h1 {
   font-weight: bold;
   color: white;
   border: 2px solid white;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   text-transform: uppercase;
 }
 
@@ -431,7 +427,7 @@ h1 {
   font-size: 16px;
   font-weight: 500;
   color: #333;
-  white-space: nowrap;  /* Verhindert Zeilenumbrüche */
+  white-space: nowrap; /* Verhindert Zeilenumbrüche */
 }
 
 /* Modal Footer */
@@ -442,7 +438,8 @@ h1 {
   margin-top: 24px;
 }
 
-.delete-button, .edit-button {
+.delete-button,
+.edit-button {
   border: none;
   padding: 12px 24px;
   border-radius: 10px;
@@ -455,7 +452,7 @@ h1 {
 }
 
 .delete-button {
-  background-color: #FF4D4D;
+  background-color: #ff4d4d;
   color: white;
 }
 
@@ -464,7 +461,7 @@ h1 {
 }
 
 .edit-button {
-  background-color: #007BFF;
+  background-color: #007bff;
   color: white;
 }
 
@@ -481,33 +478,31 @@ h1 {
   cursor: pointer;
   color: #333;
 }
-#modalSubtasks{
+#modalSubtasks {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-
-@media screen and (min-width: 768px){
-  h2{
+@media screen and (min-width: 768px) {
+  h2 {
     font-size: 12px;
   }
-  .board{
+  .board {
     display: flex;
     flex-direction: row;
     gap: 12px;
   }
-  .task-container{
+  .task-container {
     display: flex;
     flex-direction: column;
   }
-  .user-story-card{
+  .user-story-card {
     width: 200px;
   }
   .header-board {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-}
-
+  }
 }

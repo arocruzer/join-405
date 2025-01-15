@@ -18,7 +18,7 @@ hr {
   height: 59px;
   border-radius: 20px;
 }
-.title-info{
+.title-info {
   display: flex;
   flex-direction: column;
   gap: 56px;
@@ -29,7 +29,7 @@ hr {
   align-items: center;
   gap: 30px;
 }
-.info{
+.info {
   display: flex;
   flex-direction: column;
   gap: 28px;
@@ -55,13 +55,13 @@ hr {
   gap: 18px;
   border-radius: 30px;
 }
-span{
+span {
   font-size: 47px;
 }
 .status {
   text-align: center;
 }
-.task-date-info{
+.task-date-info {
   height: 168px;
   width: 560px;
   background-color: #ffffff;
@@ -70,37 +70,37 @@ span{
   justify-content: center;
   align-items: center;
 }
-.prio{
+.prio {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 18px;
 }
-.task-info{
+.task-info {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 61px;
 }
-.date{
+.date {
   display: flex;
   flex-direction: column;
   gap: 13px;
 }
-.date p{
-font-size: 16px;
-font-weight: 400;
+.date p {
+  font-size: 16px;
+  font-weight: 400;
 }
-.date h5{
-font-size: 21px;
-font-weight: 700;
+.date h5 {
+  font-size: 21px;
+  font-weight: 700;
 }
-.tasks-status-container{
+.tasks-status-container {
   display: flex;
   flex-direction: row;
   gap: 28px;
 }
-.task-status{
+.task-status {
   height: 168px;
   width: 168px;
   background-color: #ffffff;
@@ -110,65 +110,65 @@ font-weight: 700;
   align-items: center;
   flex-direction: column;
 }
-.regards{
+.regards {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-.regards h1{
-font-size: 64px;
-font-weight: 700;
-color: #29abe2;
+.regards h1 {
+  font-size: 64px;
+  font-weight: 700;
+  color: #29abe2;
 }
-.regards h2{
-font-size: 47px;
-font-weight: 500;
+.regards h2 {
+  font-size: 47px;
+  font-weight: 500;
 }
 
-.info-container:hover{
-  background-color: #2A3647;
+.info-container:hover {
+  background-color: #2a3647;
   color: white;
 }
-.task-date-info:hover{
-  background-color: #2A3647;
+.task-date-info:hover {
+  background-color: #2a3647;
   color: white;
 }
-.task-status:hover{
-  background-color: #2A3647;
+.task-status:hover {
+  background-color: #2a3647;
   color: white;
 }
-.hover-pen-img{
+.hover-pen-img {
   display: none;
 }
-.info-container:hover .pen-img{
+.info-container:hover .pen-img {
   display: none;
 }
-.info-container:hover .hover-pen-img{
+.info-container:hover .hover-pen-img {
   display: block;
 }
-.done-img-hover{
+.done-img-hover {
   display: none;
 }
-.info-container:hover .done-img{
+.info-container:hover .done-img {
   display: none;
 }
-.info-container:hover .done-img-hover{
+.info-container:hover .done-img-hover {
   display: block;
 }
-.title-underline{
+.title-underline {
   display: none;
 }
-.header{
+.header {
   display: none;
 }
 @media (max-width: 1190px) {
-  .regards{
+  .regards {
     display: none;
   }
-  .main-content{
+  .main-content {
     align-items: center;
   }
-  .hero{
+  .hero {
     padding-left: 10px;
   }
 }
@@ -176,44 +176,44 @@ font-weight: 500;
   #summary-button {
     border-radius: unset;
   }
-  .hero{
+  .hero {
     padding-top: 110px;
     height: calc(100vh - 160px);
     justify-content: flex-start;
   }
 }
-@media (max-width: 600px){
-  .info-container{
+@media (max-width: 600px) {
+  .info-container {
     width: 186px;
     height: 110px;
   }
-  .task-date-info{
+  .task-date-info {
     height: 110px;
     width: 396px;
   }
-  .task-status{
+  .task-status {
     height: 116px;
     width: 116px;
   }
-  h1{
+  h1 {
     font-size: 47px;
   }
-  h4{
+  h4 {
     font-size: 47px;
   }
-  h3{
+  h3 {
     font-size: 16px;
   }
-  .title-summary{
+  .title-summary {
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
     text-align: left;
   }
-  hr{
+  hr {
     display: none;
   }
-  .title-underline{
+  .title-underline {
     display: block;
     height: 0;
     width: 90px;
@@ -221,21 +221,21 @@ font-weight: 500;
   }
 }
 
-@media (max-width: 440px){
-  .info{
+@media (max-width: 440px) {
+  .info {
     justify-content: center;
     align-items: center;
   }
-  .info-todo{
+  .info-todo {
     flex-direction: column;
   }
-  .task-date-info{
+  .task-date-info {
     width: 100%;
   }
-  .task-info{
+  .task-info {
     gap: 30px;
   }
-  .tasks-status-container{
+  .tasks-status-container {
     flex-direction: column;
   }
 }

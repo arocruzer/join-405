@@ -24,7 +24,6 @@
   padding-bottom: 24px;
   overflow-y: auto;
   overflow-x: hidden;
-  
 }
 
 .contacts-section-header {
@@ -90,10 +89,10 @@
   color: #007cee;
 }
 
-.add-contact-button{
-    position: fixed;
-    top: calc(100vh - 15vh);
-    left: 275px;
+.add-contact-button {
+  position: fixed;
+  top: calc(100vh - 15vh);
+  left: 275px;
 }
 
 .add-contact-button:hover {
@@ -104,20 +103,19 @@
 
 /* Contact Detail */
 
-.contact-details-wrapper{
+.contact-details-wrapper {
   position: sticky;
   height: 100vh;
   overflow: hidden;
   margin-top: 4px;
   padding: 32px 16px;
-  background-color: #F6F7F8;
+  background-color: #f6f7f8;
   width: 100%;
   flex: 1;
   /* max-height: 926px; */
-    
 }
 
-.contact-detail-hidden{
+.contact-detail-hidden {
   display: none;
 }
 
@@ -206,20 +204,20 @@
   color: #000000;
 }
 
-.contact-detail-view a{
+.contact-detail-view a {
   font-size: 16px;
   font-weight: 400;
   line-height: 19.2px;
-  color: #007CEE;
+  color: #007cee;
 }
 
-.three-points-menu{
+.three-points-menu {
   position: fixed;
   top: 70%;
   left: 80%;
 }
 
-.edit-delete-div{
+.edit-delete-div {
   border: #000000 solid 1px;
   border-radius: 20px 20px 0 20px;
   height: 110px;
@@ -235,7 +233,7 @@
   z-index: 200;
 }
 
-.edit-delete-flex-div{
+.edit-delete-flex-div {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -244,8 +242,8 @@
   padding: 8px;
 }
 
-.d-none{
-    display: none !important;
+.d-none {
+  display: none !important;
 }
 
 /* EditContact AddContact Overlay */
@@ -258,8 +256,8 @@
   height: 100vh;
 }
 
-.add-contact-div-overlay{
-  position: fixed; 
+.add-contact-div-overlay {
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -272,7 +270,7 @@
 }
 
 .edit-contact-details-overlay {
-  position: fixed; 
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -284,7 +282,7 @@
   z-index: 1000;
 }
 
-.overlay-edit-contact{
+.overlay-edit-contact {
   width: 396px;
   height: 760px;
   border-radius: 15px;
@@ -472,7 +470,7 @@
 
 /* AddContact */
 
-.create-contact-button{
+.create-contact-button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -481,24 +479,20 @@
   border-radius: 10px;
   border: 1px solid grey;
   padding: 18px 10px;
-  color: #FFFFFF;
-  background-color: #2A3647;
+  color: #ffffff;
+  background-color: #2a3647;
   font-size: 21px;
   font-weight: 700;
 }
-
-
 
 /* Responsive */
 
 @media screen and (min-width: 1050px) {
   .contact-detail-hidden {
-      display: block;
+    display: block;
   }
   .contacts-list {
     max-width: 350px;
-
-
   }
 
   .contacts-container {
@@ -510,6 +504,5 @@
     width: calc(100vh - 350px);
     height: 100vh;
     flex: 1;
-    
   }
 }
