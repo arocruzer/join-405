@@ -10,7 +10,7 @@ function logIn() {
   emailError.innerHTML = "";
   passwordError.innerHTML = "";
 
-  let user = users.find((u) => u.email === email.value);
+  let user = loadedContacts.find((u) => u.email === email.value);
 
   if (user) {
       if (user.password === password.value) {

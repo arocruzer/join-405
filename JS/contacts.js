@@ -1,30 +1,8 @@
-const BASE_URL_zwei = "https://join-405-43178-default-rtdb.europe-west1.firebasedatabase.app/";
-
-let contacts = [];
-let loadedContacts = [];
-
 let page = "contacts";
 
-
-
-async function loadAllContacts(path=""){
-    let response = await fetch (BASE_URL_zwei + path + ".json");
-    let responsToJason = await response.json();
-
-    loadedContacts = [];
-    const usersArray = (Object.values(responsToJason.users));
-    usersArray.forEach((x) => {
-        let [vorname, nachname] = x.name.split(" ");
-        let initialien = vorname[0] + (nachname ? nachname[0] : "");
-        const user = {name: x.name, email: x.email, phone: x.phone, letter: x.name.trim().charAt(0), initialien: initialien};
-        loadedContacts.push(user);   
-    });
-    renderContacts(loadedContacts);
-    includeHTML();
-}
-
-function renderContacts(){
+ function renderContacts(){
     let contentRef = document.getElementById('contacts');
+    if (contentRef) {
     contentRef.innerHTML = "";
     let currentLetter = "";
     loadedContacts.sort((a, b) => a.name.localeCompare(b.name));
@@ -43,6 +21,7 @@ function renderContacts(){
     }
     addContactButtonAdden();
     renderContactDetailPage();
+}
 }
 
 function addBackgrounds() {
@@ -209,157 +188,4 @@ function deleteContact(index){
     // renderContactDetailPage();
     closeEditContactOverlay();
     closeContactDetailsOverlay();
-}
-
-
-
-
-
-
-
-
-
-
-
-// Templates
-
-function renderCurrentLetter(currentLetter){
-    return `
-    <div class="contacts-section-header">
-        <h3>${currentLetter}</h3>
-        <div class="seperation-line"></div>
-    </div>
-    <div class="contacts-container" id="contact-container-${currentLetter}">    
-    </div>`;
-}
-
-function renderCurrentContacts(index, initialien) {
-    return `
-        <div class="contact" id="contact-id-${index}" onclick="openContactDetailsOverlay(${index})">
-            <div class="contact-avatar">${initialien}</div>
-            <div class="contact-avatar-infos">
-                <span>${loadedContacts[index].name}</span>
-                <a href="mailto:${loadedContacts[index].email}">${loadedContacts[index].email}</a>
-            </div>
-        </div>
-    `;
-}
-
-function renderContactDetailPage(){
-    let contentRef = document.getElementById('contact-details-wrapper-id');
-    contentRef.innerHTML = ``;
-    contentRef.innerHTML = `
-    <div class="contact-detail-title-wrapper">
-                    <div class="page-title">
-                        <h1>Contacts</h1>
-                        <p>Better with a team</p>
-                        <div class="blue-line"></div>
-                    </div>
-                </div>  
-                <div class="edit-contact-details-overlay d-none" id="edit-contact-details-overlay-id">
-                </div>
-    `;
-}
-
-function HTMLopenContactDetailsOverlay(index){
-    return`
-            <div class="contact-detail-title-wrapper">
-                <div class="page-title">
-                    <h1>Contacts</h1>
-                    <p>Better with a team</p>
-                    <div class="blue-line"></div>
-                </div>
-                <img class="arrow-left-contact-details" src="../Assets/left-arrow-blue.svg" alt="arrow_left" onclick="closeContactDetailsOverlay()">
-            </div>  
-            <div class="contact-detail-view">
-                <div class="contact-avatar-and-name">
-                    <div class="detail-contact-avatar">${loadedContacts[index].initialien}</div>
-                    <h2>${loadedContacts[index].name}</h2>
-                </div>
-                <p>Contact Information</p>
-                <h5>Email</h5>
-                <a href="#">${loadedContacts[index].email}</a>
-                <h5>Phone</h5>
-                <a href="#">${loadedContacts[index].phone}</a>
-            </div>
-            <img class="three-points-menu" src="../Assets/threePointsMenu.png" onclick="openEditContactOverlay()" alt="threePointsMenu">
-        <div class="edit-contact-details-overlay d-none" id="edit-contact-details-overlay-id">
-            <div class="overlay-edit-contact">
-                <div class="middle-avatar">TW</div>
-                <div class="upper-half">
-                    <div class="cross-close" onclick="closeEditContactOverlay()">X</div>
-                    <div class="edit-contact-title">
-                        <h1>Edit contact</h1>
-                        <div class="blue-line"></div>
-                    </div>
-                </div>
-                <div class="lower-half">
-                    <div class="input-fields">
-                        <input class="input-person" value="${loadedContacts[index].name}" placeholder="Name" type="text" id="edit-input-name-id">
-                        <input class="input-mail" value="${loadedContacts[index].email}" placeholder="Email" type="email" id="edit-input-mail-id">
-                        <input class="input-phone" value="${loadedContacts[index].phone}" placeholder="Phone" type="tel" id="edit-input-phone-id">
-                    </div>
-                    <div class="delete-safe-buttons">
-                        <button onclick="deleteContact(${index})" class="delete-button">Delete</button>
-                        <button onclick="editContact(${index})" class="save-button">Save<i class="fa-sharp-duotone fa-solid fa-check save-padding"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
-}
-
-
-
-function HTMLOpenAddContactOverlay(){
-    return`
-    <div class="overlay-edit-contact">
-        <div class="middle-avatar">TW</div>
-            <div class="upper-half">
-                <div class="cross-close" onclick="closeAddContactOverlay()">X</div>
-                <div class="edit-contact-title">
-                    <h1>Add contact</h1>
-                    <h6>Tasks are better with a team!</h6>
-                    <div class="blue-line"></div>
-                </div>
-            </div>
-            <div class="lower-half">
-                <div class="input-fields-add">
-                    <input class="input-person" placeholder="Name" type="text" id="add-input-name-id">
-                    <input class="input-mail" placeholder="Email" type="email" id="add-input-mail-id">
-                    <input class="input-phone" placeholder="Phone" type="tel" id="add-input-phone-id">
-                    <button onclick="addNewContact()" class="create-button">Create contact<i class="fa-sharp-duotone fa-solid fa-check"></i></button>
-                </div>
-            </div>
-        </div>
-    </div>
-    `;
-}
-
-function HTMLOpenEditContactOverlay(){
-    return`
-    <div class="overlay-edit-contact">
-            <div class="middle-avatar">TW</div>
-
-            <div class="upper-half">
-                <div class="cross-close" onclick="closeEditContactOverlay()">X</div>
-                <div class="edit-contact-title">
-                    <h1>Edit contact</h1>
-                    <div class="blue-line"></div>
-                </div>
-            </div>
-    
-            <div class="lower-half">
-                <div class="input-fields">
-                    <input class="input-person" placeholder="Name" type="text">
-                    <input class="input-mail" placeholder="Email" type="email">
-                    <input class="input-phone" placeholder="Phone" type="tel">
-                </div>
-                <div class="delete-safe-buttons">
-                    <button class="delete-button">Delete</button>
-                    <button class="save-button">Save<i class="fa-sharp-duotone fa-solid fa-check save-padding"></i></button>
-                </div>
-            </div>
-        </div>
-    `;
 }

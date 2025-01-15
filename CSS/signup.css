@@ -19,7 +19,10 @@ button {
   height: 78px;
   width: 64px;
 }
-
+.hero{
+  align-items: center !important;
+  padding: 0 !important;
+}
 .signup-window {
   height: 630px;
   width: 598px;

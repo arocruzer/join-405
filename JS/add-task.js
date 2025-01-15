@@ -10,7 +10,7 @@ let subtaskList = [];
 let selectedUsers = [];
 let selectedPriority = '';
 let state = 1;
-let page = "add-task";
+/* let page = "add-task"; */
 let selectedCategory = "";
 const categorySelect = document.getElementById('categorySelect');
 const selectedCategoryElement = document.getElementById('selected-category');
@@ -50,23 +50,25 @@ function openDropDownMenuCategory() {
             break;
     }
 }
-
+function getInitials() {
+    
+}
 function addUserToTask() {
     concatList.innerHTML = ""; 
 
-    users.forEach((user, index) => {
+    loadedContacts.forEach((user, index) => {
         let isChecked = selectedUsers.includes(user) ? "checked" : "";
 
-        let initials = getInitials(user.name);
+        let initials = user.initialien;
 
-        let color = user.color
+        let color = user.color;
 
         concatList.innerHTML += renderAddToTaskContacts(color, initials, user, index, isChecked);
     });
 }
 
 function checkBoxUserTask(index) {
-    const user = users[index];
+    const user = loadedContacts[index];
     const checkbox = document.querySelectorAll('.contact input[type="checkbox"]')[index];
 
     if (checkbox.checked) {
@@ -85,7 +87,7 @@ function addedUsers() {
   addedUsers.innerHTML = "";
 
   selectedUsers.forEach((user) => {
-      let initials = getInitials(user.name);
+      let initials = user.initialien;
 
       let color = user.color;  
 

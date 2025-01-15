@@ -1,5 +1,5 @@
-const BASE_URL = "https://join-405-43178-default-rtdb.europe-west1.firebasedatabase.app/users";
-let users = [];
+const BASE_URL = "https://join-405-43178-default-rtdb.europe-west1.firebasedatabase.app/";
+let loadedContacts = [];
 let email = document.getElementById("email");
 let password = document.getElementById("password");
 let userName = document.getElementById("name");
@@ -13,24 +13,28 @@ let colors = ["#007bff", "#ffa500", "#800080", "#d8bfd8", "#ff69b4", "#28a745", 
 
 async function init() {
   await includeHTML();
-  loadData();
   welcomeAnimation();
   time();
+  await loadAllContacts();
   getUserLogo();
 }
 
-function loadScript(scriptUrl) {
-  const script = document.createElement("script");
-  script.src = scriptUrl; // URL der JavaScript-Datei
-  document.body.appendChild(script);
-}
+async function loadAllContacts(path=""){
+  let response = await fetch (BASE_URL + path + ".json");
+  let responsToJason = await response.json();
 
-async function loadData() {
-  let response = await fetch(BASE_URL + ".json");
-  let data = await response.json();
-  users = Object.values(data);
+  loadedContacts = [];
+  const usersArray = (Object.values(responsToJason.users));
+  usersArray.forEach((x) => {
+      let [vorname, nachname] = x.name.split(" ");
+      let initialien = vorname[0] + (nachname ? nachname[0] : "");
+      const user = {color: x.color, name: x.name, email: x.email, password: x.password, phone: x.phone, letter: x.name.trim().charAt(0), initialien: initialien};
+      loadedContacts.push(user);   
+  });
+  if (typeof renderContacts === "function") {
+    renderContacts(contacts);
+} 
 }
-
 function changePasswordImg() {
   if (password && password.value) {
     showPasswordImg.src = "../Assets/visibility_off.png";
@@ -92,23 +96,16 @@ async function loadContent(page) {
     element.innerHTML = 'Page not found';
   }
 }
-function getInitials(name) {
-  return name
-      .split(' ')                
-      .map(word => word[0])      
-      .join('')                  
-      .toUpperCase();            
-}
-
 function guestLogin() {
   let guestUser = {
       name: "Guest",
       email: null,
       color: "#95a5a6",
+      initialien: "G",
   };
   localStorage.setItem("loggedInUser", JSON.stringify(guestUser));
   window.location.href = "../HTML/summary.html";
-  getUserLogo()
+  getUserLogo();
 }
 
 function time() {
@@ -153,9 +150,10 @@ function getUserLogo() {
     return;
   }
 
-  let initials = getInitials(user.name);
-  let color = user.color || "#3498db";
-  if (userLogo) {
-    userLogo.innerHTML = renderUserLogo(initials, color, user);
-  }
+    let initials = user.initialien;
+    let color = user.color || "#3498db";
+
+    if (userLogo) {
+      userLogo.innerHTML = renderUserLogo(initials, color, user);
+    };
 }
