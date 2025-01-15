@@ -2,7 +2,6 @@
 
 .content-wrapper {
   position: relative;
-  top: 80px;
   width: 100%;
   display: flex;
   overflow: hidden;
@@ -54,7 +53,6 @@
 }
 
 .contact:hover {
-  /* background-color: rgba(69, 123, 157, 0.3); */
   transform: translateY(-5px) scale(1.05);
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
   border-radius: 15px;
@@ -112,7 +110,6 @@
   background-color: #f6f7f8;
   width: 100%;
   flex: 1;
-  /* max-height: 926px; */
 }
 
 .contact-detail-hidden {
@@ -487,7 +484,7 @@
 
 /* Responsive */
 
-@media screen and (min-width: 1050px) {
+@media screen and (min-width: 1150px) {
   .contact-detail-hidden {
     display: block;
   }
@@ -501,7 +498,6 @@
   .contact-details-wrapper {
     position: sticky;
     top: 20px;
-    width: calc(100vh - 350px);
     height: 100vh;
     flex: 1;
   }

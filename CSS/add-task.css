@@ -239,7 +239,7 @@ input::placeholder {
   background-color: white;
   z-index: 1000;
   position: absolute;
-  top: 100px;
+  top: 80px;
   overflow: auto;
   overflow-x: hidden;
   width: 430px;
