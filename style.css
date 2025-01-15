@@ -1,4 +1,5 @@
 * {
+  box-sizing: border-box;
   margin: 0;
   font-family: inter;
 }
@@ -6,7 +7,6 @@
 body {
   display: flex;
   flex-direction: column;
-/*   cursor: pointer; */
 }
 
 a {
@@ -16,9 +16,12 @@ a {
 #main-container {
   /* margin: 0 auto; Mihael */
   width: 100%; /* Mihael */
+  position: relative;    
+  overflow-x: hidden;
 }
 
 #main-content {
+  
   width: calc(100vw - 234px);
   max-width: calc(1440px - 234px);
   display: flex;
