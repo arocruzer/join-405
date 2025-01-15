@@ -250,15 +250,6 @@ h1 {
   margin-left: 0; /* Entferne den negativen Abstand beim ersten Avatar */
 }
 
-h3 {
-  color: white;
-  font-size: 14px;
-  background-color: #0038ff;
-  padding: 5px 15px;
-  border-radius: 8px;
-  font-weight: normal;
-}
-
 /* Stil für User Story */
 .category-label.user-story {
   background-color: blue;
