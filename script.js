@@ -157,3 +157,4 @@ function getUserLogo() {
       userLogo.innerHTML = renderUserLogo(initials, color, user);
     };
 }
+

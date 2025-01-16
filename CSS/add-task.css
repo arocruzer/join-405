@@ -110,7 +110,7 @@ span {
 }
 .cancle-subtask {
   position: absolute;
-  right: 48px;
+  right: 50px;
 }
 .subtusk-input {
   height: 40px;
@@ -169,9 +169,7 @@ input::placeholder {
 }
 
 .drop-down-arrow {
-  width: 20px;
   height: 20px;
-  transition: transform 0.3s ease;
   padding-right: 16px;
 }
 
@@ -221,7 +219,26 @@ input::placeholder {
   border: none;
   cursor: pointer;
   font-size: 12px;
-  color: #ff0000;
+}
+.images-container{
+  display: none;
+  display: flex;
+  justify-content: space-between;
+  width: 60px
+}
+.subtask-label:hover .images-container{
+  display: flex;
+}
+.subtask-label:hover{
+  background-color: rgba(128, 128, 128, 0.151);
+}
+.subtask-label:hover input{
+  background-color: rgba(128, 128, 128, 0);
+}
+.subtask-label input{
+  border: none;
+  background-color: #f6f7f8;
+  width: 300px;
 }
 
 .contact-list-container {
