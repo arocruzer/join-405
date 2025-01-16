@@ -1,6 +1,6 @@
-let dropDownArrow = document.getElementById("drop-down-arrow");
+let dropDownArrowContacts = document.getElementById("drop-down-arrow-contacts");
+let dropDownArrowCategory = document.getElementById("drop-down");
 let concatList = document.getElementById("contact-list");
-let categoryList = document.getElementById("category-list");
 let btnUrgent = document.getElementById("btn-urgent");
 let btnMedium = document.getElementById("btn-medium");
 let btnLow = document.getElementById("btn-low");
@@ -9,44 +9,44 @@ let addSubtaskBtn = document.getElementById("add-subtask-btn");
 let subtaskList = [];
 let selectedUsers = [];
 let selectedPriority = '';
-let state = 1;
+let contacState = 1;
+let categoryState = 1;
 /* let page = "add-task"; */
 let selectedCategory = "";
 const categorySelect = document.getElementById('categorySelect');
 const selectedCategoryElement = document.getElementById('selected-category');
-let dropDownArow = document.getElementById("drop-down");
 
 
 renderSubtasks();
 
 
 function openDropDownMenuUser() {
-    switch (state) {
+    switch (contacState) {
         case 1:
             concatList.style.display = 'block';
-            dropDownArrow.src = "../Assets/arrow_drop_downaa.png";
-            state = 2;
+            dropDownArrowContacts.src = "../Assets/arrow_drop_downaa.png";
+            contacState = 2;
             addUserToTask();
             break;
         case 2:
             concatList.style.display = 'none';
-            dropDownArrow.src = "../Assets/arrow_drop_downaa (1).png";
-            state = 1;
+            dropDownArrowContacts.src = "../Assets/arrow_drop_downaa (1).png";
+            contacState = 1;
             break;
     }
 }
 
 function openDropDownMenuCategory() {
-    switch (state) {
+    switch (categoryState) {
         case 1:
-            categoryList.style.display = 'block';
-            dropDownArrow.src = "../Assets/arrow_drop_downaa.png";
-            state = 2;
+            categorySelect.style.display = 'block';
+            dropDownArrowCategory.src = "../Assets/arrow_drop_downaa.png";
+            categoryState = 2;
             break;
         case 2:
-            categoryList.style.display = 'none';
-            dropDownArrow.src = "../Assets/arrow_drop_downaa (1).png";
-            state = 1;
+            categorySelect.style.display = 'none';
+            dropDownArrowCategory.src = "../Assets/arrow_drop_downaa (1).png";
+            categoryState = 1;
             break;
     }
 }
@@ -95,18 +95,14 @@ function addedUsers() {
   });
 }
 
-// Öffnen und Schließen des Dropdowns
-function toggleCategorySelect() {
-    categorySelect.classList.toggle('hidden');
-    dropDownArow.classList.toggle('rotated');
-}
 
 // Auswahl der Kategorie und Dropdown schließen
 function selectCategory(category) {
     selectedCategory = category;
     selectedCategoryElement.innerText = category;
-    categorySelect.classList.add('hidden');
-    dropDownArow.classList.remove('rotated');
+    categorySelect.style.display = "none";
+    state = 1;
+    dropDownArrowCategory.src = "../Assets/arrow_drop_downaa (1).png";
 }
 
 
@@ -146,20 +142,34 @@ function deleteSubtask(index) {
 }
 
 function changeColorPrioBtn(priority) {
-    selectedPriority = priority;  // Priorität wird korrekt gespeichert
-    if (priority === 'urgent') {
-        btnUrgent.style.backgroundColor = '#FF3B30';
-        btnMedium.style.backgroundColor = '#ffffff';
-        btnLow.style.backgroundColor = '';
-    } else if (priority === 'medium') {
-        btnMedium.style.backgroundColor = '#FFA800';
-        btnUrgent.style.backgroundColor = '';
-        btnLow.style.backgroundColor = '';
-    } else if (priority === 'low') {
-        btnLow.style.backgroundColor = '#4CD964';
-        btnMedium.style.backgroundColor = '#ffffff';
-        btnUrgent.style.backgroundColor = '';
-    }
+    let imgSources = {
+        urgent: ["../Assets/prio_arrow_white.png", "../Assets/prio_line_orange.png", "../Assets/prio_low.png"],
+        medium: ["../Assets/prio_urgent.png", "../Assets/prio_medium.png", "../Assets/prio_low.png"],
+        low: ["../Assets/prio_urgent.png", "../Assets/prio_line_orange.png", "../Assets/prio_arrowDown_white.png"]
+    };
+
+    let bgColors = { urgent: '#FF3B30', medium: '#FFA800', low: '#4CD964' };
+    
+    resetButtonStyles();
+    selectedPriority = priority;
+    setButtonStyles(priority, bgColors[priority]);
+    setImageSources(imgSources[priority]);
+}
+
+function resetButtonStyles() {
+    btnUrgent.style.backgroundColor = btnMedium.style.backgroundColor = btnLow.style.backgroundColor = '#ffffff';
+}
+
+function setButtonStyles(priority, bgColor) {
+    if (priority === 'urgent') btnUrgent.style.backgroundColor = bgColor;
+    else if (priority === 'medium') btnMedium.style.backgroundColor = bgColor;
+    else if (priority === 'low') btnLow.style.backgroundColor = bgColor;
+}
+
+function setImageSources([urgentImgSrc, mediumImgSrc, lowImgSrc]) {
+    document.getElementById("urgent-img").src = urgentImgSrc;
+    document.getElementById("medium-img").src = mediumImgSrc;
+    document.getElementById("low-img").src = lowImgSrc;
 }
 
 function toggleButtonVisibility(forceShow) {
@@ -198,7 +208,7 @@ function cancelSubtask() {
     toggleButtonVisibility();
 }
 
-function editSubtask(button) {
+/* function editSubtask(button) {
     const listItem = button.parentElement;
     const inputField = listItem.querySelector('input');
     inputField.removeAttribute('readonly');
@@ -211,21 +221,25 @@ function editSubtask(button) {
         button.innerText =`<img src="../Assets/edit.png" alt="Edit Icon">`;
         button.onclick = function () { editSubtask(button); };
     };
-}
+} */
 function renderSubtasks() {
     const subtaskContainer = document.getElementById("subtaskLabels");
     subtaskContainer.innerHTML = '';
     subtaskList.forEach((subtask, index) => {
-        subtaskContainer.innerHTML += `
-            <div class="subtask-label">
-                <input type="text" value="${subtask}" readonly>
-                <img onclick="editSubtask(this)" src="../Assets/edit.png" alt="Edit Icon">
-                <button onclick="deleteSubtask(${index})"><img src="../Assets/delete.png" alt="delete Icon"></button>
-            </div>
-        `;
+        subtaskContainer.innerHTML += getSubtasksTemplate(subtask, index);
     });
 }
 
+function editSubtask() {
+    let confirmEdit = document.getElementById("edit-subtask-img");
+    let deleteSubtask = document.getElementById("delete-subtask");
+    let imagesContainer = document.getElementById("images-container");
+
+    confirmEdit.src ="../Assets/check_blue.png";
+    deleteSubtask.src = "../Assets/delete.png";
+    imagesContainer.style.flexDirection = "row-reverse";
+
+}
 
 function getFormInputValue(inputId) {
     return document.getElementById(inputId).value.trim();

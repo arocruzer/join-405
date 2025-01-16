@@ -46,7 +46,7 @@
                   <div onclick="openDropDownMenuUser(), addUserToTask()" class="drop-down">
                     <div>Select contacts to assign</div>
                     <div>
-                      <img class="drop-down-arrow" id="drop-down-arrow" src="../Assets/arrow_drop_downaa (1).png" alt="Arrow down"/>
+                      <img class="drop-down-arrow" id="drop-down-arrow-contacts" src="../Assets/arrow_drop_downaa (1).png" alt="Arrow down"/>
                     </div>
                   </div>
                   <div class="contact-list-container" id="contact-list"></div>
@@ -62,15 +62,14 @@
                 <div class="prio-container">
                   <p>Prio</p>
                   <div class="prio-btn-container">
-                    <button onclick="changeColorPrioBtn('urgent') "id="btn-urgent" class="btn-prio-urgent">Urgent<img src="../Assets/prio_urgent.png" alt="Urgent" /></button>
-                    <button onclick="changeColorPrioBtn('medium')" id="btn-medium" class="btn-prio-medium">Medium<img src="../Assets/prio_medium.png" alt="Medium" /></button>
-                    <button
-                      onclick="changeColorPrioBtn('low')"id="btn-low" class="btn-prio-low">Low<img src="../Assets/prio_low.png" alt="Low" /></button>
+                    <button onclick="changeColorPrioBtn('urgent') "id="btn-urgent" class="btn-prio-urgent">Urgent<img id="urgent-img" src="../Assets/prio_urgent.png" alt="Urgent" /></button>
+                    <button onclick="changeColorPrioBtn('medium')" id="btn-medium" class="btn-prio-medium">Medium<img id="medium-img" src="../Assets/prio_medium.png" alt="Medium" /></button>
+                    <button onclick="changeColorPrioBtn('low')"id="btn-low" class="btn-prio-low">Low<img id="low-img" src="../Assets/prio_low.png" alt="Low" /></button>
                   </div>
                 </div>
                 <div class="input-containers">
                   <p>Category<span>*</span></p>
-                  <div class="drop-down" onclick="toggleCategorySelect()">
+                  <div class="drop-down" onclick="openDropDownMenuCategory()">
                     <div id="selected-category">Select task category</div>
                     <img class="drop-down-arrow" id="drop-down" src="../Assets/arrow_drop_downaa (1).png" alt="Arrow down"/>
                   </div>
