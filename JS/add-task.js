@@ -220,7 +220,7 @@ function renderSubtasks() {
             <div class="subtask-label">
               <div class="subtask-left">
                 <span class="dot"></span>
-                <input type="text" value="${subtask}" readonly>
+                <input class="text-subtask" type="text" value="${subtask}" readonly>
               </div>
               <div class="subtask-right">
                 <img onclick="editSubtask(this)" src="../Assets/edit.png" alt="Edit Icon">
