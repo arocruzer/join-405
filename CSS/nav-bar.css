@@ -25,7 +25,6 @@
 #logo-nav-bar {
   display: none;
   padding: 64px 0;
-  width: 232px;
 }
 
 #logo-nav-bar svg {
@@ -103,7 +102,6 @@
   background-image: url(../Assets/img/contacts_g_L.png);
 }
 
-
 @media screen and (min-width: 830px) {
   #menu {
     flex-direction: column;
@@ -112,7 +110,6 @@
 
   #nav-bar {
     height: 100vh;
-    width: 232px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

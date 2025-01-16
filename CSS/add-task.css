@@ -3,26 +3,26 @@
   flex-direction: column;
   gap: 10px;
 }
-.prio-btn-container{
+.prio-btn-container {
   display: flex;
   justify-content: space-between;
   padding-bottom: 16px;
 }
-.hero{
+.hero {
   display: block;
   padding-top: 110px;
   padding-left: 46px;
 }
-.form-container{
+.form-container {
   display: flex;
   justify-content: space-between;
   padding-top: 48px;
   width: 100%;
 }
-.form-left{
+.form-left {
   width: 440px;
 }
-.form-right{
+.form-right {
   width: 440px;
 }
 .btn-prio-urgent {
@@ -37,7 +37,7 @@
 .btn-prio-medium {
   height: 41px;
   width: 121px;
-  background-color: #FFA800;
+  background-color: #ffa800;
   border: none;
   box-shadow: 0px 0px 4px 0px #0000001a;
   border-radius: 8px;
@@ -98,21 +98,21 @@ span {
   padding-left: 21px;
 }
 
-.add-subtask{
+.add-subtask {
   position: absolute;
   right: 16px;
 }
-.linie{
+.linie {
   display: none;
   position: absolute;
   right: 44px;
-  color: #D1D1D1;
+  color: #d1d1d1;
 }
-.cancle-subtask{
+.cancle-subtask {
   position: absolute;
   right: 48px;
 }
-.subtusk-input{
+.subtusk-input {
   height: 40px;
   border: 1px solid #d1d1d1;
   border-radius: 10px;
@@ -120,7 +120,7 @@ span {
   width: 100%;
 }
 
-button{
+button {
   border: none;
   background: none;
   padding-block: 0;
@@ -165,7 +165,7 @@ input::placeholder {
   padding-left: 16px;
   cursor: pointer;
   background-color: white;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .drop-down-arrow {
@@ -180,10 +180,10 @@ input::placeholder {
   width: 100%;
   border-radius: 8px;
   background-color: white;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   z-index: 10;
   padding: 5px 0;
-  border: none;  /* Entfernt den Rahmen */
+  border: none; /* Entfernt den Rahmen */
   position: absolute;
   top: 80px;
 }
@@ -191,8 +191,8 @@ input::placeholder {
 .category-options div {
   padding: 10px;
   cursor: pointer;
-  border: none;  /* Kein Rahmen um die Optionen */
-  border-radius: 0; 
+  border: none; /* Kein Rahmen um die Optionen */
+  border-radius: 0;
 }
 
 .category-options div:hover {
@@ -239,7 +239,7 @@ input::placeholder {
   background-color: white;
   z-index: 1000;
   position: absolute;
-  top: 100px;
+  top: 80px;
   overflow: auto;
   overflow-x: hidden;
   width: 430px;
@@ -303,11 +303,11 @@ input::placeholder {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #A8A8A8;
+  background: #a8a8a8;
   border-radius: 10px;
 }
 
-#add-task-img{
+#add-task-img {
   background-image: url(../Assets/img/add-task_w_L.png);
 }
 
@@ -316,16 +316,16 @@ input::placeholder {
   color: white;
 }
 
-#confirmButton{
+#confirmButton {
   display: none;
 }
 
-#cancelButton{
+#cancelButton {
   display: none;
 }
 
 @media screen and (min-width: 768px) {
   #add-task-button {
-      border-radius: unset;
-    }
+    border-radius: unset;
+  }
 }

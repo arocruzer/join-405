@@ -8,7 +8,7 @@ body {
   flex-direction: column;
   height: 100vh;
 }
-.signup-container{
+.signup-container {
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -107,7 +107,7 @@ a {
 .logo {
   width: 100px;
   height: 100px;
-  background-image: url('../Assets/Join_logo.png'); /* Replace with your logo path */
+  background-image: url("../Assets/Join_logo.png"); /* Replace with your logo path */
   background-size: contain;
   background-repeat: no-repeat;
   animation: moveLogo 2s ease-out forwards;
@@ -149,73 +149,73 @@ a {
   transform: translate(-50%, -50%);
   animation: mymove 1s linear forwards;
 }
-.welcome-img-mobile{
+.welcome-img-mobile {
   position: absolute;
   display: none;
 }
 
 @keyframes mymove {
   0% {
-      transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
   }
   100% {
-      top: 5%; 
-      left: 6.5%;
-      transform: translate(0, 0);
-      opacity: 0;
+    top: 5%;
+    left: 6.5%;
+    transform: translate(0, 0);
+    opacity: 0;
   }
 }
 
 @keyframes fadeOutBackground {
   0% {
-      background-color: #f6f7f8;
+    background-color: #f6f7f8;
   }
   100% {
-      background-color: transparent;
+    background-color: transparent;
   }
 }
 @keyframes mymoveMobile {
   0% {
-      transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
   }
   100% {
-      top: 5%; 
-      left: 6.5%;
-      transform: translate(0, 0);
-      opacity: 0;
+    top: 5%;
+    left: 6.5%;
+    transform: translate(0, 0);
+    opacity: 0;
   }
 }
 
 @keyframes fadeOutBackgroundMobile {
   0% {
-      background-color: #2a3647;
+    background-color: #2a3647;
   }
   100% {
-      background-color: transparent;
+    background-color: transparent;
   }
 }
 
-@media (max-width: 680px){
-  header{
+@media (max-width: 680px) {
+  header {
     padding: 38px 37px;
   }
-  .login-logo{
+  .login-logo {
     height: 78px;
     width: 64px;
   }
-  .signup-container{
+  .signup-container {
     display: none;
   }
-  .signup-container-mobile{
+  .signup-container-mobile {
     display: flex;
   }
-  .login-window{
+  .login-window {
     width: calc(100% - 32px);
   }
-  .welcome-img{
+  .welcome-img {
     display: none;
   }
-  .welcome-img-mobile{
+  .welcome-img-mobile {
     display: block;
     height: 78px;
     width: 64px;
@@ -224,14 +224,14 @@ a {
     transform: translate(-50%, -50%);
     animation: mymoveMobile 1s linear forwards;
   }
-  .animation{
+  .animation {
     background-color: #2a3647;
     animation: fadeOutBackgroundMobile 1s forwards;
   }
 }
 
-@media (max-width: 500px){
-  .login-signup-container{
+@media (max-width: 500px) {
+  .login-signup-container {
     flex-direction: column;
   }
 }
