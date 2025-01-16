@@ -218,9 +218,15 @@ function renderSubtasks() {
     subtaskList.forEach((subtask, index) => {
         subtaskContainer.innerHTML += `
             <div class="subtask-label">
+              <div class="subtask-left">
+                <span class="dot"></span>
                 <input type="text" value="${subtask}" readonly>
+              </div>
+              <div class="subtask-right">
                 <img onclick="editSubtask(this)" src="../Assets/edit.png" alt="Edit Icon">
+                <span class="subtask-linie">|</span>
                 <button onclick="deleteSubtask(${index})"><img src="../Assets/delete.png" alt="delete Icon"></button>
+              </div>
             </div>
         `;
     });

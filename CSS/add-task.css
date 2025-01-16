@@ -209,20 +209,11 @@ input::placeholder {
   transform: rotate(180deg);
 }
 
-.subtask-label-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
 .subtask-label {
-  background-color: #e0e0e0;
-  padding: 5px 10px;
-  border-radius: 15px;
-  font-size: 14px;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 16px;
+    align-items: center;
 }
 
 .subtask-label button {
@@ -322,6 +313,25 @@ input::placeholder {
 
 #cancelButton {
   display: none;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  background-color: #2a3647;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+.subtask-left{
+  display: flex;
+  align-items: center;
+}
+.subtask-right{
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.subtask-linie{
+  color:  #2a3647;
 }
 
 @media screen and (min-width: 768px) {

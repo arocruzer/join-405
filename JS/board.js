@@ -394,17 +394,16 @@ function editTask() {
         // Modal erstellen und befüllen
         const modalContent = `
             <div class="modal-edit-content">
-                <h2>Edit Task</h2>
-                
-                <label for="editTitle">Title:</label>
-                <input type="text" id="editTitle" value="${task.title}">
+                <div class="close-edit"><span class="close-button-edit" onclick="closeEditModal()">X</span></div>
+                <label for="editTitle">Title</label>
+                <input  class="edit-text" type="text" id="editTitle" value="${task.title}">
                 
                 <label for="editDescription">Description:</label>
-                <textarea id="editDescription">${task.description}</textarea>
+                <textarea  class="edit-text" id="editDescription">${task.description}</textarea>
 
                 <div class="input-containers">
                   <p>Due date<span>*</span></p>
-                  <input class="date-input" type="date" id="date-input" />
+                  <input class="inputStyle edit-text" type="date" id="date-input" />
                 </div>
                 
                 <div class="prio-container">
@@ -433,20 +432,23 @@ function editTask() {
                   <div class="subtask-container">
                     <input oninput="toggleButtonVisibility()" class="subtusk-input" type="text" placeholder="Add new subtask" id="newSubtask"/>
                     <img onclick="toggleButtonVisibility(true)" id="plusButton" class="plus-img" src="../Assets/Subtasks +.png" alt=""/>
-                    <button class="add-subtask" id="confirmButton" onclick="addSubtask()">
-                      <img src="../Assets/check_blue.png" alt="" />
-                    </button>
-                    <span class="linie" id="linie" onclick="cancelSubtask()">|</span>
-                    <button class="cancle-subtask" id="cancelButton" onclick="cancelSubtask()">
-                      <img src="../Assets/iconoir_cancel.png" alt="" />
-                    </button>
+                    <div class="imgContainer">
+                       <button class="add-subtask" id="confirmButton" onclick="addSubtask()">
+                          <img src="../Assets/check_blue.png" alt="" />
+                       </button>
+                       <span class="linie" id="linie" onclick="cancelSubtask()">|</span>
+                       <button class="cancle-subtask" id="cancelButton" onclick="cancelSubtask()">
+                          <img src="../Assets/iconoir_cancel.png" alt="" />
+                        </button>
+                    </div>
                   </div>
                   <div id="subtaskLabels" class="subtask-label-container"></div>
                 </div>
                 
+                <div class="save-edit">
+                   <button class="btnPrimary" onclick="saveTaskEdits('${taskId}', '${columnId}')">Ok <img src="../Assets/check_blue.png" alt="" /> </button>
+                </div>
                 
-                <button onclick="saveTaskEdits('${taskId}', '${columnId}')">Save</button>
-                <button onclick="closeEditModal()">Cancel</button>
             </div>
         `;
 
