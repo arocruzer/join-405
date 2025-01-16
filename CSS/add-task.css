@@ -331,12 +331,18 @@ input::placeholder {
   gap: 4px;
 }
 .subtask-linie{
+  display: inline;
   color:  #2a3647;
 }
 .text-subtask{
   border: none;
   background-color: #F6F7F8;
 }
+
+.subtask-linie.hidden {
+  display: none; /* Versteckt, wenn die Klasse 'hidden' hinzugefügt wird */
+}
+
 
 @media screen and (min-width: 768px) {
   #add-task-button {
