@@ -1,5 +1,5 @@
 <div id="header-left">
-<img class="header-logo" src="../Assets/img/svg/Capa 2.svg" alt="join-logo" />
+  <img class="header-logo" src="../Assets/img/svg/Capa 2.svg" alt="join-logo" />
 </div>
 <div id="header-center">
   <p>Kanban Project Management Tool</p>
@@ -20,16 +20,32 @@
     </svg>
   </div>
   <div class="user-button" onclick="toggleUsrMenu()">
-    <div id="user-button">
-    </div>
+    <div id="user-button"></div>
   </div>
 </div>
 
-<div id="ar-overlay" onclick="toggleUsrMenu()" class="ar-overlay-box ar-overlay-close"></div>
+<div
+  id="ar-overlay"
+  onclick="toggleUsrMenu()"
+  class="ar-overlay-box ar-overlay-close"
+></div>
 
 <div id="usr-menu" class="usr-menu-box usr-menu-closed">
-  
-  <p>Legal Notice</p>
-  <p>Privacy Policy</p>
-  <p>Log out</p>
+  <a onclick="loadLegalDocumentUsrMenu(`privacy-policy`)" class="nav-button">
+    <div class="legal-documents-button">
+      <p>Privacy Policy</p>
+    </div>
+  </a>
+
+  <a onclick="loadLegalDocumentUsrMenu(`legal-notice`)" class="nav-button">
+    <div class="legal-documents-button">
+      <p>Legal Notice</p>
+    </div>
+  </a>
+
+  <a class="nav-button" href="../index.html">
+    <div class="legal-documents-button">
+      <p>Log out</p>
+    </div>
+  </a>
 </div>
