@@ -52,36 +52,6 @@ function renderTask(task) {
 }
 
 
-function allowDrop(event) {
-    event.preventDefault();
-}
-
-function drop(event, columnId) {
-    event.preventDefault();
-    const taskId = event.dataTransfer.getData("text");
-    const taskElement = document.getElementById(taskId);
-    const columnElement = event.target.closest('.column');
-    const previousColumnId = taskElement.parentElement.id.replace('-tasks', '');
-    const previousTasks = JSON.parse(localStorage.getItem(previousColumnId)) || [];
-    const updatedTasks = previousTasks.filter(task => task.id !== taskId);
-    localStorage.setItem(previousColumnId, JSON.stringify(updatedTasks));
-
-    columnElement.querySelector('.task-container').appendChild(taskElement);
-    saveTaskToLocalStorage(columnElement.id, taskElement, taskId);
-    updateTaskVisibilityById(columnElement.id);
-    updateTaskVisibilityById(previousColumnId);
-    loadTasks(columnElement.id);
-}
-
-function moveTask(event, columnId){
-    const taskId = event.dataTransfer.getData("text");
-    const taskElement = document.getElementById(taskId);
-    const columnElement = document.getElementById(columnId);
-    taskElement.remove();
-    columnElement.querySelector('.task-container').appendChild(taskElement);
-    saveTaskToLocalStorage(columnId, taskElement, taskId);
-}
-
 function getPriorityText(taskElement) {
     return taskElement.querySelector('.user-container p img')
         ? taskElement.querySelector('.user-container p img').alt.replace(' Priority', '')
@@ -139,11 +109,6 @@ function updateTaskVisibilityById(columnId) {
     const taskList = document.querySelector(`#${columnId} .task-list`);
     const tasks = JSON.parse(localStorage.getItem(columnId)) || [];
     taskList.style.display = tasks.length > 0 ? 'none' : 'block';
-}
-
-function drag(event) {
-    event.dataTransfer.setData("text", event.target.id);
-    setTimeout(() => event.target.classList.add("dragging"), 0);
 }
 
 function openInputPage(columnId) {
@@ -367,3 +332,183 @@ function addButton() {
 window.addEventListener('resize', addButton);
 window.addEventListener('DOMContentLoaded', addButton);
 
+let draggedTaskId = null;
+
+// Task ziehen starten
+function drag(event) {
+    draggedTaskId = event.target.id; // Speichert die ID der gezogenen Aufgabe
+}
+
+// Drag-Überprüfung erlauben
+function allowDrop(event) {
+    event.preventDefault(); // Verhindert Standardverhalten, um Ablegen zu ermöglichen
+}
+
+// Task ablegen
+function drop(event) {
+    event.preventDefault(); // Verhindert Standardverhalten
+
+    const targetColumnId = event.target.closest('.column').id; // Zielt auf die Spalte ab, in der die Aufgabe abgelegt wurde
+    const draggedTaskElement = document.getElementById(draggedTaskId);
+
+    if (draggedTaskElement && targetColumnId) {
+        const sourceColumnId = draggedTaskElement.closest('.column').id;
+
+        // Aufgabe von der Quellspalte entfernen
+        let sourceTasks = JSON.parse(localStorage.getItem(sourceColumnId)) || [];
+        const draggedTask = sourceTasks.find(task => task.id === draggedTaskId);
+        sourceTasks = sourceTasks.filter(task => task.id !== draggedTaskId);
+        localStorage.setItem(sourceColumnId, JSON.stringify(sourceTasks));
+
+        // Aufgabe zur Zielspalte hinzufügen
+        let targetTasks = JSON.parse(localStorage.getItem(targetColumnId)) || [];
+        if (draggedTask) {
+            targetTasks.push(draggedTask);
+            localStorage.setItem(targetColumnId, JSON.stringify(targetTasks));
+
+            // UI aktualisieren
+            loadTasks(sourceColumnId);
+            loadTasks(targetColumnId);
+        }
+    }
+}
+
+function editTask() {
+    const taskId = currentTaskId;
+    const allColumns = ['todo', 'in-progress', 'await-feedback', 'done'];
+    let task = null;
+    let columnId = null;
+
+    // Task und Spalte finden
+    for (const column of allColumns) {
+        let tasks = JSON.parse(localStorage.getItem(column)) || [];
+        const foundTask = tasks.find(t => t.id === taskId);
+        if (foundTask) {
+            task = foundTask;
+            columnId = column;
+            break;
+        }
+    }
+
+    if (task) {
+        // Modal erstellen und befüllen
+        const modalContent = `
+            <div class="modal-edit-content">
+                <h2>Edit Task</h2>
+                
+                <label for="editTitle">Title:</label>
+                <input type="text" id="editTitle" value="${task.title}">
+                
+                <label for="editDescription">Description:</label>
+                <textarea id="editDescription">${task.description}</textarea>
+
+                <div class="input-containers">
+                  <p>Due date<span>*</span></p>
+                  <input class="date-input" type="date" id="date-input" />
+                </div>
+                
+                <div class="prio-container">
+                  <p>Prio</p>
+                  <div class="prio-btn-container">
+                    <button onclick="changeColorPrioBtn('urgent') "id="btn-urgent" class="btn-prio-urgent">Urgent<img src="../Assets/prio_urgent.png" alt="Urgent" /></button>
+                    <button onclick="changeColorPrioBtn('medium')" id="btn-medium" class="btn-prio-medium">Medium<img src="../Assets/prio_medium.png" alt="Medium" /></button>
+                    <button onclick="changeColorPrioBtn('low')"id="btn-low" class="btn-prio-low">Low<img src="../Assets/prio_low.png" alt="Low" /></button>
+                  </div>
+                </div>
+                
+                
+               <div class="input-containers">
+                  <p>Assigned to</p>
+                  <div onclick="openDropDownMenuUser(), addUserToTask()" class="drop-down">
+                    <div>Select contacts to assign</div>
+                    <div>
+                      <img class="drop-down-arrow" id="drop-down-arrow" src="../Assets/arrow_drop_downaa (1).png" alt="Arrow down"/>
+                    </div>
+                  </div>
+                  <div class="contact-list-container" id="contact-list"></div>
+                  <div id="addedUers"></div>
+                </div>
+                <div class="input-containers">
+                  <p>Subtasks</p>
+                  <div class="subtask-container">
+                    <input oninput="toggleButtonVisibility()" class="subtusk-input" type="text" placeholder="Add new subtask" id="newSubtask"/>
+                    <img onclick="toggleButtonVisibility(true)" id="plusButton" class="plus-img" src="../Assets/Subtasks +.png" alt=""/>
+                    <button class="add-subtask" id="confirmButton" onclick="addSubtask()">
+                      <img src="../Assets/check_blue.png" alt="" />
+                    </button>
+                    <span class="linie" id="linie" onclick="cancelSubtask()">|</span>
+                    <button class="cancle-subtask" id="cancelButton" onclick="cancelSubtask()">
+                      <img src="../Assets/iconoir_cancel.png" alt="" />
+                    </button>
+                  </div>
+                  <div id="subtaskLabels" class="subtask-label-container"></div>
+                </div>
+                
+                
+                <button onclick="saveTaskEdits('${taskId}', '${columnId}')">Save</button>
+                <button onclick="closeEditModal()">Cancel</button>
+            </div>
+        `;
+
+        // Modal anzeigen
+        const modal = document.createElement("div");
+        modal.id = "editModal";
+        modal.className = "modal";
+        modal.innerHTML = modalContent;
+        document.body.appendChild(modal);
+        modal.style.display = "block";
+    }
+}
+
+// Benutzer hinzufügen
+function addUser() {
+    const userName = document.getElementById("newUser").value.trim();
+    if (userName) {
+        const userList = document.getElementById("userList");
+        const userItem = document.createElement("div");
+        userItem.className = "user-item";
+        userItem.innerHTML = `
+            <span>${userName}</span>
+            <button onclick="removeUser('${userName}')">Remove</button>
+        `;
+        userList.appendChild(userItem);
+        document.getElementById("newUser").value = "";
+    }
+}
+
+// Benutzer entfernen
+function removeUser(userName) {
+    const userItems = document.querySelectorAll("#userList .user-item");
+    userItems.forEach(item => {
+        if (item.innerText.includes(userName)) {
+            item.remove();
+        }
+    });
+}
+
+function saveTaskEdits(taskId, columnId) {
+    const tasks = JSON.parse(localStorage.getItem(columnId)) || [];
+    const taskIndex = tasks.findIndex(t => t.id === taskId);
+
+    if (taskIndex !== -1) {
+        // Aktualisierte Details
+        tasks[taskIndex].title = document.getElementById("editTitle").value;
+        tasks[taskIndex].description = document.getElementById("editDescription").value;
+        tasks[taskIndex].priority = document.getElementById("editPriority").value;
+        tasks[taskIndex].dueDate = document.getElementById("editDueDate").value;
+        tasks[taskIndex].assignedUsers = Array.from(document.querySelectorAll("#userList .user-item span"))
+            .map(userSpan => ({ name: userSpan.innerText, color: "#ccc" })); // Standardfarbe
+
+        // Änderungen speichern
+        localStorage.setItem(columnId, JSON.stringify(tasks));
+        loadTasks(columnId); // UI aktualisieren
+        closeEditModal(); // Modal schließen
+    }
+}
+
+function closeEditModal() {
+    const modal = document.getElementById("editModal");
+    if (modal) {
+        modal.remove();
+    }
+}
