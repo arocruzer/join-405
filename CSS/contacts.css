@@ -1,12 +1,12 @@
 /* Contacts Overview */
 
 .content-wrapper {
-  position: relative;
   width: 100%;
   display: flex;
   overflow: hidden;
   height: calc(100vh - 100px);
 }
+
 
 .contacts-list {
   position: relative;
@@ -16,7 +16,7 @@
   background-color: #ffffff;
   min-width: 350px;
   flex: 1;
-  height: 1156px;
+  height: 1200px;
   scrollbar-width: 27px;
   padding-top: 24px;
   padding-left: 38px;
@@ -498,6 +498,8 @@
 
   .content-wrapper {
     height: 100vh;
+    position: fixed;
+    top: 100;
   }
 
   .contacts-container {
