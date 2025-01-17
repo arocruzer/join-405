@@ -196,40 +196,6 @@ function renderAssignedUsers(users) {
     `).join('');
 }
 
-
-
-function openTaskDetails(taskId) {
-    const tasks = [...JSON.parse(localStorage.getItem('todo') || "[]"), 
-                   ...JSON.parse(localStorage.getItem('in-progress') || "[]"),
-                   ...JSON.parse(localStorage.getItem('await-feedback') || "[]"),
-                   ...JSON.parse(localStorage.getItem('done') || "[]")];
-    const task = tasks.find(task => task.id === taskId);
-    if (task) {
-        currentTaskId = taskId;
-        document.getElementById('modalTitle').innerText = task.title;
-        document.getElementById('modalDescription').innerText = task.description;
-        const dueDateElement = document.getElementById('modalDueDate');
-        dueDateElement.innerText = task.dueDate ? formatDate(task.dueDate) : 'Kein Fälligkeitsdatum';
-        document.getElementById('modalPriority').innerHTML = formatPriority(task.priority);
-        document.getElementById('modalAssignedUsers').innerHTML = renderAssignedUsers(task.assignedUsers);
-        const subtaskList = document.getElementById('modalSubtasks');
-        if (Array.isArray(task.subtasks) && task.subtasks.length > 0) {
-            subtaskList.innerHTML = task.subtasks.map((subtask, index) => `
-                <label class="subtask-label">
-                    <input type="checkbox" id="subtask-${taskId}-${index}"
-                           ${task.completedSubtasks > index ? 'checked' : ''}
-                           onchange="updateSubtaskCompletion('${taskId}', ${index})">
-                    ${subtask}
-                </label>
-            `).join('');
-        } else {
-            subtaskList.innerHTML = '<p>Keine Subtasks verfügbar</p>';
-        }
-        
-        document.getElementById('taskModal').style.display = 'block';
-        updateProgressBar(task);
-    }
-}
 function updateProgressBar(task) {
     const progressElement = document.querySelector(`#${task.id} .progress-bar .progress`);
     const percentage = task.totalSubtasks > 0 
@@ -296,6 +262,11 @@ function openTaskDetails(taskId) {
         updateProgressBar(task);
     }
 }
+
+function closeTaskModal() {
+    document.getElementById('taskModal').style.display = 'none';
+}
+
 
 
 function deleteTask() {
@@ -379,9 +350,9 @@ function editTask() {
     let task = null;
     let columnId = null;
 
-    // Task und Spalte finden
+    // Find the task and its column
     for (const column of allColumns) {
-        let tasks = JSON.parse(localStorage.getItem(column)) || [];
+        const tasks = JSON.parse(localStorage.getItem(column)) || [];
         const foundTask = tasks.find(t => t.id === taskId);
         if (foundTask) {
             task = foundTask;
@@ -391,32 +362,31 @@ function editTask() {
     }
 
     if (task) {
-        // Modal erstellen und befüllen
+        // Create and fill modal content
         const modalContent = `
             <div class="modal-edit-content">
                 <div class="close-edit"><span class="close-button-edit" onclick="closeEditModal()">X</span></div>
                 <label for="editTitle">Title</label>
-                <input  class="edit-text" type="text" id="editTitle" value="${task.title}">
-                
+                <input class="edit-text" type="text" id="editTitle" value="${task.title}">
+
                 <label for="editDescription">Description:</label>
-                <textarea  class="edit-text" id="editDescription">${task.description}</textarea>
+                <textarea class="edit-text" id="editDescription">${task.description}</textarea>
 
                 <div class="input-containers">
                   <p>Due date<span>*</span></p>
-                  <input class="inputStyle edit-text" type="date" id="date-input" />
+                  <input class="inputStyle edit-text" type="date" id="editDueDate" value="${task.dueDate || ''}" />
                 </div>
-                
+
                 <div class="prio-container">
                   <p>Prio</p>
                   <div class="prio-btn-container">
-                    <button onclick="changeColorPrioBtn('urgent') "id="btn-urgent" class="btn-prio-urgent">Urgent<img src="../Assets/prio_urgent.png" alt="Urgent" /></button>
-                    <button onclick="changeColorPrioBtn('medium')" id="btn-medium" class="btn-prio-medium">Medium<img src="../Assets/prio_medium.png" alt="Medium" /></button>
-                    <button onclick="changeColorPrioBtn('low')"id="btn-low" class="btn-prio-low">Low<img src="../Assets/prio_low.png" alt="Low" /></button>
+                    <button onclick="changeColorPrioBtn('urgent')" id="btn-urgent" class="btn-prio-urgent ${task.priority === 'urgent' ? 'active' : ''}">Urgent<img src="../Assets/prio_urgent.png" alt="Urgent" /></button>
+                    <button onclick="changeColorPrioBtn('medium')" id="btn-medium" class="btn-prio-medium ${task.priority === 'medium' ? 'active' : ''}">Medium<img src="../Assets/prio_medium.png" alt="Medium" /></button>
+                    <button onclick="changeColorPrioBtn('low')" id="btn-low" class="btn-prio-low ${task.priority === 'low' ? 'active' : ''}">Low<img src="../Assets/prio_low.png" alt="Low" /></button>
                   </div>
                 </div>
-                
-                
-               <div class="input-containers">
+
+                <div class="input-containers">
                   <p>Assigned to</p>
                   <div onclick="openDropDownMenuUser(), addUserToTask()" class="drop-down">
                     <div>Select contacts to assign</div>
@@ -425,8 +395,11 @@ function editTask() {
                     </div>
                   </div>
                   <div class="contact-list-container" id="contact-list"></div>
-                  <div id="addedUers"></div>
+                  <div id="addedUsers">
+                    ${task.assignedUsers.map(user => `<div class="user-item"><span>${user.name}</span></div>`).join('')}
+                  </div>
                 </div>
+
                 <div class="input-containers">
                   <p>Subtasks</p>
                   <div class="subtask-container">
@@ -442,17 +415,23 @@ function editTask() {
                         </button>
                     </div>
                   </div>
-                  <div id="subtaskLabels" class="subtask-label-container"></div>
+                  <div id="subtaskLabels" class="subtask-label-container">
+                    ${task.subtasks.map((subtask, index) => `
+                      <div class="subtask-label">
+                        <input type="checkbox" id="subtask-${index}" ${index < task.completedSubtasks ? 'checked' : ''} />
+                        <span>${subtask}</span>
+                      </div>
+                    `).join('')}
+                  </div>
                 </div>
-                
+
                 <div class="save-edit">
-                   <button class="btnPrimary" onclick="saveTaskEdits('${taskId}', '${columnId}')">Ok <img src="../Assets/check_blue.png" alt="" /> </button>
+                   <button class="btnPrimary" onclick="saveTaskEdits('${taskId}', '${columnId}')">Save <img src="../Assets/check_blue.png" alt="" /></button>
                 </div>
-                
             </div>
         `;
 
-        // Modal anzeigen
+        // Show the modal
         const modal = document.createElement("div");
         modal.id = "editModal";
         modal.className = "modal";
@@ -461,6 +440,7 @@ function editTask() {
         modal.style.display = "block";
     }
 }
+
 
 // Benutzer hinzufügen
 function addUser() {
