@@ -5,6 +5,7 @@
   width: 100%;
   display: flex;
   overflow: hidden;
+  height: calc(100vh - 100px);
 }
 
 .contacts-list {
@@ -28,6 +29,7 @@
 .contacts-section-header {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   width: 100%;
 }
 .contacts-section-header h3 {
@@ -489,7 +491,13 @@
     display: block;
   }
   .contacts-list {
-    max-width: 350px;
+    max-width: 450px;
+    height: calc(100vh - 100px);
+
+  }
+
+  .content-wrapper {
+    height: 100vh;
   }
 
   .contacts-container {
@@ -498,7 +506,7 @@
   .contact-details-wrapper {
     position: sticky;
     top: 20px;
-    height: 100vh;
+    height: calc(100vh - 100px);
     flex: 1;
   }
 }

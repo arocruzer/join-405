@@ -121,22 +121,27 @@ function HTMLOpenAddContactOverlay(){
     return`
     <div class="overlay-edit-contact">
         <div class="middle-avatar">TW</div>
-            <div class="upper-half">
-                <div class="cross-close" onclick="closeAddContactOverlay()">X</div>
-                <div class="edit-contact-title">
-                    <h1>Add contact</h1>
-                    <h6>Tasks are better with a team!</h6>
-                    <div class="blue-line"></div>
-                </div>
+        <div class="upper-half">
+            <div class="cross-close" onclick="closeAddContactOverlay()">X</div>
+            <div class="edit-contact-title">
+                <h1>Add contact</h1>
+                <h6>Tasks are better with a team!</h6>
+                <div class="blue-line"></div>
             </div>
-            <div class="lower-half">
+        </div>
+        <div class="lower-half">
+            <form id="contactForm" onsubmit="return validateContactForm()">
                 <div class="input-fields-add">
                     <input class="input-person" placeholder="Name" type="text" id="add-input-name-id">
+                    <span id="name-error" class="error-message"></span>
                     <input class="input-mail" placeholder="Email" type="email" id="add-input-mail-id">
+                    <span id="mail-error" class="error-message"></span>
                     <input class="input-phone" placeholder="Phone" type="tel" id="add-input-phone-id">
+                    <span id="phone-error" class="error-message"></span>
                     <button onclick="addNewContact()" class="create-button">Create contact<i class="fa-sharp-duotone fa-solid fa-check"></i></button>
                 </div>
-            </div>
+            </form>
+        </div>
         </div>
     </div>
     `;
