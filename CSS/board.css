@@ -88,6 +88,12 @@ body {
   flex-direction: column;
 }
 
+<<<<<<< HEAD
+=======
+.column {
+}
+
+>>>>>>> 43f48ca5d046713dcd4a00b6718a940831681d94
 .column-header {
   display: flex;
   justify-content: space-between;
