@@ -29,27 +29,27 @@
         <div id="header" w3-include-html="../HTML/header.html"></div>
         <div id="main-content">
           <div class="content-wrapper" id="content-wrapper-id">
-            <div class="contacts-list" id="contacts">
-              <img
-                onclick="OpenAddContactOverlay()"
-                class="add-contact-button"
-                src="../Assets/Property 1=Default.svg"
-                alt="add_contact"
-              />
+            <div class="contacts-wrapper">
+              <div onclick="OpenAddContactOverlay()" class="newContactButton"> 
+                Button
+                <img src="../Assets/person_add.svg" alt="add-person">
+              </div>
+              <div class="contacts-list" id="contacts">
+                <img onclick="OpenAddContactOverlay()" class="add-contact-button" src="../Assets/Property 1=Default.svg" alt="add_contact"/>
+              </div>
+              <img onclick="OpenAddContactOverlay()" class="add-contact-button" src="../Assets/Property 1=Default.svg" alt="add_contact" >`
             </div>
-            <div
-              class="add-contact-div-overlay d-none"
-              id="add-contact-div-overlay-id"
-            ></div>
-            <div
-              class="contact-details-wrapper contact-detail-hidden"
-              id="contact-details-wrapper-id"
-            ></div>
+
+            <div class="add-contact-div-overlay d-none" id="add-contact-div-overlay-id"></div>
+            <div class="contact-details-wrapper contact-detail-hidden" id="contact-details-wrapper-id"></div>
           </div>
         </div>
       </div>
       <div id="nav-bar" w3-include-html="../HTML/nav-bar.html"></div>
     </div>
     <script src="../JS/contacts.js"></script>
+
+
+
   </body>
 </html>
