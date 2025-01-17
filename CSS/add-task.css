@@ -345,3 +345,13 @@ input::placeholder {
     border-radius: unset;
   }
 }
+@media (max-width: 1220px){
+  .form-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #main-content{
+    width: auto;
+  }
+}
