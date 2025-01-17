@@ -1,12 +1,11 @@
 let page = "contacts";
 
- function renderContacts(){
+function renderContacts(){
     let contentRef = document.getElementById('contacts');
     if (contentRef) {
     contentRef.innerHTML = "";
     let currentLetter = "";
     loadedContacts.sort((a, b) => a.name.localeCompare(b.name));
-
     for (let index = 0; index < loadedContacts.length; index++) {
         let initialien = loadedContacts[index].initialien;
         let firstLetter = loadedContacts[index].name.slice(0, 1);
@@ -16,10 +15,8 @@ let page = "contacts";
         }
         const groupElement = document.getElementById(`contact-container-${currentLetter}`);
         groupElement.innerHTML += renderCurrentContacts(index, initialien);
-        addBackgrounds();
-        
+        addBackgrounds();  
     }
-    addContactButtonAdden();
     renderContactDetailPage();
 }
 }
@@ -36,18 +33,13 @@ function getRandomColor() {
     return colors[Math.floor(Math.random() * colors.length)];
 }
 
-function addContactButtonAdden(){
-    let contentRef = document.getElementById('contacts');
-    contentRef.innerHTML += `<img onclick="OpenAddContactOverlay()" class="add-contact-button" src="../Assets/Property 1=Default.svg" alt="add_contact" >`;
-}
-
 // Open Contact Details
 
 function openContactDetailsOverlay(index){
     console.log(`Kontakt ${index} wurde geklickt!`);
     console.log(loadedContacts[index]);
 
-    if (window.innerWidth < 1150) {
+    if (window.innerWidth < 830) {
         document.getElementById('contacts').classList.add('d-none');
         let contentRef = document.getElementById('contact-details-wrapper-id');
         contentRef.classList.remove('contact-detail-hidden');
