@@ -139,7 +139,6 @@ body {
 .task-container {
   min-height: 400px;
   border: 2px dashed #00000000;
-  height: calc(100vh - 300px);
   overflow-y: auto;
 }
 
@@ -712,6 +711,96 @@ textarea {
   background: #a8a8a8;
   border-radius: 10px;
 }
+.modal-container {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-body {
+  position: relative;
+  margin: 5% auto;
+  padding: 20px;
+  width: 80%;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 25px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  color: black;
+}
+
+/* Add Task Button */
+.btn-add-task {
+  background-color: #4caf50; /* Grüner Hintergrund */
+  color: white; /* Weiße Schrift */
+  font-size: 16px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px; /* Abgerundete Ecken */
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Leichter Schatten */
+  transition: all 0.2s ease; /* Glatter Hover-Effekt */
+}
+
+.btn-add-task:hover {
+  background-color: #45a049; /* Dunkleres Grün beim Hover */
+  transform: scale(1.05); /* Leichtes Vergrößern */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Intensiverer Schatten */
+}
+@media (max-width: 768px) {
+  .modal-body {
+      width: 95%; /* Verkleinertes Modal auf kleineren Bildschirmen */
+      height: 90%; /* Höhere Vertikale für kleinere Bildschirme */
+      margin: 5% auto; /* Zentriert mit weniger Abstand */
+  }
+}
+
+/* Animation beim Öffnen des Modals */
+.modal-container {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
+.modal-body {
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+      transform: translateY(-50px);
+  }
+  to {
+      transform: translateY(0);
+  }
+}
+
 
 @media screen and (min-width: 768px) {
   h2 {
