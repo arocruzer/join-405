@@ -108,7 +108,7 @@ function selectCategory(category) {
 
 
 
-subtaskInput.addEventListener('input', () => {
+/* subtaskInput.addEventListener('input', () => {
     if (subtaskInput.value.trim()) {
         addSubtaskBtn.style.display = 'none';
         document.getElementById('confirm-subtask-btn').style.display = 'inline';
@@ -118,7 +118,7 @@ subtaskInput.addEventListener('input', () => {
         document.getElementById('confirm-subtask-btn').style.display = 'none';
         document.getElementById('cancel-subtask-btn').style.display = 'none';
     }
-});
+}); */
 
 function confirmSubtask() {
     const subtaskText = subtaskInput.value.trim();

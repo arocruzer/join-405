@@ -85,6 +85,8 @@ span {
 .date {
   display: flex;
   flex-direction: column;
+  text-align: center;
+  padding-right: 10px;
   gap: 13px;
 }
 .date p {
@@ -161,6 +163,11 @@ span {
 .header {
   display: none;
 }
+@media (max-width: 1370px){
+  h1{
+    font-size: 47px;
+  }
+}
 @media (max-width: 1190px) {
   .regards {
     display: none;
@@ -169,7 +176,9 @@ span {
     align-items: center;
   }
   .hero {
-    padding-left: 10px;
+    justify-content: center;
+    align-items: center;
+    padding-left: 0;
   }
 }
 @media screen and (max-width: 830px) {
@@ -177,7 +186,7 @@ span {
     border-radius: unset;
   }
   .hero {
-    padding-top: 110px;
+    padding-top: 48px;
     height: calc(100vh - 160px);
     justify-content: flex-start;
   }
@@ -237,5 +246,8 @@ span {
   }
   .tasks-status-container {
     flex-direction: column;
+  }
+  .title-summary{
+    align-items: center;
   }
 }

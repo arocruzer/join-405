@@ -340,6 +340,12 @@ input::placeholder {
   display: none;
 }
 
+@media (max-width: 1190px){
+  .form-container{
+    gap: 10px;
+  }
+}
+
 @media screen and (min-width: 768px) {
   #add-task-button {
     border-radius: unset;

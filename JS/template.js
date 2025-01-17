@@ -185,7 +185,7 @@ function getSubtasksTemplate(subtask, index){
                             <input onfocus="editSubtask()" type="text" value="${subtask}">
                         </div>
                         <div class="images-container" id="images-container">
-                            <img id="edit-subtask-img" onclick="editSubtask()" src="../Assets/edit.png" alt="Edit Icon">
+                            <img id="edit-subtask-img" onclick="confirmSubtask()" src="../Assets/edit.png" alt="Edit Icon">
                             <hr>
                             <button class="delete-btn" onclick="deleteSubtask(${index})"><img id="delete-subtask" src="../Assets/delete.png" alt="delete Icon"></button>
                         </div>
