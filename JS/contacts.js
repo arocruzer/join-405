@@ -39,7 +39,7 @@ function openContactDetailsOverlay(index){
     console.log(`Kontakt ${index} wurde geklickt!`);
     console.log(loadedContacts[index]);
 
-    if (window.innerWidth < 830) {
+    if (window.innerWidth < 950) {
         document.getElementById('contacts').classList.add('d-none');
         let contentRef = document.getElementById('contact-details-wrapper-id');
         contentRef.classList.remove('contact-detail-hidden');

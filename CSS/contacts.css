@@ -1,10 +1,12 @@
 /* Contacts Overview */
 
 .content-wrapper {
-  width: 100%;
   display: flex;
+  justify-content: center;
+  width: 100%;
   overflow: hidden;
   height: calc(100vh - 100px);
+  background-color: white;
 }
 
 .contacts-wrapper{
@@ -12,7 +14,7 @@
   flex-direction: column;
   align-items: center;
   background-color: white;
-  min-width: 500px;
+  /* min-width: 500px; */
 }
 
 .contacts-list {
@@ -182,7 +184,7 @@
 .detail-contact-avatar {
   width: 80px;
   height: 80px;
-  border-radius: 100%;
+  border-radius: 100%!important;
   background-color: rgb(255, 89, 0);
   color: white;
   font-size: 27px;
@@ -217,10 +219,13 @@
   color: #007cee;
 }
 
+.three-points-menu-div{
+  display: flex;
+  justify-content: flex-end;
+}
+
 .three-points-menu {
-  position: fixed;
-  top: 70%;
-  left: 80%;
+display: block;
 }
 
 .edit-delete-div {
@@ -516,13 +521,21 @@
 
 /* Responsive */
 
-@media screen and (min-width: 830px) {
+@media screen and (max-width:850px) {
   
+}
+
+@media screen and (min-width: 830px) {
+  .content-wrapper{
+    justify-content: center;
+    background-color: white;
+  }
 }
 
 @media screen and (min-width: 950px) {
   .contact-detail-hidden {
-    display: block;
+    display: flex;
+    flex-direction: column;
   }
   .add-contact-button{
     display: none;
@@ -530,6 +543,9 @@
   .newContactButton {
     display: flex;
   }
+  /* .three-points-menu{
+    display: none;
+  } */
 }
 
 @media screen and (min-width: 1150px) {
@@ -538,11 +554,11 @@
     max-width: 450px;
     height: calc(100vh - 100px);
   } */
-
+/* 
   .content-wrapper {
     height: 100vh;
     position: fixed;
-  }
+  } */
 
   .contacts-container {
     flex: 1;

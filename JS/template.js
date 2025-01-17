@@ -88,7 +88,9 @@ function HTMLopenContactDetailsOverlay(index){
                 <h5>Phone</h5>
                 <a href="#">${loadedContacts[index].phone}</a>
             </div>
-            <img class="three-points-menu" src="../Assets/threePointsMenu.png" onclick="openEditContactOverlay()" alt="threePointsMenu">
+            <div class="three-points-menu-div">
+                <img class="three-points-menu" src="../Assets/threePointsMenu.png" onclick="openEditContactOverlay()" alt="threePointsMenu">
+            </div>
         <div class="edit-contact-details-overlay d-none" id="edit-contact-details-overlay-id">
             <div class="overlay-edit-contact">
                 <div class="middle-avatar">TW</div>
