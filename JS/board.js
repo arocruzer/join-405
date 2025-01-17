@@ -290,7 +290,7 @@ function addButton() {
     const headerBoard = document.getElementById('sectionBoard');
     const headerBoardPlus = document.getElementById('sectionBoardPlus');
     
-    if (window.innerWidth < 768) {
+    if (window.innerWidth < 1355) {
         headerBoard.classList.remove('hidden');  // Korrekt geschrieben
         headerBoardPlus.classList.add('hidden'); // Korrekt geschrieben
     } else {
