@@ -33,7 +33,7 @@ async function loadAllContacts(path=""){
   });
   if (typeof renderContacts === "function") {
     renderContacts(contacts);
-} 
+  } 
 }
 function changePasswordImg() {
   if (password && password.value) {
