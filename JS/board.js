@@ -305,44 +305,73 @@ window.addEventListener('DOMContentLoaded', addButton);
 
 let draggedTaskId = null;
 
-// Task ziehen starten
+// Task dragging starts
 function drag(event) {
-    draggedTaskId = event.target.id; // Speichert die ID der gezogenen Aufgabe
+    draggedTaskId = event.target.id; // Store the ID of the dragged task
+    event.dataTransfer.effectAllowed = "move";
 }
 
-// Drag-Überprüfung erlauben
+// Allow drop and add highlight to the task container
 function allowDrop(event) {
-    event.preventDefault(); // Verhindert Standardverhalten, um Ablegen zu ermöglichen
+    event.preventDefault(); // Prevent default behavior to allow dropping
+    const taskContainer = event.target.closest('.task-container');
+    if (taskContainer) {
+        // Remove highlight from other task containers
+        document.querySelectorAll('.task-container.highlight-drop').forEach((container) => {
+            container.classList.remove('highlight-drop');
+        });
+        // Add highlight to the current task container
+        taskContainer.classList.add('highlight-drop');
+    }
 }
 
-// Task ablegen
+// Remove highlight from all task containers
+function removeHighlight() {
+    document.querySelectorAll('.task-container.highlight-drop').forEach((container) => {
+        container.classList.remove('highlight-drop');
+    });
+}
+
+// Handle dropping the task
 function drop(event) {
-    event.preventDefault(); // Verhindert Standardverhalten
+    event.preventDefault(); // Prevent default behavior
+    const targetTaskContainer = event.target.closest('.task-container');
+    removeHighlight(); // Remove all highlights after dropping
 
-    const targetColumnId = event.target.closest('.column').id; // Zielt auf die Spalte ab, in der die Aufgabe abgelegt wurde
-    const draggedTaskElement = document.getElementById(draggedTaskId);
+    if (targetTaskContainer && draggedTaskId) {
+        const draggedTaskElement = document.getElementById(draggedTaskId);
+        const sourceTaskContainer = draggedTaskElement.closest('.task-container');
 
-    if (draggedTaskElement && targetColumnId) {
-        const sourceColumnId = draggedTaskElement.closest('.column').id;
+        if (draggedTaskElement && targetTaskContainer !== sourceTaskContainer) {
+            // Move the task in the DOM
+            targetTaskContainer.appendChild(draggedTaskElement);
 
-        // Aufgabe von der Quellspalte entfernen
-        let sourceTasks = JSON.parse(localStorage.getItem(sourceColumnId)) || [];
-        const draggedTask = sourceTasks.find(task => task.id === draggedTaskId);
-        sourceTasks = sourceTasks.filter(task => task.id !== draggedTaskId);
-        localStorage.setItem(sourceColumnId, JSON.stringify(sourceTasks));
+            // Update localStorage for source and target containers
+            const sourceColumnId = sourceTaskContainer.closest('.column').id;
+            const targetColumnId = targetTaskContainer.closest('.column').id;
 
-        // Aufgabe zur Zielspalte hinzufügen
-        let targetTasks = JSON.parse(localStorage.getItem(targetColumnId)) || [];
-        if (draggedTask) {
-            targetTasks.push(draggedTask);
-            localStorage.setItem(targetColumnId, JSON.stringify(targetTasks));
+            const sourceTasks = JSON.parse(localStorage.getItem(sourceColumnId)) || [];
+            const targetTasks = JSON.parse(localStorage.getItem(targetColumnId)) || [];
 
-            // UI aktualisieren
+            const taskIndex = sourceTasks.findIndex((task) => task.id === draggedTaskId);
+            if (taskIndex > -1) {
+                targetTasks.push(sourceTasks.splice(taskIndex, 1)[0]);
+                localStorage.setItem(sourceColumnId, JSON.stringify(sourceTasks));
+                localStorage.setItem(targetColumnId, JSON.stringify(targetTasks));
+            }
+
+            // Update UI
             loadTasks(sourceColumnId);
             loadTasks(targetColumnId);
         }
     }
 }
+
+// Attach dragleave event to remove highlight when dragging leaves a container
+document.querySelectorAll('.task-container').forEach((taskContainer) => {
+    taskContainer.addEventListener('dragleave', removeHighlight);
+});
+
 
 function editTask() {
     const taskId = currentTaskId;

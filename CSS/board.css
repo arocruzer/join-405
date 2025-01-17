@@ -154,9 +154,20 @@ body {
   cursor: grabbing;
 }
 
-.highlight {
-  border: 2px dashed #dbdbdb;
+.task-container.highlight-drop {
+  border: 2px dashed #848788; /* Highlight border color */
+  background-color: #e4e5e6; /* Light blue background */
+  border-radius: 8px;
 }
+
+
+.user-card:active {
+  opacity: 0.8;
+  transform: scale(1.02); /* Slightly enlarge */
+  cursor: grabbing;
+  z-index: 1000; /* Ensure it's above everything */
+}
+
 
 .user-card {
   display: flex;
