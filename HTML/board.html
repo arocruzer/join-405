@@ -74,7 +74,7 @@
                   <div class="task-list">
                       <div class="no-tasks">No tasks In progress</div>
                   </div>
-                  <div class="task-container" id="in-progress-tasks">
+                  <div class="task-container  in-progress" id="in-progress-tasks">
                   </div>
               </div>
               <div class="column" id="await-feedback" ondragover="allowDrop(event)" ondrop="drop(event)">
@@ -85,7 +85,7 @@
                   <div class="task-list">
                       <div class="no-tasks">No tasks Await feedback</div>
                   </div>
-                  <div class="task-container" id="await-feedback-tasks"></div>
+                  <div class="task-container  await-feedback" id="await-feedback-tasks"></div>
               </div>
               <div class="column" id="done" ondragover="allowDrop(event)" ondrop="drop(event)">
                   <div class="column-header">
@@ -94,7 +94,7 @@
                   <div class="task-list">
                       <div class="no-tasks">No tasks Done</div>
                   </div>
-                  <div class="task-container" id="done-tasks">
+                  <div class="task-container  done" id="done-tasks">
                   </div>
               </div>
           </div>
@@ -102,34 +102,38 @@
       <!-- Modal for Task Details -->
      <div id="taskModal" class="modal">
         <div class="modal-content">
-          <span class="close-button" onclick="closeTaskModal()">&times;</span>
+            <div class="task-modal">
+                <span class="close-button" onclick="closeTaskModal()">&times;</span>
           
-          <!-- Kategorie als Label -->
-          <div class="modal-category" id="modalCategory">User Story</div>
-  
-          <!-- Titel -->
-          <h2 id="modalTitle"></h2>
-          
-          <!-- Beschreibung -->
-          <p id="modalDescription"></p>
-          
-          <!-- Fälligkeitsdatum und Priorität -->
-          <p><strong>Due date:</strong> <span id="modalDueDate"></span></p>
-          <p><strong>Priority:</strong> <span id="modalPriority"></span></p>
-      
-          
-          <!-- Zugewiesene Benutzer -->
-          <p><strong>Assigned To:</strong></p>
-          <div id="modalAssignedUsers"></div>
-  
-          <p><strong>Subtasks:</strong></p>
-          <div id="modalSubtasks"></div>
-  
-          <!-- Edit und Delete Buttons -->
-          <div class="modal-footer">
-              <button onclick="deleteTask()" class="delete-button"><img src="../Assets/delete.png" alt="Delete Icon"> Delete</button>
-              <button onclick="editTask()" class="edit-button"><img src="../Assets/edit.png" alt="Edit Icon"> Edit</button>
-          </div>
+                <!-- Kategorie als Label -->
+                <div class="modal-category" id="modalCategory">User Story</div>
+        
+                <!-- Titel -->
+                <h2 id="modalTitle"></h2>
+                
+                <!-- Beschreibung -->
+                <p id="modalDescription"></p>
+                
+                <!-- Fälligkeitsdatum und Priorität -->
+                <p class="modalDueDate"><strong>Due date:</strong> <span id="modalDueDate"></span></p>
+                <p class="modalPriority"><strong>Priority:</strong> <span id="modalPriority"></span></p>
+            
+                
+                <!-- Zugewiesene Benutzer -->
+                <p><strong>Assigned To:</strong></p>
+                <div id="modalAssignedUsers"></div>
+        
+                <p><strong>Subtasks:</strong></p>
+                <div id="modalSubtasks"></div>
+        
+                <!-- Edit und Delete Buttons -->
+                <div class="modal-footer">
+                    <img onclick="deleteTask()" class="delete-button" src="../Assets/delete_black.png" alt="Delete Icon">
+                    <span class="line">|</span>
+                    <img onclick="editTask()" class="edit-button" src="../Assets/edit_black.png" alt="Edit Icon">
+                </div>
+            </div>
+         
         </div>
      </div>
   

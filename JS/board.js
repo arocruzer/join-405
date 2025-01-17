@@ -28,7 +28,7 @@ function renderTask(task) {
     }
     return `
         <div class="user-card" draggable="true" id="${task.id}" ondragstart="drag(event)" onclick="openTaskDetails('${task.id}')">
-            <div class="user-story-card">
+            <div class="user-story-card todo">
                 <div class="progress-container">
                     <h3 class="category-label ${categoryClass}">${task.category}</h3>
                 </div>
