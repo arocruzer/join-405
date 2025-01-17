@@ -11,7 +11,7 @@
 .hero {
   display: block;
   padding-top: 110px;
-  padding-left: 46px;
+  padding-left: 96px;
 }
 .form-container {
   display: flex;
@@ -258,11 +258,11 @@ input::placeholder {
   top: 80px;
   overflow: auto;
   overflow-x: hidden;
-  width: 430px;
+  width: 100%;
 }
 
 .contact {
-  width: 396px;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   padding: 0 16px;
@@ -339,15 +339,112 @@ input::placeholder {
 #cancelButton {
   display: none;
 }
-
+.add-clear-task{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-top: 146px;
+}
+.required{
+  display: none;
+}
 @media (max-width: 1190px){
   .form-container{
     gap: 10px;
+  }
+}
+@media (max-width: 1040px){
+  .btn-prio-urgent{
+    width: 90px;
+  }
+  .btn-prio-medium{
+    width: 90px;
+  }
+  .btn-prio-low{
+    width: 90px;
+  }
+  .subtask{
+    width: 100%;
+  }
+  .subtask input{
+    width: 100%;
+  }
+}
+@media (max-width: 830px){
+  #frame{
+    overflow-y: auto;
+  }
+  .hero{
+    padding-top: 48px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .form-container{
+    flex-direction: column;
+  }
+  hr{
+    display: none;
+  }
+  .btn-prio-urgent{
+    width: 121px;
+  }
+  .btn-prio-medium{
+    width: 121px;
+  }
+  .btn-prio-low{
+    width: 121px;
+  }
+  #main-content{
+    align-items: center;
+  }
+  .add-clear-task{
+    padding: 0;
+    position: sticky;
+    bottom: 10px;
+    background-color: #f6f7f8;
+    padding-bottom: 10px;
+    padding-top: 10px;
+  }
+  .add-clear-task p{
+    display: none;
+  }
+  .required{
+    display: block;
+  }
+  #nav-bar{
+    box-shadow: none;
   }
 }
 
 @media screen and (min-width: 768px) {
   #add-task-button {
     border-radius: unset;
+  }
+}
+
+@media (max-width: 450px){
+  .form-left{
+    width: 100%;
+  }
+  .form-right{
+    width: 100%;
+  }
+  .subtask{
+    width: 100%;
+  }
+  .subtask input{
+    width: 100%;
+  }
+}
+
+@media (max-width: 370px){
+  .btn-prio-urgent{
+    width: 80px;
+  }
+  .btn-prio-medium{
+    width: 80px;
+  }
+  .btn-prio-low{
+    width: 80px;
   }
 }
