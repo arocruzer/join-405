@@ -10,35 +10,44 @@
   />
   <link rel="icon" type="image/x-icon" href="../Assets/favIcon.png" />
 
-    <link rel="stylesheet" href="../CSS/contacts.css">
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="../CSS/header.css">
-    <link rel="stylesheet" href="../CSS/nav-bar.css">
+  <link rel="stylesheet" href="../CSS/contacts.css" />
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../CSS/header.css" />
+  <link rel="stylesheet" href="../CSS/nav-bar.css" />
 
-    <script src="../script.js"></script>
-    <script src="../JS/nav-bar.js"></script>
-    <script src="../JS/header.js"></script>
-    <script src="../JS/template.js"></script>
+  <script src="../script.js"></script>
+  <script src="../JS/nav-bar.js"></script>
+  <script src="../JS/header.js"></script>
+  <script src="../JS/template.js"></script>
 
+  <title>Join</title>
 
-    <title>Join</title>
-</head>
-
-
-
-<body onload="init()">
+  <body onload="init()">
     <div id="frame">
       <div id="main-container">
         <div id="header" w3-include-html="../HTML/header.html"></div>
-        <div class="content-wrapper" id="content-wrapper-id">            
+        <div id="main-content">
+          <div class="content-wrapper" id="content-wrapper-id">
             <div class="contacts-list" id="contacts">
-                <img onclick="OpenAddContactOverlay()" class="add-contact-button" src="../Assets/Property 1=Default.svg" alt="add_contact" >
+              <img
+                onclick="OpenAddContactOverlay()"
+                class="add-contact-button"
+                src="../Assets/Property 1=Default.svg"
+                alt="add_contact"
+              />
             </div>
-            <div class="add-contact-div-overlay d-none" id="add-contact-div-overlay-id"></div>
-            <div class="contact-details-wrapper contact-detail-hidden" id="contact-details-wrapper-id"></div>            
+            <div
+              class="add-contact-div-overlay d-none"
+              id="add-contact-div-overlay-id"
+            ></div>
+            <div
+              class="contact-details-wrapper contact-detail-hidden"
+              id="contact-details-wrapper-id"
+            ></div>
+          </div>
         </div>
       </div>
-        <div id="nav-bar" w3-include-html="../HTML/nav-bar.html"></div>
+      <div id="nav-bar" w3-include-html="../HTML/nav-bar.html"></div>
     </div>
     <script src="../JS/contacts.js"></script>
   </body>
