@@ -213,8 +213,17 @@ input:focus {
 }
 @media (max-width: 830px){
   #main-content{
-    height: 100vh;
+    height: calc(100vh - 160px);
     width: 100%;
+  }
+  .add-clear-task-mobile{
+    display: flex;
+    background-color: #f6f7f8;
+    justify-content: flex-end;
+    padding: 10px;
+  }
+  .add-clear-task-mobile p{
+    display: none;
   }
 }
 @media (max-width: 680px) {

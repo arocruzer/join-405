@@ -11,7 +11,6 @@ let selectedUsers = [];
 let selectedPriority = '';
 let contacState = 1;
 let categoryState = 1;
-/* let page = "add-task"; */
 let selectedCategory = "";
 const categorySelect = document.getElementById('categorySelect');
 const selectedCategoryElement = document.getElementById('selected-category');
@@ -49,9 +48,6 @@ function openDropDownMenuCategory() {
             categoryState = 1;
             break;
     }
-}
-function getInitials() {
-    
 }
 function addUserToTask() {
     concatList.innerHTML = ""; 
