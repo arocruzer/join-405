@@ -32,28 +32,27 @@
 ></div>
 
 <div id="usr-menu" class="usr-menu-box usr-menu-closed">
+  <button
+    id="help-button-usr-menu"
+    onclick="loadLegalDocumentUsrMenu(`help`)"
+    class="usr-menu-button"
+  >
+    Help
+  </button>
 
-  <a id="help-button-usr-menu" onclick="loadLegalDocumentUsrMenu(`help`)" class="usr-menu-nav-button">
-    <div class="usr-menu-legal-documents-button">
-      <p>Help</p>
-    </div>
-  </a>
+  <button
+    onclick="loadLegalDocumentUsrMenu(`privacy-policy`)"
+    class="usr-menu-button"
+  >
+    Privacy Policy
+  </button>
 
-  <a onclick="loadLegalDocumentUsrMenu(`privacy-policy`)" class="usr-menu-nav-button">
-    <div class="usr-menu-legal-documents-button">
-      <p>Privacy Policy</p>
-    </div>
-  </a>
+  <button
+    onclick="loadLegalDocumentUsrMenu(`legal-notice`)"
+    class="usr-menu-button"
+  >
+    Legal Notice
+  </button>
 
-  <a onclick="loadLegalDocumentUsrMenu(`legal-notice`)" class="usr-menu-nav-button">
-    <div class="usr-menu-legal-documents-button">
-      <p>Legal Notice</p>
-    </div>
-  </a>
-
-  <a class="usr-menu-nav-button" href="../index.html">
-    <div class="usr-menu-legal-documents-button">
-      <p>Log out</p>
-    </div>
-  </a>
+  <button class="usr-menu-button" href="../index.html">Log out</button>
 </div>
