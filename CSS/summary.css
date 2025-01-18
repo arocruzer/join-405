@@ -5,7 +5,6 @@
 #summary-button {
   background-color: #091931;
   color: white;
-  border-radius: 16px;
 }
 
 .title-summary h2 {
@@ -182,9 +181,6 @@ span {
   }
 }
 @media screen and (max-width: 830px) {
-  #summary-button {
-    border-radius: unset;
-  }
   .hero {
     padding-top: 48px;
     height: calc(100vh - 160px);
@@ -249,5 +245,11 @@ span {
   }
   .title-summary{
     align-items: center;
+  }
+}
+
+@media screen and (min-width: 830px) {
+  #summary-button {
+   border-radius: 0;
   }
 }

@@ -41,6 +41,7 @@
   align-items: flex-start;
   width: 100%;
 }
+
 .contacts-section-header h3 {
   padding: 17px 36px;
   font-size: 20px;
@@ -139,6 +140,7 @@
   flex-direction: column;
   gap: 16px;
 }
+
 .page-title h1 {
   font-size: 47px;
   font-weight: 700;
@@ -496,6 +498,15 @@ display: block;
   font-weight: 700;
 }
 
+#contacts-img {
+  background-image: url(../Assets/img/contacts_w_L.png);
+}
+
+#contacts-button {
+  background-color: #091931;
+  color: white;
+}
+
 .newContactButton{
   background-color: rgb(42, 54, 71);
   height: 52px;
@@ -563,10 +574,17 @@ display: block;
   .contacts-container {
     flex: 1;
   }
+
   .contact-details-wrapper {
     /* position: sticky;
     height: calc(100vh - 100px); */
     flex: 1;
   }
 
+}
+
+@media screen and (min-width: 830px) {
+  #contacts-button {
+    border-radius: 0;
+  }
 }

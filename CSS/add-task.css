@@ -416,9 +416,9 @@ input::placeholder {
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 830px) {
   #add-task-button {
-    border-radius: unset;
+   border-radius: 0;
   }
 }
 

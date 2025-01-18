@@ -484,6 +484,11 @@ body {
   gap: 10px;
 }
 
+#board-button {
+  background-color: #091931;
+  color: white;
+}
+
 @media screen and (min-width: 768px) {
   h2 {
     font-size: 12px;
@@ -504,5 +509,11 @@ body {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+  }
+}
+
+@media screen and (min-width: 830px) {
+  #board-button {
+   border-radius: 0;
   }
 }

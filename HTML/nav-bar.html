@@ -45,7 +45,7 @@
       </div>
     </a>
 
-    <a id="test" href="./board.html">
+    <a href="./board.html">
       <div>
         <button id="board-button" class="nav-button">
           <div class="nav-button-img" id="board-img"></div>
@@ -74,16 +74,20 @@
   </div>
 
   <div id="legal-documents">
-    <a onclick="loadLegalDocument(`privacy-policy`)" class="nav-button">
-      <div class="legal-documents-button">
-        <p>Privacy Policy</p>
-      </div>
-    </a>
+    <button
+      onclick="loadLegalDocument(`privacy-policy`)"
+      id="privacy-policy-button"
+      class="nav-button"
+    >
+      <p>Privacy Policy</p>
+    </button>
 
-    <a onclick="loadLegalDocument(`legal-notice`)" class="nav-button">
-      <div class="legal-documents-button">
-        <p>Legal Notice</p>
-      </div>
-    </a>
+    <button
+      onclick="loadLegalDocument(`legal-notice`)"
+      id="legal-notice-button"
+      class="nav-button"
+    >
+      <p>Legal Notice</p>
+    </button>
   </div>
 </div>
