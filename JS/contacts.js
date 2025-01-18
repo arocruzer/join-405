@@ -1,5 +1,3 @@
-let page = "contacts";
-
 function renderContacts(){
     let contentRef = document.getElementById('contacts');
     if (contentRef) {

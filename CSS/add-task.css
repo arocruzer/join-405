@@ -112,7 +112,7 @@ span {
   position: absolute;
   right: 50px;
 }
-.subtusk-input {
+.subtask-input {
   height: 40px;
   border: 1px solid #d1d1d1;
   border-radius: 10px;
@@ -230,7 +230,6 @@ input::placeholder {
 }
 .images-container{
   display: none;
-  display: flex;
   justify-content: space-between;
   width: 60px
 }
@@ -346,6 +345,9 @@ input::placeholder {
   padding-top: 146px;
 }
 .required{
+  display: none;
+}
+.confirm-subtask{
   display: none;
 }
 @media (max-width: 1190px){

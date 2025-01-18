@@ -1,4 +1,3 @@
-let page = "summary";
 let allTasks = {}; 
 
 

@@ -177,22 +177,25 @@ function HTMLOpenEditContactOverlay(){
     `;
 }
 
-function getSubtasksTemplate(subtask, index){
-    return`
-        <div class="subtask-label">
-            <ul>
+function getSubtasksTemplate(subtask, index) {
+    return `
+        <div class="subtask-label" id="subtask-label-${index}">
+            <ul id="subtask-list-${index}">
                 <li>
                     <div class="subtask">
                         <div>
-                            <input onfocus="editSubtask()" type="text" value="${subtask}">
+                            <input id="edit-subtask-${index}" onfocus="editSubtask(${index})" type="text" value="${subtask}">
                         </div>
-                        <div class="images-container" id="images-container">
-                            <img id="edit-subtask-img" onclick="confirmSubtask()" src="../Assets/edit.png" alt="Edit Icon">
+                        <div class="images-container" id="images-container-${index}">
+                            <img class="edit-subtask" id="edit-subtask-img-${index}" onclick="editSubtask(${index})" src="../Assets/edit.png" alt="Edit Icon">
+                            <img class="confirm-subtask" id="confirm-subtask-${index}" onclick="confirmSubtask(${index})" src="../Assets/check_blue.png">
                             <hr>
-                            <button class="delete-btn" onclick="deleteSubtask(${index})"><img id="delete-subtask" src="../Assets/delete.png" alt="delete Icon"></button>
+                            <button class="delete-btn" onclick="deleteSubtask(${index})">
+                                <img id="delete-subtask-${index}" src="../Assets/delete.png" alt="delete Icon">
+                            </button>
                         </div>
                     </div>
                 </li>
             </ul>
-        </div>`
+        </div>`;
 }

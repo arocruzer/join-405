@@ -4,7 +4,6 @@ let concatList = document.getElementById("contact-list");
 let btnUrgent = document.getElementById("btn-urgent");
 let btnMedium = document.getElementById("btn-medium");
 let btnLow = document.getElementById("btn-low");
-let subtaskInput = document.getElementById("subtask-input");
 let addSubtaskBtn = document.getElementById("add-subtask-btn");
 let subtaskList = [];
 let selectedUsers = [];
@@ -129,27 +128,6 @@ function selectCategory(category) {
     }
 }); */
 
-function confirmSubtask() {
-    const subtaskText = subtaskInput.value.trim();
-    if (subtaskText) {
-        subtaskList.push(subtaskText);
-        subtaskInput.value = '';
-        renderSubtasks();
-    }
-}
-
-function cancelSubtask() {
-    subtaskInput.value = '';
-    addSubtaskBtn.style.display = 'inline';
-    document.getElementById('confirm-subtask-btn').style.display = 'none';
-    document.getElementById('cancel-subtask-btn').style.display = 'none';
-}
-
-function deleteSubtask(index) {
-    subtaskList.splice(index, 1);
-    renderSubtasks();
-}
-
 function changeColorPrioBtn(priority) {
     let imgSources = {
         urgent: ["../Assets/prio_arrow_white.png", "../Assets/prio_line_orange.png", "../Assets/prio_low.png"],
@@ -220,7 +198,6 @@ function cancelSubtask() {
 /* function editSubtask(button) {
     const listItem = button.parentElement;
     const inputField = listItem.querySelector('input');
-    inputField.removeAttribute('readonly');
     inputField.focus();
     button.innerText = `<img src="../Assets/check.png" alt="check Icon">`;
     button.onclick = function () {
@@ -239,15 +216,51 @@ function renderSubtasks() {
     });
 }
 
-function editSubtask() {
-    let confirmEdit = document.getElementById("edit-subtask-img");
-    let deleteSubtask = document.getElementById("delete-subtask");
-    let imagesContainer = document.getElementById("images-container");
+function editSubtask(index) {
+    let editSubtaks = document.getElementById(`edit-subtask-img-${index}`);
+    let deleteSubtask = document.getElementById(`delete-subtask-${index}`);
+    let imagesContainer = document.getElementById(`images-container-${index}`);
+    let confrimEdit = document.getElementById(`confirm-subtask-${index}`);
 
-    confirmEdit.src ="../Assets/check_blue.png";
+    editSubtaks.style.display = "none";
+    confrimEdit.style.display = "flex";
     deleteSubtask.src = "../Assets/delete.png";
     imagesContainer.style.flexDirection = "row-reverse";
 
+    inputOnFocus(index)
+}
+function inputOnFocus(index) {
+    let editSubtask = document.getElementById(`edit-subtask-${index}`);
+    let subtaskList = document.getElementById(`subtask-list-${index}`);
+    let subtaskLabel = document.getElementById(`subtask-label-${index}`);
+    let length = editSubtask.value.length
+
+    editSubtask.focus();
+    editSubtask.setSelectionRange(length, length);
+    editSubtask.style.backgroundColor = "white";
+    subtaskLabel.style.backgroundColor = "white";
+    subtaskList.style.borderBottom = "1px solid #29abe2";
+}
+function confirmSubtask(index) {
+    const editInput = document.getElementById(`edit-subtask-${index}`);
+    const updatedValue = editInput.value.trim();
+
+    if (updatedValue) {
+        subtaskList[index] = updatedValue; 
+        renderSubtasks(); 
+    }
+}
+
+function cancelSubtask() {
+    subtaskInput.value = '';
+    addSubtaskBtn.style.display = 'inline';
+    document.getElementById('confirm-subtask-btn').style.display = 'none';
+    document.getElementById('cancel-subtask-btn').style.display = 'none';
+}
+
+function deleteSubtask(index) {
+    subtaskList.splice(index, 1);
+    renderSubtasks();
 }
 
 function getFormInputValue(inputId) {
