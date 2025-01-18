@@ -489,6 +489,11 @@ body {
   color: white;
 }
 
+
+#board-img {
+  background-image: url(../Assets/img/board_w_L.png);
+}
+
 @media screen and (min-width: 768px) {
   h2 {
     font-size: 12px;
