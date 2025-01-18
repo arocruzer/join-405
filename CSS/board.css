@@ -875,14 +875,14 @@ textarea {
   margin: 5% auto;
   border-radius: 8px;
   width: 80%;
-  max-width: 600px;
+  max-width: 1200px;
 }
 
-.modal.show {
+.modal-task.show {
   display: block;
 }
 
-.close-button {
+.close-button-task {
   float: right;
   font-size: 1.5rem;
   cursor: pointer;
