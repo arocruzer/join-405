@@ -42,7 +42,14 @@ function renderTask(task) {
                 </div>
                 <div class="user-container">
                     <div class="user-avatar-container">
-                        ${task.assignedUsers.map(user => `<div class="user-avatar" style="background-color: ${user.color};">${user.name[0]}</div>`).join('')}
+                     ${task.assignedUsers.map(user => {
+                         const nameParts = user.name.split(' '); // Split the name into parts
+                         const initials = nameParts.length > 1 
+                            ? nameParts[0][0] + nameParts[1][0] // First and last initials
+                            : nameParts[0][0]; // Only first initial if there's no last name
+                         return `<div class="user-avatar" style="background-color: ${user.color};">${initials.toUpperCase()}</div>`;
+                     }).join('')}
+                    
                     </div>
                     <p>${priorityIcon ? `<img src="${priorityIcon}" alt="${task.priority} Priority" style="height:10px;">` : task.priority}</p>
                 </div>
@@ -262,6 +269,9 @@ function openTaskDetails(taskId) {
     const task = tasks.find(task => task.id === taskId);
     if (task) {
         currentTaskId = taskId;
+        const modalCategory = document.getElementById('modalCategory');
+        modalCategory.innerText = task.category || "No Category";
+        modalCategory.className = `category-label ${task.categoryClass || ""}`;
         document.getElementById('modalTitle').innerText = task.title;
         document.getElementById('modalDescription').innerText = task.description;
         const dueDateElement = document.getElementById('modalDueDate');
