@@ -94,6 +94,19 @@ function addedUsers() {
       addedUsers.innerHTML += renderAddedUsers(color, initials);
   });
 }
+function clearTask() {
+    document.getElementById("title-input").value = "";
+    document.getElementById("description").value = "";
+    document.getElementById("addedUers").innerHTML = "";
+    document.getElementById("date-input").value = "";
+    document.getElementById("newSubtask").value = "";
+    document.getElementById("subtaskLabels").innerHTML = "";
+    document.getElementById("selected-category").innerHTML = "Select task category";
+    btnMedium.style.backgroundColor = '#FFA800';
+    btnMedium.src = "../Assets/prio_line_orange.png";
+    btnLow.style.backgroundColor = '#ffffff';
+    btnUrgent.style.backgroundColor = '#ffffff';
+}
 
 
 // Auswahl der Kategorie und Dropdown schließen
@@ -108,7 +121,7 @@ function selectCategory(category) {
 
 
 
-subtaskInput.addEventListener('input', () => {
+/* subtaskInput.addEventListener('input', () => {
     if (subtaskInput.value.trim()) {
         addSubtaskBtn.style.display = 'none';
         document.getElementById('confirm-subtask-btn').style.display = 'inline';
@@ -118,7 +131,7 @@ subtaskInput.addEventListener('input', () => {
         document.getElementById('confirm-subtask-btn').style.display = 'none';
         document.getElementById('cancel-subtask-btn').style.display = 'none';
     }
-});
+}); */
 
 function confirmSubtask() {
     const subtaskText = subtaskInput.value.trim();

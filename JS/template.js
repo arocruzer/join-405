@@ -88,7 +88,9 @@ function HTMLopenContactDetailsOverlay(index){
                 <h5>Phone</h5>
                 <a href="#">${loadedContacts[index].phone}</a>
             </div>
-            <img class="three-points-menu" src="../Assets/threePointsMenu.png" onclick="openEditContactOverlay()" alt="threePointsMenu">
+            <div class="three-points-menu-div">
+                <img class="three-points-menu" src="../Assets/threePointsMenu.png" onclick="openEditContactOverlay()" alt="threePointsMenu">
+            </div>
         <div class="edit-contact-details-overlay d-none" id="edit-contact-details-overlay-id">
             <div class="overlay-edit-contact">
                 <div class="middle-avatar">TW</div>
@@ -121,22 +123,27 @@ function HTMLOpenAddContactOverlay(){
     return`
     <div class="overlay-edit-contact">
         <div class="middle-avatar">TW</div>
-            <div class="upper-half">
-                <div class="cross-close" onclick="closeAddContactOverlay()">X</div>
-                <div class="edit-contact-title">
-                    <h1>Add contact</h1>
-                    <h6>Tasks are better with a team!</h6>
-                    <div class="blue-line"></div>
-                </div>
+        <div class="upper-half">
+            <div class="cross-close" onclick="closeAddContactOverlay()">X</div>
+            <div class="edit-contact-title">
+                <h1>Add contact</h1>
+                <h6>Tasks are better with a team!</h6>
+                <div class="blue-line"></div>
             </div>
-            <div class="lower-half">
+        </div>
+        <div class="lower-half">
+            <form id="contactForm" onsubmit="return validateContactForm()">
                 <div class="input-fields-add">
                     <input class="input-person" placeholder="Name" type="text" id="add-input-name-id">
+                    <span id="name-error" class="error-message"></span>
                     <input class="input-mail" placeholder="Email" type="email" id="add-input-mail-id">
+                    <span id="mail-error" class="error-message"></span>
                     <input class="input-phone" placeholder="Phone" type="tel" id="add-input-phone-id">
+                    <span id="phone-error" class="error-message"></span>
                     <button onclick="addNewContact()" class="create-button">Create contact<i class="fa-sharp-duotone fa-solid fa-check"></i></button>
                 </div>
-            </div>
+            </form>
+        </div>
         </div>
     </div>
     `;
@@ -180,7 +187,7 @@ function getSubtasksTemplate(subtask, index){
                             <input onfocus="editSubtask()" type="text" value="${subtask}">
                         </div>
                         <div class="images-container" id="images-container">
-                            <img id="edit-subtask-img" onclick="editSubtask()" src="../Assets/edit.png" alt="Edit Icon">
+                            <img id="edit-subtask-img" onclick="confirmSubtask()" src="../Assets/edit.png" alt="Edit Icon">
                             <hr>
                             <button class="delete-btn" onclick="deleteSubtask(${index})"><img id="delete-subtask" src="../Assets/delete.png" alt="delete Icon"></button>
                         </div>
