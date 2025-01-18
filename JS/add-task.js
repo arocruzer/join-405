@@ -288,3 +288,9 @@ function addTask() {
     saveTaskToLocalStorage(currentColumn, newTask);
     window.location.href = 'board.html';
 }
+
+function loadScripts() {
+    const script = document.createElement('script');
+    script.src = '/JS/add-task.js';
+    document.body.appendChild(script);
+}

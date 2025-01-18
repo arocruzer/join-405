@@ -111,10 +111,34 @@ function updateTaskVisibilityById(columnId) {
     taskList.style.display = tasks.length > 0 ? 'none' : 'block';
 }
 
-function openInputPage(columnId) {
+/*function openInputPage(columnId) {
     localStorage.setItem('currentColumn', columnId);
     window.location.href = "/HTML/add-task.html";
+}*/
+function openInputPage(columnId) {
+    localStorage.setItem('currentColumn', columnId);
+
+    // Lade den Inhalt der "add-task.html"
+    fetch('/HTML/add-task.html')
+        .then(response => response.text())
+        .then(html => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+
+            // Extrahiere den <div id="main-content">-Inhalt
+            const mainContent = doc.getElementById('main-content');
+
+            if (mainContent) {
+                document.getElementById('main-content-placeholder').innerHTML = mainContent.innerHTML;
+                document.getElementById('modalAddtask').classList.add('show');
+            }
+        });
 }
+
+function closeModal() {
+    document.getElementById('modalAddtask').classList.remove('show');
+}
+
 
 function searchTasks() {
     let searchText = '';
