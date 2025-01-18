@@ -78,12 +78,6 @@
   z-index: 2;
 }
 
-.usr-menu-nav-button {
-
-}
-
-
-
 .usr-menu-box p {
   padding: 8px 16px;
   gap: 8px;
@@ -110,10 +104,6 @@
 
 .ar-overlay-closed {
   display: unset;
-}
-
-.usr-menu-legal-documents-button{
-
 }
 
 @media screen and (min-width: 830px) {
