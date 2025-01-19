@@ -151,7 +151,7 @@ function searchTasks() {
     let searchText = '';
     
     // Überprüfen, welches Input-Feld aktiv ist
-    const searchInputs = document.querySelectorAll('#search');
+    const searchInputs = document.querySelectorAll('#search')|| document.querySelectorAll('#searchTask');
     searchInputs.forEach(input => {
         if (input.offsetParent !== null) { // Nur sichtbares Inputfeld nutzen
             searchText = input.value.trim().toLowerCase();

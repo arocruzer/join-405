@@ -65,6 +65,15 @@ body {
   font-size: 14px;
   color: #666;
 }
+#searchTask{
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  color: #666;
+}
+
 .search-icon {
   width: 26px;
   height: 18px;
@@ -163,6 +172,8 @@ body {
 
 .user-card:active {
   opacity: 0.1;
+  cursor: grabbing;
+  z-index: 1000; /* Ensure it's above everything */
 }
 
 
