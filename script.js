@@ -166,7 +166,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let isMobile = window.innerWidth <= 830;
   let isAnimationShowSummary = localStorage.getItem("welcomeAnimationShowSummary");
   let regardDiv = document.getElementById("regardsUser");
-  let navBar = document.getElementById("nav-bar"); 
   if (!regardDiv){
     return;
   }
