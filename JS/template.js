@@ -108,11 +108,11 @@ function HTMLopenContactDetailsOverlay(index){
                 <div class="lower-half-edit">
                     <div class="input-fields-add">
                         <input class="input-layout input-person" value="${loadedContacts[index].name}" placeholder="Name" type="text" id="edit-input-name-id">
-                        <div id="name-error" class="input-layout error-message"></div>
+                        <div id="name-error-id" class="input-layout error-message"></div>
                         <input class="input-layout input-mail" value="${loadedContacts[index].email}" placeholder="Email" type="email" id="edit-input-mail-id">
-                        <div id="mail-error" class="input-layout error-message"></div>
+                        <div id="mail-error-id" class="input-layout error-message"></div>
                         <input class="input-layout input-phone" value="${loadedContacts[index].phone}" placeholder="Phone" type="tel" id="edit-input-phone-id">
-                        <div id="phone-error" class="input-layout error-message"></div>
+                        <div id="phone-error-id" class="input-layout error-message"></div>
                         <div class="delete-safe-buttons">
                             <button onclick="deleteContact(${index})" class="delete-button">Delete</button>
                             <button onclick="editContact(${index})" class="save-button">Save<i class="fa-sharp-duotone fa-solid fa-check save-padding"></i></button>

@@ -134,7 +134,6 @@ function createNewContact(name, mail, phone){
 }
 
 
-
 //Edit Contacts
 
 function openEditContactOverlay(){
@@ -152,7 +151,7 @@ function editContact(index){
     let mailInput = document.getElementById('edit-input-mail-id').value
     let phoneInput = document.getElementById('edit-input-phone-id').value;
 
-    let isValid = validateName(nameInput) && validateEmail(mailInput) && validatePhone(phoneInput);
+    let isValid = validateEditName(nameInput) && validateEditEmail(mailInput) && validateEditPhone(phoneInput);
 
     if (isValid) {
         let editedContact = createNewContact(nameInput, mailInput, phoneInput);
@@ -162,20 +161,39 @@ function editContact(index){
         closeContactDetailsOverlay();
     } return
 
+}
 
-    // let newContact = 
-    // {
-    //     name: nameInput,
-    //     email: mailInput,
-    //     phone: phoneInput,
-    //     letter: vorname[0],
-    //     initialien: initialien
-    // };
-    // loadedContacts[index] = newContact;
+function validateEditName(name){
+    const nameRegex = /^[a-zA-ZäöüßÄÖÜ\s]+$/;
+    const nameError = document.getElementById('name-error-id');
+    nameError.innerHTML = "";
+    if (!nameRegex.test(name)) {
+      nameError.innerHTML = "Bitte einen gültigen Namen eingeben"
+      return false;
+    } else {
+        return true;
+    }
+}
 
-    // renderContacts();
-    // closeEditContactOverlay();
-    // closeContactDetailsOverlay();
+function validateEditEmail(mail){
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const mailError = document.getElementById('mail-error-id');
+    mailError.innerHTML = "";
+    if(!emailRegex.test(mail)){
+        mailError.innerHTML = "ungültiges Email Format";
+        return false;
+    } return true;
+}
+
+function validateEditPhone(phonenumber){
+    const phoneError = document.getElementById('phone-error-id');
+    const digitCount = Math.abs(phonenumber).toString().length;
+    phoneError.innerHTML = "";
+
+    if(digitCount < 8){
+        phoneError.innerHTML = "ungültige Telefonnummer";
+        return false;
+    } return true;
 }
 
 function deleteContact(index){
