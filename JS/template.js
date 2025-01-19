@@ -16,8 +16,12 @@ function renderAddedUsers(color, initials) {
             </div>`;
 }
 
-function regardsUserTemplate(greeting, userName) {
+function regardsGastTemplate(greeting, userName) {
   return `<h2>${greeting}</h2> <h1>${userName}</h1>`;
+}
+
+function regardsUserTemplate(greeting, userName) {
+    return `<h2>${greeting},</h2> <h1>${userName}</h1>`;
 }
 
 function renderUserLogo(initials, color, user) {
@@ -180,16 +184,15 @@ function HTMLOpenEditContactOverlay(){
 function getSubtasksTemplate(subtask, index) {
     return `
         <div class="subtask-label" id="subtask-label-${index}">
-            <ul id="subtask-list-${index}">
+            <ul id="subtask-list">
                 <li>
                     <div class="subtask">
                         <div>
-                            <input id="edit-subtask-${index}" onfocus="editSubtask(${index})" type="text" value="${subtask}">
+                            <input id="edit-subtask-${index}" class="edit-subtask" type="text" value="${subtask}" onfocus="editSubtask(${index})">
                         </div>
                         <div class="images-container" id="images-container-${index}">
-                            <img class="edit-subtask" id="edit-subtask-img-${index}" onclick="editSubtask(${index})" src="../Assets/edit.png" alt="Edit Icon">
-                            <img class="confirm-subtask" id="confirm-subtask-${index}" onclick="confirmSubtask(${index})" src="../Assets/check_blue.png">
-                            <hr>
+                            <img class="edit-subtask-img" id="edit-subtask-img-${index}" onclick="editSubtask(${index})" src="../Assets/edit.png" alt="Edit Icon">
+                            <img class="confirm-subtask" id="confirm-subtask-${index}" onclick="confirmSubtask(${index})" src="../Assets/check_blue.png" style="display: none;">
                             <button class="delete-btn" onclick="deleteSubtask(${index})">
                                 <img id="delete-subtask-${index}" src="../Assets/delete.png" alt="delete Icon">
                             </button>

@@ -5,7 +5,37 @@ function initSummary() {
     loadTasksFromLocalStorage();
     displayTaskCounts();
     displayTotalTaskCount();
+    time();
 }
+
+function time() {
+    let date = new Date();
+    let hour = date.getHours();
+  
+    let greeting = document.getElementById("greeting");
+    if (hour >= 19) {
+      greeting = "Good Evening";
+    } else if (hour >= 12) {
+      greeting = "Good Afternoon";
+    } else if (hour >= 6) {
+      greeting = "Good Morning";
+    } else {
+      greeting = "Hello";
+    }
+     renderRegardsUser(greeting);
+  }
+  
+  function renderRegardsUser(greeting) {
+    let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    let userName = loggedInUser ? loggedInUser.name : "";
+    let regardsUser = document.getElementById("regardsUser");
+  
+    if (regardsUser && userName == "") {
+      regardsUser.innerHTML = regardsGastTemplate(greeting, userName);
+    }else{
+      regardsUser.innerHTML = regardsUserTemplate(greeting, userName);
+    }
+  }
 
 function loadTasksFromLocalStorage() {
     allTasks = {
