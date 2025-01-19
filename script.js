@@ -179,6 +179,5 @@ document.addEventListener("DOMContentLoaded", () => {
       regardDiv.style.display = "none";
     }
   } else {
-    regardDiv.style.display = "flex";
   }
 });
