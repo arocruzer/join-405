@@ -23,7 +23,6 @@ let colors = [
 
 async function init() {
   await includeHTML();
-  welcomeAnimation();
   await loadAllContacts();
   getUserLogo();
 }
@@ -129,20 +128,6 @@ function guestLogin() {
   getUserLogo();
 }
 
-function welcomeAnimation() {
-  let animation = document.getElementById("animation");
-  if (animation) {
-    animation.addEventListener("animationend", (event) => {
-      if (
-        event.animationName === "fadeOutBackground" ||
-        "fadeOutBackgorundMobile"
-      ) {
-        animation.style.display = "none";
-      }
-    });
-  }
-}
-
 function getUserLogo() {
   let userLogo = document.getElementById("user-button");
   let user = JSON.parse(localStorage.getItem("loggedInUser"));
@@ -159,3 +144,42 @@ function getUserLogo() {
     userLogo.innerHTML = renderUserLogo(initials, color, user);
   }
 }
+document.addEventListener("DOMContentLoaded", () => {
+  const isAnimationShown = localStorage.getItem("welcomeAnimationShown");
+  const animationDiv = document.getElementById("animation");
+
+  if (!animationDiv) {
+    return;
+  }
+
+  if (!isAnimationShown) {
+    setTimeout(() => {
+      animationDiv.style.display = "none";
+      localStorage.setItem("welcomeAnimationShown", "true");
+    }, 2000);
+  } else {
+    animationDiv.style.display = "none";
+  }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const isMobile = window.innerWidth <= 830; // Überprüfen, ob es ein mobiles Gerät ist
+  const isAnimationShowSummary = localStorage.getItem("welcomeAnimationShowSummary");
+  const regardDiv = document.getElementById("regardsUser");
+
+  if (!regardDiv) return;
+
+  if (isMobile) {
+    if (!isAnimationShowSummary) {
+      setTimeout(() => {
+        regardDiv.style.display = "none"; // Container nach der Animation ausblenden
+        localStorage.setItem("welcomeAnimationShowSummary", "true");
+      }, 2000); // Animation dauert 4 Sekunden
+    } else {
+      regardDiv.style.display = "none"; // Sofort ausblenden, wenn die Animation schon gezeigt wurde
+    }
+  } else {
+    // Auf Desktop sicherstellen, dass die festen Stile angewendet werden
+ /*    regardDiv.style.display = "flex"; */
+  }
+});

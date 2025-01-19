@@ -162,8 +162,8 @@ span {
 .header {
   display: none;
 }
-@media (max-width: 1370px){
-  h1{
+@media (max-width: 1370px) {
+  h1 {
     font-size: 47px;
   }
 }
@@ -180,7 +180,28 @@ span {
     padding-left: 0;
   }
 }
+@keyframes fadeOutBackground {
+  0% {
+    background-color: #f6f7f8;
+    /* color: black; */
+  }
+  100% {
+    background-color: transparent;
+    color: transparent;
+  }
+}
 @media screen and (max-width: 830px) {
+   .regards{
+    position: absolute;
+    height: 80vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f6f7f8;
+    z-index: 1000;
+    animation: fadeOutBackground 4s forwards;
+   }
   .hero {
     padding-top: 48px;
     height: calc(100vh - 160px);
@@ -243,13 +264,13 @@ span {
   .tasks-status-container {
     flex-direction: column;
   }
-  .title-summary{
+  .title-summary {
     align-items: center;
   }
 }
 
 @media screen and (min-width: 830px) {
   #summary-button {
-   border-radius: 0;
+    border-radius: 0;
   }
 }
