@@ -261,6 +261,39 @@ function updateSubtaskCompletion(taskId, index) {
         }
     }
 }
+
+function setCategoryStyle(elementId, category) {
+    const element = document.getElementById(elementId);
+
+    if (!element) return;
+
+    // Define styles for each category
+    const categoryStyles = {
+        "User Story": {
+            text: "User Story",
+            class: "user-story",
+        },
+        "Technical Task": {
+            text: "Technical Task",
+            class: "technical-task",
+        },
+    };
+
+    // Default style if category is not defined
+    const defaultStyle = {
+        text: "Uncategorized",
+        class: "uncategorized",
+    };
+
+    // Get the style for the category or default if not found
+    const style = categoryStyles[category] || defaultStyle;
+
+    // Apply the text and class
+    element.innerText = style.text;
+    element.className = style.class;
+}
+
+
 function openTaskDetails(taskId) {
     const tasks = [...JSON.parse(localStorage.getItem('todo') || "[]"), 
                    ...JSON.parse(localStorage.getItem('in-progress') || "[]"),
@@ -291,6 +324,7 @@ function openTaskDetails(taskId) {
         } else {
             subtaskList.innerHTML = '<p>Keine Subtasks verfügbar</p>';
         }
+        setCategoryStyle("modalCategory", task.category);
         
         document.getElementById('taskModal').style.display = 'block';
         updateProgressBar(task);

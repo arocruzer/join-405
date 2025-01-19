@@ -137,7 +137,7 @@ body {
 }
 
 .task-container {
-  min-height: 400px;
+  min-height: 550px;
   border: 2px dashed #00000000;
   overflow-y: auto;
 }
@@ -162,10 +162,7 @@ body {
 
 
 .user-card:active {
-  opacity: 0.8;
-  transform: scale(1.02); /* Slightly enlarge */
-  cursor: grabbing;
-  z-index: 1000; /* Ensure it's above everything */
+  opacity: 0.1;
 }
 
 
@@ -282,8 +279,8 @@ body {
   color: white;
   padding: 5px 15px;
   border-radius: 8px;
-  font-weight: bold;
   display: inline-block;
+  font-size: 16px;
 }
 
 /* Stil für Technical Task */
@@ -294,6 +291,38 @@ body {
   border-radius: 8px;
   font-size: 16px;
   display: inline-block;
+  max-width: 135px;
+}
+/* Default style */
+.uncategorized {
+  background-color: gray;
+  color: white;
+  border-radius: 8px;
+  padding: 5px 10px;
+  display: inline-block;
+  font-weight: bold;
+}
+
+/* User Story style */
+.user-story {
+  background-color: blue;
+  color: white;
+  border-radius: 8px;
+  padding: 5px 10px;
+  display: inline-block;
+  max-width: 116px;
+  font-size: 16px;
+}
+
+/* Technical Task style */
+.technical-task {
+  background-color: #20E3B2;
+  color: white;
+  border-radius: 8px;
+  padding: 5px 10px;
+  display: inline-block;
+  max-width: 135px;
+  font-size: 16px;
 }
 
 .user-container img {
@@ -407,14 +436,12 @@ body {
 .modal-content h2 {
   font-size: 28px;
   font-weight: bold;
-  margin-bottom: 16px;
   word-wrap: break-word;
 }
 
 /* Beschreibung */
 #modalDescription {
   font-size: 16px;
-  margin-bottom: 16px;
   color: #333;
 }
 
@@ -423,7 +450,6 @@ body {
 #modalPriority {
   font-size: 16px;
   font-weight: 500;
-  margin-bottom: 12px;
 }
 
 /* Subtasks */
@@ -443,7 +469,6 @@ body {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-top: 12px;
 }
 
 /* Einzelner Benutzer (Avatar + Name) */
