@@ -451,7 +451,6 @@ function editTask() {
         document.getElementById('editTitle').value = task.title;
         document.getElementById('editDescription').value = task.description;
         document.getElementById('editDueDate').value = task.dueDate;
-        setEditPriority(task.priority);
         document.getElementById('editTaskModal').style.display = 'block';
         document.getElementById('taskModal').style.display = 'none';
     }
@@ -462,19 +461,6 @@ function closeEditTaskModal() {
     document.getElementById('editTaskModal').style.display = 'none';
 }
 
-function setEditPriority(priority) {
-    document.getElementById('editPrioUrgent').classList.remove('active');
-    document.getElementById('editPrioMedium').classList.remove('active');
-    document.getElementById('editPrioLow').classList.remove('active');
-
-    if (priority === 'urgent') {
-        document.getElementById('editPrioUrgent').classList.add('active');
-    } else if (priority === 'medium') {
-        document.getElementById('editPrioMedium').classList.add('active');
-    } else if (priority === 'low') {
-        document.getElementById('editPrioLow').classList.add('active');
-    }
-}
 function saveTaskEdits() {
     const title = document.getElementById('editTitle').value.trim();
     const description = document.getElementById('editDescription').value.trim();
