@@ -1,6 +1,6 @@
-const BASE_URL =
-  "https://join-405-43178-default-rtdb.europe-west1.firebasedatabase.app/";
+const BASE_URL = "https://join-405-43178-default-rtdb.europe-west1.firebasedatabase.app/";
 let loadedContacts = [];
+let loadedTasks = [];
 let email = document.getElementById("email");
 let password = document.getElementById("password");
 let userName = document.getElementById("name");
@@ -10,20 +10,11 @@ let passwordError = document.getElementById("password-error");
 let showPasswordImg = document.getElementById("show-password-img");
 let showRepeatPasswordImg = document.getElementById("show-repeat-password-img");
 let regardsUser = document.getElementById("regardsUser");
-let colors = [
-  "#007bff",
-  "#ffa500",
-  "#800080",
-  "#d8bfd8",
-  "#ff69b4",
-  "#28a745",
-  "#ff6347",
-  "#20b2aa",
-];
 
 async function init() {
   await includeHTML();
   await loadAllContacts();
+  await loadAllTasks();
   getUserLogo();
 }
 
@@ -51,6 +42,27 @@ async function loadAllContacts(path = "") {
     renderContacts(contacts);
   }
 }
+
+async function loadAllTasks(path = "") {
+  let response = await fetch(BASE_URL + path + ".json");
+  let responsToJason = await response.json();
+
+  let task = Object.values(responsToJason.tasks);
+  task.forEach((i) => {
+    const tasks = {
+      id: i.id,
+      title: i.title,
+      category: i.category,
+      description: i.description,
+      dueDate: i.dueDate,
+      priority: i.priority,
+      subtasks: i.subtasks,
+      assignedUsers: i.assignedUsers,
+    };
+    loadedTasks.push(tasks);
+  });
+}
+
 function changePasswordImg() {
   if (password && password.value) {
     showPasswordImg.src = "../Assets/visibility_off.png";
