@@ -163,21 +163,22 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  const isMobile = window.innerWidth <= 830;
-  const isAnimationShowSummary = localStorage.getItem("welcomeAnimationShowSummary");
-  const regardDiv = document.getElementById("regardsUser");
-
-  if (!regardDiv) return;
+  let isMobile = window.innerWidth <= 830;
+  let isAnimationShowSummary = localStorage.getItem("welcomeAnimationShowSummary");
+  let regardDiv = document.getElementById("regardsUser");
+  let navBar = document.getElementById("nav-bar"); 
+  if (!regardDiv){
+    return;
+  }
 
   if (isMobile) {
     if (!isAnimationShowSummary) {
       setTimeout(() => {
         regardDiv.style.display = "none";
         localStorage.setItem("welcomeAnimationShowSummary", "true");
-      }, 3000); 
+      }, 2000); 
     } else {
       regardDiv.style.display = "none";
     }
-  } else {
   }
 });

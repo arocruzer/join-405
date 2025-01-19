@@ -10,7 +10,7 @@
   bottom: 0;
   background: #2a3647;
   color: #cdcdcd;
-  z-index: 999;
+/*   z-index: 999; */
   box-shadow: 0px 0px 4px 0px #0000001a;
 }
 

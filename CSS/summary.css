@@ -183,6 +183,7 @@ span {
 @keyframes fadeOutBackground {
   0% {
     background-color: #f6f7f8;
+
   }
   100% {
     background-color: transparent;
@@ -192,7 +193,8 @@ span {
 @media screen and (max-width: 830px) {
    .regards{
     position: absolute;
-    height: 80vh;
+    top: 0;
+    height: 100%;
     width: 100vw;
     display: flex;
     align-items: center;
