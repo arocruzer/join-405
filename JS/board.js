@@ -440,48 +440,215 @@ document.querySelectorAll('.task-container').forEach((taskContainer) => {
     taskContainer.addEventListener('dragleave', removeHighlight);
 });
 
-function editTask() {
-    const tasks = [...JSON.parse(localStorage.getItem('todo') || "[]"), 
-                   ...JSON.parse(localStorage.getItem('in-progress') || "[]"),
-                   ...JSON.parse(localStorage.getItem('await-feedback') || "[]"),
-                   ...JSON.parse(localStorage.getItem('done') || "[]")];
-    const task = tasks.find(task => task.id === currentTaskId);
+function editTaskDetails() {
+    document.getElementById('modalCategory').classList.add('hidden')
+    enableTitleEdit();
+    enableDescriptionEdit();
+    enableDueDateEdit();
+    enablePriorityEdit();
+    enableUserEdit();
+    enableSubtaskEdit();
+    addSaveAndCancelButtons();
+}
 
-    if (task) {
-        document.getElementById('editTitle').value = task.title;
-        document.getElementById('editDescription').value = task.description;
-        document.getElementById('editDueDate').value = task.dueDate;
-        document.getElementById('editTaskModal').style.display = 'block';
-        document.getElementById('taskModal').style.display = 'none';
+// Bearbeitbarer Titel
+function enableTitleEdit() {
+    const modalTitle = document.getElementById('modalTitle');
+    modalTitle.innerHTML = `<p>Title</p><input type="text" id="editTitle" value="${modalTitle.innerText}" />`;
+}
+
+// Bearbeitbare Beschreibung
+function enableDescriptionEdit() {
+    const modalDescription = document.getElementById('modalDescription');
+    modalDescription.innerHTML = `<p>Description</p><textarea id="editDescription">${modalDescription.innerText}</textarea>`;
+}
+
+// Bearbeitbares Fälligkeitsdatum
+function enableDueDateEdit() {
+    const modalDueDate = document.getElementById('modalDueDate');
+    modalDueDate.innerHTML = `<input type="date" id="editDueDate" value="${modalDueDate.innerText.split('/').reverse().join('-')}" />`;
+}
+
+// Bearbeitbare Priorität
+function enablePriorityEdit() {
+    const modalPriority = document.getElementById('modalPriority');
+    const currentPriority = modalPriority.innerText.toLowerCase();
+
+    modalPriority.innerHTML = `
+        <div class="priority-buttons">
+            <button id="priority-urgent" class="priority-btn urgent ${currentPriority === 'urgent' ? 'active' : ''}" onclick="setPriority('urgent')">
+                Urgent <img src="../Assets/prio_urgent.png" alt="Urgent Icon">
+            </button>
+            <button id="priority-medium" class="priority-btn medium ${currentPriority === 'medium' ? 'active' : ''}" onclick="setPriority('medium')">
+                Medium <img src="../Assets/prio_medium.png" alt="Medium Icon">
+            </button>
+            <button id="priority-low" class="priority-btn low ${currentPriority === 'low' ? 'active' : ''}" onclick="setPriority('low')">
+                Low <img src="../Assets/prio_low.png" alt="Low Icon">
+            </button>
+        </div>
+    `;
+}
+
+let selectedPriority = '';
+
+function setPriority(priority) {
+    selectedPriority = priority;
+
+    // Alle Buttons zurücksetzen
+    document.getElementById('priority-urgent').classList.remove('active');
+    document.getElementById('priority-medium').classList.remove('active');
+    document.getElementById('priority-low').classList.remove('active');
+
+    // Aktiven Button hervorheben
+    if (priority === 'urgent') {
+        document.getElementById('priority-urgent').classList.add('active');
+    } else if (priority === 'medium') {
+        document.getElementById('priority-medium').classList.add('active');
+    } else if (priority === 'low') {
+        document.getElementById('priority-low').classList.add('active');
     }
 }
 
 
-function closeEditTaskModal() {
-    document.getElementById('editTaskModal').style.display = 'none';
+function initUserDropdownIntegration(loadedContacts, selectedUsers = []) {
+    renderDropdownUsers(loadedContacts, selectedUsers); // Rendert die Benutzerliste im Dropdown
+    renderSelectedUsers(selectedUsers); // Zeigt die bereits ausgewählten Benutzer an
 }
 
-function saveTaskEdits() {
-    const title = document.getElementById('editTitle').value.trim();
-    const description = document.getElementById('editDescription').value.trim();
-    const dueDate = document.getElementById('editDueDate').value;
-    const priority = document.querySelector('.prio-btn-container .active').id.replace('editPrio', '').toLowerCase();
+function renderDropdownUsers(loadedContacts, selectedUsers) {
+    const dropdown = document.getElementById('user-dropdown');
+    dropdown.innerHTML = loadedContacts.map((user, index) => {
+        const isChecked = selectedUsers.some(selected => selected.name === user.name);
+        return `
+            <div class="dropdown-item">
+                <div class="user-avatar" style="background-color: ${user.color || getRandomColor()}">${user.initialien}</div>
+                <span>${user.name}</span>
+                <input type="checkbox" id="user-${index}" ${isChecked ? 'checked' : ''} onclick="toggleUserSelection(${index})">
+            </div>
+        `;
+    }).join('');
+}
 
-    const allColumns = ['todo', 'in-progress', 'await-feedback', 'done'];
-    for (const column of allColumns) {
-        let tasks = JSON.parse(localStorage.getItem(column)) || [];
-        const taskIndex = tasks.findIndex(task => task.id === currentTaskId);
+function renderSelectedUsers(selectedUsers) {
+    const selectedUsersContainer = document.getElementById('selected-users');
+    selectedUsersContainer.innerHTML = selectedUsers.map(user => `
+        <div class="user-avatar" style="background-color: ${user.color || getRandomColor()}">
+            ${user.initialien}
+        </div>
+    `).join('');
+}
+
+function toggleUserSelection(index) {
+    const user = loadedContacts[index];
+    const checkbox = document.getElementById(`user-${index}`);
+
+    if (checkbox.checked) {
+        if (!selectedUsers.some(u => u.name === user.name)) {
+            selectedUsers.push(user);
+        }
+    } else {
+        selectedUsers = selectedUsers.filter(u => u.name !== user.name);
+    }
+
+    renderSelectedUsers(selectedUsers);
+}
+
+function filterUsers(searchTerm) {
+    const filteredContacts = loadedContacts.filter(user => 
+        user.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    renderDropdownUsers(filteredContacts, selectedUsers);
+}
+
+function getRandomColor() {
+    const colors = ['#6A8EAE', '#F4A261', '#2A9D8F', '#E76F51', '#264653', '#A2678A', '#457B9D', '#D4A373', '#8A817C', '#BC6C25'];
+    return colors[Math.floor(Math.random() * colors.length)];
+}
+
+
+// Bearbeitbare Subtasks
+function enableSubtaskEdit() {
+    const modalSubtasks = document.getElementById('modalSubtasks');
+    const subtasksHTML = Array.from(modalSubtasks.children).map((subtask, index) => {
+        const isChecked = subtask.querySelector('input').checked ? 'checked' : '';
+        const subtaskText = subtask.innerText.trim();
+        return `
+            <div>
+                <input type="checkbox" id="editSubtask-${index}" ${isChecked} />
+                <input type="text" id="editSubtaskText-${index}" value="${subtaskText}" />
+            </div>
+        `;
+    }).join('');
+    modalSubtasks.innerHTML = subtasksHTML;
+}
+
+// Buttons für Speichern und Abbrechen hinzufügen
+function addSaveAndCancelButtons() {
+    const modalFooter = document.querySelector('.modal-footer');
+    modalFooter.innerHTML = `
+        <button onclick="saveTaskChanges()">Save Changes</button>
+        <button onclick="cancelTaskEdit()">Cancel</button>
+    `;
+}
+function saveTaskChanges() {
+    const updatedTask = gatherUpdatedTaskDetails();
+    updateTaskInLocalStorage(updatedTask);
+    refreshBoard();
+}
+// Alle Änderungen aus den Eingabefeldern sammeln
+function gatherUpdatedTaskDetails() {
+    const updatedTitle = document.getElementById('editTitle').value;
+    const updatedDescription = document.getElementById('editDescription').value;
+    const updatedDueDate = document.getElementById('editDueDate').value;
+    const updatedPriority = document.getElementById('editPriority').value;
+
+    const updatedUsers = Array.from(document.querySelectorAll('#modalAssignedUsers input:checked')).map(input => ({
+        name: input.value,
+        color: 'blue' // Beispiel: Farbe kann angepasst werden
+    }));
+
+    const updatedSubtasks = Array.from(document.querySelectorAll('#modalSubtasks input[type="text"]')).map(input => input.value);
+
+    return {
+        id: currentTaskId,
+        title: updatedTitle,
+        description: updatedDescription,
+        dueDate: updatedDueDate,
+        assignedUsers: updatedUsers,
+        priority: selectedPriority || 'medium',
+        subtasks: updatedSubtasks
+    };
+}
+
+// Aufgabe im localStorage aktualisieren
+function updateTaskInLocalStorage(updatedTask) {
+    const columns = ['todo', 'in-progress', 'await-feedback', 'done'];
+    for (const column of columns) {
+        const tasks = JSON.parse(localStorage.getItem(column)) || [];
+        const taskIndex = tasks.findIndex(task => task.id === updatedTask.id);
 
         if (taskIndex !== -1) {
-            tasks[taskIndex] = { ...tasks[taskIndex], title, description, dueDate, priority };
+            tasks[taskIndex] = {
+                ...tasks[taskIndex],
+                ...updatedTask,
+                completedSubtasks: updatedTask.subtasks.filter((_, index) => document.getElementById(`editSubtask-${index}`).checked).length,
+                totalSubtasks: updatedTask.subtasks.length
+            };
             localStorage.setItem(column, JSON.stringify(tasks));
             break;
         }
     }
-    closeEditTaskModal();
-    loadTasks('todo'); // Aktualisiert die Spalten
-    loadTasks('in-progress');
-    loadTasks('await-feedback');
-    loadTasks('done');
 }
 
+// Board nach Änderungen aktualisieren
+function refreshBoard() {
+    alert('Task erfolgreich gespeichert!');
+    window.location.reload();
+}
+function cancelTaskEdit() {
+    reloadTaskDetails();
+}
+function reloadTaskDetails() {
+    closeTaskModal();
+    openTaskDetails(currentTaskId);
+}
