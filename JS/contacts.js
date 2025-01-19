@@ -5,8 +5,8 @@ function renderContacts(){
     let currentLetter = "";
     loadedContacts.sort((a, b) => a.name.localeCompare(b.name));
     for (let index = 0; index < loadedContacts.length; index++) {
-        let initialien = loadedContacts[index].initialien;
-        let firstLetter = loadedContacts[index].name.slice(0, 1);
+        let initialien = loadedContacts[index].initialien.toUpperCase();
+        let firstLetter = loadedContacts[index].name.slice(0, 1).toUpperCase();
         if (firstLetter !== currentLetter) {
             currentLetter = firstLetter;
             contentRef.innerHTML += renderCurrentLetter(currentLetter);
@@ -127,7 +127,7 @@ function createNewContact(name, mail, phone){
         name: name,
         email: mail,
         phone: phone,
-        letter: vorname[0],
+        letter: vorname[0].toUpperCase(),
         initialien: initialien
     }
     return newContact;
@@ -151,22 +151,31 @@ function editContact(index){
     let nameInput = document.getElementById('edit-input-name-id').value;
     let mailInput = document.getElementById('edit-input-mail-id').value
     let phoneInput = document.getElementById('edit-input-phone-id').value;
-    let [vorname, nachname] = nameInput.split(" ");
-    let initialien = vorname[0] + (nachname ? nachname[0] : "");
 
-    let newContact = 
-    {
-        name: nameInput,
-        email: mailInput,
-        phone: phoneInput,
-        letter: vorname[0],
-        initialien: initialien
-    };
-    loadedContacts[index] = newContact;
+    let isValid = validateName(nameInput) && validateEmail(mailInput) && validatePhone(phoneInput);
 
-    renderContacts();
-    closeEditContactOverlay();
-    closeContactDetailsOverlay();
+    if (isValid) {
+        let editedContact = createNewContact(nameInput, mailInput, phoneInput);
+        loadedContacts[index] = editedContact;
+        renderContacts();
+        closeEditContactOverlay();
+        closeContactDetailsOverlay();
+    } return
+
+
+    // let newContact = 
+    // {
+    //     name: nameInput,
+    //     email: mailInput,
+    //     phone: phoneInput,
+    //     letter: vorname[0],
+    //     initialien: initialien
+    // };
+    // loadedContacts[index] = newContact;
+
+    // renderContacts();
+    // closeEditContactOverlay();
+    // closeContactDetailsOverlay();
 }
 
 function deleteContact(index){
