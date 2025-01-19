@@ -331,19 +331,9 @@ display: block;
   position: relative;
 }
 
-.input-fields {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 24px;
-  height: 171px;
-  width: 364px;
-}
-
 .input-fields input {
   width: 100%;
-  height: 30px;
+  height: 24px;
   border-radius: 15px;
   border: 1px solid lightgray;
   padding-left: 16px;
@@ -351,22 +341,28 @@ display: block;
   top: 20px;
 }
 
+.error-message{
+  color: red;
+  font-size: 8px;
+  height: 16px;
+}
+
 .input-person {
   background: url(../Assets/person.png) no-repeat;
   background-size: 24px;
-  background-position: right 10px center;
+  background-position: right 16px center;
 }
 
 .input-mail {
   background: url(../Assets/mail.png) no-repeat;
   background-size: 24px;
-  background-position: right 10px center;
+  background-position: right 16px center;
 }
 
 .input-phone {
   background: url(../Assets/call.png) no-repeat;
   background-size: 24px;
-  background-position: right 10px center;
+  background-position: right 16px center;
 }
 
 .edit-contact-title {
@@ -383,15 +379,10 @@ display: block;
   background-color: white;
   border-radius: 0 0 15px 15px;
   color: black;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   height: 351px;
   width: 396px;
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 24px;
 }
 
 .middle-avatar {
@@ -447,12 +438,16 @@ display: block;
 /* AddContact Overlay */
 
 .input-fields-add {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-  width: 364px;
+  height: 100%;
+  width: 80%;
+  margin-top: 70px;
+  text-align: center;
+}
+
+.input-layout{
+  height: 30px;
+  padding-left: 16px;
+  padding-right: 24px;
 }
 
 .input-fields-add input {
@@ -460,17 +455,13 @@ display: block;
   height: 30px;
   border-radius: 15px;
   border: 1px solid lightgray;
-  padding-left: 16px;
-  position: relative;
-  top: 20px;
-  height: 30px;
+
 }
 
 .create-button {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 36px;
   padding: 18px 10px;
   border-radius: 16px;
   background-color: #2a3647;
@@ -529,6 +520,7 @@ display: block;
   cursor: pointer;
   background-color: #29ABE2;
 }
+
 
 /* Responsive */
 

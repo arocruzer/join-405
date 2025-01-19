@@ -136,18 +136,15 @@ function HTMLOpenAddContactOverlay(){
             </div>
         </div>
         <div class="lower-half">
-            <form id="contactForm" onsubmit="return validateContactForm()">
-                <div class="input-fields-add">
-                    <input class="input-person" placeholder="Name" type="text" id="add-input-name-id">
-                    <span id="name-error" class="error-message"></span>
-                    <input class="input-mail" placeholder="Email" type="email" id="add-input-mail-id">
-                    <span id="mail-error" class="error-message"></span>
-                    <input class="input-phone" placeholder="Phone" type="tel" id="add-input-phone-id">
-                    <span id="phone-error" class="error-message"></span>
-                    <button onclick="addNewContact()" class="create-button">Create contact<i class="fa-sharp-duotone fa-solid fa-check"></i></button>
-                </div>
-            </form>
-        </div>
+            <div class="input-fields-add">
+                <input class="input-layout input-person" placeholder="Name" type="text" id="add-input-name-id">
+                <div id="name-error" class="input-layout error-message"></div>
+                <input class="input-layout input-mail" placeholder="Email" type="email" id="add-input-mail-id">
+                <div id="mail-error" class="input-layout error-message"></div>
+                <input class="input-layout input-phone" placeholder="Phone" type="tel" id="add-input-phone-id">
+                <div id="phone-error" class="input-layout error-message"></div>
+                <button onclick="addNewContact()" class="create-button">Create contact<i class="fa-sharp-duotone fa-solid fa-check"></i></button>
+            </div>
         </div>
     </div>
     `;
@@ -157,7 +154,6 @@ function HTMLOpenEditContactOverlay(){
     return`
     <div class="overlay-edit-contact">
             <div class="middle-avatar">TW</div>
-
             <div class="upper-half">
                 <div class="cross-close" onclick="closeEditContactOverlay()">X</div>
                 <div class="edit-contact-title">
