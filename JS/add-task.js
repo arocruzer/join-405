@@ -289,8 +289,8 @@ function addTask() {
     window.location.href = 'board.html';
 }
 
-function loadScripts() {
+/*function loadScripts() {
     const script = document.createElement('script');
     script.src = '/JS/add-task.js';
     document.body.appendChild(script);
-}
+}*/

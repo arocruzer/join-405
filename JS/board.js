@@ -118,11 +118,11 @@ function updateTaskVisibilityById(columnId) {
     taskList.style.display = tasks.length > 0 ? 'none' : 'block';
 }
 
-/*function openInputPage(columnId) {
+function openInputPage(columnId) {
     localStorage.setItem('currentColumn', columnId);
     window.location.href = "/HTML/add-task.html";
-}*/
-function openInputPage(columnId) {
+}
+/*function openInputPage(columnId) {
     localStorage.setItem('currentColumn', columnId);
 
     // Lade den Inhalt der "add-task.html"
@@ -140,7 +140,7 @@ function openInputPage(columnId) {
                 document.getElementById('modalAddtask').classList.add('show');
             }
         });
-}
+}*/
 
 function closeModal() {
     document.getElementById('modalAddtask').classList.remove('show');
