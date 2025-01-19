@@ -440,4 +440,62 @@ document.querySelectorAll('.task-container').forEach((taskContainer) => {
     taskContainer.addEventListener('dragleave', removeHighlight);
 });
 
+function editTask() {
+    const tasks = [...JSON.parse(localStorage.getItem('todo') || "[]"), 
+                   ...JSON.parse(localStorage.getItem('in-progress') || "[]"),
+                   ...JSON.parse(localStorage.getItem('await-feedback') || "[]"),
+                   ...JSON.parse(localStorage.getItem('done') || "[]")];
+    const task = tasks.find(task => task.id === currentTaskId);
+
+    if (task) {
+        document.getElementById('editTitle').value = task.title;
+        document.getElementById('editDescription').value = task.description;
+        document.getElementById('editDueDate').value = task.dueDate;
+        setEditPriority(task.priority);
+        document.getElementById('editTaskModal').style.display = 'block';
+        document.getElementById('taskModal').style.display = 'none';
+    }
+}
+
+
+function closeEditTaskModal() {
+    document.getElementById('editTaskModal').style.display = 'none';
+}
+
+function setEditPriority(priority) {
+    document.getElementById('editPrioUrgent').classList.remove('active');
+    document.getElementById('editPrioMedium').classList.remove('active');
+    document.getElementById('editPrioLow').classList.remove('active');
+
+    if (priority === 'urgent') {
+        document.getElementById('editPrioUrgent').classList.add('active');
+    } else if (priority === 'medium') {
+        document.getElementById('editPrioMedium').classList.add('active');
+    } else if (priority === 'low') {
+        document.getElementById('editPrioLow').classList.add('active');
+    }
+}
+function saveTaskEdits() {
+    const title = document.getElementById('editTitle').value.trim();
+    const description = document.getElementById('editDescription').value.trim();
+    const dueDate = document.getElementById('editDueDate').value;
+    const priority = document.querySelector('.prio-btn-container .active').id.replace('editPrio', '').toLowerCase();
+
+    const allColumns = ['todo', 'in-progress', 'await-feedback', 'done'];
+    for (const column of allColumns) {
+        let tasks = JSON.parse(localStorage.getItem(column)) || [];
+        const taskIndex = tasks.findIndex(task => task.id === currentTaskId);
+
+        if (taskIndex !== -1) {
+            tasks[taskIndex] = { ...tasks[taskIndex], title, description, dueDate, priority };
+            localStorage.setItem(column, JSON.stringify(tasks));
+            break;
+        }
+    }
+    closeEditTaskModal();
+    loadTasks('todo'); // Aktualisiert die Spalten
+    loadTasks('in-progress');
+    loadTasks('await-feedback');
+    loadTasks('done');
+}
 

@@ -211,6 +211,26 @@
                 <div id="main-content-placeholder"></div>
             </div>
         </div>
+        <div id="editTaskModal" class="modal">
+          <div class="modal-edit-content">
+              <span class="close-button" onclick="closeEditTaskModal()">&times;</span>
+              <h2>Bearbeite Task</h2>
+              <label for="editTitle">Titel</label>
+              <input type="text" id="editTitle" class="edit-text" />
+              <label for="editDescription">Beschreibung</label>
+              <textarea id="editDescription" class="edit-text"></textarea>
+              <label for="editDueDate">Fälligkeitsdatum</label>
+              <input type="date" id="editDueDate" class="date-input" />
+              <label for="editPriority">Priorität</label>
+              <div class="prio-btn-container">
+                  <button onclick="setEditPriority('urgent')" id="editPrioUrgent" class="btn-prio-urgent">Urgent</button>
+                  <button onclick="setEditPriority('medium')" id="editPrioMedium" class="btn-prio-medium">Medium</button>
+                  <button onclick="setEditPriority('low')" id="editPrioLow" class="btn-prio-low">Low</button>
+              </div>
+              <button class="btnPrimary" onclick="saveTaskEdits()">Speichern</button>
+          </div>
+        </div>
+      
         
       </div>
 
