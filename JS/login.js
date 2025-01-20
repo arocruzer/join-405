@@ -3,7 +3,7 @@ const msg = urlParams.get("msg");
 let msgBox = document.getElementById("msgBox");
 let hero = document.getElementById("body");
 
-function userLogIn() {
+async function userLogIn() {
   let emailError = document.getElementById("email-error");
   let passwordError = document.getElementById("password-error");
 
@@ -27,6 +27,7 @@ function userLogIn() {
     emailError.style.display = "flex"
       emailError.innerHTML = "User not found. Please check your email.";
   }
+  await loadAllTasks();
 }
 
 if (msg) {
@@ -39,7 +40,7 @@ hero.onclick = function () {
   msgBox.style.display = "none";
 };
 
-function guestLogin() {
+async function guestLogin() {
   let guestUser = {
     name: "",
     email: null,
@@ -49,4 +50,5 @@ function guestLogin() {
   localStorage.setItem("loggedInUser", JSON.stringify(guestUser));
   window.location.href = "../HTML/summary.html";
   getUserLogo();
+  await loadAllTasks();
 }
