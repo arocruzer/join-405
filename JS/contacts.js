@@ -41,7 +41,7 @@ function openContactDetailsOverlay(index){
         document.getElementById('contacts').classList.add('d-none');
         let contentRef = document.getElementById('contact-details-wrapper-id');
         contentRef.classList.remove('contact-detail-hidden');
-        contentRef.innerHTML = HTMLopenContactDetailsOverlay(index);  
+        contentRef.innerHTML = HTMLopenContactDetailsOverlayMobile(index);  
     }else{
         let contentRef = document.getElementById('contact-details-wrapper-id');
         contentRef.innerHTML = HTMLopenContactDetailsOverlay(index);  
