@@ -14,7 +14,6 @@
   flex-direction: column;
   align-items: center;
   background-color: white;
-  /* min-width: 500px; */
 }
 
 .contacts-list {
@@ -100,9 +99,9 @@
 }
 
 .add-contact-button {
-  position: fixed;
+  position: absolute;
   top: calc(100vh - 15vh);
-  left: 575px;
+  right: 10%;
 }
 
 .add-contact-button:hover {
@@ -141,6 +140,13 @@
   gap: 16px;
 }
 
+.page-title-desktop{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+
 .page-title h1 {
   font-size: 47px;
   font-weight: 700;
@@ -170,6 +176,57 @@
   display: flex;
 }
 
+.blue-line-desktop {
+  height: 90px;
+  background-color: #29abe2;
+  width: 3px;
+  display: flex;
+}
+
+.edit-delete-button-div-desktop{
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+
+.edit-button-desktop{
+  display: flex;
+  flex-direction: row;
+}
+
+.edit-button-desktop:hover{
+  color: #29ABE2;
+  cursor: pointer;
+  .edit-img-blue{
+    content: url('../Assets/edit_blue.svg');
+  }
+
+}
+
+.delete-button-desktop{
+  display: flex;
+  flex-direction: row;
+}
+
+.delete-button-desktop p{
+  font-size: medium;
+}
+
+.delete-button-desktop:hover{
+  color: #29ABE2;
+  cursor: pointer;
+  .delete-img-blue{
+    content: url('../Assets/delete_blue.svg');
+  }
+
+}
+
+.detail-name-div{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .contact-detail-view {
   display: flex;
   flex-direction: column;
@@ -197,8 +254,8 @@
 }
 
 .contact-avatar-and-name h2 {
-  font-size: 36px;
-  font-weight: 700;
+  font-size: 34px;
+  font-weight: 500;
 }
 
 .contact-detail-view p {
@@ -537,10 +594,6 @@ display: block;
 
 /* Responsive */
 
-@media screen and (max-width:850px) {
-  
-}
-
 @media screen and (min-width: 830px) {
   .content-wrapper{
     justify-content: center;
@@ -548,7 +601,7 @@ display: block;
   }
 }
 
-@media screen and (min-width: 950px) {
+@media screen and (min-width: 1180px) {
   .contact-detail-hidden {
     display: flex;
     flex-direction: column;
@@ -562,7 +615,6 @@ display: block;
 }
 
 @media screen and (min-width: 1150px) {
-
   .contacts-container {
     flex: 1;
   }
@@ -570,11 +622,16 @@ display: block;
   .contact-details-wrapper {
     flex: 1;
   }
-
 }
 
 @media screen and (min-width: 830px) {
   #contacts-button {
     border-radius: 0;
+  }
+}
+
+@media screen and (min-width: 1350px) {
+  .contact-details-wrapper{
+    padding: 64px 48px;
   }
 }

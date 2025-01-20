@@ -1,3 +1,9 @@
+window.addEventListener("resize", function(){
+    if(window.innerWidth > 1180){
+        renderContacts();
+    }
+});
+
 function renderContacts(){
     let contentRef = document.getElementById('contacts');
     if (contentRef) {
@@ -37,7 +43,7 @@ function openContactDetailsOverlay(index){
     console.log(`Kontakt ${index} wurde geklickt!`);
     console.log(loadedContacts[index]);
 
-    if (window.innerWidth < 950) {
+    if (window.innerWidth < 1180) {
         document.getElementById('contacts').classList.add('d-none');
         let contentRef = document.getElementById('contact-details-wrapper-id');
         contentRef.classList.remove('contact-detail-hidden');
