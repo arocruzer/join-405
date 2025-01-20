@@ -324,10 +324,7 @@ function addTask() {
 }
 
 body.onclick = function (event) {
-  if (
-    !event.target.closest("#input-contacts") &&
-    !event.target.closest("#input-category")
-  ) {
+  if (!event.target.closest("#input-contacts") && !event.target.closest("#input-category")) {
     concatList.style.display = "none";
     dropDownArrowContacts.src = "../Assets/arrow_drop_downaa (1).png";
     contacState = 1;

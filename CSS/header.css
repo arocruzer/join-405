@@ -1,6 +1,5 @@
 #header {
   height: 80px;
-  /* display: none; */
   align-items: center;
   padding-left: 16px;
   padding-right: 16px;
@@ -23,24 +22,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 36px;
-  width: 36px;
+  height: 40px;
+  width: 40px;
   border-radius: 100%;
-  border: solid 3px #2a3647;
+  border: solid 2px #2a3647;
 }
 
-.user-button:hover {
-  cursor: pointer;
-}
-
-.inside-radius {
+/* .inside-radius {
   height: 32px;
   width: 32px;
   border-radius: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} */
 
 #header-center {
   display: none;
@@ -48,7 +43,11 @@
   font-size: 20px;
 }
 
-#header-right {
+.header-right-logged-out {
+  display: none;
+}
+
+.header-right-logged-in {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -111,6 +110,9 @@
 }
 
 @media screen and (min-width: 830px) {
+  #usr-menu-help-button{
+    display: none;
+  }
   #header-center {
     display: unset;
   }
@@ -144,8 +146,12 @@
     border: solid 3px #2A3647;
   }
 
-  .inside-radius {
+  /* .inside-radius {
     height: 48px;
     width: 48px;
+  } */
+
+  #help-button-usr-menu{
+    display: none;
   }
 }

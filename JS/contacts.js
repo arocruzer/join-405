@@ -1,3 +1,9 @@
+window.addEventListener("resize", function(){
+    if(window.innerWidth > 1180){
+        renderContacts();
+    }
+});
+
 function renderContacts(){
     let contentRef = document.getElementById('contacts');
     if (contentRef) {
@@ -5,8 +11,8 @@ function renderContacts(){
     let currentLetter = "";
     loadedContacts.sort((a, b) => a.name.localeCompare(b.name));
     for (let index = 0; index < loadedContacts.length; index++) {
-        let initialien = loadedContacts[index].initialien;
-        let firstLetter = loadedContacts[index].name.slice(0, 1);
+        let initialien = loadedContacts[index].initialien.toUpperCase();
+        let firstLetter = loadedContacts[index].name.slice(0, 1).toUpperCase();
         if (firstLetter !== currentLetter) {
             currentLetter = firstLetter;
             contentRef.innerHTML += renderCurrentLetter(currentLetter);
@@ -37,11 +43,11 @@ function openContactDetailsOverlay(index){
     console.log(`Kontakt ${index} wurde geklickt!`);
     console.log(loadedContacts[index]);
 
-    if (window.innerWidth < 950) {
+    if (window.innerWidth < 1180) {
         document.getElementById('contacts').classList.add('d-none');
         let contentRef = document.getElementById('contact-details-wrapper-id');
         contentRef.classList.remove('contact-detail-hidden');
-        contentRef.innerHTML = HTMLopenContactDetailsOverlay(index);  
+        contentRef.innerHTML = HTMLopenContactDetailsOverlayMobile(index);  
     }else{
         let contentRef = document.getElementById('contact-details-wrapper-id');
         contentRef.innerHTML = HTMLopenContactDetailsOverlay(index);  
@@ -127,12 +133,11 @@ function createNewContact(name, mail, phone){
         name: name,
         email: mail,
         phone: phone,
-        letter: vorname[0],
+        letter: vorname[0].toUpperCase(),
         initialien: initialien
     }
     return newContact;
 }
-
 
 
 //Edit Contacts
@@ -151,22 +156,50 @@ function editContact(index){
     let nameInput = document.getElementById('edit-input-name-id').value;
     let mailInput = document.getElementById('edit-input-mail-id').value
     let phoneInput = document.getElementById('edit-input-phone-id').value;
-    let [vorname, nachname] = nameInput.split(" ");
-    let initialien = vorname[0] + (nachname ? nachname[0] : "");
 
-    let newContact = 
-    {
-        name: nameInput,
-        email: mailInput,
-        phone: phoneInput,
-        letter: vorname[0],
-        initialien: initialien
-    };
-    loadedContacts[index] = newContact;
+    let isValid = validateEditName(nameInput) && validateEditEmail(mailInput) && validateEditPhone(phoneInput);
 
-    renderContacts();
-    closeEditContactOverlay();
-    closeContactDetailsOverlay();
+    if (isValid) {
+        let editedContact = createNewContact(nameInput, mailInput, phoneInput);
+        loadedContacts[index] = editedContact;
+        renderContacts();
+        closeEditContactOverlay();
+        closeContactDetailsOverlay();
+    } return
+
+}
+
+function validateEditName(name){
+    const nameRegex = /^[a-zA-ZäöüßÄÖÜ\s]+$/;
+    const nameError = document.getElementById('name-error-id');
+    nameError.innerHTML = "";
+    if (!nameRegex.test(name)) {
+      nameError.innerHTML = "Bitte einen gültigen Namen eingeben"
+      return false;
+    } else {
+        return true;
+    }
+}
+
+function validateEditEmail(mail){
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const mailError = document.getElementById('mail-error-id');
+    mailError.innerHTML = "";
+    if(!emailRegex.test(mail)){
+        mailError.innerHTML = "ungültiges Email Format";
+        return false;
+    } return true;
+}
+
+function validateEditPhone(phonenumber){
+    const phoneError = document.getElementById('phone-error-id');
+    const digitCount = Math.abs(phonenumber).toString().length;
+    phoneError.innerHTML = "";
+
+    if(digitCount < 8){
+        phoneError.innerHTML = "ungültige Telefonnummer";
+        return false;
+    } return true;
 }
 
 function deleteContact(index){

@@ -13,15 +13,20 @@ a {
   text-decoration: none;
 }
 
+.clickable:hover {
+  cursor: pointer;
+}
+
 #main-container {
   /* margin: 0 auto; Mihael */
-  width: 100%; /* Mihael */
-  position: relative;    
+  width: 100%;
+  /* Mihael */
+  position: relative;
   overflow-x: hidden;
 }
 
 #main-content {
-  
+
   width: calc(100vw - 234px);
   max-width: calc(1440px - 234px);
   display: flex;
@@ -36,9 +41,12 @@ a {
   /*   max-width: 1440px;  Mihael */
   /* padding: 67px 122px;  von Mihael auskommentieret*/
   justify-content: space-between;
-  overflow-y: hidden; /*von Martin */
-  height: 100vh; /*von Martin */
+  overflow-y: hidden;
+  /*von Martin */
+  height: 100vh;
+  /*von Martin */
 }
+
 h1 {
   font-family: Inter;
   font-size: 61px;
@@ -52,6 +60,7 @@ h3 {
   line-height: 24px;
   text-align: center;
 }
+
 header {
   height: 80px;
   width: auto;
@@ -65,6 +74,7 @@ header {
   height: 39px;
   width: 32px;
 }
+
 button {
   cursor: pointer;
 }
@@ -84,8 +94,9 @@ button {
 }
 
 .hero {
-  padding-left: 96px;
-  padding-top: 110px;
+  padding-left: 16px;  /*96px*/
+  padding-right: 16px; /*0px*/
+  padding-top: 48px;   /*110px*/
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -106,6 +117,7 @@ h5 {
   display: flex;
   justify-content: space-between;
   align-items: top;
+  width: 100%;
 }
 
 .arrow-left {
@@ -116,9 +128,11 @@ h5 {
 .imprint-title {
   padding-bottom: 16px;
 }
+
 .email-div {
   padding-top: 16px;
 }
+
 h2 {
   font-size: 16px;
   font-weight: 800;
@@ -126,18 +140,22 @@ h2 {
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
 }
+
 .login-header {
   padding: 37px 38px;
 }
+
 .login-logo {
   position: relative;
   height: 122px;
   width: 100px;
 }
+
 input:focus {
   outline: none !important;
   border: 1px solid #29abe2;
 }
+
 .input-box {
   position: relative;
   height: 48px;
@@ -147,6 +165,7 @@ input:focus {
   align-items: center;
   padding: 0 10px;
 }
+
 .input-box input {
   border: solid 1px #d1d1d1;
   border-radius: 10px;
@@ -155,6 +174,7 @@ input:focus {
   padding-left: 10px;
   padding-right: 10px;
 }
+
 .input-img {
   position: absolute;
   right: 20px;
@@ -165,6 +185,7 @@ input:focus {
 .show-password-img {
   cursor: pointer;
 }
+
 .input-box input:focus {
   outline: none !important;
   border: 1px solid #29abe2 !important;
@@ -182,6 +203,7 @@ input:focus {
   justify-content: center;
   align-items: center;
 }
+
 .erorr-msg {
   display: none;
   font-size: 12px;
@@ -204,28 +226,34 @@ input:focus {
   margin: 5px;
   text-transform: uppercase;
 }
+
 .initials-circle-logo h3 {
   font-size: 20px;
   font-weight: 600;
 }
-.add-clear-task-mobile{
+
+.add-clear-task-mobile {
   display: none;
 }
-@media (max-width: 830px){
-  #main-content{
+
+@media (max-width: 830px) {
+  #main-content {
     height: calc(100vh - 160px);
     width: 100%;
   }
-  .add-clear-task-mobile{
+
+  .add-clear-task-mobile {
     display: flex;
     background-color: #f6f7f8;
     justify-content: flex-end;
     padding: 10px;
   }
-  .add-clear-task-mobile p{
+
+  .add-clear-task-mobile p {
     display: none;
   }
 }
+
 @media (max-width: 680px) {
   h1 {
     font-size: 47px;
@@ -236,6 +264,7 @@ input:focus {
   .input-box {
     width: calc(100% - 32px);
   }
+
   .input-box input {
     width: 100%;
   }
@@ -269,5 +298,11 @@ input:focus {
 
   h5 {
     font-size: 14px;
+  }
+
+  .hero {
+    padding-left: 96px;
+    padding-right: 96px; /*0px*/
+    padding-top: 110px;
   }
 }

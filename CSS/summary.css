@@ -162,6 +162,9 @@ span {
 .header {
   display: none;
 }
+a{
+  color: black;
+}
 @media (max-width: 1430px) {
   h1 {
     font-size: 47px;

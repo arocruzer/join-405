@@ -3,6 +3,8 @@ function toggleUsrMenu() {
     document.getElementById("ar-overlay").classList.toggle('ar-overlay-closed');
   }
 
-  function closeUsrMenu(){
-    
+  function logOut() {
+    localStorage.removeItem('loggedInUser');
+    console.log("Schlüssel 'loggedInUser' wurde entfernt.");
   }
+  
