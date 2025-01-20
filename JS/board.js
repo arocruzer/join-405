@@ -1,3 +1,5 @@
+let selectedUsers = [];
+
 function loadTasks(columnId) {
     const container = document.getElementById(`${columnId}-tasks`);
     container.innerHTML = '';
