@@ -19,7 +19,6 @@
 
   <script src="../script.js"></script>
   <script src="../JS/board.js"></script>
-  <script src="../JS/add-task.js"></script>
   <script src="../JS/nav-bar.js"></script>
   <script src="../JS/header.js"></script>
   <script src="../JS/template.js"></script>
@@ -157,16 +156,17 @@
         <!-- Modal for Task Details -->
         <div id="taskModal" class="modal">
           <div class="modal-content">
-            <div class="task-modal">
-              <span class="close-button" onclick="closeTaskModal()"
+            <span class="close-button" onclick="closeTaskModal()"
                 >&times;</span
               >
+            <div class="task-modal">
+
 
               <!-- Kategorie als Label -->
               <h3 id="modalCategory" class="category-label"></h3>
 
               <!-- Titel -->
-              <h2 id="modalTitle"></h2>
+              <h4 id="modalTitle"></h4>
 
               <!-- Beschreibung -->
               <p id="modalDescription"></p>

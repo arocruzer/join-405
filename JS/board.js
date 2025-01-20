@@ -314,7 +314,7 @@ function openTaskDetails(taskId) {
         const subtaskList = document.getElementById('modalSubtasks');
         if (Array.isArray(task.subtasks) && task.subtasks.length > 0) {
             subtaskList.innerHTML = task.subtasks.map((subtask, index) => `
-                <label class="subtask-label">
+                <label class="subtasks-label">
                     <input type="checkbox" id="subtask-${taskId}-${index}"
                            ${task.completedSubtasks > index ? 'checked' : ''}
                            onchange="updateSubtaskCompletion('${taskId}', ${index})">
@@ -327,7 +327,9 @@ function openTaskDetails(taskId) {
         setCategoryStyle("modalCategory", task.category);
         
         document.getElementById('taskModal').style.display = 'block';
+        toggleModalLayout(false); 
         updateProgressBar(task);
+        addSaveAndCancelButtons(false);
     }
 }
 
@@ -454,7 +456,8 @@ function editTaskDetails() {
     addedUsers(); // Initialen der Benutzer anzeigen
 
     enableSubtaskEdit();
-    addSaveAndCancelButtons();
+    addSaveAndCancelButtons(true);
+    toggleModalLayout(true); 
 }
 
 
@@ -462,60 +465,142 @@ function editTaskDetails() {
 // Bearbeitbarer Titel
 function enableTitleEdit() {
     const modalTitle = document.getElementById('modalTitle');
-    modalTitle.innerHTML = `<p>Title</p><input type="text" id="editTitle" value="${modalTitle.innerText}" />`;
+    modalTitle.innerHTML = `<div class="input-containers">
+                               <p>Title</p>
+                               <input class="title-input" type="text" placeholder="Enter a title" id="editTitle" value="${modalTitle.innerText}"/>
+                            </div>`;
 }
 
 // Bearbeitbare Beschreibung
 function enableDescriptionEdit() {
     const modalDescription = document.getElementById('modalDescription');
-    modalDescription.innerHTML = `<p>Description</p><textarea id="editDescription">${modalDescription.innerText}</textarea>`;
+    modalDescription.innerHTML = `<div class="input-containers">
+                                     <p>Description</p>
+                                     <textarea class="description-input" placeholder="Enter a Description" id="editDescription">${modalDescription.innerText}</textarea>
+                                  </div>`;
 }
 
 // Bearbeitbares Fälligkeitsdatum
 function enableDueDateEdit() {
     const modalDueDate = document.getElementById('modalDueDate');
-    modalDueDate.innerHTML = `<input type="date" id="editDueDate" value="${modalDueDate.innerText.split('/').reverse().join('-')}" />`;
+    modalDueDate.innerHTML = `<div class="input-containers">
+                                <input class="date-input" type="date" id="editDueDate" value="${modalDueDate.innerText.split('/').reverse().join('-')}" />
+                             `;
 }
 
 // Bearbeitbare Priorität
 function enablePriorityEdit() {
     const modalPriority = document.getElementById('modalPriority');
-    const currentPriority = modalPriority.innerText.toLowerCase();
+    const currentPriority = modalPriority.innerText.trim().toLowerCase(); // Hol die aktuelle Priorität
 
     modalPriority.innerHTML = `
-        <div class="priority-buttons">
-            <button id="priority-urgent" class="priority-btn urgent ${currentPriority === 'urgent' ? 'active' : ''}" onclick="setPriority('urgent')">
-                Urgent <img src="../Assets/prio_urgent.png" alt="Urgent Icon">
-            </button>
-            <button id="priority-medium" class="priority-btn medium ${currentPriority === 'medium' ? 'active' : ''}" onclick="setPriority('medium')">
-                Medium <img src="../Assets/prio_medium.png" alt="Medium Icon">
-            </button>
-            <button id="priority-low" class="priority-btn low ${currentPriority === 'low' ? 'active' : ''}" onclick="setPriority('low')">
-                Low <img src="../Assets/prio_low.png" alt="Low Icon">
-            </button>
-        </div>
+            <div class="prio-btn-container">
+                <button 
+                    id="btn-urgent" 
+                    class="btn-prio-urgent ${currentPriority === 'urgent' ? 'active' : ''}" 
+                    onclick="changeColorPrioBtn('urgent')">
+                    Urgent
+                    <img id="urgent-img" src="../Assets/prio_urgent.png" alt="Urgent" />
+                </button>
+                <button 
+                    id="btn-medium" 
+                    class="btn-prio-medium ${currentPriority === 'medium' ? 'active' : ''}" 
+                    onclick="changeColorPrioBtn('medium')">
+                    Medium
+                    <img id="medium-img" src="../Assets/prio_medium.png" alt="Medium" />
+                </button>
+                <button 
+                    id="btn-low" 
+                    class="btn-prio-low ${currentPriority === 'low' ? 'active' : ''}" 
+                    onclick="changeColorPrioBtn('low')">
+                    Low
+                    <img id="low-img" src="../Assets/prio_low.png" alt="Low" />
+                </button>
+            </div>
+
     `;
+
+    // Setze den initialen Stil für die aktuelle Priorität
+    changeColorPrioBtn(currentPriority);
 }
 
-let selectedPriority = '';
+// Ändert den Stil basierend auf der ausgewählten Priorität
+function changeColorPrioBtn(priority) {
+    const imgSources = {
+        urgent: ["../Assets/prio_arrow_white.png", "../Assets/prio_medium.png", "../Assets/prio_low.png"],
+        medium: ["../Assets/prio_urgent.png", "../Assets/prio_arrow_white.png", "../Assets/prio_low.png"],
+        low: ["../Assets/prio_urgent.png", "../Assets/prio_medium.png", "../Assets/prio_arrowDown_white.png"]
+    };
 
-function setPriority(priority) {
-    selectedPriority = priority;
+    const bgColors = {
+        urgent: '#FF3B30',
+        medium: '#FFA800',
+        low: '#4CD964'
+    };
 
-    // Alle Buttons zurücksetzen
-    document.getElementById('priority-urgent').classList.remove('active');
-    document.getElementById('priority-medium').classList.remove('active');
-    document.getElementById('priority-low').classList.remove('active');
+    resetButtonStyles(); // Setze alle Button-Stile zurück
+    selectedPriority = priority; // Aktualisiere die ausgewählte Priorität
 
-    // Aktiven Button hervorheben
-    if (priority === 'urgent') {
-        document.getElementById('priority-urgent').classList.add('active');
-    } else if (priority === 'medium') {
-        document.getElementById('priority-medium').classList.add('active');
-    } else if (priority === 'low') {
-        document.getElementById('priority-low').classList.add('active');
+    // Setze den Stil für den aktiven Button
+    setButtonStyles(priority, bgColors[priority]);
+
+    // Setze die Bildquellen für die Icons
+    setImageSources(imgSources[priority]);
+}
+
+// Setzt alle Button-Stile zurück
+function resetButtonStyles() {
+    const buttons = ['btn-urgent', 'btn-medium', 'btn-low'];
+    buttons.forEach(buttonId => {
+        const button = document.getElementById(buttonId);
+        button.style.backgroundColor = '#ffffff'; // Standard-Hintergrundfarbe
+        button.classList.remove('active'); // Entferne die aktive Klasse
+    });
+}
+
+// Setzt den Stil für den spezifischen Button
+function setButtonStyles(priority, bgColor) {
+    const buttonId = `btn-${priority}`;
+    const button = document.getElementById(buttonId);
+    if (button) {
+        button.style.backgroundColor = bgColor;
+        button.classList.add('active'); // Füge die aktive Klasse hinzu
     }
 }
+
+// Aktualisiert die Bildquellen der Icons
+function setImageSources([urgentImgSrc, mediumImgSrc, lowImgSrc]) {
+    document.getElementById("urgent-img").src = urgentImgSrc;
+    document.getElementById("medium-img").src = mediumImgSrc;
+    document.getElementById("low-img").src = lowImgSrc;
+}
+
+// Speichert die ausgewählte Priorität
+function savePriority() {
+    const task = getCurrentTask(); // Lade den aktuellen Task
+    if (!task) {
+        console.error('Kein aktueller Task gefunden!');
+        return;
+    }
+
+    task.priority = selectedPriority; // Aktualisiere die Priorität des Tasks
+
+    // Speichere die Änderungen im localStorage
+    const columns = ['todo', 'in-progress', 'await-feedback', 'done'];
+    for (const column of columns) {
+        const tasks = JSON.parse(localStorage.getItem(column)) || [];
+        const taskIndex = tasks.findIndex(t => t.id === task.id);
+        if (taskIndex !== -1) {
+            tasks[taskIndex] = task;
+            localStorage.setItem(column, JSON.stringify(tasks));
+            break;
+        }
+    }
+
+    alert('Priorität erfolgreich gespeichert!');
+}
+
+
 function getCurrentTask() {
     const columns = ['todo', 'in-progress', 'await-feedback', 'done'];
     for (const column of columns) {
@@ -583,6 +668,22 @@ function renderDropdownUsers(loadedContacts, selectedUsers) {
         `;
     });
 }
+function getInitials(name) {
+    const nameParts = name.trim().split(' ');
+    if (nameParts.length > 1) {
+        return nameParts[0][0].toUpperCase() + nameParts[1][0].toUpperCase(); // Vor- und Nachname
+    }
+    return nameParts[0][0].toUpperCase(); // Nur Vorname
+}
+function addUserToTask(userName, userColor) {
+    if (!userName || !userColor) {
+        console.error("Fehler: Benutzername oder Farbe fehlen!");
+        return;
+    }
+    selectedUsers.push({ name: userName, color: userColor });
+    renderAssignedUsers(selectedUsers);
+}
+
 
 
 function checkBoxUserTask(index) {
@@ -646,16 +747,26 @@ function openDropDownMenuUser() {
 function enableSubtaskEdit() {
     const modalSubtasks = document.getElementById('modalSubtasks');
 
-    // Überprüfe, ob `modalSubtasks` existiert
     if (!modalSubtasks) {
-        console.error('modalSubtasks element not found!');
+        console.error('Element "modalSubtasks" nicht gefunden!');
         return;
     }
 
-    // HTML für das Eingabefeld zum Hinzufügen eines neuen Subtasks (nur oben)
+    // Aktuellen Task aus dem Speicher abrufen
+    const task = getCurrentTask();
+
+    if (!task) {
+        console.error('Kein Task gefunden, um Subtasks anzuzeigen.');
+        return;
+    }
+
+    // Lade bestehende Subtasks des Tasks in die globale Liste
+    subtaskList = task.subtasks || [];
+
+    // HTML für das Eingabefeld zum Hinzufügen eines neuen Subtasks
     const addNewSubtaskHTML = `
         <div class="add-subtask-container">
-           <div class="subtask-container">
+            <div class="subtask-container">
                 <input oninput="toggleButtonVisibility()" class="subtask-input" type="text" placeholder="Add new subtask" id="newSubtask"/>
                 <img onclick="toggleButtonVisibility(true)" id="plusButton" class="plus-img" src="../Assets/Subtasks +.png" alt="Add"/>
                 <button class="add-subtask" id="confirmButton" onclick="addSubtasks()">
@@ -665,41 +776,40 @@ function enableSubtaskEdit() {
                 <button class="cancel-subtask" id="cancelTask" onclick="cancelSubtask()">
                     <img src="../Assets/iconoir_cancel.png" alt="Cancel"/>
                 </button>
-           </div>
+            </div>
         </div>
         <div id="subtaskList" class="subtask-list"></div>
     `;
 
-    // Setze die HTML-Struktur für das Modal
     modalSubtasks.innerHTML = addNewSubtaskHTML;
 
-    // Füge bestehende Subtasks hinzu
+    // Vorhandene Subtasks rendern
     renderExistingSubtasks();
 }
 
-let subtaskList = []; // Globale Variable für Subtasks
 
 function renderExistingSubtasks() {
     const subtaskListContainer = document.getElementById('subtaskList');
-    subtaskListContainer.innerHTML = ''; // Leere Liste zurücksetzen
+    subtaskListContainer.innerHTML = ''; // Vorherige Liste leeren
 
     subtaskList.forEach((subtask, index) => {
-        const subtaskHTML = `
-            <div class="subtask-item" id="subtask-${index}">
-                <span class="subtask-text">${subtask}</span>
-                <div class="images-container">
-                    <button onclick="editSubtask(${index})">
-                        <img src="../Assets/edit.png" alt="Edit"/>
-                    </button>
-                    <button onclick="deleteSubtask(${index})">
-                        <img src="../Assets/delete.png" alt="Delete"/>
-                    </button>
+        const isChecked = document.getElementById(`subtask-checkbox-${index}`)?.checked || false;
+
+        const subtaskHTML = `<div class="subtask-label" id="subtask-${index}">
+                <div class="subtask">
+                    <span class="subtask-text">${subtask}</span>
+                    <div class="images-container">
+                        <img id="edit-subtask-img" onclick="editSubtask(${index})" src="../Assets/edit.png" alt="Edit Icon">
+                        <hr>
+                        <button class="delete-btn" onclick="deleteSubtask(${index})"><img id="delete-subtask" src="../Assets/delete.png" alt="Delete Icon"></button>
+                    </div>
                 </div>
             </div>
         `;
         subtaskListContainer.insertAdjacentHTML('beforeend', subtaskHTML);
     });
 }
+
 
 function addSubtasks() {
     const newSubtaskInput = document.getElementById('newSubtask');
@@ -736,12 +846,15 @@ function editSubtask(index) {
     // Ersetze den Subtask mit einem Eingabefeld
     subtaskItem.innerHTML = `
         <input type="text" value="${subtaskText}" id="editSubtaskInput-${index}" class="subtask-edit-input"/>
-        <button onclick="saveSubtask(${index})">
-            <img src="../Assets/check_blue.png" alt="Save"/>
-        </button>
-        <button onclick="cancelEditSubtask(${index}, '${subtaskText}')">
-            <img src="../Assets/iconoir_cancel.png" alt="Cancel"/>
-        </button>
+        <div class="images-container" id="images-container">
+           
+           <img id="edit-subtask-img" onclick="saveSubtask(${index})" src="../Assets/check_blue.png" alt="Save"/>
+           <hr>
+           <button onclick="cancelEditSubtask(${index}, '${subtaskText}')">
+               <img src="../Assets/iconoir_cancel.png" alt="Cancel"/>
+           </button>
+        </div>       
+        
     `;
 }
 
@@ -791,35 +904,79 @@ function cancelSubtask() {
     toggleButtonVisibility(false);
 }
 
-
-
-
-// Buttons für Speichern und Abbrechen hinzufügen
-function addSaveAndCancelButtons() {
+// Modal schließen und OK-Button entfernen
+function closeTaskModal() {
     const modalFooter = document.querySelector('.modal-footer');
-    modalFooter.innerHTML = `
-        <button onclick="saveTaskChanges()">Save Changes</button>
-        <button onclick="cancelTaskEdit()">Cancel</button>
-    `;
+    if (modalFooter) {
+        modalFooter.innerHTML = ''; // Alle Buttons im Footer entfernen
+    }
+    document.getElementById('taskModal').style.display = 'none';
 }
+
+// Buttons für Speichern hinzufügen
+function addSaveAndCancelButtons(isEditMode) {
+    const modalFooter = document.querySelector('.modal-footer');
+
+    if (isEditMode) {
+        // Zeige den OK-Button für den Bearbeitungsmodus
+        modalFooter.innerHTML = `
+            <button onclick="saveTaskChanges()" class="okTask-btn" id="oktaskBtn">OK <img src="../Assets/check.png" alt="Save"></button>
+        `;
+    } else {
+        // Zeige Löschen- und Bearbeiten-Schaltflächen für den Anzeigemodus
+        modalFooter.innerHTML = `
+            <img
+                onclick="deleteTask()"
+                class="delete-button"
+                src="../Assets/delete_black.png"
+                alt="Delete Icon"
+            />
+            <span class="line">|</span>
+            <img
+                onclick="editTaskDetails()"
+                class="edit-button"
+                src="../Assets/edit_black.png"
+                alt="Edit Icon"
+            />
+        `;
+    }
+}
+
+
+
 function saveTaskChanges() {
     const updatedTask = gatherUpdatedTaskDetails();
     updateTaskInLocalStorage(updatedTask);
+
+    // Fortschritt direkt aktualisieren
+    updateProgressBar(updatedTask);
+
+    // Board aktualisieren
     refreshBoard();
+
+    // Modal schließen
+    closeTaskModal();
 }
-// Alle Änderungen aus den Eingabefeldern sammeln
+
+function refreshBoard() {
+    ['todo', 'in-progress', 'await-feedback', 'done'].forEach(loadTasks);
+}
+
+
+// Änderungen sammeln
 function gatherUpdatedTaskDetails() {
     const updatedTitle = document.getElementById('editTitle').value;
     const updatedDescription = document.getElementById('editDescription').value;
     const updatedDueDate = document.getElementById('editDueDate').value;
-    const updatedPriority = document.getElementById('editPriority').value;
 
-    const updatedUsers = Array.from(document.querySelectorAll('#modalAssignedUsers input:checked')).map(input => ({
-        name: input.value,
-        color: 'blue' // Beispiel: Farbe kann angepasst werden
+    // Benutzer sammeln
+    const updatedUsers = selectedUsers.map(user => ({
+        name: user.name,
+        color: user.color,
     }));
 
-    const updatedSubtasks = Array.from(document.querySelectorAll('#modalSubtasks input[type="text"]')).map(input => input.value);
+    // Subtasks sammeln
+    const updatedSubtasks = subtaskList.map(subtask => subtask);
 
     return {
         id: currentTaskId,
@@ -828,11 +985,15 @@ function gatherUpdatedTaskDetails() {
         dueDate: updatedDueDate,
         assignedUsers: updatedUsers,
         priority: selectedPriority || 'medium',
-        subtasks: updatedSubtasks
+        subtasks: updatedSubtasks,
+        completedSubtasks: updatedSubtasks.filter((subtask, index) => 
+            document.getElementById(`subtask-checkbox-${index}`)?.checked
+        ).length,
     };
 }
 
 // Aufgabe im localStorage aktualisieren
+
 function updateTaskInLocalStorage(updatedTask) {
     const columns = ['todo', 'in-progress', 'await-feedback', 'done'];
     for (const column of columns) {
@@ -843,8 +1004,10 @@ function updateTaskInLocalStorage(updatedTask) {
             tasks[taskIndex] = {
                 ...tasks[taskIndex],
                 ...updatedTask,
-                completedSubtasks: updatedTask.subtasks.filter((_, index) => document.getElementById(`editSubtask-${index}`).checked).length,
-                totalSubtasks: updatedTask.subtasks.length
+                totalSubtasks: updatedTask.subtasks.length,
+                completedSubtasks: updatedTask.subtasks.filter((_, index) => 
+                    document.getElementById(`subtask-checkbox-${index}`)?.checked
+                ).length,
             };
             localStorage.setItem(column, JSON.stringify(tasks));
             break;
@@ -852,15 +1015,51 @@ function updateTaskInLocalStorage(updatedTask) {
     }
 }
 
+
+// Board aktualisieren
+function refreshBoard() {
+    // Tasks der aktuellen Spalte neu laden
+    ['todo', 'in-progress', 'await-feedback', 'done'].forEach(loadTasks);
+}
+
+
 // Board nach Änderungen aktualisieren
 function refreshBoard() {
-    alert('Task erfolgreich gespeichert!');
-    window.location.reload();
+    alert('Änderungen erfolgreich gespeichert!');
+    window.location.reload(); // Seite neu laden
 }
-function cancelTaskEdit() {
-    reloadTaskDetails();
-}
+
+// Ursprüngliche Task-Details erneut laden
 function reloadTaskDetails() {
     closeTaskModal();
     openTaskDetails(currentTaskId);
+}
+
+function closeTaskModal() {
+    const modalFooter = document.querySelector('.modal-footer');
+    if (modalFooter) {
+        modalFooter.innerHTML = ''; // Entfernt alle Buttons im Footer
+    }
+
+    // Modal ausblenden
+    document.getElementById('taskModal').style.display = 'none';
+}
+
+function toggleModalLayout(isEditMode) {
+    const dueDateElement = document.querySelector('.modalDueDate, .modalsDueDate');
+    const priorityElement = document.querySelector('.modalPriority, .modalsPriority');
+
+    if (isEditMode) {
+        dueDateElement.classList.remove('modalDueDate');
+        dueDateElement.classList.add('modalsDueDate');
+        
+        priorityElement.classList.remove('modalPriority');
+        priorityElement.classList.add('modalsPriority');
+    } else {
+        dueDateElement.classList.remove('modalsDueDate');
+        dueDateElement.classList.add('modalDueDate');
+        
+        priorityElement.classList.remove('modalsPriority');
+        priorityElement.classList.add('modalPriority');
+    }
 }
