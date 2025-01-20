@@ -441,15 +441,23 @@ document.querySelectorAll('.task-container').forEach((taskContainer) => {
 });
 
 function editTaskDetails() {
-    document.getElementById('modalCategory').classList.add('hidden')
+    document.getElementById('modalCategory').classList.add('hidden');
     enableTitleEdit();
     enableDescriptionEdit();
     enableDueDateEdit();
     enablePriorityEdit();
-    enableUserEdit();
+
+    const task = getCurrentTask(); // Lade die aktuelle Aufgabe
+    selectedUsers = task.assignedUsers || []; // Synchronisiere die Benutzerliste
+    enableUserEdit(); // Benutzer-Dropdown initialisieren
+
+    addedUsers(); // Initialen der Benutzer anzeigen
+
     enableSubtaskEdit();
     addSaveAndCancelButtons();
 }
+
+
 
 // Bearbeitbarer Titel
 function enableTitleEdit() {
@@ -508,79 +516,283 @@ function setPriority(priority) {
         document.getElementById('priority-low').classList.add('active');
     }
 }
-
-
-function initUserDropdownIntegration(loadedContacts, selectedUsers = []) {
-    renderDropdownUsers(loadedContacts, selectedUsers); // Rendert die Benutzerliste im Dropdown
-    renderSelectedUsers(selectedUsers); // Zeigt die bereits ausgewählten Benutzer an
+function getCurrentTask() {
+    const columns = ['todo', 'in-progress', 'await-feedback', 'done'];
+    for (const column of columns) {
+        const tasks = JSON.parse(localStorage.getItem(column)) || [];
+        const task = tasks.find(task => task.id === currentTaskId);
+        if (task) {
+            return task;
+        }
+    }
+    return null;
 }
+
+
+function enableUserEdit() {
+    const modalAssignedUsers = document.getElementById('modalAssignedUsers'); // Stelle sicher, dass dieses Element existiert
+    modalAssignedUsers.innerHTML = `
+        <div onclick="openDropDownMenuUser()" class="drop-down">
+            <div>Select contacts to assign</div>
+            <div>
+                <img class="drop-down-arrow" id="drop-down-arrow-contacts" src="../Assets/arrow_drop_downaa (1).png" alt="Arrow down"/>
+            </div>
+        </div>
+        <div class="contact-list-container" id="contact-list" style="display: none;"></div>
+        <div id="addedUsers" class="added-users"></div>
+    `;
+
+    // Benutzer-Dropdown initialisieren
+    renderDropdownUsers(loadedContacts, selectedUsers);
+}
+
+function getCurrentTask() {
+    const columns = ['todo', 'in-progress', 'await-feedback', 'done'];
+    for (const column of columns) {
+        const tasks = JSON.parse(localStorage.getItem(column)) || [];
+        const task = tasks.find(task => task.id === currentTaskId);
+        if (task) {
+            return task;
+        }
+    }
+    return null;
+}
+document.addEventListener('DOMContentLoaded', () => {
+    renderDropdownUsers(loadedContacts, selectedUsers);
+    addedUsers();
+});
+
+
 
 function renderDropdownUsers(loadedContacts, selectedUsers) {
-    const dropdown = document.getElementById('user-dropdown');
-    dropdown.innerHTML = loadedContacts.map((user, index) => {
+    const contactList = document.getElementById('contact-list');
+    contactList.innerHTML = ""; // Zurücksetzen der Liste
+
+    loadedContacts.forEach((user, index) => {
         const isChecked = selectedUsers.some(selected => selected.name === user.name);
-        return `
-            <div class="dropdown-item">
-                <div class="user-avatar" style="background-color: ${user.color || getRandomColor()}">${user.initialien}</div>
+        contactList.innerHTML += `
+            <div class="contact">
+                <div class="user-avatar" style="background-color: ${user.color};">${user.initialien}</div>
                 <span>${user.name}</span>
-                <input type="checkbox" id="user-${index}" ${isChecked ? 'checked' : ''} onclick="toggleUserSelection(${index})">
+                <input 
+                    type="checkbox" 
+                    ${isChecked ? 'checked' : ''} 
+                    onclick="checkBoxUserTask(${index})"
+                />
             </div>
         `;
-    }).join('');
+    });
 }
 
-function renderSelectedUsers(selectedUsers) {
-    const selectedUsersContainer = document.getElementById('selected-users');
-    selectedUsersContainer.innerHTML = selectedUsers.map(user => `
-        <div class="user-avatar" style="background-color: ${user.color || getRandomColor()}">
-            ${user.initialien}
-        </div>
-    `).join('');
-}
 
-function toggleUserSelection(index) {
-    const user = loadedContacts[index];
-    const checkbox = document.getElementById(`user-${index}`);
+function checkBoxUserTask(index) {
+    const user = loadedContacts[index]; // Zugriff auf den Benutzer im Array
+    const checkbox = document.querySelectorAll('.contact input[type="checkbox"]')[index];
+
+    if (!user) {
+        console.error(`User not found at index ${index}`);
+        return;
+    }
 
     if (checkbox.checked) {
+        // Benutzer zur Liste hinzufügen
         if (!selectedUsers.some(u => u.name === user.name)) {
             selectedUsers.push(user);
         }
     } else {
+        // Benutzer aus der Liste entfernen
         selectedUsers = selectedUsers.filter(u => u.name !== user.name);
     }
 
-    renderSelectedUsers(selectedUsers);
-}
-
-function filterUsers(searchTerm) {
-    const filteredContacts = loadedContacts.filter(user => 
-        user.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    renderDropdownUsers(filteredContacts, selectedUsers);
-}
-
-function getRandomColor() {
-    const colors = ['#6A8EAE', '#F4A261', '#2A9D8F', '#E76F51', '#264653', '#A2678A', '#457B9D', '#D4A373', '#8A817C', '#BC6C25'];
-    return colors[Math.floor(Math.random() * colors.length)];
+    // Aktualisiere die Ansicht der hinzugefügten Benutzer
+    addedUsers();
 }
 
 
-// Bearbeitbare Subtasks
+function addedUsers() {
+    const addedUsersContainer = document.getElementById("addedUsers");
+    if (!addedUsersContainer) {
+        console.error('Element "addedUsers" not found!');
+        return;
+    }
+
+    addedUsersContainer.innerHTML = ""; // Container zurücksetzen
+
+    // Nur Benutzer anzeigen, die in selectedUsers sind
+    selectedUsers.forEach(user => {
+        addedUsersContainer.innerHTML += `
+            <div class="user-avatar" style="background-color: ${user.color};">${user.initialien}</div>
+        `;
+    });
+}
+
+
+
+
+function openDropDownMenuUser() {
+    const contactList = document.getElementById('contact-list');
+    const dropDownArrowContacts = document.getElementById('drop-down-arrow-contacts');
+
+    // Wechsel zwischen "anzeigen" und "verbergen"
+    if (contactList.style.display === 'none' || !contactList.style.display) {
+        contactList.style.display = 'block'; // Dropdown anzeigen
+        dropDownArrowContacts.src = "../Assets/arrow_drop_up.png"; // Nach oben zeigende Pfeil-Ikone
+    } else {
+        contactList.style.display = 'none'; // Dropdown verbergen
+        dropDownArrowContacts.src = "../Assets/arrow_drop_downaa (1).png"; // Nach unten zeigende Pfeil-Ikone
+    }
+}
+
 function enableSubtaskEdit() {
     const modalSubtasks = document.getElementById('modalSubtasks');
-    const subtasksHTML = Array.from(modalSubtasks.children).map((subtask, index) => {
-        const isChecked = subtask.querySelector('input').checked ? 'checked' : '';
-        const subtaskText = subtask.innerText.trim();
-        return `
-            <div>
-                <input type="checkbox" id="editSubtask-${index}" ${isChecked} />
-                <input type="text" id="editSubtaskText-${index}" value="${subtaskText}" />
+
+    // Überprüfe, ob `modalSubtasks` existiert
+    if (!modalSubtasks) {
+        console.error('modalSubtasks element not found!');
+        return;
+    }
+
+    // HTML für das Eingabefeld zum Hinzufügen eines neuen Subtasks (nur oben)
+    const addNewSubtaskHTML = `
+        <div class="add-subtask-container">
+           <div class="subtask-container">
+                <input oninput="toggleButtonVisibility()" class="subtask-input" type="text" placeholder="Add new subtask" id="newSubtask"/>
+                <img onclick="toggleButtonVisibility(true)" id="plusButton" class="plus-img" src="../Assets/Subtasks +.png" alt="Add"/>
+                <button class="add-subtask" id="confirmButton" onclick="addSubtasks()">
+                    <img src="../Assets/check_blue.png" alt="Confirm"/>
+                </button>
+                <span class="linie" id="linie" onclick="cancelSubtask()">|</span>
+                <button class="cancel-subtask" id="cancelTask" onclick="cancelSubtask()">
+                    <img src="../Assets/iconoir_cancel.png" alt="Cancel"/>
+                </button>
+           </div>
+        </div>
+        <div id="subtaskList" class="subtask-list"></div>
+    `;
+
+    // Setze die HTML-Struktur für das Modal
+    modalSubtasks.innerHTML = addNewSubtaskHTML;
+
+    // Füge bestehende Subtasks hinzu
+    renderExistingSubtasks();
+}
+
+let subtaskList = []; // Globale Variable für Subtasks
+
+function renderExistingSubtasks() {
+    const subtaskListContainer = document.getElementById('subtaskList');
+    subtaskListContainer.innerHTML = ''; // Leere Liste zurücksetzen
+
+    subtaskList.forEach((subtask, index) => {
+        const subtaskHTML = `
+            <div class="subtask-item" id="subtask-${index}">
+                <span class="subtask-text">${subtask}</span>
+                <div class="images-container">
+                    <button onclick="editSubtask(${index})">
+                        <img src="../Assets/edit.png" alt="Edit"/>
+                    </button>
+                    <button onclick="deleteSubtask(${index})">
+                        <img src="../Assets/delete.png" alt="Delete"/>
+                    </button>
+                </div>
             </div>
         `;
-    }).join('');
-    modalSubtasks.innerHTML = subtasksHTML;
+        subtaskListContainer.insertAdjacentHTML('beforeend', subtaskHTML);
+    });
 }
+
+function addSubtasks() {
+    const newSubtaskInput = document.getElementById('newSubtask');
+    const subtaskText = newSubtaskInput.value.trim();
+
+    if (!subtaskText) {
+        alert('Please enter a valid subtask!');
+        return;
+    }
+
+    // Füge neuen Subtask zur Liste hinzu
+    subtaskList.push(subtaskText);
+
+    // Render Subtasks erneut
+    renderExistingSubtasks();
+
+    // Eingabefeld zurücksetzen
+    newSubtaskInput.value = '';
+    toggleButtonVisibility(false);
+}
+
+function deleteSubtask(index) {
+    // Entferne den Subtask aus der Liste
+    subtaskList.splice(index, 1);
+
+    // Render Subtasks erneut
+    renderExistingSubtasks();
+}
+
+function editSubtask(index) {
+    const subtaskItem = document.getElementById(`subtask-${index}`);
+    const subtaskText = subtaskList[index];
+
+    // Ersetze den Subtask mit einem Eingabefeld
+    subtaskItem.innerHTML = `
+        <input type="text" value="${subtaskText}" id="editSubtaskInput-${index}" class="subtask-edit-input"/>
+        <button onclick="saveSubtask(${index})">
+            <img src="../Assets/check_blue.png" alt="Save"/>
+        </button>
+        <button onclick="cancelEditSubtask(${index}, '${subtaskText}')">
+            <img src="../Assets/iconoir_cancel.png" alt="Cancel"/>
+        </button>
+    `;
+}
+
+function saveSubtask(index) {
+    const editInput = document.getElementById(`editSubtaskInput-${index}`);
+    const updatedText = editInput.value.trim();
+
+    if (!updatedText) {
+        alert('Please enter a valid subtask!');
+        return;
+    }
+
+    // Aktualisiere den Subtask in der Liste
+    subtaskList[index] = updatedText;
+
+    // Render Subtasks erneut
+    renderExistingSubtasks();
+}
+
+function cancelEditSubtask(index, originalText) {
+    subtaskList[index] = originalText;
+    renderExistingSubtasks();
+}
+
+function toggleButtonVisibility(forceShow) {
+    const taskInput = document.getElementById('newSubtask');
+    const confirmButton = document.getElementById('confirmButton');
+    const cancelButton = document.getElementById('cancelTask');
+    const plusButton = document.getElementById('plusButton');
+    const linie = document.getElementById('linie');
+    linie.style.display='none';
+    confirmButton.style.display = 'none';
+    cancelButton.style.display = 'none';
+    plusButton.style.display = 'inline';
+
+    if (forceShow || taskInput.value.trim()) {
+        confirmButton.style.display = 'inline';
+        cancelButton.style.display = 'inline';
+        linie.style.display='inline';
+        plusButton.style.display = 'none';
+    } 
+}
+
+
+function cancelSubtask() {
+    document.getElementById('newSubtask').value = '';
+    toggleButtonVisibility(false);
+}
+
+
+
 
 // Buttons für Speichern und Abbrechen hinzufügen
 function addSaveAndCancelButtons() {
