@@ -242,31 +242,33 @@ function HTMLOpenEditContactOverlay(){
     `;
 }
 
-function HTMLOpenEditContactOverlayDesktop(){
+function HTMLOpenEditContactOverlayDesktop(index){
     return`
     <div class="overlay-edit-contact">
-            <div class="middle-avatar">TW</div>
-            <div class="upper-half">
-                <div class="cross-close" onclick="closeEditContactOverlay()">X</div>
-                <div class="edit-contact-title">
-                    <h1>Edit contact</h1>
-                    <div class="blue-line"></div>
-                </div>
+        <div class="middle-avatar">TW</div>
+        <div class="upper-half">
+            <div class="cross-close" onclick="closeEditContactOverlay()">X</div>
+            <div class="edit-contact-title">
+                <h1>Edit contact</h1>
+                <div class="blue-line"></div>
             </div>
-    
-            <div class="lower-half">
-                <div class="input-fields">
-                    <input class="input-person" placeholder="Name" type="text">
-                    <input class="input-mail" placeholder="Email" type="email">
-                    <input class="input-phone" placeholder="Phone" type="tel">
-                </div>
+        </div>
+        <div class="lower-half-edit">
+            <div class="input-fields-add">
+                <input class="input-layout input-person" value="${loadedContacts[index].name}" placeholder="Name" type="text" id="edit-input-name-id">
+                <div id="name-error-id" class="input-layout error-message"></div>
+                <input class="input-layout input-mail" value="${loadedContacts[index].email}" placeholder="Email" type="email" id="edit-input-mail-id">
+                <div id="mail-error-id" class="input-layout error-message"></div>
+                <input class="input-layout input-phone" value="${loadedContacts[index].phone}" placeholder="Phone" type="tel" id="edit-input-phone-id">
+                <div id="phone-error-id" class="input-layout error-message"></div>
                 <div class="delete-safe-buttons">
-                    <button class="delete-button">Delete</button>
-                    <button class="save-button">Save<i class="fa-sharp-duotone fa-solid fa-check save-padding"></i></button>
+                    <button onclick="deleteContact(${index})" class="delete-button">Delete</button>
+                    <button onclick="editContact(${index})" class="save-button">Save<i class="fa-sharp-duotone fa-solid fa-check save-padding"></i></button>
                 </div>
             </div>
         </div>
-    `;
+    </div>
+`;
 }
 
 function getSubtasksTemplate(subtask, index) {

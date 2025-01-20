@@ -69,6 +69,11 @@ function OpenAddContactOverlay(){
     document.getElementById('add-contact-div-overlay-id').innerHTML = HTMLOpenAddContactOverlay();
 }
 
+function OpenAddContactOverlayTestEdit(index){
+    document.getElementById('add-contact-div-overlay-id').classList.remove('d-none');
+    document.getElementById('add-contact-div-overlay-id').innerHTML = HTMLOpenEditContactOverlayDesktop(index);
+}
+
 function closeAddContactOverlay(){
     document.getElementById('add-contact-div-overlay-id').classList.add('d-none');
 }
