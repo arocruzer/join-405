@@ -135,7 +135,6 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: fadeOutBackground 1s forwards;
 }
 
 .welcome-img {
@@ -147,9 +146,16 @@ a {
   transform: translate(-50%, -50%);
   animation: mymove 1s linear forwards;
 }
+
 .welcome-img-mobile {
   position: absolute;
   display: none;
+  height: 100px;
+  width: 80px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: mymoveMobile 1s linear forwards;
 }
 
 @keyframes mymove {
@@ -157,8 +163,8 @@ a {
     transform: translate(-50%, -50%);
   }
   100% {
-    top: 5%;
-    left: 6.5%;
+    top: 10%;
+    left: 6%;
     transform: translate(0, 0);
     opacity: 0;
   }
@@ -172,6 +178,7 @@ a {
     background-color: transparent;
   }
 }
+
 @keyframes mymoveMobile {
   0% {
     transform: translate(-50%, -50%);
@@ -190,6 +197,27 @@ a {
   }
   100% {
     background-color: transparent;
+  }
+}
+
+@media (max-width: 830px) {
+  .welcome-img {
+    display: none;
+  }
+
+  .welcome-img-mobile {
+    display: block;
+    animation: mymoveMobile 1s linear forwards;
+  }
+
+  .animation {
+    animation: fadeOutBackgroundMobile 1s forwards;
+  }
+}
+
+@media (min-width: 831px) {
+  .animation {
+    animation: fadeOutBackground 1s forwards;
   }
 }
 

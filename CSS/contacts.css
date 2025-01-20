@@ -331,19 +331,29 @@ display: block;
   position: relative;
 }
 
-.input-fields {
+.lower-half {
+  background-color: white;
+  border-radius: 0 0 15px 15px;
+  color: black;
+  height: 351px;
+  width: 396px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  gap: 24px;
-  height: 171px;
-  width: 364px;
+}
+
+.lower-half-edit {
+  background-color: white;
+  border-radius: 0 0 15px 15px;
+  color: black;
+  height: 351px;
+  width: 396px;
+  display: flex;
+  justify-content: center;
 }
 
 .input-fields input {
   width: 100%;
-  height: 30px;
+  height: 24px;
   border-radius: 15px;
   border: 1px solid lightgray;
   padding-left: 16px;
@@ -351,22 +361,28 @@ display: block;
   top: 20px;
 }
 
+.error-message{
+  color: red;
+  font-size: 8px;
+  height: 16px;
+}
+
 .input-person {
   background: url(../Assets/person.png) no-repeat;
   background-size: 24px;
-  background-position: right 10px center;
+  background-position: right 16px center;
 }
 
 .input-mail {
   background: url(../Assets/mail.png) no-repeat;
   background-size: 24px;
-  background-position: right 10px center;
+  background-position: right 16px center;
 }
 
 .input-phone {
   background: url(../Assets/call.png) no-repeat;
   background-size: 24px;
-  background-position: right 10px center;
+  background-position: right 16px center;
 }
 
 .edit-contact-title {
@@ -377,21 +393,6 @@ display: block;
   font-size: 20px;
   font-weight: 400;
   margin-bottom: 8px;
-}
-
-.lower-half {
-  background-color: white;
-  border-radius: 0 0 15px 15px;
-  color: black;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 351px;
-  width: 396px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 24px;
 }
 
 .middle-avatar {
@@ -412,6 +413,7 @@ display: block;
 
 .delete-safe-buttons {
   display: flex;
+  justify-content: center;
   gap: 20px;
   margin-top: 16px;
 }
@@ -447,12 +449,18 @@ display: block;
 /* AddContact Overlay */
 
 .input-fields-add {
+  height: 100%;
+  width: 80%;
+  margin-top: 70px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 15px;
-  width: 364px;
+}
+
+.input-layout{
+  height: 30px;
+  padding-left: 16px;
+  padding-right: 24px;
 }
 
 .input-fields-add input {
@@ -460,17 +468,13 @@ display: block;
   height: 30px;
   border-radius: 15px;
   border: 1px solid lightgray;
-  padding-left: 16px;
-  position: relative;
-  top: 20px;
-  height: 30px;
+
 }
 
 .create-button {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 36px;
   padding: 18px 10px;
   border-radius: 16px;
   background-color: #2a3647;
@@ -529,6 +533,7 @@ display: block;
   cursor: pointer;
   background-color: #29ABE2;
 }
+
 
 /* Responsive */
 
