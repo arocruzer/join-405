@@ -111,6 +111,9 @@
 }
 
 @media screen and (min-width: 830px) {
+  #usr-menu-help-button{
+    display: none;
+  }
   #header-center {
     display: unset;
   }
