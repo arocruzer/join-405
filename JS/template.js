@@ -242,6 +242,33 @@ function HTMLOpenEditContactOverlay(){
     `;
 }
 
+function HTMLOpenEditContactOverlayDesktop(){
+    return`
+    <div class="overlay-edit-contact">
+            <div class="middle-avatar">TW</div>
+            <div class="upper-half">
+                <div class="cross-close" onclick="closeEditContactOverlay()">X</div>
+                <div class="edit-contact-title">
+                    <h1>Edit contact</h1>
+                    <div class="blue-line"></div>
+                </div>
+            </div>
+    
+            <div class="lower-half">
+                <div class="input-fields">
+                    <input class="input-person" placeholder="Name" type="text">
+                    <input class="input-mail" placeholder="Email" type="email">
+                    <input class="input-phone" placeholder="Phone" type="tel">
+                </div>
+                <div class="delete-safe-buttons">
+                    <button class="delete-button">Delete</button>
+                    <button class="save-button">Save<i class="fa-sharp-duotone fa-solid fa-check save-padding"></i></button>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
 function getSubtasksTemplate(subtask, index) {
     return `
         <div class="subtask-label" id="subtask-label-${index}">
