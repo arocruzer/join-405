@@ -13,19 +13,19 @@ async function userLogIn() {
   let user = loadedContacts.find((u) => u.email === email.value);
 
   if (user) {
-      if (user.password === password.value) {
-          localStorage.setItem("loggedInUser", JSON.stringify(user));
-          window.location.href = "../HTML/summary.html";
-          
-          email.value = "";
-          password.value = "";
-      } else {
-          passwordError.style.display = "flex";
-          passwordError.innerHTML = "Check your email and password. Please try again.";
-      }
+    if (user.password === password.value) {
+      localStorage.setItem("loggedInUser", JSON.stringify(user));
+      window.location.href = "../HTML/summary.html";
+
+      email.value = "";
+      password.value = "";
+    } else {
+      passwordError.style.display = "flex";
+      passwordError.innerHTML = "Check your email and password. Please try again.";
+    }
   } else {
     emailError.style.display = "flex"
-      emailError.innerHTML = "User not found. Please check your email.";
+    emailError.innerHTML = "User not found. Please check your email.";
   }
   await loadAllTasks();
 }
