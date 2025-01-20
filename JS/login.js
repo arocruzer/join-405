@@ -3,7 +3,7 @@ const msg = urlParams.get("msg");
 let msgBox = document.getElementById("msgBox");
 let hero = document.getElementById("body");
 
-function logIn() {
+async function userLogIn() {
   let emailError = document.getElementById("email-error");
   let passwordError = document.getElementById("password-error");
 
@@ -13,20 +13,21 @@ function logIn() {
   let user = loadedContacts.find((u) => u.email === email.value);
 
   if (user) {
-      if (user.password === password.value) {
-          localStorage.setItem("loggedInUser", JSON.stringify(user));
-          window.location.href = "../HTML/summary.html";
-          
-          email.value = "";
-          password.value = "";
-      } else {
-          passwordError.style.display = "flex";
-          passwordError.innerHTML = "Check your email and password. Please try again.";
-      }
+    if (user.password === password.value) {
+      localStorage.setItem("loggedInUser", JSON.stringify(user));
+      window.location.href = "../HTML/summary.html";
+
+      email.value = "";
+      password.value = "";
+    } else {
+      passwordError.style.display = "flex";
+      passwordError.innerHTML = "Check your email and password. Please try again.";
+    }
   } else {
     emailError.style.display = "flex"
-      emailError.innerHTML = "User not found. Please check your email.";
+    emailError.innerHTML = "User not found. Please check your email.";
   }
+  await loadAllTasks();
 }
 
 if (msg) {
@@ -38,3 +39,16 @@ if (msg) {
 hero.onclick = function () {
   msgBox.style.display = "none";
 };
+
+async function guestLogin() {
+  let guestUser = {
+    name: "",
+    email: null,
+    color: "#95a5a6",
+    initialien: "G",
+  };
+  localStorage.setItem("loggedInUser", JSON.stringify(guestUser));
+  window.location.href = "../HTML/summary.html";
+  getUserLogo();
+  await loadAllTasks();
+}

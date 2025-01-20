@@ -130,24 +130,12 @@ async function loadContent(page) {
     element.innerHTML = "Page not found";
   }
 }
-function guestLogin() {
-  let guestUser = {
-    name: "",
-    email: null,
-    color: "#95a5a6",
-    initialien: "G",
-  };
-  localStorage.setItem("loggedInUser", JSON.stringify(guestUser));
-  window.location.href = "../HTML/summary.html";
-  getUserLogo();
-}
 
 function getUserLogo() {
   let userLogo = document.getElementById("user-button");
   let user = JSON.parse(localStorage.getItem("loggedInUser"));
 
   if (!user) {
-    console.error("Kein Benutzer im localStorage gefunden.");
     return;
   }
 
