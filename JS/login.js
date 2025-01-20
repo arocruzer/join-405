@@ -3,7 +3,7 @@ const msg = urlParams.get("msg");
 let msgBox = document.getElementById("msgBox");
 let hero = document.getElementById("body");
 
-function logIn() {
+function userLogIn() {
   let emailError = document.getElementById("email-error");
   let passwordError = document.getElementById("password-error");
 
@@ -38,3 +38,15 @@ if (msg) {
 hero.onclick = function () {
   msgBox.style.display = "none";
 };
+
+function guestLogin() {
+  let guestUser = {
+    name: "",
+    email: null,
+    color: "#95a5a6",
+    initialien: "G",
+  };
+  localStorage.setItem("loggedInUser", JSON.stringify(guestUser));
+  window.location.href = "../HTML/summary.html";
+  getUserLogo();
+}
