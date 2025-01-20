@@ -6,7 +6,7 @@
   gap: 15px;
 }
 
-.menu-logged-off {
+.menu-logged-out {
   display: none;
 }
 
@@ -27,7 +27,7 @@
   height: 100%;
 }
 
-.frame-nav-bar-logged-off {
+.frame-nav-bar-logged-out {
   display: flex;
   justify-content: space-between;
   padding: 0 16px;
@@ -38,12 +38,12 @@
   padding-bottom: 64px;
 }
 
-.legal-documents-logged-off {
+.legal-documents-logged-out {
   display: flex;
   gap: 4px;
 }
 
-.legal-documents-logged-off .nav-button {
+.legal-documents-logged-out .nav-button {
   width: 100%;
   padding: 8px;
 }
@@ -218,14 +218,14 @@
     height: 30px;
   }
 
-  .frame-nav-bar-logged-off {
+  .frame-nav-bar-logged-out {
     flex-direction: column;
     justify-content: space-between;
     padding: 0 0 64px;
     height: 100%;
   }
 
-  .legal-documents-logged-off .nav-button {
+  .legal-documents-logged-out .nav-button {
     width: 232px;
   }
 }

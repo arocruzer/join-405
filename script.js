@@ -16,7 +16,9 @@ async function init() {
   await loadAllContacts();
   await loadAllTasks();
   getUserLogo();
+  inOrOut();
 }
+
 
 async function loadAllContacts(path = "") {
   let response = await fetch(BASE_URL + path + ".json");
@@ -156,6 +158,7 @@ function getUserLogo() {
     userLogo.innerHTML = renderUserLogo(initials, color, user);
   }
 }
+
 document.addEventListener("DOMContentLoaded", () => {
   const isAnimationShown = localStorage.getItem("welcomeAnimationShown");
   const animationDiv = document.getElementById("animation");
@@ -178,7 +181,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let isMobile = window.innerWidth <= 830;
   let isAnimationShowSummary = localStorage.getItem("welcomeAnimationShowSummary");
   let regardDiv = document.getElementById("regardsUser");
-  if (!regardDiv){
+  if (!regardDiv) {
     return;
   }
 
@@ -187,7 +190,7 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(() => {
         regardDiv.style.display = "none";
         localStorage.setItem("welcomeAnimationShowSummary", "true");
-      }, 2000); 
+      }, 2000);
     } else {
       regardDiv.style.display = "none";
     }
