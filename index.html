@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
+  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -8,6 +9,8 @@
   <link rel="icon" type="image/x-icon" href="../Assets/favIcon.png">
   <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="./CSS/login.css">
+<!--   <script src="./JS/login.js"></script> -->
+</head>
   
   <title>Join</title>
   <body id="body" onload="init()">
@@ -41,7 +44,7 @@
       <div class="erorr-msg" id="password-error"></div>
     </div>
     <div class="login-signup-container">
-      <button onclick="logIn()" class="login-btn">Log in</button>
+      <button onclick="userLogIn()" class="login-btn">Log in</button>
       <button onclick="guestLogin()" class="guest-login">Guest Log in</button>
     </div>
     </div>
@@ -56,8 +59,8 @@
   </footer>
 </div>
 <script src="./script.js"></script>
-<script src="./JS/template.js"></script>
 <script src="./JS/login.js"></script>
+<script src="./JS/template.js"></script>
 <script src="./JS/nav-bar.js"></script>
   </body>
 </html>
