@@ -559,30 +559,15 @@ display: block;
   .newContactButton {
     display: flex;
   }
-  /* .three-points-menu{
-    display: none;
-  } */
 }
 
 @media screen and (min-width: 1150px) {
-
-  /* .contacts-list {
-    max-width: 450px;
-    height: calc(100vh - 100px);
-  } */
-/* 
-  .content-wrapper {
-    height: 100vh;
-    position: fixed;
-  } */
 
   .contacts-container {
     flex: 1;
   }
 
   .contact-details-wrapper {
-    /* position: sticky;
-    height: calc(100vh - 100px); */
     flex: 1;
   }
 
