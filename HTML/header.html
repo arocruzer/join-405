@@ -24,6 +24,7 @@
   </div>
 </div>
 
+<!-- Usr-Menu -->
 <div
   id="ar-overlay"
   onclick="toggleUsrMenu()"
@@ -31,21 +32,27 @@
 ></div>
 
 <div id="usr-menu" class="usr-menu-box usr-menu-closed">
-  <a onclick="loadLegalDocumentUsrMenu(`privacy-policy`)" class="nav-button">
-    <div class="legal-documents-button">
-      <p>Privacy Policy</p>
-    </div>
-  </a>
+  <button
+    id="help-button-usr-menu"
+    onclick="loadLegalDocumentUsrMenu(`help`)"
+    class="usr-menu-button"
+  >
+    Help
+  </button>
 
-  <a onclick="loadLegalDocumentUsrMenu(`legal-notice`)" class="nav-button">
-    <div class="legal-documents-button">
-      <p>Legal Notice</p>
-    </div>
-  </a>
+  <button
+    onclick="loadLegalDocumentUsrMenu(`privacy-policy`)"
+    class="usr-menu-button"
+  >
+    Privacy Policy
+  </button>
 
-  <a class="nav-button" href="../index.html">
-    <div class="legal-documents-button">
-      <p>Log out</p>
-    </div>
-  </a>
+  <button
+    onclick="loadLegalDocumentUsrMenu(`legal-notice`)"
+    class="usr-menu-button"
+  >
+    Legal Notice
+  </button>
+
+  <button class="usr-menu-button" href="../index.html">Log out</button>
 </div>

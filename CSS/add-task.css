@@ -11,7 +11,7 @@
 .hero {
   display: block;
   padding-top: 110px;
-  padding-left: 46px;
+  padding-left: 96px;
 }
 .form-container {
   display: flex;
@@ -112,7 +112,7 @@ span {
   position: absolute;
   right: 50px;
 }
-.subtusk-input {
+.subtask-input {
   height: 40px;
   border: 1px solid #d1d1d1;
   border-radius: 10px;
@@ -230,7 +230,6 @@ input::placeholder {
 }
 .images-container{
   display: none;
-  display: flex;
   justify-content: space-between;
   width: 60px
 }
@@ -258,11 +257,11 @@ input::placeholder {
   top: 80px;
   overflow: auto;
   overflow-x: hidden;
-  width: 430px;
+  width: 100%;
 }
 
 .contact {
-  width: 396px;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   padding: 0 16px;
@@ -339,10 +338,121 @@ input::placeholder {
 #cancelButton {
   display: none;
 }
+.add-clear-task{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-top: 146px;
+}
+.required{
+  display: none;
+}
+.confirm-subtask{
+  display: none;
+}
+@media (max-width: 1190px){
+  .form-container{
+    gap: 10px;
+  }
+}
+@media (max-width: 1040px){
+  .btn-prio-urgent{
+    width: 90px;
+  }
+  .btn-prio-medium{
+    width: 90px;
+  }
+  .btn-prio-low{
+    width: 90px;
+  }
+  .subtask{
+    width: 100%;
+  }
+  .subtask input{
+    width: 100%;
+  }
+}
+@media (max-width: 830px){
+  #frame{
+    overflow-y: auto;
+  }
+  .hero{
+    padding-top: 48px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .form-container{
+    flex-direction: column;
+  }
+  hr{
+    display: none;
+  }
+  .btn-prio-urgent{
+    width: 121px;
+  }
+  .btn-prio-medium{
+    width: 121px;
+  }
+  .btn-prio-low{
+    width: 121px;
+  }
+  #main-content{
+    align-items: center;
+  }
+  .add-clear-task{
+   /*  display: none; */
+   position: sticky;
+   background-color: #f6f7f8;
+   bottom: 0px;
+   padding: 10px;
+  }
+  .add-clear-task p{
+    display: none;
+  }
+  .required{
+    display: block;
+  }
+  #nav-bar{
+    box-shadow: none;
+  }
+  .title-arrow{
+    position: sticky;
+    top: 82px;
+    background-color: #f6f7f8;
+    z-index: 1000;
+  }
+}
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 830px) {
   #add-task-button {
-    border-radius: unset;
+   border-radius: 0;
+  }
+}
+
+@media (max-width: 450px){
+  .form-left{
+    width: 100%;
+  }
+  .form-right{
+    width: 100%;
+  }
+  .subtask{
+    width: 100%;
+  }
+  .subtask input{
+    width: 100%;
+  }
+}
+
+@media (max-width: 370px){
+  .btn-prio-urgent{
+    width: 80px;
+  }
+  .btn-prio-medium{
+    width: 80px;
+  }
+  .btn-prio-low{
+    width: 80px;
   }
 }
 @media (max-width: 1220px){

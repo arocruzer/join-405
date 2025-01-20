@@ -16,8 +16,12 @@ function renderAddedUsers(color, initials) {
             </div>`;
 }
 
-function regardsUserTemplate(greeting, userName) {
+function regardsGastTemplate(greeting, userName) {
   return `<h2>${greeting}</h2> <h1>${userName}</h1>`;
+}
+
+function regardsUserTemplate(greeting, userName) {
+    return `<h2>${greeting},</h2> <h1>${userName}</h1>`;
 }
 
 function renderUserLogo(initials, color, user) {
@@ -88,7 +92,9 @@ function HTMLopenContactDetailsOverlay(index){
                 <h5>Phone</h5>
                 <a href="#">${loadedContacts[index].phone}</a>
             </div>
-            <img class="three-points-menu" src="../Assets/threePointsMenu.png" onclick="openEditContactOverlay()" alt="threePointsMenu">
+            <div class="three-points-menu-div">
+                <img class="three-points-menu" src="../Assets/threePointsMenu.png" onclick="openEditContactOverlay()" alt="threePointsMenu">
+            </div>
         <div class="edit-contact-details-overlay d-none" id="edit-contact-details-overlay-id">
             <div class="overlay-edit-contact">
                 <div class="middle-avatar">TW</div>
@@ -121,21 +127,23 @@ function HTMLOpenAddContactOverlay(){
     return`
     <div class="overlay-edit-contact">
         <div class="middle-avatar">TW</div>
-            <div class="upper-half">
-                <div class="cross-close" onclick="closeAddContactOverlay()">X</div>
-                <div class="edit-contact-title">
-                    <h1>Add contact</h1>
-                    <h6>Tasks are better with a team!</h6>
-                    <div class="blue-line"></div>
-                </div>
+        <div class="upper-half">
+            <div class="cross-close" onclick="closeAddContactOverlay()">X</div>
+            <div class="edit-contact-title">
+                <h1>Add contact</h1>
+                <h6>Tasks are better with a team!</h6>
+                <div class="blue-line"></div>
             </div>
-            <div class="lower-half">
-                <div class="input-fields-add">
-                    <input class="input-person" placeholder="Name" type="text" id="add-input-name-id">
-                    <input class="input-mail" placeholder="Email" type="email" id="add-input-mail-id">
-                    <input class="input-phone" placeholder="Phone" type="tel" id="add-input-phone-id">
-                    <button onclick="addNewContact()" class="create-button">Create contact<i class="fa-sharp-duotone fa-solid fa-check"></i></button>
-                </div>
+        </div>
+        <div class="lower-half">
+            <div class="input-fields-add">
+                <input class="input-layout input-person" placeholder="Name" type="text" id="add-input-name-id">
+                <div id="name-error" class="input-layout error-message"></div>
+                <input class="input-layout input-mail" placeholder="Email" type="email" id="add-input-mail-id">
+                <div id="mail-error" class="input-layout error-message"></div>
+                <input class="input-layout input-phone" placeholder="Phone" type="tel" id="add-input-phone-id">
+                <div id="phone-error" class="input-layout error-message"></div>
+                <button onclick="addNewContact()" class="create-button">Create contact<i class="fa-sharp-duotone fa-solid fa-check"></i></button>
             </div>
         </div>
     </div>
@@ -146,7 +154,6 @@ function HTMLOpenEditContactOverlay(){
     return`
     <div class="overlay-edit-contact">
             <div class="middle-avatar">TW</div>
-
             <div class="upper-half">
                 <div class="cross-close" onclick="closeEditContactOverlay()">X</div>
                 <div class="edit-contact-title">
@@ -170,22 +177,24 @@ function HTMLOpenEditContactOverlay(){
     `;
 }
 
-function getSubtasksTemplate(subtask, index){
-    return`
-        <div class="subtask-label">
-            <ul>
+function getSubtasksTemplate(subtask, index) {
+    return `
+        <div class="subtask-label" id="subtask-label-${index}">
+            <ul id="subtask-list">
                 <li>
                     <div class="subtask">
                         <div>
-                            <input onfocus="editSubtask()" type="text" value="${subtask}">
+                            <input id="edit-subtask-${index}" class="edit-subtask" type="text" value="${subtask}" onfocus="editSubtask(${index})">
                         </div>
-                        <div class="images-container" id="images-container">
-                            <img id="edit-subtask-img" onclick="editSubtask()" src="../Assets/edit.png" alt="Edit Icon">
-                            <hr>
-                            <button class="delete-btn" onclick="deleteSubtask(${index})"><img id="delete-subtask" src="../Assets/delete.png" alt="delete Icon"></button>
+                        <div class="images-container" id="images-container-${index}">
+                            <img class="edit-subtask-img" id="edit-subtask-img-${index}" onclick="editSubtask(${index})" src="../Assets/edit.png" alt="Edit Icon">
+                            <img class="confirm-subtask" id="confirm-subtask-${index}" onclick="confirmSubtask(${index})" src="../Assets/check_blue.png" style="display: none;">
+                            <button class="delete-btn" onclick="deleteSubtask(${index})">
+                                <img id="delete-subtask-${index}" src="../Assets/delete.png" alt="delete Icon">
+                            </button>
                         </div>
                     </div>
                 </li>
             </ul>
-        </div>`
+        </div>`;
 }

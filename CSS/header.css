@@ -66,7 +66,7 @@
   color: #CDCDCD;
   text-decoration: none;
   border-radius: 20px 0px 20px 20px;
-  padding: 10px;
+  padding: 18px 10px;
   display: flex;
   flex-direction: column;
   /* width: 150px; */
@@ -76,19 +76,24 @@
   transition: all 250ms ease-in-out;
   box-shadow: 0px 0px 4px 0px #0000001A;
   z-index: 2;
-}
-
-.usr-menu-box p {
-  padding: 8px 16px;
   gap: 8px;
-  height: 46px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
 .usr-menu-closed {
   transform: translateX(calc(100% + 14px));
+}
+
+.usr-menu-button {
+  color: #CDCDCD;
+  background-color: #2a364700;
+  border: unset;
+  display: flex;
+  padding: 8px 16px;
+  font-size: 16px;
+}
+
+.usr-menu-button:hover {
+  color: white;
 }
 
 .ar-overlay-box {

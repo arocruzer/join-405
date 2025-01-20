@@ -26,6 +26,7 @@ a {
   max-width: calc(1440px - 234px);
   display: flex;
   flex-direction: column;
+  /* height: 100vh; */
 }
 
 #frame {
@@ -55,8 +56,8 @@ header {
   height: 80px;
   width: auto;
   display: flex;
-  align-items: center;
-  padding: 67px 122px;
+  align-items: flex-start;
+  padding: 80px 77px;
   justify-content: space-between;
 }
 
@@ -121,7 +122,6 @@ h5 {
 h2 {
   font-size: 16px;
   font-weight: 800;
-  line-height: 19.2px;
   text-align: left;
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
@@ -208,7 +208,24 @@ input:focus {
   font-size: 20px;
   font-weight: 600;
 }
-
+.add-clear-task-mobile{
+  display: none;
+}
+@media (max-width: 830px){
+  #main-content{
+    height: calc(100vh - 160px);
+    width: 100%;
+  }
+  .add-clear-task-mobile{
+    display: flex;
+    background-color: #f6f7f8;
+    justify-content: flex-end;
+    padding: 10px;
+  }
+  .add-clear-task-mobile p{
+    display: none;
+  }
+}
 @media (max-width: 680px) {
   h1 {
     font-size: 47px;
