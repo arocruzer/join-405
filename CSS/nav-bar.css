@@ -1,9 +1,13 @@
-#menu {
+.menu-logged-in {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 2px;
   gap: 15px;
+}
+
+.menu-logged-off {
+  display: none;
 }
 
 #nav-bar {
@@ -15,12 +19,37 @@
   box-shadow: 0px 0px 4px 0px #0000001a;
 }
 
-#frame-nav-bar {
+.frame-nav-bar-logged-in {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   height: 100%;
+}
+
+.frame-nav-bar-logged-off {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 16px;
+}
+
+.legal-documents-logged-in {
+  display: none;
+  padding-bottom: 64px;
+}
+
+.legal-documents-logged-off {
+  display: flex;
+  gap: 4px;
+}
+
+.legal-documents-logged-off .nav-button {
+  width: 100%;
+  padding: 8px;
+}
+
+.log-in-logged-in {
+  display: none;
 }
 
 #logo-nav-bar {
@@ -64,19 +93,13 @@
   background-image: url(../Assets/img/contacts_w_L.png);
 }
 
+#log-in-button:hover #log-in-img {
+  background-image: url(../Assets/img/log-in_w_L.png);
+}
+
 .nav-button:hover {
   background-color: #091931;
   color: white;
-}
-
-#legal-documents {
-  display: none;
-  padding-bottom: 64px;
-}
-
-#legal-documents p {
-  padding: 8px;
-  width: 120px;
 }
 
 .nav-button-img {
@@ -101,6 +124,10 @@
 
 #contacts-img {
   background-image: url(../Assets/img/contacts_g_L.png);
+}
+
+#log-in-img {
+  background-image: url(../Assets/img/log-in_g_L.png);
 }
 
 @media screen and (min-width: 830px) {
@@ -189,5 +216,16 @@
   .footer-button svg {
     width: 30px;
     height: 30px;
+  }
+
+  .frame-nav-bar-logged-off {
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0 0 64px;
+    height: 100%;
+  }
+
+  .legal-documents-logged-off .nav-button {
+    width: 232px;
   }
 }
