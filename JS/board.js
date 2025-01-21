@@ -20,7 +20,7 @@ function renderTask(task) {
             priorityIcon = "../Assets/prio_low.png";
             break;
         case "medium":
-            priorityIcon = "../Assets/prio_medium.png";
+            priorityIcon = "../Assets/prio_medium_orang.png";
             break;
         case "urgent":
             priorityIcon = "../Assets/prio_urgent.png";
@@ -53,7 +53,7 @@ function renderTask(task) {
                      }).join('')}
                     
                     </div>
-                    <p>${priorityIcon ? `<img src="${priorityIcon}" alt="${task.priority} Priority" style="height:10px;">` : task.priority}</p>
+                    <p>${priorityIcon ? `<img src="${priorityIcon}" alt="${task.priority} Priority">` : task.priority}</p>
                 </div>
             </div>
         </div>
@@ -72,11 +72,11 @@ function getPriorityIcon(priorityText) {
         case "low":
             return "../Assets/prio_low.png";
         case "medium":
-            return "../Assets/prio_medium.png";
+            return "../Assets/prio_medium_orang.png";
         case "urgent":
             return "../Assets/prio_urgent.png";
         default:
-            return "../Assets/prio_medium.png";
+            return "../Assets/prio_medium_orang.png";
     }
 }
 
@@ -207,7 +207,7 @@ function formatPriority(priorityText) {
             priorityIcon = "../Assets/prio_low.png";
             break;
         case "medium":
-            priorityIcon = "../Assets/prio_medium.png";
+            priorityIcon = "../Assets/prio_medium_orang.png";
             break;
         case "urgent":
             priorityIcon = "../Assets/prio_urgent.png";

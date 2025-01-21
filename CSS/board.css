@@ -1115,6 +1115,27 @@ textarea {
   padding: 18px 21px;
   font-size: 16px;
 }
+
+input.title-input, textarea.description-input {
+  border: 1px solid #d1d1d1;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 16px;
+  width: 100%; 
+  box-sizing: border-box;
+  outline: none;
+}
+
+input.title-input:focus, textarea.description-input:focus {
+  border: 1px solid #29abe2;
+}
+
+textarea.description-input {
+  resize: none;
+  height: 80px;
+}
+
+
 .title-input {
   height: 40px;
   border: 1px solid #d1d1d1;
