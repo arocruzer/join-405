@@ -202,18 +202,19 @@ document.addEventListener("DOMContentLoaded", () => {
  */
 function addClickEffect(elementId) {
   let element = document.getElementById(elementId);
+  if (element) {
+    element.addEventListener("mousedown", () => {
+      element.classList.add("color-on-click");
+    });
 
-  element.addEventListener("mousedown", () => {
-    element.classList.add("color-on-click");
-  });
+    element.addEventListener("mouseup", () => {
+      element.classList.remove("color-on-click");
+    });
 
-  element.addEventListener("mouseup", () => {
-    element.classList.remove("color-on-click");
-  });
-
-  element.addEventListener("mouseleave", () => {
-    element.classList.remove("color-on-click");
-  });
+    element.addEventListener("mouseleave", () => {
+      element.classList.remove("color-on-click");
+    });
+  }
 }
 
 addClickEffect("login-click-privacy");
