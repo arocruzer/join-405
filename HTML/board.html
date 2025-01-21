@@ -189,19 +189,19 @@
 
               <!-- Edit und Delete Buttons -->
               <div class="modal-footer">
-                <img
-                  onclick="deleteTask()"
-                  class="delete-button"
-                  src="../Assets/delete_black.png"
-                  alt="Delete Icon"
-                />
+                <div onclick="deleteTask()" class="delete-button">
+                  <img
+                  src="../Assets/delete.svg"
+                  alt="Delete Icon"/>
+                  <p>Delete</p>
+                </div>                
                 <span class="line">|</span>
-                <img
-                  onclick="editTaskDetails()"
-                  class="edit-button"
-                  src="../Assets/edit_black.png"
-                  alt="Edit Icon"
-                />
+                <div onclick="editTaskDetails()" class="edit-button">
+                  <img
+                  src="../Assets/edit.svg"
+                  alt="Edit Icon"/>
+                  <p>Edit</p>
+                </div>
               </div>
             </div>
           </div>
