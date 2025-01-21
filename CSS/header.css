@@ -43,7 +43,11 @@
   font-size: 20px;
 }
 
-#header-right {
+.header-right-logged-out {
+  display: none;
+}
+
+.header-right-logged-in {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -146,4 +150,8 @@
     height: 48px;
     width: 48px;
   } */
+
+  #help-button-usr-menu{
+    display: none;
+  }
 }

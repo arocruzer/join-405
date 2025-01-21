@@ -16,6 +16,7 @@ async function init() {
   await loadAllContacts();
   await loadAllTasks();
   getUserLogo();
+  inOrOut();
 }
 
 async function loadAllContacts(path = "") {
@@ -128,24 +129,14 @@ async function loadContent(page) {
     element.innerHTML = "Page not found";
   }
 }
-function guestLogin() {
-  let guestUser = {
-    name: "",
-    email: null,
-    color: "#95a5a6",
-    initialien: "G",
-  };
-  localStorage.setItem("loggedInUser", JSON.stringify(guestUser));
-  window.location.href = "../HTML/summary.html";
-  getUserLogo();
-}
 
 function getUserLogo() {
+
+  
   let userLogo = document.getElementById("user-button");
   let user = JSON.parse(localStorage.getItem("loggedInUser"));
 
   if (!user) {
-    console.error("Kein Benutzer im localStorage gefunden.");
     return;
   }
 
@@ -156,6 +147,7 @@ function getUserLogo() {
     userLogo.innerHTML = renderUserLogo(initials, color, user);
   }
 }
+
 document.addEventListener("DOMContentLoaded", () => {
   const isAnimationShown = localStorage.getItem("welcomeAnimationShown");
   const animationDiv = document.getElementById("animation");
@@ -178,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let isMobile = window.innerWidth <= 830;
   let isAnimationShowSummary = localStorage.getItem("welcomeAnimationShowSummary");
   let regardDiv = document.getElementById("regardsUser");
-  if (!regardDiv){
+  if (!regardDiv) {
     return;
   }
 
@@ -187,7 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(() => {
         regardDiv.style.display = "none";
         localStorage.setItem("welcomeAnimationShowSummary", "true");
-      }, 2000); 
+      }, 2000);
     } else {
       regardDiv.style.display = "none";
     }

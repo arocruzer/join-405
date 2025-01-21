@@ -455,3 +455,13 @@ input::placeholder {
     width: 80px;
   }
 }
+@media (max-width: 1220px){
+  .form-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #main-content{
+    width: auto;
+  }
+}
