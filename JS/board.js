@@ -509,7 +509,7 @@ function enablePriorityEdit() {
                     class="btn-prio-medium ${currentPriority === 'medium' ? 'active' : ''}" 
                     onclick="changeColorPrioBtn('medium')">
                     Medium
-                    <img id="medium-img" src="../Assets/prio_medium.png" alt="Medium" />
+                    <img id="medium-img" src="../Assets/prio_medium_Basis.png" alt="Medium" />
                 </button>
                 <button 
                     id="btn-low" 
@@ -529,9 +529,9 @@ function enablePriorityEdit() {
 // Ändert den Stil basierend auf der ausgewählten Priorität
 function changeColorPrioBtn(priority) {
     const imgSources = {
-        urgent: ["../Assets/prio_arrow_white.png", "../Assets/prio_medium.png", "../Assets/prio_low.png"],
-        medium: ["../Assets/prio_urgent.png", "../Assets/prio_arrow_white.png", "../Assets/prio_low.png"],
-        low: ["../Assets/prio_urgent.png", "../Assets/prio_medium.png", "../Assets/prio_arrowDown_white.png"]
+        urgent: ["../Assets/prio_arrow_white.png", "../Assets/prio_medium_Basis.png", "../Assets/prio_low.png"],
+        medium: ["../Assets/prio_urgent.png", "../Assets/prio_medium.png", "../Assets/prio_low.png"],
+        low: ["../Assets/prio_urgent.png", "../Assets/prio_medium_Basis.png", "../Assets/prio_arrowDown_white.png"]
     };
 
     const bgColors = {
@@ -599,25 +599,12 @@ function savePriority() {
         }
     }
 
-    alert('Priorität erfolgreich gespeichert!');
 }
 
-
-function getCurrentTask() {
-    const columns = ['todo', 'in-progress', 'await-feedback', 'done'];
-    for (const column of columns) {
-        const tasks = JSON.parse(localStorage.getItem(column)) || [];
-        const task = tasks.find(task => task.id === currentTaskId);
-        if (task) {
-            return task;
-        }
-    }
-    return null;
-}
 
 
 function enableUserEdit() {
-    const modalAssignedUsers = document.getElementById('modalAssignedUsers'); // Stelle sicher, dass dieses Element existiert
+    let modalAssignedUsers = document.getElementById('modalAssignedUsers'); // Stelle sicher, dass dieses Element existiert
     modalAssignedUsers.innerHTML = `
         <div onclick="openDropDownMenuUser()" class="drop-down">
             <div>Select contacts to assign</div>
@@ -625,7 +612,7 @@ function enableUserEdit() {
                 <img class="drop-down-arrow" id="drop-down-arrow-contacts" src="../Assets/arrow_drop_downaa (1).png" alt="Arrow down"/>
             </div>
         </div>
-        <div class="contact-list-container" id="contact-list" style="display: none;"></div>
+        <div class="contact-list-container" id="contactList" style="display: none;"></div>
         <div id="addedUsers" class="added-users"></div>
     `;
 
@@ -652,24 +639,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 function renderDropdownUsers(loadedContacts, selectedUsers) {
-    const contactList = document.getElementById('contact-list');
+    let contactList = document.getElementById('contactList');
     contactList.innerHTML = ""; // Zurücksetzen der Liste
 
     loadedContacts.forEach((user, index) => {
-        const isChecked = selectedUsers.some(selected => selected.name === user.name);
-        contactList.innerHTML += `
-            <div class="contact">
-                <div class="user-avatar" style="background-color: ${user.color};">${user.initialien}</div>
-                <span>${user.name}</span>
-                <input 
-                    type="checkbox" 
-                    ${isChecked ? 'checked' : ''} 
-                    onclick="checkBoxUserTask(${index})"
-                />
-            </div>
-        `;
+      const isChecked = selectedUsers.some(selected => selected.name === user.name);
+      contactList.innerHTML += `
+        <div class="contact">
+          <div class="user-avatar" style="background-color: ${user.color};">${user.initialien}</div>
+          <span>${user.name}</span>
+          <input 
+            type="checkbox" 
+            ${isChecked ? 'checked' : ''} 
+            onclick="checkBoxUserTask(${index})"
+          />
+        </div>
+      `;
     });
 }
+  
 function getInitials(name) {
     const nameParts = name.trim().split(' ');
     if (nameParts.length > 1) {
@@ -733,7 +721,7 @@ function addedUsers() {
 
 
 function openDropDownMenuUser() {
-    const contactList = document.getElementById('contact-list');
+    const contactList = document.getElementById('contactList');
     const dropDownArrowContacts = document.getElementById('drop-down-arrow-contacts');
 
     // Wechsel zwischen "anzeigen" und "verbergen"
@@ -798,15 +786,21 @@ function renderExistingSubtasks() {
         const isChecked = document.getElementById(`subtask-checkbox-${index}`)?.checked || false;
 
         const subtaskHTML = `<div class="subtask-label" id="subtask-${index}">
-                <div class="subtask">
-                    <span class="subtask-text">${subtask}</span>
-                    <div class="images-container">
-                        <img id="edit-subtask-img" onclick="editSubtask(${index})" src="../Assets/edit.png" alt="Edit Icon">
-                        <hr>
-                        <button class="delete-btn" onclick="deleteSubtask(${index})"><img id="delete-subtask" src="../Assets/delete.png" alt="Delete Icon"></button>
+            <ul id="subtask-list">
+                <li>
+                    <div class="subtask">
+                        <div>
+                            <span class="subtask-text">${subtask}</span>
+                        </div>
+                        <div class="images-container">
+                           <img id="edit-subtask-img" onclick="editSubtask(${index})" src="../Assets/edit_black.png" alt="Edit Icon">
+                           <hr>
+                          <button class="delete-btn" onclick="deleteSubtask(${index})"><img id="delete-subtask" src="../Assets/delete_black.png" alt="Delete Icon"></button>
+                        </div>
                     </div>
-                </div>
-            </div>
+                </li>
+            </ul>
+         </div>
         `;
         subtaskListContainer.insertAdjacentHTML('beforeend', subtaskHTML);
     });
@@ -850,11 +844,11 @@ function editSubtask(index) {
         <input type="text" value="${subtaskText}" id="editSubtaskInput-${index}" class="subtask-edit-input"/>
         <div class="images-container" id="images-container">
            
-           <img id="edit-subtask-img" onclick="saveSubtask(${index})" src="../Assets/check_blue.png" alt="Save"/>
-           <hr>
            <button onclick="cancelEditSubtask(${index}, '${subtaskText}')">
-               <img src="../Assets/iconoir_cancel.png" alt="Cancel"/>
-           </button>
+               <img src="../Assets/delete_black.png" alt="Cancel"/>
+           </button>   
+           <hr>
+            <img id="edit-subtask-img" onclick="saveSubtask(${index})" src="../Assets/check_blue.png" alt="Save"/>
         </div>       
         
     `;
@@ -927,19 +921,19 @@ function addSaveAndCancelButtons(isEditMode) {
     } else {
         // Zeige Löschen- und Bearbeiten-Schaltflächen für den Anzeigemodus
         modalFooter.innerHTML = `
-            <img
-                onclick="deleteTask()"
-                class="delete-button"
-                src="../Assets/delete_black.png"
-                alt="Delete Icon"
-            />
-            <span class="line">|</span>
-            <img
-                onclick="editTaskDetails()"
-                class="edit-button"
-                src="../Assets/edit_black.png"
-                alt="Edit Icon"
-            />
+                <div onclick="deleteTask()" class="delete-button">
+                  <img class="delete-img"
+                  src="../Assets/delete_black.png"
+                  alt="Delete Icon"/>
+                  <p>Delete</p>
+                </div>                
+                <span class="line">|</span>
+                <div onclick="editTaskDetails()" class="edit-button">
+                  <img class="edit-img"
+                  src="../Assets/edit_black.png"
+                  alt="Edit Icon"/>
+                  <p>Edit</p>
+                </div>
         `;
     }
 }
