@@ -15,7 +15,7 @@ async function init() {
   await includeHTML();
   await loadAllContacts();
   await loadAllTasks();
-  getUserLogo();
+  // getUserLogo();
   inOrOut();
 }
 
