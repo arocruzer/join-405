@@ -10,12 +10,14 @@ let passwordError = document.getElementById("password-error");
 let showPasswordImg = document.getElementById("show-password-img");
 let showRepeatPasswordImg = document.getElementById("show-repeat-password-img");
 let regardsUser = document.getElementById("regardsUser");
+let colors = ["#007bff", "#ffa500", "#800080", "#d8bfd8", "#ff69b4", "#28a745", "#ff6347", "#20b2aa"];
 
 async function init() {
   await includeHTML();
   await loadAllContacts();
   getUserLogo();
   inOrOut();
+  /* checkIfLoggedIn() */
 }
 
 async function loadAllContacts(path = "") {
@@ -163,7 +165,6 @@ document.addEventListener("DOMContentLoaded", () => {
     animationDiv.style.display = "none";
   }
 });
-
 document.addEventListener("DOMContentLoaded", () => {
   let isMobile = window.innerWidth <= 830;
   let isAnimationShowSummary = localStorage.getItem("welcomeAnimationShowSummary");
@@ -201,7 +202,8 @@ document.addEventListener("DOMContentLoaded", () => {
  */
 function addClickEffect(elementId) {
   let element = document.getElementById(elementId);
-
+  if (element) {
+    
   element.addEventListener("mousedown", () => {
     element.classList.add("color-on-click");
   });
@@ -214,6 +216,15 @@ function addClickEffect(elementId) {
     element.classList.remove("color-on-click");
   });
 }
+}
 
 addClickEffect("login-click-privacy");
 addClickEffect("login-click-legal");
+
+function checkIfLoggedIn() {
+  let loggedUser = localStorage.getItem('loggedInUser');
+  console.log(loggedUser);
+  if(!loggedUser){
+    window.location.href = '/index.html';
+  }
+}

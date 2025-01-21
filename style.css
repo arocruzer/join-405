@@ -100,7 +100,6 @@ button {
 .hero {
   padding-left: 16px;
   /*96px*/
-  padding-right: 16px;
   /*0px*/
   padding-top: 48px;
   /*110px*/
@@ -327,8 +326,6 @@ input:focus {
 
   .hero {
     padding-left: 96px;
-    padding-right: 96px;
-    /*0px*/
     padding-top: 110px;
   }
 }

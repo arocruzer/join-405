@@ -28,7 +28,7 @@
             <hr width="88px" color="#29ABE2" size="3" />
           </div>
         </div>
-        <form onsubmit="checkSignUp(); return false;">
+        <form onsubmit="checkSignUp(event); return false;">
           <div class="input-box">
             <input type="text" id="name" placeholder="Name" required />
             <img class="input-img" src="../Assets/person.png" alt="" />
@@ -91,6 +91,9 @@
         <a href="../HTML/privacy-policy.html" target="_blank">Privacy Policy</a>
         <a href="../HTML/legal-notice.html" target="_blank">Legal notice</a>
       </footer>
+      <div class="overlay-msg" id="signup-msg">
+        <div class="msg-box" id="msgBox">You signed up sucsessfuly</div>
+      </div>
     </div>
     <script src="../script.js"></script>
     <script src="../JS/signup.js"></script>

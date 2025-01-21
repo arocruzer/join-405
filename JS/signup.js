@@ -1,4 +1,5 @@
-function checkSignUp() {
+function checkSignUp(event) {
+  event.preventDefault();
   repeatPasswordError.innerHTML = "";
   passwordError.innerHTML = "";
   
@@ -21,7 +22,7 @@ function addUser() {
     email: email.value,
     password: password.value,
     telefon: "",
-    color: colors[Object.keys(users).length % colors.length], 
+    color: colors[Object.keys(loadedContacts).length % colors.length], 
   };
 
   postUser(newUser);
@@ -34,23 +35,31 @@ function addUser() {
 
 async function postUser(newUser) {
   try {
-    let response = await fetch(BASE_URL + ".json");
+    let response = await fetch(`${BASE_URL}/users.json`);
 
     const users = await response.json();
     const userCount = users ? Object.keys(users).length : 0;
-
     const userId = `user${userCount + 1}`;
 
-    response = await fetch(`${BASE_URL}/${userId}.json`, {
+    response = await fetch(`${BASE_URL}/users/${userId}.json`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(newUser),
     });
-
-    window.location.href = ".index.html?msg=You Signed Up successfully!";
   } catch (error) {
     console.error("Benutzer konnte nicht geladen werden", error);
   }
+  signUpMsg();
+}
+
+function signUpMsg() {
+  let msgContainer = document.getElementById("signup-msg");
+
+    msgContainer.style.display = "flex";
+    setTimeout(() => {
+      msgContainer.style.display = "none";
+      window.location.href = "/index.html";
+    }, 2000); 
 }
