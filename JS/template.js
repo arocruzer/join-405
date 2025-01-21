@@ -164,6 +164,36 @@ function HTMLOpenAddContactOverlay(){
     `;
 }
 
+function HTMLOpenAddContactOverlayDesktop(){
+    return`
+    <div class="overlay-edit-contact-desktop">
+        <div class="middle-avatar-desktop gray-bg"><img src="../Assets/person.svg" alt=""></div>
+        <div class="left-part">
+            <div class="edit-contact-title-desktop">
+                <img src="../Assets/Capa 2.svg" alt="Join">
+                <h1>Add contact</h1>
+                <h2>Tasks are better with a team!</h2>
+                <div class="blue-line"></div>
+            </div>
+        </div>
+        <div class="right-part">
+            <img onclick="closeAddContactOverlay()" class="close-cross-desktop" src="../Assets/close.svg" alt="">
+            <div class="input-fields-desktop">
+                <input class="input-layout-desktop input-person" placeholder="Name" type="text" id="add-input-name-id">
+                <div id="name-error" class="input-layout error-message"></div>
+                <input class="input-layout-desktop input-mail" placeholder="Email" type="email" id="add-input-mail-id">
+                <div id="mail-error" class="input-layout error-message"></div>
+                <input class="input-layout-desktop input-phone" placeholder="Phone" type="tel" id="add-input-phone-id">
+                <div id="phone-error" class="input-layout error-message"></div>
+                <div class="delete-save-buttons-desktop">
+                    <button onclick="closeAddContactOverlay()" class="overlay-cancel-button-desktop">Cancel x</button>
+                    <button onclick="addNewContact()" class="overlay-create-button-desktop">Create Contact  <img src="../Assets/check.svg" alt=""><i class="fa-sharp-duotone fa-solid fa-check save-padding"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>`;
+}
+
 // function HTMLOpenEditContactOverlay(){
 //     return`
 //     <div class="overlay-edit-contact">
@@ -244,7 +274,7 @@ function getSubtasksTemplate(subtask, index) {
 function HTMLEditOverlay(index){
     return`
         <div class="overlay-edit-contact">
-            <div class="middle-avatar">TW</div>
+            <div class="middle-avatar">${loadedContacts[index].initialien}</div>
             <div class="upper-half">
                 <div class="cross-close" onclick="closeEditContactOverlay()">X</div>
                 <div class="edit-contact-title">
@@ -267,5 +297,35 @@ function HTMLEditOverlay(index){
                 </div>
             </div>
         </div>
+    `;
+}
+
+function HTMLEditOverlayDesktop(index){
+    return`
+    <div class="overlay-edit-contact-desktop">
+        <div class="middle-avatar-desktop">${loadedContacts[index].initialien}</div>
+        <div class="left-part">
+            <div class="edit-contact-title-desktop">
+                <img src="../Assets/Capa 2.svg" alt="Join">
+                <h1>Edit contact</h1>
+                <div class="blue-line"></div>
+            </div>
+        </div>
+        <div class="right-part">
+        <img onclick="closeEditContactOverlay()" class="close-cross-desktop" src="../Assets/close.svg" alt="">
+            <div class="input-fields-desktop">
+                <input class="input-layout-desktop input-person" value="${loadedContacts[index].name}" placeholder="Name" type="text" id="edit-input-name-id">
+                <div id="name-error-id" class="input-layout error-message"></div>
+                <input class="input-layout-desktop input-mail" value="${loadedContacts[index].email}" placeholder="Email" type="email" id="edit-input-mail-id">
+                <div id="mail-error-id" class="input-layout error-message"></div>
+                <input class="input-layout-desktop input-phone" value="${loadedContacts[index].phone}" placeholder="Phone" type="tel" id="edit-input-phone-id">
+                <div id="phone-error-id" class="input-layout error-message"></div>
+                <div class="delete-save-buttons-desktop">
+                    <button onclick="deleteContact()" class="overlay-delete-button-desktop">Delete</button>
+                    <button onclick="editContact()" class="overlay-save-button-desktop">Save<i class="fa-sharp-duotone fa-solid fa-check save-padding"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
     `;
 }
