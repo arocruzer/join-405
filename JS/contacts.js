@@ -48,9 +48,13 @@ function openContactDetailsOverlay(index){
         let contentRef = document.getElementById('contact-details-wrapper-id');
         contentRef.classList.remove('contact-detail-hidden');
         contentRef.innerHTML = HTMLopenContactDetailsOverlayMobile(index);  
+        let content = document.getElementById('edit-contact-details-overlay-id');
+        content.innerHTML = HTMLEditOverlay(index);
     }else{
         let contentRef = document.getElementById('contact-details-wrapper-id');
         contentRef.innerHTML = HTMLopenContactDetailsOverlay(index);  
+        let content = document.getElementById('edit-contact-details-overlay-id');
+        content.innerHTML = HTMLEditOverlay(index);
     } 
 }
 
@@ -67,11 +71,6 @@ function closeContactDetailsOverlay(){
 function OpenAddContactOverlay(){
     document.getElementById('add-contact-div-overlay-id').classList.remove('d-none');
     document.getElementById('add-contact-div-overlay-id').innerHTML = HTMLOpenAddContactOverlay();
-}
-
-function OpenAddContactOverlayTestEdit(index){
-    document.getElementById('add-contact-div-overlay-id').classList.remove('d-none');
-    document.getElementById('add-contact-div-overlay-id').innerHTML = HTMLOpenEditContactOverlayDesktop(index);
 }
 
 function closeAddContactOverlay(){
