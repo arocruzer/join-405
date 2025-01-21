@@ -184,3 +184,37 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 });
+
+/**
+ * Fügt einem HTML-Element interaktive Klick-Effekte hinzu.
+ * Beim Drücken der Maustaste (`mousedown`) wird eine CSS-Klasse hinzugefügt,
+ * die beim Loslassen (`mouseup`) oder Verlassen des Elements (`mouseleave`) wieder entfernt wird.
+ *
+ * @param {string} elementId - Die ID des HTML-Elements, auf das der Effekt angewendet werden soll.
+ *
+ * @example
+ * // Wendet die Klick-Effekte auf ein Element mit der ID "click-privacy" an
+ * addClickEffect("click-privacy");
+ *
+ * @example
+ * // Wendet die Klick-Effekte auf ein Element mit der ID "click-legal" an
+ * addClickEffect("click-legal");
+ */
+function addClickEffect(elementId) {
+  let element = document.getElementById(elementId);
+
+  element.addEventListener("mousedown", () => {
+    element.classList.add("color-on-click");
+  });
+
+  element.addEventListener("mouseup", () => {
+    element.classList.remove("color-on-click");
+  });
+
+  element.addEventListener("mouseleave", () => {
+    element.classList.remove("color-on-click");
+  });
+}
+
+addClickEffect("login-click-privacy");
+addClickEffect("login-click-legal");
