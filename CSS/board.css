@@ -507,30 +507,40 @@ body {
 .modal-footer {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
 }
 
 .delete-button,
 .edit-button {
   cursor: pointer;
   display: flex;
+  align-items: center;
   gap: 10px;
-  transition: all 0.3s ease;
+  transition: color 0.3s ease, transform 0.3s ease;
 }
-.line{
+
+.line {
   display: flex;
   align-items: center;
   font-size: 24px;
-  color: #E8E8E8;
+  color: #e8e8e8;
 }
 
-
-.delete-button:hover {
-  color: #29abe2;
+.delete-button:hover img {
+  content: url('../Assets/delete_blue.svg'); /* Ändert das Icon */
 }
 
+.edit-button:hover img {
+  content: url('../Assets/edit_blue.svg'); /* Ändert das Icon */
+}
+
+.delete-button:hover,
 .edit-button:hover {
-  color: #29abe2;
+  color: #29abe2; /* Ändert die Textfarbe */
+  transform: scale(1.05); /* Leichte Vergrößerung für ein dynamisches Gefühl */
 }
+
 
 /* Close Button */
 .close-button {
