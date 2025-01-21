@@ -862,7 +862,7 @@ function editSubtask(index) {
         <input type="text" value="${subtaskText}" id="editSubtaskInput-${index}" class="subtask-edit-input"/>
         <div class="images-container" id="images-container">
            
-           <button onclick="cancelEditSubtask(${index}, '${subtaskText}')">
+           <button onclick="deleteSubtask(${index})">
                <img src="../Assets/delete_black.png" alt="Cancel"/>
            </button>   
            <hr>
