@@ -525,12 +525,11 @@ body {
 
 
 .delete-button:hover {
-  content: url(../Assets/delete_blue.png);
-  background-color: #ffffff;
+  color: #29abe2;
 }
 
 .edit-button:hover {
-  content: url(../Assets/edit_blue.png);
+  color: #29abe2;
 }
 
 /* Close Button */
