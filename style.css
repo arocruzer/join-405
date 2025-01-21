@@ -70,6 +70,10 @@ header {
   justify-content: space-between;
 }
 
+.highlight-legal-documents{
+  color: #29ABE2;
+}
+
 .header-logo {
   height: 39px;
   width: 32px;
