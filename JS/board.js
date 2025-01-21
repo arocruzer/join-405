@@ -1,5 +1,5 @@
 let selectedUsers = [];
-
+let searchText = '';
 function loadTasks(columnId) {
     const container = document.getElementById(`${columnId}-tasks`);
     container.innerHTML = '';
@@ -149,31 +149,25 @@ function closeModal() {
 }
 
 
-function searchTasks() {
-    let searchText = '';
-    
-    // Überprüfen, welches Input-Feld aktiv ist
-    const searchInputs = document.querySelectorAll('#search')|| document.querySelectorAll('#searchTask');
-    searchInputs.forEach(input => {
-        if (input.offsetParent !== null) { // Nur sichtbares Inputfeld nutzen
-            searchText = input.value.trim().toLowerCase();
-        }
+function searchFromSearchTaskInput() {
+    const searchInput = document.querySelector('#searchTask');
+    const searchText = searchInput && searchInput.offsetParent !== null
+        ? searchInput.value.trim().toLowerCase()
+        : '';
+    document.querySelectorAll('.user-card').forEach(task => {
+        const taskTitle = task.querySelector('h4')?.textContent.toLowerCase() || '';
+        task.style.display = (searchText.length < 3 || taskTitle.includes(searchText)) ? 'block' : 'none';
     });
+}
 
-    let tasks = document.querySelectorAll('.user-card');
-    
-    if (searchText.length < 3) {
-        tasks.forEach(task => task.style.display = "block");
-        return;
-    }
-
-    tasks.forEach(task => {
-        let taskTitle = task.querySelector('h4') ? task.querySelector('h4').textContent.toLowerCase() : '';
-        if (taskTitle.includes(searchText)) {
-            task.style.display = "block";
-        } else {
-            task.style.display = "none";
-        }
+function searchFromSearchInput() {
+    const searchInput = document.querySelector('#search');
+    const searchText = searchInput && searchInput.offsetParent !== null
+        ? searchInput.value.trim().toLowerCase()
+        : '';
+    document.querySelectorAll('.user-card').forEach(task => {
+        const taskTitle = task.querySelector('h4')?.textContent.toLowerCase() || '';
+        task.style.display = (searchText.length < 3 || taskTitle.includes(searchText)) ? 'block' : 'none';
     });
 }
 
@@ -601,6 +595,9 @@ function savePriority() {
 
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+    enableUserEdit(); // Stelle sicher, dass die Funktion beim Laden der Seite ausgeführt wird
+});
 
 
 function enableUserEdit() {
@@ -640,7 +637,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function renderDropdownUsers(loadedContacts, selectedUsers) {
     let contactList = document.getElementById('contactList');
-    contactList.innerHTML = ""; // Zurücksetzen der Liste
+    if (contactList) {
+       contactList.innerHTML = ""; // Oder dein Code
+       // Restlicher Code
+    } else {
+       console.error("Das Element 'contactList' wurde nicht gefunden!");
+}
+
 
     loadedContacts.forEach((user, index) => {
       const isChecked = selectedUsers.some(selected => selected.name === user.name);
@@ -700,6 +703,7 @@ function checkBoxUserTask(index) {
 }
 
 
+
 function addedUsers() {
     const addedUsersContainer = document.getElementById("addedUsers");
     if (!addedUsersContainer) {
@@ -711,10 +715,18 @@ function addedUsers() {
 
     // Nur Benutzer anzeigen, die in selectedUsers sind
     selectedUsers.forEach(user => {
+        const nameParts = user.name.split(' '); // Split the name into parts
+        const initials = nameParts.length > 1 
+            ? nameParts[0][0] + nameParts[1][0] // First and last initials
+            : nameParts[0][0]; // Only first initial if there's no last name
+    
         addedUsersContainer.innerHTML += `
-            <div class="user-avatar" style="background-color: ${user.color};">${user.initialien}</div>
+            <div class="user-avatar" style="background-color: ${user.color};">
+                ${initials.toUpperCase()}
+            </div>
         `;
     });
+    
 }
 
 
@@ -727,7 +739,7 @@ function openDropDownMenuUser() {
     // Wechsel zwischen "anzeigen" und "verbergen"
     if (contactList.style.display === 'none' || !contactList.style.display) {
         contactList.style.display = 'block'; // Dropdown anzeigen
-        dropDownArrowContacts.src = "../Assets/arrow_drop_up.png"; // Nach oben zeigende Pfeil-Ikone
+        dropDownArrowContacts.src = "../Assets/arrow_drop_downaa.png"; // Nach oben zeigende Pfeil-Ikone
     } else {
         contactList.style.display = 'none'; // Dropdown verbergen
         dropDownArrowContacts.src = "../Assets/arrow_drop_downaa (1).png"; // Nach unten zeigende Pfeil-Ikone
@@ -1012,18 +1024,6 @@ function updateTaskInLocalStorage(updatedTask) {
 }
 
 
-// Board aktualisieren
-function refreshBoard() {
-    // Tasks der aktuellen Spalte neu laden
-    ['todo', 'in-progress', 'await-feedback', 'done'].forEach(loadTasks);
-}
-
-
-// Board nach Änderungen aktualisieren
-function refreshBoard() {
-    alert('Änderungen erfolgreich gespeichert!');
-    window.location.reload(); // Seite neu laden
-}
 
 // Ursprüngliche Task-Details erneut laden
 function reloadTaskDetails() {
