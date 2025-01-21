@@ -1129,6 +1129,9 @@ input.title-input, textarea.description-input {
 input.title-input:focus, textarea.description-input:focus {
   border: 1px solid #29abe2;
 }
+.add-task-board:hover {
+  background-color:#29abe2;
+}
 
 textarea.description-input {
   resize: none;
