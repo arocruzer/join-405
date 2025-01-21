@@ -4,7 +4,5 @@ function toggleUsrMenu() {
 }
 
 function logOut() {
-  // localStorage.clear();
-
   localStorage.removeItem('loggedInUser');
 }
