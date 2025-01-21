@@ -70,6 +70,10 @@ header {
   justify-content: space-between;
 }
 
+.highlight-legal-documents {
+  color: #29ABE2;
+}
+
 .header-logo {
   height: 39px;
   width: 32px;
@@ -94,9 +98,12 @@ button {
 }
 
 .hero {
-  padding-left: 16px;  /*96px*/
-  padding-right: 16px; /*0px*/
-  padding-top: 48px;   /*110px*/
+  padding-left: 16px;
+  /*96px*/
+  padding-right: 16px;
+  /*0px*/
+  padding-top: 48px;
+  /*110px*/
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -236,6 +243,24 @@ input:focus {
   display: none;
 }
 
+#click-privacy {
+  transition: all 0.2s ease;
+}
+
+#click-legal {
+  transition: all 0.2s ease;
+}
+
+.color-on-click {
+  color: #29ABE2;
+  font-weight: 800;
+}
+
+.color-on-click-hover:hover {
+  color: #29ABE2;
+  font-weight: 800;
+}
+
 @media (max-width: 830px) {
   #main-content {
     height: calc(100vh - 160px);
@@ -302,7 +327,8 @@ input:focus {
 
   .hero {
     padding-left: 96px;
-    padding-right: 96px; /*0px*/
+    padding-right: 96px;
+    /*0px*/
     padding-top: 110px;
   }
 }
