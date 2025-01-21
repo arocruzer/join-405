@@ -118,6 +118,8 @@ function updateTaskVisibilityById(columnId) {
     const taskList = document.querySelector(`#${columnId} .task-list`);
     const tasks = JSON.parse(localStorage.getItem(columnId)) || [];
     taskList.style.display = tasks.length > 0 ? 'none' : 'block';
+    const visibleTasks = container.querySelectorAll('.user-card:not([style*="display: none"])');
+    taskList.style.display = visibleTasks.length === 0 ? 'block' : 'none';
 }
 
 function openInputPage(columnId) {
@@ -158,6 +160,7 @@ function searchFromSearchTaskInput() {
         const taskTitle = task.querySelector('h4')?.textContent.toLowerCase() || '';
         task.style.display = (searchText.length < 3 || taskTitle.includes(searchText)) ? 'block' : 'none';
     });
+    ['todo', 'in-progress', 'await-feedback', 'done'].forEach(updateTaskVisibilityById);
 }
 
 function searchFromSearchInput() {
@@ -169,7 +172,10 @@ function searchFromSearchInput() {
         const taskTitle = task.querySelector('h4')?.textContent.toLowerCase() || '';
         task.style.display = (searchText.length < 3 || taskTitle.includes(searchText)) ? 'block' : 'none';
     });
+    ['todo', 'in-progress', 'await-feedback', 'done'].forEach(updateTaskVisibilityById);
 }
+
+
 
 
 window.addEventListener("load", function () {

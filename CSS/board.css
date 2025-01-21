@@ -1161,3 +1161,9 @@ textarea {
     min-height: 150px;
   }
 }
+
+.no-tasks {
+  color: #c7c7c7;
+  font-style: italic;
+  display: block;
+}
