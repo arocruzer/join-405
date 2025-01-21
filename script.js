@@ -105,6 +105,7 @@ function showRepeatPassowrd() {
     showRepeatPasswordImg.src = "../Assets/visibility_off.png";
   }
 }
+
 async function includeHTML() {
   let includeElements = document.querySelectorAll("[w3-include-html]");
   for (let i = 0; i < includeElements.length; i++) {
@@ -131,8 +132,6 @@ async function loadContent(page) {
 }
 
 function getUserLogo() {
-
-  
   let userLogo = document.getElementById("user-button");
   let user = JSON.parse(localStorage.getItem("loggedInUser"));
 
