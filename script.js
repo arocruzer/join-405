@@ -14,7 +14,6 @@ let regardsUser = document.getElementById("regardsUser");
 async function init() {
   await includeHTML();
   await loadAllContacts();
-  await loadAllTasks();
   getUserLogo();
   inOrOut();
 }
