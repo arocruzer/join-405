@@ -19,7 +19,6 @@ async function init() {
   inOrOut();
 }
 
-
 async function loadAllContacts(path = "") {
   let response = await fetch(BASE_URL + path + ".json");
   let responsToJason = await response.json();
@@ -132,6 +131,8 @@ async function loadContent(page) {
 }
 
 function getUserLogo() {
+
+  
   let userLogo = document.getElementById("user-button");
   let user = JSON.parse(localStorage.getItem("loggedInUser"));
 
