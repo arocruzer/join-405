@@ -19,6 +19,7 @@ async function loadLegalDocument(htmlPage) {
 
 function inOrOut() {
     let status = JSON.parse(localStorage.getItem("loggedInUser"));
+    
     navBar = document.getElementById("frame-nav-bar");
     menu = document.getElementById("menu");
     logIn = document.getElementById("log-in");
