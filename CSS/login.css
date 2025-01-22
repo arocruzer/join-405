@@ -88,20 +88,6 @@ a {
   font-weight: 400;
 }
 
-.msg-box {
-  height: 74px;
-  width: 326px;
-  position: absolute;
-  top: 50%;
-  background-color: #2a3647;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-size: 20px;
-  border-radius: 20px;
-}
-
 .logo {
   width: 100px;
   height: 100px;

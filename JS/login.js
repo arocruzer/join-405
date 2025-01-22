@@ -30,16 +30,6 @@ async function userLogIn() {
   await loadAllTasks();
 }
 
-if (msg) {
-  msgBox.innerHTML = msg;
-} else {
-  msgBox.style.display = "none";
-}
-
-hero.onclick = function () {
-  msgBox.style.display = "none";
-};
-
 async function guestLogin() {
   let guestUser = {
     name: "",

@@ -9,11 +9,11 @@
   <link rel="icon" type="image/x-icon" href="../Assets/favIcon.png">
   <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="./CSS/login.css">
-<!--   <script src="./JS/login.js"></script> -->
+  <script src="./JS/header.js"></script>
 </head>
   
   <title>Join</title>
-  <body id="body" onload="init()">
+  <body id="body" onload="logOut(); init()">
     <header>
         <img class="login-logo" src="./Assets/Join_logo_blue.png" alt="">
         <div class="signup-container">
@@ -52,10 +52,9 @@
       <h3>Not a Join user?</h3>
       <a class="signup-btn" href="./HTML/signup.html">Sign up</a>
     </div>
-    <div class="msg-box" id="msgBox"></div>
   <footer>
-    <a href="./HTML/privacy-policy.html" target="_blank">Privacy Policy</a>
-    <a href="./HTML/legal-notice.html" target="_blank">Legal notice</a>
+    <a id="login-click-privacy" class="color-on-click-hover" href="./HTML/privacy-policy.html" target="_blank">Privacy Policy</a>
+    <a id="login-click-legal" class="color-on-click-hover" href="./HTML/legal-notice.html" target="_blank">Legal notice</a>
   </footer>
 </div>
 <script src="./script.js"></script>

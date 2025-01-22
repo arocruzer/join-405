@@ -1,8 +1,8 @@
-window.addEventListener("resize", function(){
-    if(window.innerWidth > 1180){
-        renderContacts();
-    }
-});
+// window.addEventListener("resize", function(){
+//     if(window.innerWidth > 1180){
+//         renderContacts();
+//     }
+// });
 
 function renderContacts(){
     let contentRef = document.getElementById('contacts');
@@ -54,7 +54,7 @@ function openContactDetailsOverlay(index){
         let contentRef = document.getElementById('contact-details-wrapper-id');
         contentRef.innerHTML = HTMLopenContactDetailsOverlay(index);  
         let content = document.getElementById('edit-contact-details-overlay-id');
-        content.innerHTML = HTMLEditOverlay(index);
+        content.innerHTML = HTMLEditOverlayDesktop(index);
     } 
 }
 
@@ -70,8 +70,12 @@ function closeContactDetailsOverlay(){
 
 function OpenAddContactOverlay(){
     document.getElementById('add-contact-div-overlay-id').classList.remove('d-none');
-    document.getElementById('add-contact-div-overlay-id').innerHTML = HTMLOpenAddContactOverlay();
-}
+    if(window.innerWidth <1180){
+        document.getElementById('add-contact-div-overlay-id').innerHTML = HTMLOpenAddContactOverlay();
+    }else{
+        document.getElementById('add-contact-div-overlay-id').innerHTML = HTMLOpenAddContactOverlayDesktop();
+    }
+    }
 
 function closeAddContactOverlay(){
     document.getElementById('add-contact-div-overlay-id').classList.add('d-none');

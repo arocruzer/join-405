@@ -10,13 +10,14 @@ let passwordError = document.getElementById("password-error");
 let showPasswordImg = document.getElementById("show-password-img");
 let showRepeatPasswordImg = document.getElementById("show-repeat-password-img");
 let regardsUser = document.getElementById("regardsUser");
+let colors = ["#007bff", "#ffa500", "#800080", "#d8bfd8", "#ff69b4", "#28a745", "#ff6347", "#20b2aa"];
 
 async function init() {
   await includeHTML();
   await loadAllContacts();
-  await loadAllTasks();
   getUserLogo();
   inOrOut();
+  /* checkIfLoggedIn() */
 }
 
 async function loadAllContacts(path = "") {
@@ -105,6 +106,7 @@ function showRepeatPassowrd() {
     showRepeatPasswordImg.src = "../Assets/visibility_off.png";
   }
 }
+
 async function includeHTML() {
   let includeElements = document.querySelectorAll("[w3-include-html]");
   for (let i = 0; i < includeElements.length; i++) {
@@ -131,8 +133,6 @@ async function loadContent(page) {
 }
 
 function getUserLogo() {
-
-  
   let userLogo = document.getElementById("user-button");
   let user = JSON.parse(localStorage.getItem("loggedInUser"));
 
@@ -165,7 +165,6 @@ document.addEventListener("DOMContentLoaded", () => {
     animationDiv.style.display = "none";
   }
 });
-
 document.addEventListener("DOMContentLoaded", () => {
   let isMobile = window.innerWidth <= 830;
   let isAnimationShowSummary = localStorage.getItem("welcomeAnimationShowSummary");
@@ -185,3 +184,47 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 });
+
+/**
+ * Fügt einem HTML-Element interaktive Klick-Effekte hinzu.
+ * Beim Drücken der Maustaste (`mousedown`) wird eine CSS-Klasse hinzugefügt,
+ * die beim Loslassen (`mouseup`) oder Verlassen des Elements (`mouseleave`) wieder entfernt wird.
+ *
+ * @param {string} elementId - Die ID des HTML-Elements, auf das der Effekt angewendet werden soll.
+ *
+ * @example
+ * // Wendet die Klick-Effekte auf ein Element mit der ID "click-privacy" an
+ * addClickEffect("click-privacy");
+ *
+ * @example
+ * // Wendet die Klick-Effekte auf ein Element mit der ID "click-legal" an
+ * addClickEffect("click-legal");
+ */
+function addClickEffect(elementId) {
+  let element = document.getElementById(elementId);
+  if (element) {
+    
+  element.addEventListener("mousedown", () => {
+    element.classList.add("color-on-click");
+  });
+
+  element.addEventListener("mouseup", () => {
+    element.classList.remove("color-on-click");
+  });
+
+  element.addEventListener("mouseleave", () => {
+    element.classList.remove("color-on-click");
+  });
+}
+}
+
+addClickEffect("login-click-privacy");
+addClickEffect("login-click-legal");
+
+function checkIfLoggedIn() {
+  let loggedUser = localStorage.getItem('loggedInUser');
+  console.log(loggedUser);
+  if(!loggedUser){
+    window.location.href = '/index.html';
+  }
+}

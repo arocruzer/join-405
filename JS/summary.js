@@ -1,9 +1,15 @@
 let allTasks = {};
+const priorityIcons = {
+  urgent: "../Assets/urgent_big.png",
+  medium: "../Assets/urgent_big.png",
+  low: "../Assets/urgent_big.png",
+};
 
 function initSummary() {
   loadTasksFromLocalStorage();
   displayTaskCounts();
   displayTotalTaskCount();
+  displayNextDueTask();
   time();
 }
 
@@ -81,5 +87,63 @@ function displayTotalTaskCount() {
     totalCountElement.textContent = totalCount;
   } else {
     console.error("Element mit ID 'totalTaskCount' nicht gefunden.");
+  }
+}
+
+function getNextDueTask() {
+  const allTasksCombined = [
+    ...allTasks.todo,
+    ...allTasks.inProgress,
+    ...allTasks.awaitFeedback,
+    ...allTasks.done,
+  ];
+
+  const tasksWithDueDate = allTasksCombined.filter(task => task.dueDate);
+
+  tasksWithDueDate.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+
+  return tasksWithDueDate[0] || null;
+}
+
+function formatDateLong(dateString) {
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+
+function getPriorityIcon(priority) {
+  return priorityIcons[priority];
+}
+
+function displayNextDueTask() {
+  const nextTask = getNextDueTask();
+  const nextDueElement = document.getElementById("task-info");
+
+  if (nextTask && nextDueElement) {
+    const priorityIcon = getPriorityIcon(nextTask.priority);
+    const formattedDate = formatDateLong(nextTask.dueDate);
+    nextDueElement.innerHTML = `
+                            <div class="task-info">
+                        <div class="prio">
+                          <div>
+                            <img src="${priorityIcon}" />
+                          </div>
+                          <div class="status">
+                            <h4>1</h4>
+                            <p>Urgent</p>
+                          </div>
+                        </div>
+                        <hr style="height: 102px; display: inline-block; border: 1px solid #d1d1d1;"/>
+                        <div class="date">
+                          <h3>${formattedDate}</h3>
+                          <p>Upcoming Deadline</p>
+                        </div>
+                      </div>
+    `;
+  } else if (nextDueElement) {
+    nextDueElement.innerHTML = "<p>Keine anstehenden Aufgaben gefunden.</p>";
   }
 }
