@@ -23,6 +23,7 @@
   <script src="../JS/nav-bar.js"></script>
   <script src="../JS/header.js"></script>
   <script src="../JS/template.js"></script>
+  <script src="../JS/edit-task.js"></script>
 
     <title>Board</title>
   </head>
@@ -38,8 +39,6 @@
                 +
               </div>
             </div>
-
-            <!-- Search Bar -->
             <div class="search-container">
               <input
                 type="text"
@@ -154,52 +153,30 @@
             </div>
           </div>
         </div>
-        <!-- Modal for Task Details -->
         <div id="taskModal" class="modal">
           <div class="modal-content">
             <span class="close-button" onclick="closeTaskModal()"
                 >&times;</span
               >
             <div class="task-modal">
-
-
-              <!-- Kategorie als Label -->
               <h3 id="modalCategory" class="category-label"></h3>
-
-              <!-- Titel -->
               <h4 id="modalTitle"></h4>
-
-              <!-- Beschreibung -->
               <p id="modalDescription"></p>
-
-              <!-- Fälligkeitsdatum und Priorität -->
               <p class="modalDueDate">
                 <strong>Due date:</strong> <span id="modalDueDate"></span>
               </p>
               <p class="modalPriority">
                 <strong>Priority:</strong> <span id="modalPriority"></span>
               </p>
-
-              <!-- Zugewiesene Benutzer -->
               <p><strong>Assigned To:</strong></p>
               <div id="modalAssignedUsers"></div>
-
               <p><strong>Subtasks:</strong></p>
               <div id="modalSubtasks"></div>
-
-              <!-- Edit und Delete Buttons -->
               <div class="modal-footer"></div>
             </div>
           </div>
         </div>
-        <div id="modalAddtask" class="modal-task hidden">
-            <div class="modal-content-task">
-                <div class="close-button-task" onclick="closeModal()">&times;</div>
-                <div id="main-content-placeholder"></div>
-            </div>
-        </div>
       </div>
-
       <div id="nav-bar" w3-include-html="../HTML/nav-bar.html"></div>
     </div>
   </body>

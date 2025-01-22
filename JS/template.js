@@ -269,3 +269,204 @@ function HTMLEditOverlay(index){
         </div>
     `;
 }
+
+function renderTask(task) {
+    const categoryClass = task.category === "Technical Task" ? "technical-task" : "user-story";
+    let priorityIcon;
+    switch (task.priority.toLowerCase()) {
+        case "low":
+            priorityIcon = "../Assets/prio_low.png";
+            break;
+        case "medium":
+            priorityIcon = "../Assets/prio_medium_orang.png";
+            break;
+        case "urgent":
+            priorityIcon = "../Assets/prio_urgent.png";
+            break;
+        default:
+            priorityIcon = "";
+    }
+    return `
+        <div class="user-card" draggable="true" id="${task.id}" ondragstart="drag(event)" onclick="openTaskDetails('${task.id}')">
+            <div class="user-story-card todo">
+                <div class="progress-container">
+                    <h3 class="category-label ${categoryClass}">${task.category}</h3>
+                </div>
+                <h4>${task.title}</h4>
+                <p>${task.description}</p>
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress" style="width: ${task.totalSubtasks > 0 ? (task.completedSubtasks / task.totalSubtasks) * 100 : 0}%"></div>
+                    </div>
+                    <span class="subtasks">${task.completedSubtasks}/${task.totalSubtasks} Subtasks</span>
+                </div>
+                <div class="user-container">
+                    <div class="user-avatar-container">
+                     ${task.assignedUsers.map(user => {
+                         const nameParts = user.name.split(' '); // Split the name into parts
+                         const initials = nameParts.length > 1 
+                            ? nameParts[0][0] + nameParts[1][0] // First and last initials
+                            : nameParts[0][0]; // Only first initial if there's no last name
+                         return `<div class="user-avatar" style="background-color: ${user.color};">${initials.toUpperCase()}</div>`;
+                     }).join('')}
+                    
+                    </div>
+                    <p>${priorityIcon ? `<img src="${priorityIcon}" alt="${task.priority} Priority">` : task.priority}</p>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function generatePriorityButtons(currentPriority) {
+    return `
+        <div class="prio-btn-container">
+            <button 
+                id="btn-urgent" 
+                class="btn-prio-urgent ${currentPriority === 'urgent' ? 'active' : ''}" 
+                onclick="changeColorPrioBtn('urgent')">
+                Urgent
+                <img id="urgent-img" src="../Assets/prio_urgent.png" alt="Urgent" />
+            </button>
+            <button 
+                id="btn-medium" 
+                class="btn-prio-medium ${currentPriority === 'medium' ? 'active' : ''}" 
+                onclick="changeColorPrioBtn('medium')">
+                Medium
+                <img id="medium-img" src="../Assets/prio_medium_Basis.png" alt="Medium" />
+            </button>
+            <button 
+                id="btn-low" 
+                class="btn-prio-low ${currentPriority === 'low' ? 'active' : ''}" 
+                onclick="changeColorPrioBtn('low')">
+                Low
+                <img id="low-img" src="../Assets/prio_low.png" alt="Low" />
+            </button>
+        </div>
+    `;
+}
+
+
+function generateUserEditHTML() {
+    return `
+        <div onclick="openDropDownMenuUser()" class="drop-down">
+            <div>Select contacts to assign</div>
+            <div>
+                <img class="drop-down-arrow" id="drop-down-arrow-contacts" src="../Assets/arrow_drop_downaa (1).png" alt="Arrow down"/>
+            </div>
+        </div>
+        <div class="contact-list-container" id="contactList" style="display: none;"></div>
+        <div id="addedUsers" class="added-users"></div>
+    `;
+}
+
+
+function createUserElement(user, index, isChecked) {
+    return `
+        <div class="contact">
+          <div class="user-avatar" style="background-color: ${user.color};">${user.initialien}</div>
+          <span>${user.name}</span>
+          <input 
+            type="checkbox" 
+            ${isChecked ? 'checked' : ''} 
+            onclick="checkBoxUserTask(${index})"
+          />
+        </div>
+    `;
+}
+
+
+function createAddSubtaskHTML() {
+    return `
+        <div class="add-subtask-container">
+            <div class="subtask-container">
+                <input 
+                    oninput="toggleButtonVisibility()" 
+                    class="subtask-input" 
+                    type="text" 
+                    placeholder="Add new subtask" 
+                    id="newSubtask"
+                />
+                <img 
+                    onclick="toggleButtonVisibility(true)" 
+                    id="plusButton" 
+                    class="plus-img" 
+                    src="../Assets/Subtasks +.png" 
+                    alt="Add"
+                />
+                <button 
+                    class="add-subtask" 
+                    id="confirmButton" 
+                    onclick="addSubtasks()"
+                >
+                    <img src="../Assets/check_blue.png" alt="Confirm"/>
+                </button>
+                <span class="linie" id="linie" onclick="cancelSubtask()">|</span>
+                <button 
+                    class="cancel-subtask" 
+                    id="cancelTask" 
+                    onclick="cancelSubtask()"
+                >
+                    <img src="../Assets/iconoir_cancel.png" alt="Cancel"/>
+                </button>
+            </div>
+        </div>
+        <div id="subtaskList" class="subtask-list"></div>
+    `;
+}
+
+function createSubtaskHTML(subtask, index) {
+    return `
+        <div class="subtask-label" id="subtask-${index}">
+            <ul id="subtask-list">
+                <li>
+                    <div class="subtask">
+                        <div>
+                            <span class="subtask-text">${subtask}</span>
+                        </div>
+                        <div class="images-container">
+                           <img 
+                               id="edit-subtask-img" 
+                               onclick="editSubtask(${index})" 
+                               src="../Assets/edit_black.png" 
+                               alt="Edit Icon"
+                           />
+                           <hr>
+                           <button class="delete-btn" onclick="deleteSubtask(${index})">
+                               <img 
+                                   id="delete-subtask" 
+                                   src="../Assets/delete_black.png" 
+                                   alt="Delete Icon"
+                               />
+                           </button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    `;
+}
+
+
+function createSaveButtonHTML() {
+    return `
+        <button onclick="saveTaskChanges()" class="okTask-btn" id="oktaskBtn">
+            OK <img src="../Assets/check.png" alt="Save">
+        </button>
+    `;
+}
+
+
+function createEditAndDeleteButtonsHTML() {
+    return `
+        <div onclick="deleteTask()" class="delete-button">
+            <img class="delete-img" src="../Assets/delete_black.png" alt="Delete Icon"/>
+            <p>Delete</p>
+        </div>
+        <span class="line">|</span>
+        <div onclick="editTaskDetails()" class="edit-button">
+            <img class="edit-img" src="../Assets/edit_black.png" alt="Edit Icon"/>
+            <p>Edit</p>
+        </div>
+    `;
+}

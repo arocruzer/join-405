@@ -1,5 +1,9 @@
 let selectedUsers = [];
 let searchText = '';
+let currentTaskId = null;
+let draggedTaskId = null;
+
+
 function loadTasks(columnId) {
     const container = document.getElementById(`${columnId}-tasks`);
     container.innerHTML = '';
@@ -12,60 +16,13 @@ function loadTasks(columnId) {
     updateTaskVisibilityById(columnId);
 }
 
-function renderTask(task) {
-    const categoryClass = task.category === "Technical Task" ? "technical-task" : "user-story";
-    let priorityIcon;
-    switch (task.priority.toLowerCase()) {
-        case "low":
-            priorityIcon = "../Assets/prio_low.png";
-            break;
-        case "medium":
-            priorityIcon = "../Assets/prio_medium_orang.png";
-            break;
-        case "urgent":
-            priorityIcon = "../Assets/prio_urgent.png";
-            break;
-        default:
-            priorityIcon = "";
-    }
-    return `
-        <div class="user-card" draggable="true" id="${task.id}" ondragstart="drag(event)" onclick="openTaskDetails('${task.id}')">
-            <div class="user-story-card todo">
-                <div class="progress-container">
-                    <h3 class="category-label ${categoryClass}">${task.category}</h3>
-                </div>
-                <h4>${task.title}</h4>
-                <p>${task.description}</p>
-                <div class="progress-container">
-                    <div class="progress-bar">
-                        <div class="progress" style="width: ${task.totalSubtasks > 0 ? (task.completedSubtasks / task.totalSubtasks) * 100 : 0}%"></div>
-                    </div>
-                    <span class="subtasks">${task.completedSubtasks}/${task.totalSubtasks} Subtasks</span>
-                </div>
-                <div class="user-container">
-                    <div class="user-avatar-container">
-                     ${task.assignedUsers.map(user => {
-                         const nameParts = user.name.split(' '); // Split the name into parts
-                         const initials = nameParts.length > 1 
-                            ? nameParts[0][0] + nameParts[1][0] // First and last initials
-                            : nameParts[0][0]; // Only first initial if there's no last name
-                         return `<div class="user-avatar" style="background-color: ${user.color};">${initials.toUpperCase()}</div>`;
-                     }).join('')}
-                    
-                    </div>
-                    <p>${priorityIcon ? `<img src="${priorityIcon}" alt="${task.priority} Priority">` : task.priority}</p>
-                </div>
-            </div>
-        </div>
-    `;
-}
-
 
 function getPriorityText(taskElement) {
     return taskElement.querySelector('.user-container p img')
         ? taskElement.querySelector('.user-container p img').alt.replace(' Priority', '')
         : taskElement.querySelector('.user-container p').innerText.trim();
 }
+
 
 function getPriorityIcon(priorityText) {
     switch (priorityText.toLowerCase()) {
@@ -80,12 +37,14 @@ function getPriorityIcon(priorityText) {
     }
 }
 
+
 function getAssignedUsers(taskElement) {
     return Array.from(taskElement.querySelectorAll('.user-avatar')).map(user => ({
         name: user.innerText.trim(),
         color: user.style.backgroundColor
     }));
 }
+
 
 function createTaskObject(taskElement, taskId) {
     const priorityText = getPriorityText(taskElement);
@@ -101,6 +60,7 @@ function createTaskObject(taskElement, taskId) {
         assignedUsers: getAssignedUsers(taskElement)
     };
 }
+
 
 function saveTaskToLocalStorage(columnId, taskElement, taskId) {
     const tasks = JSON.parse(localStorage.getItem(columnId)) || [];
@@ -122,32 +82,10 @@ function updateTaskVisibilityById(columnId) {
     taskList.style.display = visibleTasks.length === 0 ? 'block' : 'none';
 }
 
+
 function openInputPage(columnId) {
     localStorage.setItem('currentColumn', columnId);
     window.location.href = "/HTML/add-task.html";
-}
-/*function openInputPage(columnId) {
-    localStorage.setItem('currentColumn', columnId);
-
-    // Lade den Inhalt der "add-task.html"
-    fetch('/HTML/add-task.html')
-        .then(response => response.text())
-        .then(html => {
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
-
-            // Extrahiere den <div id="main-content">-Inhalt
-            const mainContent = doc.getElementById('main-content');
-
-            if (mainContent) {
-                document.getElementById('main-content-placeholder').innerHTML = mainContent.innerHTML;
-                document.getElementById('modalAddtask').classList.add('show');
-            }
-        });
-}*/
-
-function closeModal() {
-    document.getElementById('modalAddtask').classList.remove('show');
 }
 
 
@@ -163,6 +101,7 @@ function searchFromSearchTaskInput() {
     ['todo', 'in-progress', 'await-feedback', 'done'].forEach(updateTaskVisibilityById);
 }
 
+
 function searchFromSearchInput() {
     const searchInput = document.querySelector('#search');
     const searchText = searchInput && searchInput.offsetParent !== null
@@ -176,27 +115,25 @@ function searchFromSearchInput() {
 }
 
 
-
-
 window.addEventListener("load", function () {
     ['todo', 'in-progress', 'await-feedback', 'done'].forEach(loadTasks);
 });
 
-let currentTaskId = null;
+
 function formatDate(dateString) {
     if (!dateString) {
         console.warn('Kein Datum übergeben.');
-        return 'Datum nicht verfügbar'; // Rückgabewert bei fehlendem Datum
+        return 'Datum nicht verfügbar';
     }
 
     const [year, month, day] = dateString.split('-');
 
     if (!year || !month || !day) {
         console.warn('Ungültiges Datumsformat:', dateString);
-        return 'Ungültiges Datum'; // Rückgabewert bei falschem Format
+        return 'Ungültiges Datum';
     }
 
-    return `${day}/${month}/${year}`; // Ändert das Format zu dd/mm/yyyy
+    return `${day}/${month}/${year}`;
 }
 
 
@@ -215,10 +152,10 @@ function formatPriority(priorityText) {
         default:
             priorityIcon = "";
     }
-
     return `<span class="priority-text">${priorityText}</span> 
             <img src="${priorityIcon}" alt="${priorityText} Priority Icon" class="priority-icon">`;
 }
+
 
 function renderAssignedUsers(users) {
     return users.map(user => `
@@ -228,6 +165,7 @@ function renderAssignedUsers(users) {
         </div>
     `).join('');
 }
+
 
 function updateProgressBar(task) {
     const progressElement = document.querySelector(`#${task.id} .progress-bar .progress`);
@@ -241,16 +179,13 @@ function updateProgressBar(task) {
 }
 
 
-// Subtask abhaken und Fortschritt direkt aktualisieren
 function updateSubtaskCompletion(taskId, index) {
     const checkboxId = `subtask-${taskId}-${index}`;
     const checkboxElement = document.getElementById(checkboxId);
-
     const allColumns = ['todo', 'in-progress', 'await-feedback', 'done'];
     for (const column of allColumns) {
         let tasks = JSON.parse(localStorage.getItem(column)) || [];
         const taskIndex = tasks.findIndex(task => task.id === taskId);
-        
         if (taskIndex !== -1) {
             if (checkboxElement.checked) {
                 tasks[taskIndex].completedSubtasks++;
@@ -264,12 +199,10 @@ function updateSubtaskCompletion(taskId, index) {
     }
 }
 
+
 function setCategoryStyle(elementId, category) {
     const element = document.getElementById(elementId);
-
     if (!element) return;
-
-    // Define styles for each category
     const categoryStyles = {
         "User Story": {
             text: "User Story",
@@ -280,65 +213,105 @@ function setCategoryStyle(elementId, category) {
             class: "technical-task",
         },
     };
-
-    // Default style if category is not defined
     const defaultStyle = {
         text: "Uncategorized",
         class: "uncategorized",
     };
-
-    // Get the style for the category or default if not found
     const style = categoryStyles[category] || defaultStyle;
-
-    // Apply the text and class
     element.innerText = style.text;
     element.className = style.class;
 }
 
 
+// Hauptfunktion
 function openTaskDetails(taskId) {
-    const tasks = [...JSON.parse(localStorage.getItem('todo') || "[]"), 
-                   ...JSON.parse(localStorage.getItem('in-progress') || "[]"),
-                   ...JSON.parse(localStorage.getItem('await-feedback') || "[]"),
-                   ...JSON.parse(localStorage.getItem('done') || "[]")];
-    const task = tasks.find(task => task.id === taskId);
+    const tasks = getAllTasks();
+    const task = findTaskById(tasks, taskId);
+
     if (task) {
         currentTaskId = taskId;
-        const modalCategory = document.getElementById('modalCategory');
-        modalCategory.innerText = task.category || "No Category";
-        modalCategory.className = `category-label ${task.categoryClass || ""}`;
-        document.getElementById('modalTitle').innerText = task.title;
-        document.getElementById('modalDescription').innerText = task.description;
-        const dueDateElement = document.getElementById('modalDueDate');
-        dueDateElement.innerText = task.dueDate ? formatDate(task.dueDate) : 'Kein Fälligkeitsdatum';
-        document.getElementById('modalPriority').innerHTML = formatPriority(task.priority);
-        document.getElementById('modalAssignedUsers').innerHTML = renderAssignedUsers(task.assignedUsers);
-        const subtaskList = document.getElementById('modalSubtasks');
-        if (Array.isArray(task.subtasks) && task.subtasks.length > 0) {
-            subtaskList.innerHTML = task.subtasks.map((subtask, index) => `
-                <label class="subtasks-label">
-                    <input type="checkbox" id="subtask-${taskId}-${index}"
-                           ${task.completedSubtasks > index ? 'checked' : ''}
-                           onchange="updateSubtaskCompletion('${taskId}', ${index})">
-                    ${subtask}
-                </label>
-            `).join('');
-        } else {
-            subtaskList.innerHTML = '<p>Keine Subtasks verfügbar</p>';
-        }
-        setCategoryStyle("modalCategory", task.category);
-        
+        updateModalContent(task);
         document.getElementById('taskModal').style.display = 'block';
-        toggleModalLayout(false); 
+        toggleModalLayout(false);
         updateProgressBar(task);
         addSaveAndCancelButtons(false);
     }
 }
 
+
+function getAllTasks() {
+    return [...JSON.parse(localStorage.getItem('todo') || "[]"), 
+            ...JSON.parse(localStorage.getItem('in-progress') || "[]"),
+            ...JSON.parse(localStorage.getItem('await-feedback') || "[]"),
+            ...JSON.parse(localStorage.getItem('done') || "[]")];
+}
+
+
+function findTaskById(tasks, taskId) {
+    return tasks.find(task => task.id === taskId);
+}
+
+
+function updateModalContent(task) {
+    updateModalCategory(task);
+    updateModalTitleAndDescription(task);
+    updateModalDueDate(task);
+    updateModalPriority(task);
+    updateModalAssignedUsers(task);
+    updateModalSubtasks(task);
+}
+
+
+function updateModalCategory(task) {
+    const modalCategory = document.getElementById('modalCategory');
+    modalCategory.innerText = task.category || "No Category";
+    modalCategory.className = `category-label ${task.categoryClass || ""}`;
+    setCategoryStyle("modalCategory", task.category);
+}
+
+
+function updateModalTitleAndDescription(task) {
+    document.getElementById('modalTitle').innerText = task.title;
+    document.getElementById('modalDescription').innerText = task.description;
+}
+
+
+function updateModalDueDate(task) {
+    const dueDateElement = document.getElementById('modalDueDate');
+    dueDateElement.innerText = task.dueDate ? formatDate(task.dueDate) : 'Kein Fälligkeitsdatum';
+}
+
+
+function updateModalPriority(task) {
+    document.getElementById('modalPriority').innerHTML = formatPriority(task.priority);
+}
+
+
+function updateModalAssignedUsers(task) {
+    document.getElementById('modalAssignedUsers').innerHTML = renderAssignedUsers(task.assignedUsers);
+}
+
+
+function updateModalSubtasks(task) {
+    const subtaskList = document.getElementById('modalSubtasks');
+    if (Array.isArray(task.subtasks) && task.subtasks.length > 0) {
+        subtaskList.innerHTML = task.subtasks.map((subtask, index) => `
+            <label class="subtasks-label">
+                <input type="checkbox" id="subtask-${task.id}-${index}"
+                       ${task.completedSubtasks > index ? 'checked' : ''}
+                       onchange="updateSubtaskCompletion('${task.id}', ${index})">
+                ${subtask}
+            </label>
+        `).join('');
+    } else {
+        subtaskList.innerHTML = '<p>Keine Subtasks verfügbar</p>';
+    }
+}
+
+
 function closeTaskModal() {
     document.getElementById('taskModal').style.display = 'none';
 }
-
 
 
 function deleteTask() {
@@ -358,710 +331,119 @@ function closeTaskModal() {
     document.getElementById('taskModal').style.display = 'none';
 }
 
+
 function addButton() {
     const headerBoard = document.getElementById('sectionBoard');
     const headerBoardPlus = document.getElementById('sectionBoardPlus');
-    
     if (window.innerWidth < 1355) {
-        headerBoard.classList.remove('hidden');  // Korrekt geschrieben
-        headerBoardPlus.classList.add('hidden'); // Korrekt geschrieben
+        headerBoard.classList.remove('hidden');
+        headerBoardPlus.classList.add('hidden');
     } else {
-        headerBoard.classList.add('hidden');     // Umgekehrt für größere Bildschirme
+        headerBoard.classList.add('hidden'); 
         headerBoardPlus.classList.remove('hidden');
     }
 }
 
-// Event Listener für die Anpassung der Ansicht basierend auf der Bildschirmgröße
+
 window.addEventListener('resize', addButton);
 window.addEventListener('DOMContentLoaded', addButton);
 
-let draggedTaskId = null;
 
-// Task dragging starts
 function drag(event) {
-    draggedTaskId = event.target.id; // Store the ID of the dragged task
+    draggedTaskId = event.target.id;
     event.dataTransfer.effectAllowed = "move";
 }
 
-// Allow drop and add highlight to the task container
+
 function allowDrop(event) {
-    event.preventDefault(); // Prevent default behavior to allow dropping
+    event.preventDefault();
     const taskContainer = event.target.closest('.task-container');
     if (taskContainer) {
-        // Remove highlight from other task containers
         document.querySelectorAll('.task-container.highlight-drop').forEach((container) => {
             container.classList.remove('highlight-drop');
         });
-        // Add highlight to the current task container
         taskContainer.classList.add('highlight-drop');
     }
 }
 
-// Remove highlight from all task containers
+
 function removeHighlight() {
     document.querySelectorAll('.task-container.highlight-drop').forEach((container) => {
         container.classList.remove('highlight-drop');
     });
 }
 
-// Handle dropping the task
-function drop(event) {
-    event.preventDefault(); // Prevent default behavior
-    const targetTaskContainer = event.target.closest('.task-container');
-    removeHighlight(); // Remove all highlights after dropping
 
+function drop(event) {
+    event.preventDefault();
+    const targetTaskContainer = getClosestTaskContainer(event.target);
+    removeHighlight();
     if (targetTaskContainer && draggedTaskId) {
         const draggedTaskElement = document.getElementById(draggedTaskId);
-        const sourceTaskContainer = draggedTaskElement.closest('.task-container');
+        const sourceTaskContainer = getSourceTaskContainer(draggedTaskElement);
 
         if (draggedTaskElement && targetTaskContainer !== sourceTaskContainer) {
-            // Move the task in the DOM
-            targetTaskContainer.appendChild(draggedTaskElement);
-
-            // Update localStorage for source and target containers
-            const sourceColumnId = sourceTaskContainer.closest('.column').id;
-            const targetColumnId = targetTaskContainer.closest('.column').id;
-
-            const sourceTasks = JSON.parse(localStorage.getItem(sourceColumnId)) || [];
-            const targetTasks = JSON.parse(localStorage.getItem(targetColumnId)) || [];
-
-            const taskIndex = sourceTasks.findIndex((task) => task.id === draggedTaskId);
-            if (taskIndex > -1) {
-                targetTasks.push(sourceTasks.splice(taskIndex, 1)[0]);
-                localStorage.setItem(sourceColumnId, JSON.stringify(sourceTasks));
-                localStorage.setItem(targetColumnId, JSON.stringify(targetTasks));
-            }
-
-            // Update UI
-            loadTasks(sourceColumnId);
-            loadTasks(targetColumnId);
+            moveTaskInDOM(draggedTaskElement, targetTaskContainer);
+            updateLocalStorage(sourceTaskContainer, targetTaskContainer, draggedTaskId);
+            refreshUI(sourceTaskContainer, targetTaskContainer);
         }
     }
 }
 
-// Attach dragleave event to remove highlight when dragging leaves a container
+
+function getClosestTaskContainer(element) {
+    return element.closest('.task-container');
+}
+
+
+function getSourceTaskContainer(draggedTaskElement) {
+    return draggedTaskElement.closest('.task-container');
+}
+
+
+function moveTaskInDOM(draggedTaskElement, targetTaskContainer) {
+    targetTaskContainer.appendChild(draggedTaskElement);
+}
+
+
+function updateLocalStorage(sourceTaskContainer, targetTaskContainer, taskId) {
+    const sourceColumnId = sourceTaskContainer.closest('.column').id;
+    const targetColumnId = targetTaskContainer.closest('.column').id;
+
+    const sourceTasks = JSON.parse(localStorage.getItem(sourceColumnId)) || [];
+    const targetTasks = JSON.parse(localStorage.getItem(targetColumnId)) || [];
+
+    const taskIndex = sourceTasks.findIndex((task) => task.id === taskId);
+    if (taskIndex > -1) {
+        targetTasks.push(sourceTasks.splice(taskIndex, 1)[0]);
+        localStorage.setItem(sourceColumnId, JSON.stringify(sourceTasks));
+        localStorage.setItem(targetColumnId, JSON.stringify(targetTasks));
+    }
+}
+
+
+function refreshUI(sourceTaskContainer, targetTaskContainer) {
+    const sourceColumnId = sourceTaskContainer.closest('.column').id;
+    const targetColumnId = targetTaskContainer.closest('.column').id;
+
+    loadTasks(sourceColumnId);
+    loadTasks(targetColumnId);
+}
+
+
 document.querySelectorAll('.task-container').forEach((taskContainer) => {
     taskContainer.addEventListener('dragleave', removeHighlight);
 });
 
-function editTaskDetails() {
-    document.getElementById('modalCategory').classList.add('hidden');
-    enableTitleEdit();
-    enableDescriptionEdit();
-    enableDueDateEdit();
-    enablePriorityEdit();
 
-    const task = getCurrentTask(); // Lade die aktuelle Aufgabe
-    selectedUsers = task.assignedUsers || []; // Synchronisiere die Benutzerliste
-    enableUserEdit(); // Benutzer-Dropdown initialisieren
 
-    addedUsers(); // Initialen der Benutzer anzeigen
 
-    enableSubtaskEdit();
-    addSaveAndCancelButtons(true);
-    toggleModalLayout(true); 
-}
 
 
 
-// Bearbeitbarer Titel
-function enableTitleEdit() {
-    const modalTitle = document.getElementById('modalTitle');
-    modalTitle.innerHTML = `<div class="input-containers">
-                               <p>Title</p>
-                               <input class="title-input" type="text" placeholder="Enter a title" id="editTitle" value="${modalTitle.innerText}"/>
-                            </div>`;
-}
 
-// Bearbeitbare Beschreibung
-function enableDescriptionEdit() {
-    const modalDescription = document.getElementById('modalDescription');
-    modalDescription.innerHTML = `<div class="input-containers">
-                                     <p>Description</p>
-                                     <textarea class="description-input" placeholder="Enter a Description" id="editDescription">${modalDescription.innerText}</textarea>
-                                  </div>`;
-}
 
-// Bearbeitbares Fälligkeitsdatum
-function enableDueDateEdit() {
-    const modalDueDate = document.getElementById('modalDueDate');
-    modalDueDate.innerHTML = `<div class="input-containers">
-                                <input class="date-input" type="date" id="editDueDate" value="${modalDueDate.innerText.split('/').reverse().join('-')}" />
-                             `;
-}
 
-// Bearbeitbare Priorität
-function enablePriorityEdit() {
-    const modalPriority = document.getElementById('modalPriority');
-    const currentPriority = modalPriority.innerText.trim().toLowerCase(); // Hol die aktuelle Priorität
 
-    modalPriority.innerHTML = `
-            <div class="prio-btn-container">
-                <button 
-                    id="btn-urgent" 
-                    class="btn-prio-urgent ${currentPriority === 'urgent' ? 'active' : ''}" 
-                    onclick="changeColorPrioBtn('urgent')">
-                    Urgent
-                    <img id="urgent-img" src="../Assets/prio_urgent.png" alt="Urgent" />
-                </button>
-                <button 
-                    id="btn-medium" 
-                    class="btn-prio-medium ${currentPriority === 'medium' ? 'active' : ''}" 
-                    onclick="changeColorPrioBtn('medium')">
-                    Medium
-                    <img id="medium-img" src="../Assets/prio_medium_Basis.png" alt="Medium" />
-                </button>
-                <button 
-                    id="btn-low" 
-                    class="btn-prio-low ${currentPriority === 'low' ? 'active' : ''}" 
-                    onclick="changeColorPrioBtn('low')">
-                    Low
-                    <img id="low-img" src="../Assets/prio_low.png" alt="Low" />
-                </button>
-            </div>
 
-    `;
 
-    // Setze den initialen Stil für die aktuelle Priorität
-    changeColorPrioBtn(currentPriority);
-}
-
-// Ändert den Stil basierend auf der ausgewählten Priorität
-function changeColorPrioBtn(priority) {
-    const imgSources = {
-        urgent: ["../Assets/prio_arrow_white.png", "../Assets/prio_medium_Basis.png", "../Assets/prio_low.png"],
-        medium: ["../Assets/prio_urgent.png", "../Assets/prio_medium.png", "../Assets/prio_low.png"],
-        low: ["../Assets/prio_urgent.png", "../Assets/prio_medium_Basis.png", "../Assets/prio_arrowDown_white.png"]
-    };
-
-    const bgColors = {
-        urgent: '#FF3B30',
-        medium: '#FFA800',
-        low: '#4CD964'
-    };
-
-    resetButtonStyles(); // Setze alle Button-Stile zurück
-    selectedPriority = priority; // Aktualisiere die ausgewählte Priorität
-
-    // Setze den Stil für den aktiven Button
-    setButtonStyles(priority, bgColors[priority]);
-
-    // Setze die Bildquellen für die Icons
-    setImageSources(imgSources[priority]);
-}
-
-// Setzt alle Button-Stile zurück
-function resetButtonStyles() {
-    const buttons = ['btn-urgent', 'btn-medium', 'btn-low'];
-    buttons.forEach(buttonId => {
-        const button = document.getElementById(buttonId);
-        button.style.backgroundColor = '#ffffff'; // Standard-Hintergrundfarbe
-        button.classList.remove('active'); // Entferne die aktive Klasse
-    });
-}
-
-// Setzt den Stil für den spezifischen Button
-function setButtonStyles(priority, bgColor) {
-    const buttonId = `btn-${priority}`;
-    const button = document.getElementById(buttonId);
-    if (button) {
-        button.style.backgroundColor = bgColor;
-        button.classList.add('active'); // Füge die aktive Klasse hinzu
-    }
-}
-
-// Aktualisiert die Bildquellen der Icons
-function setImageSources([urgentImgSrc, mediumImgSrc, lowImgSrc]) {
-    document.getElementById("urgent-img").src = urgentImgSrc;
-    document.getElementById("medium-img").src = mediumImgSrc;
-    document.getElementById("low-img").src = lowImgSrc;
-}
-
-// Speichert die ausgewählte Priorität
-function savePriority() {
-    const task = getCurrentTask(); // Lade den aktuellen Task
-    if (!task) {
-        console.error('Kein aktueller Task gefunden!');
-        return;
-    }
-
-    task.priority = selectedPriority; // Aktualisiere die Priorität des Tasks
-
-    // Speichere die Änderungen im localStorage
-    const columns = ['todo', 'in-progress', 'await-feedback', 'done'];
-    for (const column of columns) {
-        const tasks = JSON.parse(localStorage.getItem(column)) || [];
-        const taskIndex = tasks.findIndex(t => t.id === task.id);
-        if (taskIndex !== -1) {
-            tasks[taskIndex] = task;
-            localStorage.setItem(column, JSON.stringify(tasks));
-            break;
-        }
-    }
-
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-    enableUserEdit(); // Stelle sicher, dass die Funktion beim Laden der Seite ausgeführt wird
-});
-
-
-function enableUserEdit() {
-    let modalAssignedUsers = document.getElementById('modalAssignedUsers'); // Stelle sicher, dass dieses Element existiert
-    modalAssignedUsers.innerHTML = `
-        <div onclick="openDropDownMenuUser()" class="drop-down">
-            <div>Select contacts to assign</div>
-            <div>
-                <img class="drop-down-arrow" id="drop-down-arrow-contacts" src="../Assets/arrow_drop_downaa (1).png" alt="Arrow down"/>
-            </div>
-        </div>
-        <div class="contact-list-container" id="contactList" style="display: none;"></div>
-        <div id="addedUsers" class="added-users"></div>
-    `;
-
-    // Benutzer-Dropdown initialisieren
-    renderDropdownUsers(loadedContacts, selectedUsers);
-}
-
-function getCurrentTask() {
-    const columns = ['todo', 'in-progress', 'await-feedback', 'done'];
-    for (const column of columns) {
-        const tasks = JSON.parse(localStorage.getItem(column)) || [];
-        const task = tasks.find(task => task.id === currentTaskId);
-        if (task) {
-            return task;
-        }
-    }
-    return null;
-}
-document.addEventListener('DOMContentLoaded', () => {
-    renderDropdownUsers(loadedContacts, selectedUsers);
-    addedUsers();
-});
-
-
-
-function renderDropdownUsers(loadedContacts, selectedUsers) {
-    let contactList = document.getElementById('contactList');
-    if (contactList) {
-       contactList.innerHTML = ""; // Oder dein Code
-       // Restlicher Code
-    } else {
-       console.error("Das Element 'contactList' wurde nicht gefunden!");
-}
-
-
-    loadedContacts.forEach((user, index) => {
-      const isChecked = selectedUsers.some(selected => selected.name === user.name);
-      contactList.innerHTML += `
-        <div class="contact">
-          <div class="user-avatar" style="background-color: ${user.color};">${user.initialien}</div>
-          <span>${user.name}</span>
-          <input 
-            type="checkbox" 
-            ${isChecked ? 'checked' : ''} 
-            onclick="checkBoxUserTask(${index})"
-          />
-        </div>
-      `;
-    });
-}
-  
-function getInitials(name) {
-    const nameParts = name.trim().split(' ');
-    if (nameParts.length > 1) {
-        return nameParts[0][0].toUpperCase() + nameParts[1][0].toUpperCase(); // Vor- und Nachname
-    }
-    return nameParts[0][0].toUpperCase(); // Nur Vorname
-}
-function addUserToTask(userName, userColor) {
-    if (!userName || !userColor) {
-        console.error("Fehler: Benutzername oder Farbe fehlen!");
-        return;
-    }
-    selectedUsers.push({ name: userName, color: userColor });
-    renderAssignedUsers(selectedUsers);
-}
-
-
-
-function checkBoxUserTask(index) {
-    const user = loadedContacts[index]; // Zugriff auf den Benutzer im Array
-    const checkbox = document.querySelectorAll('.contact input[type="checkbox"]')[index];
-
-    if (!user) {
-        console.error(`User not found at index ${index}`);
-        return;
-    }
-
-    if (checkbox.checked) {
-        // Benutzer zur Liste hinzufügen
-        if (!selectedUsers.some(u => u.name === user.name)) {
-            selectedUsers.push(user);
-        }
-    } else {
-        // Benutzer aus der Liste entfernen
-        selectedUsers = selectedUsers.filter(u => u.name !== user.name);
-    }
-
-    // Aktualisiere die Ansicht der hinzugefügten Benutzer
-    addedUsers();
-}
-
-
-
-function addedUsers() {
-    const addedUsersContainer = document.getElementById("addedUsers");
-    if (!addedUsersContainer) {
-        console.error('Element "addedUsers" not found!');
-        return;
-    }
-
-    addedUsersContainer.innerHTML = ""; // Container zurücksetzen
-
-    // Nur Benutzer anzeigen, die in selectedUsers sind
-    selectedUsers.forEach(user => {
-        const nameParts = user.name.split(' '); // Split the name into parts
-        const initials = nameParts.length > 1 
-            ? nameParts[0][0] + nameParts[1][0] // First and last initials
-            : nameParts[0][0]; // Only first initial if there's no last name
-    
-        addedUsersContainer.innerHTML += `
-            <div class="user-avatar" style="background-color: ${user.color};">
-                ${initials.toUpperCase()}
-            </div>
-        `;
-    });
-    
-}
-
-
-
-
-function openDropDownMenuUser() {
-    const contactList = document.getElementById('contactList');
-    const dropDownArrowContacts = document.getElementById('drop-down-arrow-contacts');
-
-    // Wechsel zwischen "anzeigen" und "verbergen"
-    if (contactList.style.display === 'none' || !contactList.style.display) {
-        contactList.style.display = 'block'; // Dropdown anzeigen
-        dropDownArrowContacts.src = "../Assets/arrow_drop_downaa.png"; // Nach oben zeigende Pfeil-Ikone
-    } else {
-        contactList.style.display = 'none'; // Dropdown verbergen
-        dropDownArrowContacts.src = "../Assets/arrow_drop_downaa (1).png"; // Nach unten zeigende Pfeil-Ikone
-    }
-}
-
-function enableSubtaskEdit() {
-    const modalSubtasks = document.getElementById('modalSubtasks');
-
-    if (!modalSubtasks) {
-        console.error('Element "modalSubtasks" nicht gefunden!');
-        return;
-    }
-
-    // Aktuellen Task aus dem Speicher abrufen
-    const task = getCurrentTask();
-
-    if (!task) {
-        console.error('Kein Task gefunden, um Subtasks anzuzeigen.');
-        return;
-    }
-
-    // Lade bestehende Subtasks des Tasks in die globale Liste
-    subtaskList = task.subtasks || [];
-
-    // HTML für das Eingabefeld zum Hinzufügen eines neuen Subtasks
-    const addNewSubtaskHTML = `
-        <div class="add-subtask-container">
-            <div class="subtask-container">
-                <input oninput="toggleButtonVisibility()" class="subtask-input" type="text" placeholder="Add new subtask" id="newSubtask"/>
-                <img onclick="toggleButtonVisibility(true)" id="plusButton" class="plus-img" src="../Assets/Subtasks +.png" alt="Add"/>
-                <button class="add-subtask" id="confirmButton" onclick="addSubtasks()">
-                    <img src="../Assets/check_blue.png" alt="Confirm"/>
-                </button>
-                <span class="linie" id="linie" onclick="cancelSubtask()">|</span>
-                <button class="cancel-subtask" id="cancelTask" onclick="cancelSubtask()">
-                    <img src="../Assets/iconoir_cancel.png" alt="Cancel"/>
-                </button>
-            </div>
-        </div>
-        <div id="subtaskList" class="subtask-list"></div>
-    `;
-
-    modalSubtasks.innerHTML = addNewSubtaskHTML;
-
-    // Vorhandene Subtasks rendern
-    renderExistingSubtasks();
-}
-
-
-function renderExistingSubtasks() {
-    const subtaskListContainer = document.getElementById('subtaskList');
-    subtaskListContainer.innerHTML = ''; // Vorherige Liste leeren
-
-    subtaskList.forEach((subtask, index) => {
-        const isChecked = document.getElementById(`subtask-checkbox-${index}`)?.checked || false;
-
-        const subtaskHTML = `<div class="subtask-label" id="subtask-${index}">
-            <ul id="subtask-list">
-                <li>
-                    <div class="subtask">
-                        <div>
-                            <span class="subtask-text">${subtask}</span>
-                        </div>
-                        <div class="images-container">
-                           <img id="edit-subtask-img" onclick="editSubtask(${index})" src="../Assets/edit_black.png" alt="Edit Icon">
-                           <hr>
-                          <button class="delete-btn" onclick="deleteSubtask(${index})"><img id="delete-subtask" src="../Assets/delete_black.png" alt="Delete Icon"></button>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-         </div>
-        `;
-        subtaskListContainer.insertAdjacentHTML('beforeend', subtaskHTML);
-    });
-}
-
-
-function addSubtasks() {
-    const newSubtaskInput = document.getElementById('newSubtask');
-    const subtaskText = newSubtaskInput.value.trim();
-
-    if (!subtaskText) {
-        alert('Please enter a valid subtask!');
-        return;
-    }
-
-    // Füge neuen Subtask zur Liste hinzu
-    subtaskList.push(subtaskText);
-
-    // Render Subtasks erneut
-    renderExistingSubtasks();
-
-    // Eingabefeld zurücksetzen
-    newSubtaskInput.value = '';
-    toggleButtonVisibility(false);
-}
-
-function deleteSubtask(index) {
-    // Entferne den Subtask aus der Liste
-    subtaskList.splice(index, 1);
-
-    // Render Subtasks erneut
-    renderExistingSubtasks();
-}
-
-function editSubtask(index) {
-    const subtaskItem = document.getElementById(`subtask-${index}`);
-    const subtaskText = subtaskList[index];
-
-    // Ersetze den Subtask mit einem Eingabefeld
-    subtaskItem.innerHTML = `
-        <input type="text" value="${subtaskText}" id="editSubtaskInput-${index}" class="subtask-edit-input"/>
-        <div class="images-container" id="images-container">
-           
-           <button onclick="deleteSubtask(${index})">
-               <img src="../Assets/delete_black.png" alt="Cancel"/>
-           </button>   
-           <hr>
-            <img id="edit-subtask-img" onclick="saveSubtask(${index})" src="../Assets/check_blue.png" alt="Save"/>
-        </div>       
-        
-    `;
-}
-
-function saveSubtask(index) {
-    const editInput = document.getElementById(`editSubtaskInput-${index}`);
-    const updatedText = editInput.value.trim();
-
-    if (!updatedText) {
-        alert('Please enter a valid subtask!');
-        return;
-    }
-
-    // Aktualisiere den Subtask in der Liste
-    subtaskList[index] = updatedText;
-
-    // Render Subtasks erneut
-    renderExistingSubtasks();
-}
-
-function cancelEditSubtask(index, originalText) {
-    subtaskList[index] = originalText;
-    renderExistingSubtasks();
-}
-
-function toggleButtonVisibility(forceShow) {
-    const taskInput = document.getElementById('newSubtask');
-    const confirmButton = document.getElementById('confirmButton');
-    const cancelButton = document.getElementById('cancelTask');
-    const plusButton = document.getElementById('plusButton');
-    const linie = document.getElementById('linie');
-    linie.style.display='none';
-    confirmButton.style.display = 'none';
-    cancelButton.style.display = 'none';
-    plusButton.style.display = 'inline';
-
-    if (forceShow || taskInput.value.trim()) {
-        confirmButton.style.display = 'inline';
-        cancelButton.style.display = 'inline';
-        linie.style.display='inline';
-        plusButton.style.display = 'none';
-    } 
-}
-
-
-function cancelSubtask() {
-    document.getElementById('newSubtask').value = '';
-    toggleButtonVisibility(false);
-}
-
-// Modal schließen und OK-Button entfernen
-function closeTaskModal() {
-    const modalFooter = document.querySelector('.modal-footer');
-    if (modalFooter) {
-        modalFooter.innerHTML = ''; // Alle Buttons im Footer entfernen
-    }
-    document.getElementById('taskModal').style.display = 'none';
-}
-
-// Buttons für Speichern hinzufügen
-function addSaveAndCancelButtons(isEditMode) {
-    const modalFooter = document.querySelector('.modal-footer');
-
-    if (isEditMode) {
-        // Zeige den OK-Button für den Bearbeitungsmodus
-        modalFooter.innerHTML = `
-            <button onclick="saveTaskChanges()" class="okTask-btn" id="oktaskBtn">OK <img src="../Assets/check.png" alt="Save"></button>
-        `;
-    } else {
-        // Zeige Löschen- und Bearbeiten-Schaltflächen für den Anzeigemodus
-        modalFooter.innerHTML = `
-                <div onclick="deleteTask()" class="delete-button">
-                  <img class="delete-img"
-                  src="../Assets/delete_black.png"
-                  alt="Delete Icon"/>
-                  <p>Delete</p>
-                </div>                
-                <span class="line">|</span>
-                <div onclick="editTaskDetails()" class="edit-button">
-                  <img class="edit-img"
-                  src="../Assets/edit_black.png"
-                  alt="Edit Icon"/>
-                  <p>Edit</p>
-                </div>
-        `;
-    }
-}
-
-
-
-function saveTaskChanges() {
-    const updatedTask = gatherUpdatedTaskDetails();
-    updateTaskInLocalStorage(updatedTask);
-
-    // Fortschritt direkt aktualisieren
-    updateProgressBar(updatedTask);
-
-    // Board aktualisieren
-    refreshBoard();
-
-    // Modal schließen
-    closeTaskModal();
-}
-
-function refreshBoard() {
-    ['todo', 'in-progress', 'await-feedback', 'done'].forEach(loadTasks);
-}
-
-
-// Änderungen sammeln
-function gatherUpdatedTaskDetails() {
-    const updatedTitle = document.getElementById('editTitle').value;
-    const updatedDescription = document.getElementById('editDescription').value;
-    const updatedDueDate = document.getElementById('editDueDate').value;
-
-    // Benutzer sammeln
-    const updatedUsers = selectedUsers.map(user => ({
-        name: user.name,
-        color: user.color,
-    }));
-
-    // Subtasks sammeln
-    const updatedSubtasks = subtaskList.map(subtask => subtask);
-
-    return {
-        id: currentTaskId,
-        title: updatedTitle,
-        description: updatedDescription,
-        dueDate: updatedDueDate,
-        assignedUsers: updatedUsers,
-        priority: selectedPriority || 'medium',
-        subtasks: updatedSubtasks,
-        completedSubtasks: updatedSubtasks.filter((subtask, index) => 
-            document.getElementById(`subtask-checkbox-${index}`)?.checked
-        ).length,
-    };
-}
-
-// Aufgabe im localStorage aktualisieren
-
-function updateTaskInLocalStorage(updatedTask) {
-    const columns = ['todo', 'in-progress', 'await-feedback', 'done'];
-    for (const column of columns) {
-        const tasks = JSON.parse(localStorage.getItem(column)) || [];
-        const taskIndex = tasks.findIndex(task => task.id === updatedTask.id);
-
-        if (taskIndex !== -1) {
-            tasks[taskIndex] = {
-                ...tasks[taskIndex],
-                ...updatedTask,
-                totalSubtasks: updatedTask.subtasks.length,
-                completedSubtasks: updatedTask.subtasks.filter((_, index) => 
-                    document.getElementById(`subtask-checkbox-${index}`)?.checked
-                ).length,
-            };
-            localStorage.setItem(column, JSON.stringify(tasks));
-            break;
-        }
-    }
-}
-
-
-
-// Ursprüngliche Task-Details erneut laden
-function reloadTaskDetails() {
-    closeTaskModal();
-    openTaskDetails(currentTaskId);
-}
-
-function closeTaskModal() {
-    const modalFooter = document.querySelector('.modal-footer');
-    if (modalFooter) {
-        modalFooter.innerHTML = ''; // Entfernt alle Buttons im Footer
-    }
-
-    // Modal ausblenden
-    document.getElementById('taskModal').style.display = 'none';
-}
-
-function toggleModalLayout(isEditMode) {
-    const dueDateElement = document.querySelector('.modalDueDate, .modalsDueDate');
-    const priorityElement = document.querySelector('.modalPriority, .modalsPriority');
-
-    if (isEditMode) {
-        dueDateElement.classList.remove('modalDueDate');
-        dueDateElement.classList.add('modalsDueDate');
-        
-        priorityElement.classList.remove('modalPriority');
-        priorityElement.classList.add('modalsPriority');
-    } else {
-        dueDateElement.classList.remove('modalsDueDate');
-        dueDateElement.classList.add('modalDueDate');
-        
-        priorityElement.classList.remove('modalsPriority');
-        priorityElement.classList.add('modalPriority');
-    }
-}
