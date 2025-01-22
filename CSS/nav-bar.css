@@ -14,7 +14,6 @@
   bottom: 0;
   background: #2a3647;
   color: #cdcdcd;
-  /*   z-index: 999; */
   box-shadow: 0px 0px 4px 0px #0000001a;
 }
 
@@ -29,7 +28,6 @@
 .frame-nav-bar-logged-out {
   display: flex;
   justify-content: space-between;
-  
 }
 
 .legal-documents-logged-in {
@@ -133,6 +131,10 @@
   .menu-logged-in {
     padding: 2px 2px;
     gap: 10px;
+  }
+
+  .frame-nav-bar-logged-out {
+    padding: 0 16px;
   }
 }
 
