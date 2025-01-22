@@ -134,7 +134,6 @@ function createNewContact(name, mail, phone){
 function openEditContactOverlay(){
     let contentRef = document.getElementById('edit-contact-details-overlay-id');
     contentRef.classList.remove('d-none');
-    hideEditDeleteDiv();
 }
 
 function closeEditContactOverlay(){
