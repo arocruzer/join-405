@@ -1,9 +1,3 @@
-// window.addEventListener("resize", function(){
-//     if(window.innerWidth > 1180){
-//         renderContacts();
-//     }
-// });
-
 function renderContacts(){
     let contentRef = document.getElementById('contacts');
     if (contentRef) {
@@ -37,12 +31,7 @@ function getRandomColor() {
     return colors[Math.floor(Math.random() * colors.length)];
 }
 
-// Open Contact Details
-
 function openContactDetailsOverlay(index){
-    console.log(`Kontakt ${index} wurde geklickt!`);
-    console.log(loadedContacts[index]);
-
     if (window.innerWidth < 1180) {
         document.getElementById('contacts').classList.add('d-none');
         let contentRef = document.getElementById('contact-details-wrapper-id');
@@ -59,14 +48,11 @@ function openContactDetailsOverlay(index){
 }
 
 function closeContactDetailsOverlay(){
-
     document.getElementById('contacts').classList.remove('d-none');
     let contentRef = document.getElementById('contact-details-wrapper-id');
     contentRef.classList.add('contact-detail-hidden');
     renderContactDetailPage();
 }
-
-// Add Contact
 
 function OpenAddContactOverlay(){
     document.getElementById('add-contact-div-overlay-id').classList.remove('d-none');
@@ -75,16 +61,13 @@ function OpenAddContactOverlay(){
     }else{
         document.getElementById('add-contact-div-overlay-id').innerHTML = HTMLOpenAddContactOverlayDesktop();
     }
-    }
+}
 
 function closeAddContactOverlay(){
     document.getElementById('add-contact-div-overlay-id').classList.add('d-none');
 }
 
-// Validation Functions
-
-function addNewContact(){
-    
+function addNewContact(){   
     let nameInput = document.getElementById('add-input-name-id').value;
     let mailInput = document.getElementById('add-input-mail-id').value
     let phoneInput = document.getElementById('add-input-phone-id').value
@@ -148,9 +131,6 @@ function createNewContact(name, mail, phone){
     return newContact;
 }
 
-
-//Edit Contacts
-
 function openEditContactOverlay(){
     let contentRef = document.getElementById('edit-contact-details-overlay-id');
     contentRef.classList.remove('d-none');
@@ -176,7 +156,6 @@ function editContact(index){
         closeEditContactOverlay();
         closeContactDetailsOverlay();
     } return
-
 }
 
 function validateEditName(name){
@@ -221,7 +200,6 @@ function deleteContact(index){
 
 function startAnimation() {
     const flyingDiv = document.getElementById('flying-div-id');
-
     flyingDiv.classList.remove('d-none', 'disappear');
     setTimeout(() => {
         flyingDiv.classList.add('visible');
