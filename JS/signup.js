@@ -21,7 +21,7 @@ function addUser() {
     name: userName.value,
     email: email.value,
     password: password.value,
-    telefon: "",
+    phone: "",
     color: colors[Object.keys(loadedContacts).length % colors.length], 
   };
 
