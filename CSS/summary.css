@@ -59,6 +59,7 @@ hr {
   align-items: center;
   gap: 18px;
   border-radius: 30px;
+  transition: all 100ms ease;
 }
 
 span {
@@ -77,6 +78,7 @@ span {
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all 100ms ease;
 }
 
 .prio {
@@ -126,6 +128,7 @@ span {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  transition: all 100ms ease;
 }
 
 .regards {
@@ -145,19 +148,56 @@ span {
   font-weight: 500;
 }
 
-.info-container:hover {
+/* .info-container:hover {
   background-color: #2a3647;
   color: white;
+} */
+
+#info-container-left:hover {
+  background-color: #2a3647;
+  color: white;
+  transform: scale(1.05, 1.05);
+  transform-origin: left;
+}
+
+#info-container-right:hover {
+  background-color: #2a3647;
+  color: white;
+  transform: scale(1.05, 1.05);
+  transform-origin: right;
 }
 
 .task-date-info:hover {
   background-color: #2a3647;
   color: white;
+  transform: scale(1.05, 1.05);
+  transform-origin: left top;
 }
 
-.task-status:hover {
+/* .task-status:hover {
   background-color: #2a3647;
   color: white;
+} */
+
+#task-status-left:hover {
+  background-color: #2a3647;
+  color: white;
+  transform: scale(1.05, 1.05);
+  transform-origin: left;
+}
+
+#task-status-center:hover {
+  background-color: #2a3647;
+  color: white;
+  transform: scale(1.05, 1.05);
+  transform-origin: all;
+}
+
+#task-status-right:hover {
+  background-color: #2a3647;
+  color: white;
+  transform: scale(1.05, 1.05);
+  transform-origin: right;
 }
 
 .hover-pen-img {
