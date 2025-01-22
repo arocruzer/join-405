@@ -1,17 +1,14 @@
 function renderContacts() {
     let contentRef = document.getElementById('contacts');
     if (!contentRef) return;
-
     contentRef.innerHTML = "";
     loadedContacts.sort((a, b) => a.name.localeCompare(b.name));
     let currentLetter = "";
-
     for (let index = 0; index < loadedContacts.length; index++) {
         const contact = loadedContacts[index];
         currentLetter = updateCurrentLetter(contact.name, currentLetter, contentRef);
         renderContactGroup(contact, currentLetter, index);
     }
-
     addBackgrounds();
     renderContactDetailPage();
 }
