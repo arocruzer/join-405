@@ -1,22 +1,34 @@
-function renderContacts(){
+function renderContacts() {
     let contentRef = document.getElementById('contacts');
-    if (contentRef) {
+    if (!contentRef) return;
+
     contentRef.innerHTML = "";
-    let currentLetter = "";
     loadedContacts.sort((a, b) => a.name.localeCompare(b.name));
+    let currentLetter = "";
+
     for (let index = 0; index < loadedContacts.length; index++) {
-        let initialien = loadedContacts[index].initialien.toUpperCase();
-        let firstLetter = loadedContacts[index].name.slice(0, 1).toUpperCase();
-        if (firstLetter !== currentLetter) {
-            currentLetter = firstLetter;
-            contentRef.innerHTML += renderCurrentLetter(currentLetter);
-        }
-        const groupElement = document.getElementById(`contact-container-${currentLetter}`);
-        groupElement.innerHTML += renderCurrentContacts(index, initialien);
-        addBackgrounds();  
+        const contact = loadedContacts[index];
+        currentLetter = updateCurrentLetter(contact.name, currentLetter, contentRef);
+        renderContactGroup(contact, currentLetter, index);
     }
+
+    addBackgrounds();
     renderContactDetailPage();
 }
+
+function updateCurrentLetter(name, currentLetter, contentRef) {
+    let firstLetter = name.slice(0, 1).toUpperCase();
+    if (firstLetter !== currentLetter) {
+        currentLetter = firstLetter;
+        contentRef.innerHTML += renderCurrentLetter(currentLetter);
+    }
+    return currentLetter;
+}
+
+function renderContactGroup(contact, currentLetter, index) {
+    const groupElement = document.getElementById(`contact-container-${currentLetter}`);
+    const initialien = contact.initialien.toUpperCase();
+    groupElement.innerHTML += renderCurrentContacts(index, initialien);
 }
 
 function addBackgrounds() {
