@@ -9,7 +9,7 @@
   background-color: white;
 }
 
-.contacts-wrapper{
+.contacts-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -140,7 +140,7 @@
   gap: 16px;
 }
 
-.page-title-desktop{
+.page-title-desktop {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -183,45 +183,47 @@
   display: flex;
 }
 
-.edit-delete-button-div-desktop{
+.edit-delete-button-div-desktop {
   display: flex;
   flex-direction: row;
   gap: 16px;
 }
 
-.edit-button-desktop{
+.edit-button-desktop {
   display: flex;
   flex-direction: row;
 }
 
-.edit-button-desktop:hover{
+.edit-button-desktop:hover {
   color: #29ABE2;
   cursor: pointer;
-  .edit-img-blue{
+
+  .edit-img-blue {
     content: url('../Assets/edit_blue.svg');
   }
 
 }
 
-.delete-button-desktop{
+.delete-button-desktop {
   display: flex;
   flex-direction: row;
 }
 
-.delete-button-desktop p{
+.delete-button-desktop p {
   font-size: medium;
 }
 
-.delete-button-desktop:hover{
+.delete-button-desktop:hover {
   color: #29ABE2;
   cursor: pointer;
-  .delete-img-blue{
+
+  .delete-img-blue {
     content: url('../Assets/delete_blue.svg');
   }
 
 }
 
-.detail-name-div{
+.detail-name-div {
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -243,7 +245,7 @@
 .detail-contact-avatar {
   width: 80px;
   height: 80px;
-  border-radius: 100%!important;
+  border-radius: 100% !important;
   background-color: rgb(255, 89, 0);
   color: white;
   font-size: 27px;
@@ -278,13 +280,13 @@
   color: #007cee;
 }
 
-.three-points-menu-div{
+.three-points-menu-div {
   display: flex;
   justify-content: flex-end;
 }
 
 .three-points-menu {
-display: block;
+  display: block;
 }
 
 .edit-delete-div {
@@ -420,7 +422,7 @@ display: block;
   top: 20px;
 }
 
-.error-message{
+.error-message {
   color: red;
   font-size: 8px;
   height: 16px;
@@ -516,7 +518,7 @@ display: block;
   align-items: center;
 }
 
-.input-layout{
+.input-layout {
   height: 30px;
   padding-left: 16px;
   padding-right: 24px;
@@ -570,7 +572,7 @@ display: block;
   color: white;
 }
 
-.newContactButton{
+.newContactButton {
   background-color: rgb(42, 54, 71);
   height: 52px;
   width: 380px;
@@ -586,7 +588,7 @@ display: block;
   padding: 16px;
 }
 
-.newContactButton:hover{
+.newContactButton:hover {
   transform: translateY(-5px) scale(1.05);
   border-radius: 15px;
   cursor: pointer;
@@ -595,7 +597,7 @@ display: block;
 
 /* NewAdditions */
 
-.overlay-edit-contact-desktop{
+.overlay-edit-contact-desktop {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -603,7 +605,7 @@ display: block;
   position: relative;
 }
 
-.left-part{
+.left-part {
   background-color: #2a3647;
   border-radius: 30px 0 0 30px;
   color: white;
@@ -616,7 +618,7 @@ display: block;
   position: relative;
 }
 
-.right-part{
+.right-part {
   width: 759px;
   height: 592px;
   border-radius: 0 30px 30px 0;
@@ -625,7 +627,7 @@ display: block;
   position: relative;
 }
 
-.input-fields-desktop{
+.input-fields-desktop {
   width: 100%;
   height: 100%;
   display: flex;
@@ -635,7 +637,7 @@ display: block;
   margin-right: 25px;
 }
 
-.input-layout-desktop{
+.input-layout-desktop {
   width: 422px;
   height: 50px;
   border-radius: 15px;
@@ -643,7 +645,7 @@ display: block;
   border: 1px solid lightgray;
 }
 
-.middle-avatar-desktop{
+.middle-avatar-desktop {
   position: absolute;
   top: 234px;
   width: 120px;
@@ -660,7 +662,7 @@ display: block;
   z-index: 999;
 }
 
-.edit-contact-title-desktop{
+.edit-contact-title-desktop {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -671,7 +673,7 @@ display: block;
   height: 66px
 }
 
-.delete-save-buttons-desktop{
+.delete-save-buttons-desktop {
   width: 422px;
   display: flex;
   flex-direction: row;
@@ -679,7 +681,7 @@ display: block;
 
 }
 
-.close-cross-desktop{
+.close-cross-desktop {
   width: 25px;
   height: 25px;
   position: absolute;
@@ -687,14 +689,14 @@ display: block;
   right: 25px;
 }
 
-.close-cross-desktop:hover{
+.close-cross-desktop:hover {
   transform: translateY(-5px) scale(1.05);
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
   border-radius: 15px;
   cursor: pointer;
 }
 
-.overlay-delete-button-desktop{
+.overlay-delete-button-desktop {
   width: 113px;
   height: 55px;
   border-radius: 8px;
@@ -707,7 +709,7 @@ display: block;
   background-color: white;
 }
 
-.overlay-save-button-desktop{
+.overlay-save-button-desktop {
   width: 113px;
   height: 55px;
   border-radius: 8px;
@@ -721,7 +723,7 @@ display: block;
   color: white;
 }
 
-.overlay-cancel-button-desktop{
+.overlay-cancel-button-desktop {
   width: 113px;
   height: 55px;
   border-radius: 8px;
@@ -734,7 +736,7 @@ display: block;
   background-color: white;
 }
 
-.overlay-create-button-desktop{
+.overlay-create-button-desktop {
   width: 214px;
   height: 57px;
   border-radius: 8px;
@@ -749,7 +751,7 @@ display: block;
 
 }
 
-.gray-bg{
+.gray-bg {
   background-color: rgb(193, 192, 192);
 }
 
@@ -781,7 +783,7 @@ display: block;
 /* Responsive */
 
 @media screen and (min-width: 830px) {
-  .content-wrapper{
+  .content-wrapper {
     justify-content: center;
     background-color: white;
   }
@@ -792,9 +794,11 @@ display: block;
     display: flex;
     flex-direction: column;
   }
-  .add-contact-button{
+
+  .add-contact-button {
     display: none;
   }
+
   .newContactButton {
     display: flex;
   }
@@ -842,7 +846,7 @@ display: block;
 }
 
 @media screen and (min-width: 1350px) {
-  .contact-details-wrapper{
+  .contact-details-wrapper {
     padding: 64px 48px;
   }
 }
@@ -854,6 +858,7 @@ display: block;
   from {
     right: -100%;
   }
+
   to {
     right: 0;
   }
