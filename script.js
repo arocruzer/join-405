@@ -15,8 +15,10 @@ let colors = ["#007bff", "#ffa500", "#800080", "#d8bfd8", "#ff69b4", "#28a745", 
 async function init() {
   await includeHTML();
   await loadAllContacts();
+  await loadAllTasks();
   getUserLogo();
   inOrOut();
+  saveTaskFromDB();
 }
 
 function userCheck() {
@@ -222,6 +224,6 @@ function checkIfLoggedIn() {
   }
 }
 
-function saveTaskFromDB() {
-  
-}
+/* function saveTaskFromDB() {
+  localStorage.setItem('todo', JSON.stringify(loadedTasks[0]));
+} */
