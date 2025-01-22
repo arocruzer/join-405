@@ -96,6 +96,7 @@ function addNewContact(){
         loadedContacts.push(newContact);
         renderContacts();
         closeAddContactOverlay();
+        startAnimation();
     }return;
 }
 
@@ -215,4 +216,22 @@ function deleteContact(index){
     renderContacts();
     closeEditContactOverlay();
     closeContactDetailsOverlay();
+}
+
+function startAnimation() {
+    const flyingDiv = document.getElementById('flying-div-id');
+
+    flyingDiv.classList.remove('hidden', 'disappear');
+    setTimeout(() => {
+        flyingDiv.classList.add('visible');
+    }, 10);
+
+    setTimeout(() => {
+        flyingDiv.classList.remove('visible');
+        flyingDiv.classList.add('disappear');
+
+        setTimeout(() => {
+            flyingDiv.classList.add('hidden');
+        }, 500); 
+    }, 3000);
 }
