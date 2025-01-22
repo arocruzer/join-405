@@ -293,9 +293,9 @@ function createNewTask(
   };
 }
 
-function saveTaskToLocalStorage(columnId, task) {
+function saveTaskToLocalStorage(columnId, newTask) {
   const tasks = JSON.parse(localStorage.getItem(columnId)) || [];
-  tasks.push(task);
+  tasks.push(newTask);
   localStorage.setItem(columnId, JSON.stringify(tasks));
 }
 
