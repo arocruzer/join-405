@@ -1259,7 +1259,15 @@ textarea.description-input {
 
 @media (max-width: 490px) {
   .subtask {
-    width: 270px;
+    width: 230px;
+  }
+  .images-container{
+    height: 20px;
+    width: 10px;
+    gap: 3px;
+  }
+  .subtask-text{
+    font-size: 12px;
   }
 
 }
@@ -1288,6 +1296,9 @@ textarea.description-input {
 
   .modal-content {
     padding: 13px;
+  }
+  .images-container{
+    height: 17px;
   }
 
 }
