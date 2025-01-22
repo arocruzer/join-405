@@ -1230,7 +1230,8 @@ textarea.description-input {
   .board {
     display: flex;
     flex-direction: column; 
-    gap: 16px; 
+    gap: 16px;
+    padding-bottom: 60px; 
   }
 
   .column {
