@@ -164,7 +164,6 @@
 
 .arrow-left-contact-details:hover {
   transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
   border-radius: 15px;
   cursor: pointer;
 }
@@ -281,10 +280,17 @@
 .three-points-menu-div{
   display: flex;
   justify-content: flex-end;
+  position: relative;
 }
 
 .three-points-menu {
 display: block;
+}
+
+.three-points-menu:hover{
+  transform: translateY(-5px) scale(1.05);
+  border-radius: 15px;
+  cursor: pointer;
 }
 
 .edit-delete-div {
@@ -293,9 +299,7 @@ display: block;
   height: 110px;
   width: 116px;
   background-color: #ffffff;
-  position: fixed;
-  top: 70%;
-  left: 70%;
+  position: absolute;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -310,6 +314,12 @@ display: block;
   align-items: center;
   gap: 8px;
   padding: 8px;
+  width: 100%;
+}
+
+.edit-delete-flex-div:hover{
+  transform: translateY(-2px);
+  cursor: pointer;
 }
 
 .d-none {
@@ -756,7 +766,7 @@ display: block;
 .flying-div{
   position: absolute;
   bottom: -100px;
-  right: 10%;
+  right: 5%;
   transform: translateX(-50%);
   color: white;
   text-align: center;

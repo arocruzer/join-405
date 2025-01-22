@@ -154,6 +154,7 @@ function createNewContact(name, mail, phone){
 function openEditContactOverlay(){
     let contentRef = document.getElementById('edit-contact-details-overlay-id');
     contentRef.classList.remove('d-none');
+    hideEditDeleteDiv();
 }
 
 function closeEditContactOverlay(){
@@ -221,7 +222,7 @@ function deleteContact(index){
 function startAnimation() {
     const flyingDiv = document.getElementById('flying-div-id');
 
-    flyingDiv.classList.remove('hidden', 'disappear');
+    flyingDiv.classList.remove('d-none', 'disappear');
     setTimeout(() => {
         flyingDiv.classList.add('visible');
     }, 10);
@@ -231,7 +232,17 @@ function startAnimation() {
         flyingDiv.classList.add('disappear');
 
         setTimeout(() => {
-            flyingDiv.classList.add('hidden');
+            flyingDiv.classList.add('d-none');
         }, 500); 
     }, 3000);
+}
+
+function showEditDeleteDiv(){
+    const contentRef = document.getElementById('edit-delete-div-id');
+    contentRef.classList.remove('d-none');
+}
+
+function hideEditDeleteDiv(){
+    const contentRef = document.getElementById('edit-delete-div-id');
+    contentRef.classList.add('d-none');
 }
