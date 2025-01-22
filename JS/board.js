@@ -320,7 +320,6 @@ function deleteTask() {
         tasks = tasks.filter(task => task.id !== currentTaskId);
         localStorage.setItem(column, JSON.stringify(tasks));
     });
-    alert('Task deleted successfully.');
     closeTaskModal();
     window.location.reload();
 }

@@ -99,10 +99,8 @@ button {
 
 .hero {
   padding-left: 16px;
-  /*96px*/
-  /*0px*/
+  padding-right: 16px;
   padding-top: 48px;
-  /*110px*/
   display: flex;
   justify-content: center;
   align-items: flex-start;

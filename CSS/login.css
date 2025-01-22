@@ -2,18 +2,21 @@
   margin: 0;
   font-family: inter;
 }
+
 body {
   background-color: #f6f7f8;
   display: flex;
   flex-direction: column;
   height: 100vh;
 }
+
 .signup-container {
   display: flex;
   align-items: center;
   flex-direction: row;
   gap: 35px;
 }
+
 button {
   cursor: pointer;
 }
@@ -72,6 +75,7 @@ button {
   border-radius: 10px;
   font-size: 21px;
 }
+
 footer {
   display: flex;
   justify-content: space-between;
@@ -91,7 +95,8 @@ a {
 .logo {
   width: 100px;
   height: 100px;
-  background-image: url("../Assets/Join_logo.png"); /* Replace with your logo path */
+  background-image: url("../Assets/Join_logo.png");
+  /* Replace with your logo path */
   background-size: contain;
   background-repeat: no-repeat;
   animation: moveLogo 2s ease-out forwards;
@@ -148,6 +153,7 @@ a {
   0% {
     transform: translate(-50%, -50%);
   }
+
   100% {
     top: 10%;
     left: 6%;
@@ -160,6 +166,7 @@ a {
   0% {
     background-color: #f6f7f8;
   }
+
   100% {
     background-color: transparent;
   }
@@ -169,6 +176,7 @@ a {
   0% {
     transform: translate(-50%, -50%);
   }
+
   100% {
     top: 5%;
     left: 6.5%;
@@ -181,6 +189,7 @@ a {
   0% {
     background-color: #2a3647;
   }
+
   100% {
     background-color: transparent;
   }
@@ -211,22 +220,28 @@ a {
   header {
     padding: 38px 37px;
   }
+
   .login-logo {
     height: 78px;
     width: 64px;
   }
+
   .signup-container {
     display: none;
   }
+
   .signup-container-mobile {
     display: flex;
   }
+
   .login-window {
     width: calc(100% - 32px);
   }
+
   .welcome-img {
     display: none;
   }
+
   .welcome-img-mobile {
     display: block;
     height: 78px;
@@ -236,6 +251,7 @@ a {
     transform: translate(-50%, -50%);
     animation: mymoveMobile 1s linear forwards;
   }
+
   .animation {
     background-color: #2a3647;
     animation: fadeOutBackgroundMobile 1s forwards;

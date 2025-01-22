@@ -21,7 +21,7 @@
 
     <title>Contacts</title>
   </head>
-  <body onload="init()">
+  <body onload="userCheck()">
     <div id="frame">
       <div id="main-container">
         <div id="header" w3-include-html="../HTML/header.html"></div>
@@ -37,10 +37,11 @@
               </div>
               <img onclick="OpenAddContactOverlay()" class="add-contact-button" src="../Assets/Property 1=Default.svg" alt="add_contact" >`
             </div>
-
+            <div id="flying-div-id" class="flying-div d-none">
+              <img src="../Assets/Frame 73.svg" alt="">
+            </div>
             <div class="add-contact-div-overlay d-none" id="add-contact-div-overlay-id"></div>
             <div class="edit-contact-details-overlay d-none" id="edit-contact-details-overlay-id"></div>
-              
             <div class="contact-details-wrapper contact-detail-hidden" id="contact-details-wrapper-id"></div>
           </div>
         </div>
@@ -48,8 +49,5 @@
       <div id="nav-bar" w3-include-html="../HTML/nav-bar.html"></div>
     </div>
     <script src="../JS/contacts.js"></script>
-
-
-
   </body>
 </html>

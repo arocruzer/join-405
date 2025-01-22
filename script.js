@@ -1,6 +1,7 @@
 const BASE_URL = "https://join-405-43178-default-rtdb.europe-west1.firebasedatabase.app/";
 let loadedContacts = [];
 let loadedTasks = [];
+let allTasks = {};
 let email = document.getElementById("email");
 let password = document.getElementById("password");
 let userName = document.getElementById("name");
@@ -17,7 +18,15 @@ async function init() {
   await loadAllContacts();
   getUserLogo();
   inOrOut();
-  /* checkIfLoggedIn() */
+}
+
+function userCheck() {
+  let status = JSON.parse(localStorage.getItem("loggedInUser"));
+  if (status) {
+    init();
+  } else {
+    window.location.href = '../index.html';
+  }
 }
 
 async function loadAllContacts(path = "") {
@@ -45,24 +54,24 @@ async function loadAllContacts(path = "") {
   }
 }
 
-async function loadAllTasks(path = "") {
-  let response = await fetch(BASE_URL + path + ".json");
-  let responsToJason = await response.json();
+async function fetchAndStoreTasks() {
+  try {
+    let response = await fetch(`${BASE_URL}/tasks.json`);
+    let tasksData = await response.json();
 
-  let task = Object.values(responsToJason.tasks);
-  task.forEach((i) => {
-    const tasks = {
-      id: i.id,
-      title: i.title,
-      category: i.category,
-      description: i.description,
-      dueDate: i.dueDate,
-      priority: i.priority,
-      subtasks: i.subtasks,
-      assignedUsers: i.assignedUsers,
-    };
-    loadedTasks.push(tasks);
-  });
+    loadedTasks.push(tasksData);
+    saveTasksInLocalStorage(loadedTasks);
+  } catch (error) {
+    console.error("Fehler:", error.message);
+  }
+}
+
+function saveTasksInLocalStorage(loadedTasks) {
+  localStorage.setItem("await-feedback",JSON.stringify(loadedTasks[0]["-OHEHGcS4ouKKz4lJ0nr"].awaitFeedback));
+  localStorage.setItem("todo",JSON.stringify(loadedTasks[0]["-OHEHGcS4ouKKz4lJ0nr"].todo));
+  localStorage.setItem("in-progress",JSON.stringify(loadedTasks[0]["-OHEHGcS4ouKKz4lJ0nr"].inProgress));
+  localStorage.setItem("done",JSON.stringify(loadedTasks[0]["-OHEHGcS4ouKKz4lJ0nr"].done));
+  console.log(loadedTasks[0]["-OHEHGcS4ouKKz4lJ0nr"].awaitFeedback);
 }
 
 function changePasswordImg() {
@@ -185,37 +194,22 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-/**
- * Fügt einem HTML-Element interaktive Klick-Effekte hinzu.
- * Beim Drücken der Maustaste (`mousedown`) wird eine CSS-Klasse hinzugefügt,
- * die beim Loslassen (`mouseup`) oder Verlassen des Elements (`mouseleave`) wieder entfernt wird.
- *
- * @param {string} elementId - Die ID des HTML-Elements, auf das der Effekt angewendet werden soll.
- *
- * @example
- * // Wendet die Klick-Effekte auf ein Element mit der ID "click-privacy" an
- * addClickEffect("click-privacy");
- *
- * @example
- * // Wendet die Klick-Effekte auf ein Element mit der ID "click-legal" an
- * addClickEffect("click-legal");
- */
+
 function addClickEffect(elementId) {
   let element = document.getElementById(elementId);
   if (element) {
-    
-  element.addEventListener("mousedown", () => {
-    element.classList.add("color-on-click");
-  });
+    element.addEventListener("mousedown", () => {
+      element.classList.add("color-on-click");
+    });
 
-  element.addEventListener("mouseup", () => {
-    element.classList.remove("color-on-click");
-  });
+    element.addEventListener("mouseup", () => {
+      element.classList.remove("color-on-click");
+    });
 
-  element.addEventListener("mouseleave", () => {
-    element.classList.remove("color-on-click");
-  });
-}
+    element.addEventListener("mouseleave", () => {
+      element.classList.remove("color-on-click");
+    });
+  }
 }
 
 addClickEffect("login-click-privacy");
@@ -224,7 +218,7 @@ addClickEffect("login-click-legal");
 function checkIfLoggedIn() {
   let loggedUser = localStorage.getItem('loggedInUser');
   console.log(loggedUser);
-  if(!loggedUser){
+  if (!loggedUser) {
     window.location.href = '/index.html';
   }
 }

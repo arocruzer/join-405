@@ -95,7 +95,17 @@ function HTMLopenContactDetailsOverlayMobile(index){
             <a href="#">${loadedContacts[index].phone}</a>
         </div>
         <div class="three-points-menu-div">
-            <img class="three-points-menu" src="../Assets/threePointsMenu.png" onclick="openEditContactOverlay()" alt="threePointsMenu">
+            <img class="three-points-menu" src="../Assets/threePointsMenu.png" onclick="showEditDeleteDiv()" alt="threePointsMenu">
+            <div class="edit-delete-div d-none" id="edit-delete-div-id">
+                <div class="edit-delete-flex-div" onclick="openEditContactOverlay()">
+                    <img src="../Assets/edit.svg" alt="">
+                    <span>Edit</span>
+                </div>
+                <div class="edit-delete-flex-div" onclick="deleteContact(${index})">
+                    <img src="../Assets/delete.svg" alt="">
+                    <span>Delete</span>
+                </div>
+            </div>
         </div>
     `;
 }
@@ -194,65 +204,10 @@ function HTMLOpenAddContactOverlayDesktop(){
     </div>`;
 }
 
-// function HTMLOpenEditContactOverlay(){
-//     return`
-//     <div class="overlay-edit-contact">
-//             <div class="middle-avatar">TW</div>
-//             <div class="upper-half">
-//                 <div class="cross-close" onclick="closeEditContactOverlay()">X</div>
-//                 <div class="edit-contact-title">
-//                     <h1>Edit contact</h1>
-//                     <div class="blue-line"></div>
-//                 </div>
-//             </div>
-//             <div class="lower-half">
-//                 <div class="input-fields">
-//                     <input class="input-person" placeholder="Name" type="text">
-//                     <input class="input-mail" placeholder="Email" type="email">
-//                     <input class="input-phone" placeholder="Phone" type="tel">
-//                 </div>
-//                 <div class="delete-safe-buttons">
-//                     <button class="delete-button">Delete</button>
-//                     <button class="save-button">Save<i class="fa-sharp-duotone fa-solid fa-check save-padding"></i></button>
-//                 </div>
-//             </div>
-//         </div>
-//     `;
-// }
-
-// function HTMLOpenEditContactOverlayDesktop(index){
-//     return`
-//     <div class="overlay-edit-contact">
-//         <div class="middle-avatar">TW</div>
-//         <div class="upper-half">
-//             <div class="cross-close" onclick="closeEditContactOverlay()">X</div>
-//             <div class="edit-contact-title">
-//                 <h1>Edit contact</h1>
-//                 <div class="blue-line"></div>
-//             </div>
-//         </div>
-//         <div class="lower-half-edit">
-//             <div class="input-fields-add">
-//                 <input class="input-layout input-person" value="${loadedContacts[index].name}" placeholder="Name" type="text" id="edit-input-name-id">
-//                 <div id="name-error-id" class="input-layout error-message"></div>
-//                 <input class="input-layout input-mail" value="${loadedContacts[index].email}" placeholder="Email" type="email" id="edit-input-mail-id">
-//                 <div id="mail-error-id" class="input-layout error-message"></div>
-//                 <input class="input-layout input-phone" value="${loadedContacts[index].phone}" placeholder="Phone" type="tel" id="edit-input-phone-id">
-//                 <div id="phone-error-id" class="input-layout error-message"></div>
-//                 <div class="delete-safe-buttons">
-//                     <button onclick="deleteContact(${index})" class="delete-button">Delete</button>
-//                     <button onclick="editContact(${index})" class="save-button">Save<i class="fa-sharp-duotone fa-solid fa-check save-padding"></i></button>
-//                 </div>
-//             </div>
-//         </div>
-//     </div>
-// `;
-// }
-
 function getSubtasksTemplate(subtask, index) {
     return `
         <div class="subtask-label" id="subtask-label-${index}">
-            <ul id="subtask-list">
+            <ul id="subtask-list-${index}">
                 <li>
                     <div class="subtask">
                         <div>
@@ -544,3 +499,25 @@ function createEditAndDeleteButtonsHTML() {
         </div>
     `;
 }
+
+function getDueDateTemplate(priorityIcon, formattedDate, priority) {
+    const priorityClass = getPriorityClass(priority);
+    return `
+                              <div class="task-info">
+                          <div class="prio">
+                            <div class="${priorityClass}">
+                              <img class="prio-img" src="${priorityIcon}" />
+                            </div>
+                            <div class="status">
+                              <h4>1</h4>
+                              <p>Urgent</p>
+                            </div>
+                          </div>
+                          <hr style="height: 102px; display: inline-block; border: 1px solid #d1d1d1;"/>
+                          <div class="date">
+                            <h3>${formattedDate}</h3>
+                            <p>Upcoming Deadline</p>
+                          </div>
+                        </div>
+      `;
+  }

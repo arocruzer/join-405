@@ -1,28 +1,31 @@
-// window.addEventListener("resize", function(){
-//     if(window.innerWidth > 1180){
-//         renderContacts();
-//     }
-// });
-
-function renderContacts(){
+function renderContacts() {
     let contentRef = document.getElementById('contacts');
-    if (contentRef) {
+    if (!contentRef) return;
     contentRef.innerHTML = "";
-    let currentLetter = "";
     loadedContacts.sort((a, b) => a.name.localeCompare(b.name));
+    let currentLetter = "";
     for (let index = 0; index < loadedContacts.length; index++) {
-        let initialien = loadedContacts[index].initialien.toUpperCase();
-        let firstLetter = loadedContacts[index].name.slice(0, 1).toUpperCase();
-        if (firstLetter !== currentLetter) {
-            currentLetter = firstLetter;
-            contentRef.innerHTML += renderCurrentLetter(currentLetter);
-        }
-        const groupElement = document.getElementById(`contact-container-${currentLetter}`);
-        groupElement.innerHTML += renderCurrentContacts(index, initialien);
-        addBackgrounds();  
+        const contact = loadedContacts[index];
+        currentLetter = updateCurrentLetter(contact.name, currentLetter, contentRef);
+        renderContactGroup(contact, currentLetter, index);
     }
+    addBackgrounds();
     renderContactDetailPage();
 }
+
+function updateCurrentLetter(name, currentLetter, contentRef) {
+    let firstLetter = name.slice(0, 1).toUpperCase();
+    if (firstLetter !== currentLetter) {
+        currentLetter = firstLetter;
+        contentRef.innerHTML += renderCurrentLetter(currentLetter);
+    }
+    return currentLetter;
+}
+
+function renderContactGroup(contact, currentLetter, index) {
+    const groupElement = document.getElementById(`contact-container-${currentLetter}`);
+    const initialien = contact.initialien.toUpperCase();
+    groupElement.innerHTML += renderCurrentContacts(index, initialien);
 }
 
 function addBackgrounds() {
@@ -37,12 +40,7 @@ function getRandomColor() {
     return colors[Math.floor(Math.random() * colors.length)];
 }
 
-// Open Contact Details
-
 function openContactDetailsOverlay(index){
-    console.log(`Kontakt ${index} wurde geklickt!`);
-    console.log(loadedContacts[index]);
-
     if (window.innerWidth < 1180) {
         document.getElementById('contacts').classList.add('d-none');
         let contentRef = document.getElementById('contact-details-wrapper-id');
@@ -59,14 +57,11 @@ function openContactDetailsOverlay(index){
 }
 
 function closeContactDetailsOverlay(){
-
     document.getElementById('contacts').classList.remove('d-none');
     let contentRef = document.getElementById('contact-details-wrapper-id');
     contentRef.classList.add('contact-detail-hidden');
     renderContactDetailPage();
 }
-
-// Add Contact
 
 function OpenAddContactOverlay(){
     document.getElementById('add-contact-div-overlay-id').classList.remove('d-none');
@@ -75,16 +70,13 @@ function OpenAddContactOverlay(){
     }else{
         document.getElementById('add-contact-div-overlay-id').innerHTML = HTMLOpenAddContactOverlayDesktop();
     }
-    }
+}
 
 function closeAddContactOverlay(){
     document.getElementById('add-contact-div-overlay-id').classList.add('d-none');
 }
 
-// Validation Functions
-
-function addNewContact(){
-    
+function addNewContact(){   
     let nameInput = document.getElementById('add-input-name-id').value;
     let mailInput = document.getElementById('add-input-mail-id').value
     let phoneInput = document.getElementById('add-input-phone-id').value
@@ -96,6 +88,7 @@ function addNewContact(){
         loadedContacts.push(newContact);
         renderContacts();
         closeAddContactOverlay();
+        startAnimation();
     }return;
 }
 
@@ -147,9 +140,6 @@ function createNewContact(name, mail, phone){
     return newContact;
 }
 
-
-//Edit Contacts
-
 function openEditContactOverlay(){
     let contentRef = document.getElementById('edit-contact-details-overlay-id');
     contentRef.classList.remove('d-none');
@@ -174,7 +164,6 @@ function editContact(index){
         closeEditContactOverlay();
         closeContactDetailsOverlay();
     } return
-
 }
 
 function validateEditName(name){
@@ -215,4 +204,31 @@ function deleteContact(index){
     renderContacts();
     closeEditContactOverlay();
     closeContactDetailsOverlay();
+}
+
+function startAnimation() {
+    const flyingDiv = document.getElementById('flying-div-id');
+    flyingDiv.classList.remove('d-none', 'disappear');
+    setTimeout(() => {
+        flyingDiv.classList.add('visible');
+    }, 10);
+
+    setTimeout(() => {
+        flyingDiv.classList.remove('visible');
+        flyingDiv.classList.add('disappear');
+
+        setTimeout(() => {
+            flyingDiv.classList.add('d-none');
+        }, 500); 
+    }, 3000);
+}
+
+function showEditDeleteDiv(){
+    const contentRef = document.getElementById('edit-delete-div-id');
+    contentRef.classList.remove('d-none');
+}
+
+function hideEditDeleteDiv(){
+    const contentRef = document.getElementById('edit-delete-div-id');
+    contentRef.classList.add('d-none');
 }

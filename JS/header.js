@@ -4,7 +4,8 @@ function toggleUsrMenu() {
 }
 
 function logOut() {
-  localStorage.removeItem('loggedInUser');
-  localStorage.removeItem('welcomeAnimationShowSummary');
-  localStorage.removeItem('welcomeAnimationShown');
+  localStorage.clear();
+  // localStorage.removeItem('loggedInUser');
+  // localStorage.removeItem('welcomeAnimationShowSummary');
+  // localStorage.removeItem('welcomeAnimationShown');
 }

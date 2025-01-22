@@ -1,8 +1,7 @@
-let allTasks = {};
 const priorityIcons = {
-  urgent: "../Assets/urgent_big.png",
-  medium: "../Assets/urgent_big.png",
-  low: "../Assets/urgent_big.png",
+  urgent: "../Assets/prio_arrow_white.png",
+  medium: "../Assets/prio_medium.png",
+  low: "../Assets/prio_arrowDown_white.png",
 };
 
 function initSummary() {
@@ -81,8 +80,8 @@ function getTotalTaskCount() {
   return totalCount;
 }
 function displayTotalTaskCount() {
-  const totalCount = getTotalTaskCount();
-  const totalCountElement = document.getElementById("totalTaskCount");
+  let totalCount = getTotalTaskCount();
+  let totalCountElement = document.getElementById("totalTaskCount");
   if (totalCountElement) {
     totalCountElement.textContent = totalCount;
   } else {
@@ -91,14 +90,14 @@ function displayTotalTaskCount() {
 }
 
 function getNextDueTask() {
-  const allTasksCombined = [
+  let allTasksCombined = [
     ...allTasks.todo,
     ...allTasks.inProgress,
     ...allTasks.awaitFeedback,
     ...allTasks.done,
   ];
 
-  const tasksWithDueDate = allTasksCombined.filter(task => task.dueDate);
+  let tasksWithDueDate = allTasksCombined.filter(task => task.dueDate);
 
   tasksWithDueDate.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
 
@@ -106,7 +105,7 @@ function getNextDueTask() {
 }
 
 function formatDateLong(dateString) {
-  const date = new Date(dateString);
+  let date = new Date(dateString);
   return date.toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
@@ -118,6 +117,10 @@ function getPriorityIcon(priority) {
   return priorityIcons[priority];
 }
 
+function getPriorityClass(priority) {
+  return `prio-${priority}`; 
+}
+
 function displayNextDueTask() {
   const nextTask = getNextDueTask();
   const nextDueElement = document.getElementById("task-info");
@@ -125,24 +128,8 @@ function displayNextDueTask() {
   if (nextTask && nextDueElement) {
     const priorityIcon = getPriorityIcon(nextTask.priority);
     const formattedDate = formatDateLong(nextTask.dueDate);
-    nextDueElement.innerHTML = `
-                            <div class="task-info">
-                        <div class="prio">
-                          <div>
-                            <img src="${priorityIcon}" />
-                          </div>
-                          <div class="status">
-                            <h4>1</h4>
-                            <p>Urgent</p>
-                          </div>
-                        </div>
-                        <hr style="height: 102px; display: inline-block; border: 1px solid #d1d1d1;"/>
-                        <div class="date">
-                          <h3>${formattedDate}</h3>
-                          <p>Upcoming Deadline</p>
-                        </div>
-                      </div>
-    `;
+    const priority = nextTask.priority;
+    nextDueElement.innerHTML = getDueDateTemplate(priorityIcon, formattedDate, priority);
   } else if (nextDueElement) {
     nextDueElement.innerHTML = "<p>Keine anstehenden Aufgaben gefunden.</p>";
   }
