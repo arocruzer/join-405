@@ -412,6 +412,7 @@ body {
   gap: 24px;
   max-height: 650px;
   overflow-x: auto;
+  padding-right: 12px;
 }
 
 .section-board {
@@ -1218,6 +1219,7 @@ textarea.description-input {
     display: flex;
     min-height: 200px;
     gap: 15px;
+    padding-bottom: 60px;
   }
 }
 
