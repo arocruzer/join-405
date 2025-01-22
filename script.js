@@ -76,18 +76,18 @@ function saveTasksInLocalStorage(loadedTasks) {
 
 function changePasswordImg() {
   if (password && password.value) {
-    showPasswordImg.src = "./Assets/visibility_off.png";
+    showPasswordImg.src = "../Assets/visibility_off.png";
     showPasswordImg.style.cursor = "pointer";
   } else if (showPasswordImg) {
-    showPasswordImg.src = "./Assets/lock.png";
+    showPasswordImg.src = "../Assets/lock.png";
     showPasswordImg.style.cursor = "default";
   }
 
   if (repeatPassword && repeatPassword.value && showRepeatPasswordImg) {
-    showRepeatPasswordImg.src = "./Assets/visibility_off.png";
+    showRepeatPasswordImg.src = "../Assets/visibility_off.png";
     showRepeatPasswordImg.style.cursor = "pointer";
   } else if (showRepeatPasswordImg) {
-    showRepeatPasswordImg.src = "./Assets/lock.png";
+    showRepeatPasswordImg.src = "../Assets/lock.png";
     showRepeatPasswordImg.style.cursor = "default";
   }
 }
@@ -95,10 +95,10 @@ function changePasswordImg() {
 function showPassword() {
   if (password && password.type === "password" && password.value.length >= 1) {
     password.type = "text";
-    showPasswordImg.src = "./Assets/visibility.png";
+    showPasswordImg.src = "../Assets/visibility.png";
   } else if (password && password.value.length >= 1) {
     password.type = "password";
-    showPasswordImg.src = "./Assets/visibility_off.png";
+    showPasswordImg.src = "../Assets/visibility_off.png";
   }
 }
 
@@ -109,10 +109,10 @@ function showRepeatPassowrd() {
     repeatPassword.value.length >= 1
   ) {
     repeatPassword.type = "text";
-    showRepeatPasswordImg.src = "./Assets/visibility.png";
+    showRepeatPasswordImg.src = "../Assets/visibility.png";
   } else if (repeatPassword && repeatPassword.value.length >= 1) {
     repeatPassword.type = "password";
-    showRepeatPasswordImg.src = "./Assets/visibility_off.png";
+    showRepeatPasswordImg.src = "../Assets/visibility_off.png";
   }
 }
 

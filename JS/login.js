@@ -39,6 +39,6 @@ async function guestLogin() {
     initialien: "G",
   };
   localStorage.setItem("loggedInUser", JSON.stringify(guestUser));
-  window.location.href = "summary.html";
+  window.location.href = "../HTML/summary.html";
   getUserLogo();
 }
