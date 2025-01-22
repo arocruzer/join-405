@@ -17,7 +17,15 @@ async function init() {
   await loadAllContacts();
   getUserLogo();
   inOrOut();
-  /* checkIfLoggedIn() */
+}
+
+function userCheck() {
+  let status = JSON.parse(localStorage.getItem("loggedInUser"));
+  if (status) {
+    init();
+  } else {
+    window.location.href = '../index.html';
+  }
 }
 
 async function loadAllContacts(path = "") {
@@ -209,7 +217,7 @@ addClickEffect("login-click-legal");
 function checkIfLoggedIn() {
   let loggedUser = localStorage.getItem('loggedInUser');
   console.log(loggedUser);
-  if(!loggedUser){
+  if (!loggedUser) {
     window.location.href = '/index.html';
   }
 }
