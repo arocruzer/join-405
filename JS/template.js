@@ -207,7 +207,7 @@ function HTMLOpenAddContactOverlayDesktop(){
 function getSubtasksTemplate(subtask, index) {
     return `
         <div class="subtask-label" id="subtask-label-${index}">
-            <ul id="subtask-list">
+            <ul id="subtask-list-${index}">
                 <li>
                     <div class="subtask">
                         <div>
@@ -499,3 +499,25 @@ function createEditAndDeleteButtonsHTML() {
         </div>
     `;
 }
+
+function getDueDateTemplate(priorityIcon, formattedDate, priority) {
+    const priorityClass = getPriorityClass(priority);
+    return `
+                              <div class="task-info">
+                          <div class="prio">
+                            <div class="${priorityClass}">
+                              <img class="prio-img" src="${priorityIcon}" />
+                            </div>
+                            <div class="status">
+                              <h4>1</h4>
+                              <p>Urgent</p>
+                            </div>
+                          </div>
+                          <hr style="height: 102px; display: inline-block; border: 1px solid #d1d1d1;"/>
+                          <div class="date">
+                            <h3>${formattedDate}</h3>
+                            <p>Upcoming Deadline</p>
+                          </div>
+                        </div>
+      `;
+  }

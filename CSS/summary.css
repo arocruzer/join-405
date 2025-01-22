@@ -196,6 +196,36 @@ a {
   color: black;
 }
 
+.prio-urgent {
+  background-color: #ff3d00;
+  height: 60px;
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.prio-medium {
+  background-color: #ffa800;
+  height: 60px;
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.prio-low {
+  background-color: #7ae229;
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @media (max-width: 1430px) {
   h1 {
     font-size: 47px;
@@ -222,7 +252,6 @@ a {
 @keyframes fadeOutBackground {
   0% {
     background-color: #f6f7f8;
-
   }
 
   100% {
@@ -296,6 +325,18 @@ a {
     height: 0;
     width: 90px;
     border: 2px solid #29abe2;
+  }
+  .prio-urgent{
+    height: 40px;
+    width: 40px;
+  }
+  .prio-medium{
+    height: 30px;
+    width: 30px;
+  }
+  .prio-low{
+    height: 30px;
+    width: 30px;
   }
 }
 
