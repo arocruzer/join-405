@@ -350,7 +350,7 @@ display: block;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 500;
   animation: slideIn ease-in forwards 125ms;
 }
 
@@ -753,6 +753,30 @@ display: block;
   background-color: rgb(193, 192, 192);
 }
 
+.flying-div{
+  position: absolute;
+  bottom: -100px;
+  right: 10%;
+  transform: translateX(-50%);
+  color: white;
+  text-align: center;
+  border-radius: 10px;
+  transition: bottom 1s ease-in-out, 0.5s ease-in-out;
+  z-index: 900;
+}
+
+#flyingDiv.hidden {
+  display: none; 
+}
+
+#flying-div-id.visible {
+  display: block;
+  bottom: 50px;
+}
+
+#flying-div-id.disappear {
+  bottom: -100px;
+}
 
 /* Responsive */
 
@@ -773,6 +797,31 @@ display: block;
   }
   .newContactButton {
     display: flex;
+  }
+  #flying-div-id {
+    position: absolute;
+    bottom: 50%;
+    right: -300px;
+    transform: translateY(-50%);
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+    transition: right 0.5s ease-in-out; 
+  }
+
+  #flying-div-id.hidden {
+    display: none; 
+  }
+
+  #flying-div-id.visible {
+    display: block; 
+    bottom: 50%;
+    right: 200px; 
+  }
+
+  #flying-div-id.disappear {
+    right: -300px; 
+    bottom: 50%;
   }
 }
 
