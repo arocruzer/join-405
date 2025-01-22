@@ -1,3 +1,4 @@
+// Entry point for enabling task details editing in the modal.
 function editTaskDetails() {
     document.getElementById('modalCategory').classList.add('hidden');
     enableTitleEdit();
@@ -13,7 +14,7 @@ function editTaskDetails() {
     toggleModalLayout(true); 
 }
 
-
+// Enables editing for the task title by replacing it with an input field.
 function enableTitleEdit() {
     const modalTitle = document.getElementById('modalTitle');
     modalTitle.innerHTML = `<div class="input-containers">
@@ -22,7 +23,7 @@ function enableTitleEdit() {
                             </div>`;
 }
 
-
+// Enables editing for the task description by replacing it with a textarea.
 function enableDescriptionEdit() {
     const modalDescription = document.getElementById('modalDescription');
     modalDescription.innerHTML = `<div class="input-containers">
@@ -31,7 +32,7 @@ function enableDescriptionEdit() {
                                   </div>`;
 }
 
-
+// Allows the user to edit the due date by replacing it with a date input.
 function enableDueDateEdit() {
     const modalDueDate = document.getElementById('modalDueDate');
     modalDueDate.innerHTML = `<div class="input-containers">
@@ -39,7 +40,7 @@ function enableDueDateEdit() {
                              `;
 }
 
-
+// Enables priority editing by rendering priority buttons and setting the default priority.
 function enablePriorityEdit() {
     const modalPriority = document.getElementById('modalPriority');
     const currentPriority = modalPriority.innerText.trim().toLowerCase();
@@ -47,7 +48,7 @@ function enablePriorityEdit() {
     changeColorPrioBtn(currentPriority);
 }
 
-
+// Changes the appearance and functionality of priority buttons based on the selected priority.
 function changeColorPrioBtn(priority) {
     const imgSources = {
         urgent: ["../Assets/prio_arrow_white.png", "../Assets/prio_medium_Basis.png", "../Assets/prio_low.png"],
@@ -65,7 +66,7 @@ function changeColorPrioBtn(priority) {
     setImageSources(imgSources[priority]);
 }
 
-
+// Resets the styles for all priority buttons.
 function resetButtonStyles() {
     const buttons = ['btn-urgent', 'btn-medium', 'btn-low'];
     buttons.forEach(buttonId => {
@@ -75,7 +76,7 @@ function resetButtonStyles() {
     });
 }
 
-
+// Updates the background color and styling for the selected priority button.
 function setButtonStyles(priority, bgColor) {
     const buttonId = `btn-${priority}`;
     const button = document.getElementById(buttonId);
@@ -85,14 +86,14 @@ function setButtonStyles(priority, bgColor) {
     }
 }
 
-
+// Updates the image sources for priority indicators.
 function setImageSources([urgentImgSrc, mediumImgSrc, lowImgSrc]) {
     document.getElementById("urgent-img").src = urgentImgSrc;
     document.getElementById("medium-img").src = mediumImgSrc;
     document.getElementById("low-img").src = lowImgSrc;
 }
 
-
+// Saves the currently selected priority back to the task and updates localStorage.
 function savePriority() {
     const task = getCurrentTask();
     if (!task) {
@@ -118,14 +119,14 @@ document.addEventListener("DOMContentLoaded", () => {
     enableUserEdit();
 });
 
-
+// Enables the editing of assigned users by rendering a dropdown menu for selection.
 function enableUserEdit() {
     const modalAssignedUsers = document.getElementById('modalAssignedUsers');
     modalAssignedUsers.innerHTML = generateUserEditHTML();
     renderDropdownUsers(loadedContacts, selectedUsers);
 }
 
-
+// Retrieves the currently selected task object from localStorage.
 function getCurrentTask() {
     const columns = ['todo', 'in-progress', 'await-feedback', 'done'];
     for (const column of columns) {
@@ -144,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
     addedUsers();
 });
 
-
+// Clears the user contact list for re-rendering.
 function clearContactList() {
     const contactList = document.getElementById('contactList');
     if (contactList) {
@@ -154,12 +155,12 @@ function clearContactList() {
     }
 }
 
-
+// Checks whether a user is already selected for the task.
 function isUserSelected(user, selectedUsers) {
     return selectedUsers.some(selected => selected.name === user.name);
 }
 
-
+// Renders the list of selectable users for assignment.
 function renderUserList(loadedContacts, selectedUsers) {
     const contactList = document.getElementById('contactList');
     if (!contactList) return;
@@ -171,7 +172,7 @@ function renderUserList(loadedContacts, selectedUsers) {
     });
 }
 
-
+// Combines user rendering and dropdown menu preparation for assigned users.
 function renderDropdownUsers(loadedContacts, selectedUsers) {
     clearContactList();
     renderUserList(loadedContacts, selectedUsers);
@@ -186,7 +187,7 @@ function getInitials(name) {
     return nameParts[0][0].toUpperCase();
 }
 
-
+// Adds a new user to the task and re-renders the assigned user avatars.
 function addUserToTask(userName, userColor) {
     if (!userName || !userColor) {
         console.error("Fehler: Benutzername oder Farbe fehlen!");
@@ -196,7 +197,7 @@ function addUserToTask(userName, userColor) {
     renderAssignedUsers(selectedUsers);
 }
 
-
+// Toggles user selection for the task when a checkbox is clicked.
 function checkBoxUserTask(index) {
     const user = loadedContacts[index];
     const checkbox = document.querySelectorAll('.contact input[type="checkbox"]')[index];
@@ -215,7 +216,7 @@ function checkBoxUserTask(index) {
     addedUsers();
 }
 
-
+// Renders the currently added users as avatars in the modal
 function addedUsers() {
     const addedUsersContainer = document.getElementById("addedUsers");
     addedUsersContainer.innerHTML = "";
@@ -233,7 +234,7 @@ function addedUsers() {
     
 }
 
-
+// Toggles the visibility of the dropdown menu for user selection.
 function openDropDownMenuUser() {
     const contactList = document.getElementById('contactList');
     const dropDownArrowContacts = document.getElementById('drop-down-arrow-contacts');
@@ -246,7 +247,7 @@ function openDropDownMenuUser() {
     }
 }
 
-
+// Enables editing of subtasks by allowing users to add, edit, or delete subtasks
 function enableSubtaskEdit() {
     const modalSubtasks = document.getElementById('modalSubtasks');
     if (!modalSubtasks) {
@@ -263,7 +264,7 @@ function enableSubtaskEdit() {
     renderExistingSubtasks();
 }
 
-
+// Renders the existing subtasks in the modal for editing.
 function renderExistingSubtasks() {
     const subtaskListContainer = document.getElementById('subtaskList');
     if (!subtaskListContainer) {
@@ -277,7 +278,7 @@ function renderExistingSubtasks() {
     });
 }
 
-
+// Adds a new subtask to the task and updates the UI.
 function addSubtasks() {
     const newSubtaskInput = document.getElementById('newSubtask');
     const subtaskText = newSubtaskInput.value.trim();
@@ -291,13 +292,13 @@ function addSubtasks() {
     toggleButtonVisibility(false);
 }
 
-
+// Deletes a subtask at the specified index.
 function deleteSubtask(index) {
     subtaskList.splice(index, 1);
     renderExistingSubtasks();
 }
 
-
+// Enables inline editing for a specific subtask.
 function editSubtask(index) {
     const subtaskItem = document.getElementById(`subtask-${index}`);
     const subtaskText = subtaskList[index];
@@ -315,7 +316,7 @@ function editSubtask(index) {
     `;
 }
 
-
+// Saves the edited subtask back to the task and updates the UI.
 function saveSubtask(index) {
     const editInput = document.getElementById(`editSubtaskInput-${index}`);
     const updatedText = editInput.value.trim();
@@ -327,13 +328,13 @@ function saveSubtask(index) {
     renderExistingSubtasks();
 }
 
-
+// Cancels the inline editing of a subtask and reverts to the original text.
 function cancelEditSubtask(index, originalText) {
     subtaskList[index] = originalText;
     renderExistingSubtasks();
 }
 
-
+// Toggles the visibility of subtask-related buttons depending on input state.
 function toggleButtonVisibility(forceShow) {
     const taskInput = document.getElementById('newSubtask');
     const confirmButton = document.getElementById('confirmButton');
@@ -353,13 +354,13 @@ function toggleButtonVisibility(forceShow) {
     } 
 }
 
-
+// Cancels the addition of a new subtask and resets the input field.
 function cancelSubtask() {
     document.getElementById('newSubtask').value = '';
     toggleButtonVisibility(false);
 }
 
-
+// Closes the task modal and resets its content
 function closeTaskModal() {
     const modalFooter = document.querySelector('.modal-footer');
     if (modalFooter) {
@@ -368,7 +369,7 @@ function closeTaskModal() {
     document.getElementById('taskModal').style.display = 'none';
 }
 
-
+// Adds save and cancel buttons or edit/delete buttons to the modal footer based on mode.
 function addSaveAndCancelButtons(isEditMode) {
     const modalFooter = document.querySelector('.modal-footer');
     if (!modalFooter) {
@@ -396,7 +397,7 @@ function refreshBoard() {
     ['todo', 'in-progress', 'await-feedback', 'done'].forEach(loadTasks);
 }
 
-
+// Gathers updated details from the modal fields and creates an updated task object.
 function gatherUpdatedTaskDetails() {
     const updatedTitle = getInputValueById('editTitle');
     const updatedDescription = getInputValueById('editDescription');
@@ -416,7 +417,7 @@ function gatherUpdatedTaskDetails() {
     };
 }
 
-
+// Helper to retrieve the value of an input element by its ID.
 function getInputValueById(elementId) {
     const inputElement = document.getElementById(elementId);
     if (!inputElement) {
@@ -426,7 +427,7 @@ function getInputValueById(elementId) {
     return inputElement.value;
 }
 
-
+// Gathers the list of selected users from the modal.
 function gatherSelectedUsers() {
     return selectedUsers.map(user => ({
         name: user.name,
@@ -434,19 +435,19 @@ function gatherSelectedUsers() {
     }));
 }
 
-
+// Collects the subtasks as an array of strings from the modal.
 function gatherSubtasks() {
     return subtaskList.map(subtask => subtask);
 }
 
-
+// Counts the number of completed subtasks based on checkboxes in the modal.
 function countCompletedSubtasks(subtasks) {
     return subtasks.filter((_, index) => 
         document.getElementById(`subtask-checkbox-${index}`)?.checked
     ).length;
 }
 
-
+// Updates the task in localStorage with the latest changes.
 function updateTaskInLocalStorage(updatedTask) {
     const columns = ['todo', 'in-progress', 'await-feedback', 'done'];
     for (const column of columns) {
@@ -467,7 +468,7 @@ function updateTaskInLocalStorage(updatedTask) {
     }
 }
 
-
+// Refreshes the modal with the updated task details after changes are saved.
 function reloadTaskDetails() {
     closeTaskModal();
     openTaskDetails(currentTaskId);
@@ -482,7 +483,7 @@ function closeTaskModal() {
     document.getElementById('taskModal').style.display = 'none';
 }
 
-
+// Switches the modal layout between edit and view modes.
 function toggleModalLayout(isEditMode) {
     const dueDateElement = document.querySelector('.modalDueDate, .modalsDueDate');
     const priorityElement = document.querySelector('.modalPriority, .modalsPriority');

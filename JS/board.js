@@ -3,7 +3,7 @@ let searchText = '';
 let currentTaskId = null;
 let draggedTaskId = null;
 
-
+// Initializes the tasks for a specific column by loading them from localStorage and rendering them in the UI.
 function loadTasks(columnId) {
     const container = document.getElementById(`${columnId}-tasks`);
     container.innerHTML = '';
@@ -16,14 +16,14 @@ function loadTasks(columnId) {
     updateTaskVisibilityById(columnId);
 }
 
-
+// Retrieves the priority text (e.g., "Low", "Medium") from a task element.
 function getPriorityText(taskElement) {
     return taskElement.querySelector('.user-container p img')
         ? taskElement.querySelector('.user-container p img').alt.replace(' Priority', '')
         : taskElement.querySelector('.user-container p').innerText.trim();
 }
 
-
+// Returns the appropriate icon path based on the priority level.
 function getPriorityIcon(priorityText) {
     switch (priorityText.toLowerCase()) {
         case "low":
@@ -37,7 +37,7 @@ function getPriorityIcon(priorityText) {
     }
 }
 
-
+// Retrieves the assigned users for a task as an array of objects with name and color properties.
 function getAssignedUsers(taskElement) {
     return Array.from(taskElement.querySelectorAll('.user-avatar')).map(user => ({
         name: user.innerText.trim(),
@@ -45,7 +45,7 @@ function getAssignedUsers(taskElement) {
     }));
 }
 
-
+// Creates a task object with all relevant properties for saving in localStorage.
 function createTaskObject(taskElement, taskId) {
     const priorityText = getPriorityText(taskElement);
     return {
@@ -61,7 +61,7 @@ function createTaskObject(taskElement, taskId) {
     };
 }
 
-
+// Saves a task to localStorage under the specified column if it doesn't already exist.
 function saveTaskToLocalStorage(columnId, taskElement, taskId) {
     const tasks = JSON.parse(localStorage.getItem(columnId)) || [];
 
@@ -72,7 +72,7 @@ function saveTaskToLocalStorage(columnId, taskElement, taskId) {
     }
 }
 
-
+// Updates the visibility of tasks in a column, hiding or showing the "no tasks" message as needed.
 function updateTaskVisibilityById(columnId) {
     const container = document.getElementById(`${columnId}-tasks`);
     const taskList = document.querySelector(`#${columnId} .task-list`);
@@ -82,13 +82,13 @@ function updateTaskVisibilityById(columnId) {
     taskList.style.display = visibleTasks.length === 0 ? 'block' : 'none';
 }
 
-
+// Redirects the user to the task creation page and stores the current column in localStorage.
 function openInputPage(columnId) {
     localStorage.setItem('currentColumn', columnId);
     window.location.href = "/HTML/add-task.html";
 }
 
-
+// Filters and displays tasks based on a search input (tasks must match the search text).
 function searchFromSearchTaskInput() {
     const searchInput = document.querySelector('#searchTask');
     const searchText = searchInput && searchInput.offsetParent !== null
@@ -101,7 +101,7 @@ function searchFromSearchTaskInput() {
     ['todo', 'in-progress', 'await-feedback', 'done'].forEach(updateTaskVisibilityById);
 }
 
-
+// Another search function, possibly for a different search input element.
 function searchFromSearchInput() {
     const searchInput = document.querySelector('#search');
     const searchText = searchInput && searchInput.offsetParent !== null
@@ -114,12 +114,12 @@ function searchFromSearchInput() {
     ['todo', 'in-progress', 'await-feedback', 'done'].forEach(updateTaskVisibilityById);
 }
 
-
+// Loads tasks into their respective columns when the page is loaded.
 window.addEventListener("load", function () {
     ['todo', 'in-progress', 'await-feedback', 'done'].forEach(loadTasks);
 });
 
-
+// Formats a date string (YYYY-MM-DD) into a more readable format (DD/MM/YYYY)
 function formatDate(dateString) {
     if (!dateString) {
         console.warn('Kein Datum übergeben.');
@@ -136,7 +136,7 @@ function formatDate(dateString) {
     return `${day}/${month}/${year}`;
 }
 
-
+// Formats the priority level with both text and icon for display.
 function formatPriority(priorityText) {
     let priorityIcon;
     switch (priorityText.toLowerCase()) {
@@ -156,7 +156,7 @@ function formatPriority(priorityText) {
             <img src="${priorityIcon}" alt="${priorityText} Priority Icon" class="priority-icon">`;
 }
 
-
+// Renders the assigned users as HTML elements for display.
 function renderAssignedUsers(users) {
     return users.map(user => `
         <div class="user-item">
@@ -166,7 +166,7 @@ function renderAssignedUsers(users) {
     `).join('');
 }
 
-
+// Updates the progress bar of a task based on the completed and total subtasks.
 function updateProgressBar(task) {
     const progressElement = document.querySelector(`#${task.id} .progress-bar .progress`);
     const percentage = task.totalSubtasks > 0 
@@ -178,7 +178,7 @@ function updateProgressBar(task) {
     subtasksElement.innerText = `${task.completedSubtasks}/${task.totalSubtasks} Subtasks`;
 }
 
-
+// Updates the completion state of a subtask and reflects the changes in localStorage and the UI.
 function updateSubtaskCompletion(taskId, index) {
     const checkboxId = `subtask-${taskId}-${index}`;
     const checkboxElement = document.getElementById(checkboxId);
@@ -199,7 +199,7 @@ function updateSubtaskCompletion(taskId, index) {
     }
 }
 
-
+// Sets the style of an element based on the task's category (e.g., User Story, Technical Task).
 function setCategoryStyle(elementId, category) {
     const element = document.getElementById(elementId);
     if (!element) return;
@@ -222,8 +222,7 @@ function setCategoryStyle(elementId, category) {
     element.className = style.class;
 }
 
-
-// Hauptfunktion
+// Opens the task details modal and populates it with the selected task's data.
 function openTaskDetails(taskId) {
     const tasks = getAllTasks();
     const task = findTaskById(tasks, taskId);
@@ -238,7 +237,7 @@ function openTaskDetails(taskId) {
     }
 }
 
-
+// Aggregates all tasks across columns into a single array.
 function getAllTasks() {
     return [...JSON.parse(localStorage.getItem('todo') || "[]"), 
             ...JSON.parse(localStorage.getItem('in-progress') || "[]"),
@@ -246,12 +245,12 @@ function getAllTasks() {
             ...JSON.parse(localStorage.getItem('done') || "[]")];
 }
 
-
+// Finds a specific task by its ID from the aggregated task list.
 function findTaskById(tasks, taskId) {
     return tasks.find(task => task.id === taskId);
 }
 
-
+// Updates the modal content with task details such as category, title, and description.
 function updateModalContent(task) {
     updateModalCategory(task);
     updateModalTitleAndDescription(task);
@@ -308,12 +307,12 @@ function updateModalSubtasks(task) {
     }
 }
 
-
+// Closes the task details modal.
 function closeTaskModal() {
     document.getElementById('taskModal').style.display = 'none';
 }
 
-
+// Deletes the current task from all columns and refreshes the UI.
 function deleteTask() {
     const allColumns = ['todo', 'in-progress', 'await-feedback', 'done'];
     allColumns.forEach(column => {
@@ -331,7 +330,7 @@ function closeTaskModal() {
     document.getElementById('taskModal').style.display = 'none';
 }
 
-
+// Adjusts the visibility of add buttons based on the screen size.
 function addButton() {
     const headerBoard = document.getElementById('sectionBoard');
     const headerBoardPlus = document.getElementById('sectionBoardPlus');
@@ -348,7 +347,7 @@ function addButton() {
 window.addEventListener('resize', addButton);
 window.addEventListener('DOMContentLoaded', addButton);
 
-
+// Drag-and-drop handlers for moving tasks between columns.
 function drag(event) {
     draggedTaskId = event.target.id;
     event.dataTransfer.effectAllowed = "move";
@@ -366,7 +365,7 @@ function allowDrop(event) {
     }
 }
 
-
+// Drag-and-drop handlers for moving tasks between columns.
 function removeHighlight() {
     document.querySelectorAll('.task-container.highlight-drop').forEach((container) => {
         container.classList.remove('highlight-drop');
@@ -390,7 +389,7 @@ function drop(event) {
     }
 }
 
-
+// Helper function to retrieve the closest task container during a drop operation
 function getClosestTaskContainer(element) {
     return element.closest('.task-container');
 }
@@ -400,7 +399,7 @@ function getSourceTaskContainer(draggedTaskElement) {
     return draggedTaskElement.closest('.task-container');
 }
 
-
+// Moves a task between columns in the DOM and updates localStorage accordingly.
 function moveTaskInDOM(draggedTaskElement, targetTaskContainer) {
     targetTaskContainer.appendChild(draggedTaskElement);
 }
@@ -434,16 +433,3 @@ function refreshUI(sourceTaskContainer, targetTaskContainer) {
 document.querySelectorAll('.task-container').forEach((taskContainer) => {
     taskContainer.addEventListener('dragleave', removeHighlight);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-

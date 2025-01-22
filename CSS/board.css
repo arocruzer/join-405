@@ -233,6 +233,22 @@ body {
   word-wrap: break-word;
 }
 
+.modalTitle{
+  font-size: 24px;
+  font-weight: bold;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+}
+.modalDescription{
+  font-size: 16px;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+}
+
 .progress-container {
   display: flex;
   align-items: center;
@@ -1126,6 +1142,10 @@ textarea.description-input {
   display: block;
 }
 
+.remaining-users-circle{
+  background-color: red;
+}
+
 @media (max-width: 768px) {
   .modal-body {
       width: 95%;
@@ -1197,7 +1217,7 @@ textarea.description-input {
   }
 }
 
-@media (min-width: 320px) and (max-width: 830px) {
+@media (min-width: 315px) and (max-width: 830px) {
   #main-container {
     overflow-y: auto; 
     max-height: 100vh; 
@@ -1216,5 +1236,49 @@ textarea.description-input {
   .column {
     min-height: 150px;
   }
+  .added-users{
+    padding: 5px;
+    gap: 6px;
+  }
 }
 
+@media (max-width: 490px){
+  .subtask {
+    width: 270px;
+  }
+
+}
+
+@media (max-width: 395px){
+  .subtask {
+    width: 200px;
+  }
+}
+
+@media (max-width: 385px){
+  .user-story-card{
+    width: 200px;
+  }
+  .board-container {
+    margin-top: 80px;
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+  .added-users{
+    padding: 5px;
+    gap: 3px;
+  }
+  .modal-content {
+    padding: 13px;
+  }
+
+}
+@media (max-width: 360px){
+  .subtask {
+    width: 180px;
+  }
+  .prio-btn-container{
+    gap: 5px;
+  }
+
+}

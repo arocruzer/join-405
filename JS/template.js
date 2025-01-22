@@ -286,6 +286,25 @@ function renderTask(task) {
         default:
             priorityIcon = "";
     }
+
+    // Limit displayed users to 4 and calculate remaining
+    const maxDisplayedUsers = 4;
+    const displayedUsers = task.assignedUsers.slice(0, maxDisplayedUsers);
+    const remainingUsersCount = task.assignedUsers.length - maxDisplayedUsers;
+
+    const usersHtml = displayedUsers.map(user => {
+        const nameParts = user.name.split(' ');
+        const initials = nameParts.length > 1
+            ? nameParts[0][0] + nameParts[1][0]
+            : nameParts[0][0];
+        return `<div class="user-avatar" style="background-color: ${user.color};">${initials.toUpperCase()}</div>`;
+    }).join('');
+
+    // Add "+N" circle for remaining users
+    const remainingUsersHtml = remainingUsersCount > 0
+        ? `<div class="user-avatar remaining-users-circle">+${remainingUsersCount}</div>`
+        : '';
+
     return `
         <div class="user-card" draggable="true" id="${task.id}" ondragstart="drag(event)" onclick="openTaskDetails('${task.id}')">
             <div class="user-story-card todo">
@@ -302,14 +321,8 @@ function renderTask(task) {
                 </div>
                 <div class="user-container">
                     <div class="user-avatar-container">
-                     ${task.assignedUsers.map(user => {
-                         const nameParts = user.name.split(' '); // Split the name into parts
-                         const initials = nameParts.length > 1 
-                            ? nameParts[0][0] + nameParts[1][0] // First and last initials
-                            : nameParts[0][0]; // Only first initial if there's no last name
-                         return `<div class="user-avatar" style="background-color: ${user.color};">${initials.toUpperCase()}</div>`;
-                     }).join('')}
-                    
+                        ${usersHtml}
+                        ${remainingUsersHtml}
                     </div>
                     <p>${priorityIcon ? `<img src="${priorityIcon}" alt="${task.priority} Priority">` : task.priority}</p>
                 </div>
@@ -317,6 +330,7 @@ function renderTask(task) {
         </div>
     `;
 }
+
 
 function generatePriorityButtons(currentPriority) {
     return `
