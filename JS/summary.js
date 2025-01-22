@@ -1,4 +1,3 @@
-let allTasks = {};
 const priorityIcons = {
   urgent: "../Assets/prio_arrow_white.png",
   medium: "../Assets/prio_medium.png",
