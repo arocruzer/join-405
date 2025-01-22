@@ -2,8 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2px;
-  gap: 15px;
+  padding: 2px 0;
 }
 
 .menu-logged-out {
@@ -30,7 +29,7 @@
 .frame-nav-bar-logged-out {
   display: flex;
   justify-content: space-between;
-  padding: 0 16px;
+  
 }
 
 .legal-documents-logged-in {
@@ -130,6 +129,13 @@
   background-image: url(../Assets/img/log-in_g_L.png);
 }
 
+@media screen and (min-width: 382px) {
+  .menu-logged-in {
+    padding: 2px 2px;
+    gap: 10px;
+  }
+}
+
 @media screen and (min-width: 830px) {
   #menu {
     flex-direction: column;
@@ -223,6 +229,10 @@
     justify-content: space-between;
     padding: 0 0 64px;
     height: 100%;
+  }
+
+  .frame-nav-bar-logged-in {
+    padding: 0 0 64px;
   }
 
   .legal-documents-logged-out .nav-button {
