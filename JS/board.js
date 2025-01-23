@@ -312,16 +312,16 @@ function closeTaskModal() {
     document.getElementById('taskModal').style.display = 'none';
 }
 
-// Deletes the current task from all columns and refreshes the UI.
+
 function deleteTask() {
     const allColumns = ['todo', 'in-progress', 'await-feedback', 'done'];
     allColumns.forEach(column => {
         let tasks = JSON.parse(localStorage.getItem(column)) || [];
         tasks = tasks.filter(task => task.id !== currentTaskId);
         localStorage.setItem(column, JSON.stringify(tasks));
+        loadTasks(column);
     });
     closeTaskModal();
-    window.location.reload();
 }
 
 

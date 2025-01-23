@@ -167,8 +167,9 @@ function renderUserList(loadedContacts, selectedUsers) {
 
     loadedContacts.forEach((user, index) => {
         const isChecked = isUserSelected(user, selectedUsers);
-        const userElement = createUserElement(user, index, isChecked);
-        contactList.innerHTML += userElement;
+        const userElement = createUserElement(user, index);
+        const userElementadd = createUserElement(isChecked);
+        contactList.innerHTML += userElement,userElementadd;
     });
 }
 

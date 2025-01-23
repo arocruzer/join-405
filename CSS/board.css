@@ -867,6 +867,12 @@ textarea {
   display: flex;
   align-items: center;
   gap: 8px;
+  justify-content: space-between;
+}
+
+.user-contact{
+  display: flex;
+  align-items: center;
 }
 
 .added-users {
@@ -1202,6 +1208,13 @@ textarea.description-input {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+  }
+  .column-header{
+    justify-content: space-around;
+  }
+  .task-list{
+    width: 85%;
+    margin-left: 12px;
   }
 
 }
