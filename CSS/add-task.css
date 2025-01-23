@@ -222,7 +222,11 @@ input::placeholder {
 
 .subtask-label-container {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  height: 100px;
+  position: absolute;
+  top: 80px;
+  overflow-y: auto;
   gap: 8px;
 }
 
@@ -370,6 +374,13 @@ input::placeholder {
 
 .confirm-subtask {
   display: none;
+}
+
+.erorr-msg{
+  top: 70px;
+}
+.description-error{
+  top: 120px;
 }
 
 @media (max-width: 1190px) {
