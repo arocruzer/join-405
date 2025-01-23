@@ -432,3 +432,41 @@ function refreshUI(sourceTaskContainer, targetTaskContainer) {
 document.querySelectorAll('.task-container').forEach((taskContainer) => {
     taskContainer.addEventListener('dragleave', removeHighlight);
 });
+
+function moveTask(taskId, direction, event) {
+    if (event) event.stopPropagation(); // Prevent modal opening
+
+    const columns = ['todo', 'in-progress', 'await-feedback', 'done'];
+    const tasks = getAllTasks();
+    const task = findTaskById(tasks, taskId);
+
+    if (!task) return;
+
+    const currentColumnIndex = columns.findIndex(column => {
+        const columnTasks = JSON.parse(localStorage.getItem(column)) || [];
+        return columnTasks.some(t => t.id === taskId);
+    });
+
+    let targetColumnIndex = direction === 'previous' 
+        ? currentColumnIndex - 1 
+        : currentColumnIndex + 1;
+
+    if (targetColumnIndex < 0 || targetColumnIndex >= columns.length) return;
+
+    const currentColumn = columns[currentColumnIndex];
+    const targetColumn = columns[targetColumnIndex];
+
+    // Remove from current column
+    let currentTasks = JSON.parse(localStorage.getItem(currentColumn)) || [];
+    currentTasks = currentTasks.filter(t => t.id !== taskId);
+    localStorage.setItem(currentColumn, JSON.stringify(currentTasks));
+
+    // Add to target column
+    let targetTasks = JSON.parse(localStorage.getItem(targetColumn)) || [];
+    targetTasks.push(task);
+    localStorage.setItem(targetColumn, JSON.stringify(targetTasks));
+
+    // Refresh UI
+    loadTasks(currentColumn);
+    loadTasks(targetColumn);
+}

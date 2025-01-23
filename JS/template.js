@@ -325,6 +325,19 @@ function renderTask(task) {
             <div class="user-story-card todo">
                 <div class="progress-container">
                     <h3 class="category-label ${categoryClass}">${task.category}</h3>
+                    <div class="task-buttons">
+                       <button id ="moveBtn" class="move-btn" onclick="moveTask('${task.id}', 'previous', event)"> <img
+                          class="arrow-right-icon"
+                          src="../Assets/arrow-left-line.png"
+                          alt="search-icon"/>
+                        </button>
+                       <button id ="moveBtn" class="move-btn" onclick="moveTask('${task.id}', 'next', event)">
+                         <img
+                          class="arrow-left-icon"
+                          src="../Assets/arrow-left-line.png"
+                          alt="search-icon"/>
+                       </button>
+                   </div>
                 </div>
                 <h4>${task.title}</h4>
                 <p>${task.description}</p>
