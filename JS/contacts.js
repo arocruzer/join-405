@@ -70,6 +70,7 @@ function closeContactDetailsOverlay(){
     allContacts.forEach(contact => {
         contact.classList.remove('darkgray-bg');
     });
+    
 }
 
 function OpenAddContactOverlay(){
@@ -102,7 +103,7 @@ function addNewContact(){
 }
 
 function validateName(name){
-    const nameRegex = /^[a-zA-ZäöüßÄÖÜ\s]+$/;
+    const nameRegex = /^[a-zA-ZäöüßÄÖÜéèêñáàäâëç\s]+$/u;
     const nameError = document.getElementById('name-error');
     nameError.innerHTML = "";
     if (!nameRegex.test(name)) {
@@ -128,7 +129,7 @@ function validatePhone(phonenumber){
     const digitCount = Math.abs(phonenumber).toString().length;
     phoneError.innerHTML = "";
 
-    if(digitCount < 8){
+    if(digitCount < 8 && digitCount !=0){
         phoneError.innerHTML = "ungültige Telefonnummer";
         return false;
     } return true;
@@ -154,9 +155,10 @@ function openEditContactOverlay(){
     contentRef.classList.remove('d-none');
 }
 
-function closeEditContactOverlay(){
+function closeEditContactOverlay(index){
     let contentRef = document.getElementById('edit-contact-details-overlay-id');
     contentRef.classList.add('d-none');
+    openContactDetailsOverlay(index);
 }
 
 function editContact(index){
