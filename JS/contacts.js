@@ -41,6 +41,10 @@ function getRandomColor() {
 }
 
 function openContactDetailsOverlay(index){
+    const allContacts = document.querySelectorAll('[id^="contact-id-"]');
+    allContacts.forEach(contact => {
+        contact.classList.remove('darkgray-bg');
+    });
     if (window.innerWidth < 1180) {
         document.getElementById('contacts').classList.add('d-none');
         let contentRef = document.getElementById('contact-details-wrapper-id');
@@ -54,6 +58,7 @@ function openContactDetailsOverlay(index){
         let content = document.getElementById('edit-contact-details-overlay-id');
         content.innerHTML = HTMLEditOverlayDesktop(index);
     } 
+    document.getElementById(`contact-id-${index}`).classList.add('darkgray-bg');
 }
 
 function closeContactDetailsOverlay(){
