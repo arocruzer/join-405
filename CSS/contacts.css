@@ -33,6 +33,10 @@
   padding-bottom: 24px;
 }
 
+.contacts-container {
+  width: 100%;
+}
+
 .content-wrapper::-webkit-scrollbar {
   width: 12px;
 }
@@ -893,6 +897,7 @@
 @media screen and (min-width: 1150px) {
   .contacts-container {
     flex: 1;
+    width: 100%;
   }
 
   .contact-details-wrapper {
