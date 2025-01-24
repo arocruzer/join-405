@@ -66,6 +66,10 @@ function closeContactDetailsOverlay(){
     let contentRef = document.getElementById('contact-details-wrapper-id');
     contentRef.classList.add('contact-detail-hidden');
     renderContactDetailPage();
+    const allContacts = document.querySelectorAll('[id^="contact-id-"]');
+    allContacts.forEach(contact => {
+        contact.classList.remove('darkgray-bg');
+    });
 }
 
 function OpenAddContactOverlay(){
