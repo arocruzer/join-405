@@ -7,6 +7,8 @@
   overflow: hidden;
   height: calc(100vh - 100px);
   background-color: white;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .contacts-wrapper {
@@ -25,13 +27,32 @@
   min-width: 350px;
   flex: 1;
   height: 1200px;
-  scrollbar-width: 27px;
   padding-top: 24px;
   padding-left: 38px;
   padding-right: 24px;
   padding-bottom: 24px;
-  overflow-y: auto;
-  overflow-x: hidden;
+}
+
+.contacts-container {
+  width: 100%;
+}
+
+.content-wrapper::-webkit-scrollbar {
+  width: 12px;
+}
+
+.content-wrapper::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 10px;
+}
+
+.content-wrapper::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, #898989, #afafaf);
+  border-radius: 10px;
+}
+
+.content-wrapper::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(90deg, #858585, #898989); /* Farbverlauf beim Hover */
 }
 
 .contacts-section-header {
@@ -100,7 +121,7 @@
 
 .add-contact-button {
   position: absolute;
-  top: calc(100vh - 15vh);
+  top: 85%;
   right: 10%;
 }
 
@@ -386,7 +407,6 @@
 
 .cross-close:hover {
   transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
   border-radius: 15px;
   cursor: pointer;
 }
@@ -532,6 +552,9 @@
   height: 30px;
   padding-left: 16px;
   padding-right: 24px;
+  font-size: 12px;
+  width: 422px;
+  text-align: center;
 }
 
 .input-fields-add input {
@@ -701,7 +724,6 @@
 
 .close-cross-desktop:hover {
   transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
   border-radius: 15px;
   cursor: pointer;
 }
@@ -763,6 +785,13 @@
 
 .gray-bg {
   background-color: rgb(193, 192, 192);
+}
+
+.darkgray-bg {
+  background-color: #2A3647;
+  border-radius: 10px;
+  color: white;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 }
 
 .flying-div{
@@ -837,11 +866,38 @@
     right: -300px; 
     bottom: 50%;
   }
+
+  .contacts-list{
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .content-wrapper{
+    overflow-y: hidden
+  }
+  .contacts-list::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+  .contacts-list::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 10px;
+  }
+  
+  .contacts-list::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, #898989, #afafaf);
+    border-radius: 10px;
+  }
+  
+  .contacts-list::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(90deg, #858585, #898989); 
+  }
 }
 
 @media screen and (min-width: 1150px) {
   .contacts-container {
     flex: 1;
+    width: 100%;
   }
 
   .contact-details-wrapper {

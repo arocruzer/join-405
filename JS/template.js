@@ -238,7 +238,7 @@ function HTMLEditOverlay(index){
         <div class="overlay-edit-contact">
             <div class="middle-avatar">${loadedContacts[index].initialien}</div>
             <div class="upper-half">
-                <div class="cross-close" onclick="closeEditContactOverlay()">X</div>
+                <div class="cross-close" onclick="closeEditContactOverlay(${index})">X</div>
                 <div class="edit-contact-title">
                     <h1>Edit contact</h1>
                     <div class="blue-line"></div>
@@ -274,7 +274,7 @@ function HTMLEditOverlayDesktop(index){
             </div>
         </div>
         <div class="right-part">
-        <img onclick="closeEditContactOverlay()" class="close-cross-desktop" src="../Assets/close.svg" alt="">
+        <img onclick="closeEditContactOverlay(${index})" class="close-cross-desktop" src="../Assets/close.svg" alt="">
             <div class="input-fields-desktop">
                 <input class="input-layout-desktop input-person" value="${loadedContacts[index].name}" placeholder="Name" type="text" id="edit-input-name-id">
                 <div id="name-error-id" class="input-layout error-message"></div>
