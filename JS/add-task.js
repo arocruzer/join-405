@@ -210,6 +210,16 @@ function renderSubtasks() {
   });
 }
 
+function toggleSubtaskCompletion(index) {
+  const checkbox = document.getElementById(`subtask-checkbox-${index}`);
+  if (checkbox.checked) {
+      subtaskList[index].completed = true;
+  } else {
+      subtaskList[index].completed = false;
+  }
+}
+
+
 function editSubtask(index) {
   let editSubtaks = document.getElementById(`edit-subtask-img-${index}`);
   let deleteSubtask = document.getElementById(`delete-subtask-${index}`);

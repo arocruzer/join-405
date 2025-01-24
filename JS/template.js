@@ -286,58 +286,19 @@ function HTMLEditOverlayDesktop(index){
 }
 
 function renderTask(task) {
-    const categoryClass = task.category === "Technical Task" ? "technical-task" : "user-story";
-    let priorityIcon;
-    switch (task.priority.toLowerCase()) {
-        case "low":
-            priorityIcon = "../Assets/prio_low.png";
-            break;
-        case "medium":
-            priorityIcon = "../Assets/prio_medium_orang.png";
-            break;
-        case "urgent":
-            priorityIcon = "../Assets/prio_urgent.png";
-            break;
-        default:
-            priorityIcon = "";
-    }
-
-    // Limit displayed users to 4 and calculate remaining
-    const maxDisplayedUsers = 4;
-    const displayedUsers = task.assignedUsers.slice(0, maxDisplayedUsers);
-    const remainingUsersCount = task.assignedUsers.length - maxDisplayedUsers;
-
-    const usersHtml = displayedUsers.map(user => {
-        const nameParts = user.name.split(' ');
-        const initials = nameParts.length > 1
-            ? nameParts[0][0] + nameParts[1][0]
-            : nameParts[0][0];
-        return `<div class="user-avatar" style="background-color: ${user.color};">${initials.toUpperCase()}</div>`;
-    }).join('');
-
-    // Add "+N" circle for remaining users
-    const remainingUsersHtml = remainingUsersCount > 0
-        ? `<div class="user-avatar remaining-users-circle">+${remainingUsersCount}</div>`
-        : '';
-
     return `
         <div class="user-card" draggable="true" id="${task.id}" ondragstart="drag(event)" onclick="openTaskDetails('${task.id}')">
             <div class="user-story-card todo">
                 <div class="progress-container">
-                    <h3 class="category-label ${categoryClass}">${task.category}</h3>
+                    <h3 class="category-label ${task.category === "Technical Task" ? "technical-task" : "user-story"}">${task.category}</h3>
                     <div class="task-buttons">
-                       <button id ="moveBtn" class="move-btn" onclick="moveTask('${task.id}', 'previous', event)"> <img
-                          class="arrow-right-icon"
-                          src="../Assets/arrow-left-line.png"
-                          alt="search-icon"/>
+                        <button id="moveBtn link" class="move-btn" onclick="moveTask('${task.id}', 'previous', event)">
+                            <img class="arrow-right-icon" src="../Assets/arrow-left-line.png" alt="search-icon"/>
                         </button>
-                       <button id ="moveBtn" class="move-btn" onclick="moveTask('${task.id}', 'next', event)">
-                         <img
-                          class="arrow-left-icon"
-                          src="../Assets/arrow-left-line.png"
-                          alt="search-icon"/>
-                       </button>
-                   </div>
+                        <button id="moveBtn right" class="move-btn" onclick="moveTask('${task.id}', 'next', event)">
+                            <img class="arrow-left-icon" src="../Assets/arrow-left-line.png" alt="search-icon"/>
+                        </button>
+                    </div>
                 </div>
                 <h4>${task.title}</h4>
                 <p>${task.description}</p>
@@ -349,10 +310,26 @@ function renderTask(task) {
                 </div>
                 <div class="user-container">
                     <div class="user-avatar-container">
-                        ${usersHtml}
-                        ${remainingUsersHtml}
+                        ${task.assignedUsers.slice(0, 4).map(user => {
+                            const initials = user.name.split(' ').map(n => n[0]).join('').toUpperCase();
+                            return `<div class="user-avatar" style="background-color: ${user.color};">${initials}</div>`;
+                        }).join('')}
+                        ${task.assignedUsers.length > 4
+                            ? `<div class="user-avatar remaining-users-circle">+${task.assignedUsers.length - 4}</div>`
+                            : ''}
                     </div>
-                    <p>${priorityIcon ? `<img src="${priorityIcon}" alt="${task.priority} Priority">` : task.priority}</p>
+                    <p>${(() => {
+                        switch (task.priority.toLowerCase()) {
+                            case "low":
+                                return `<img src="../Assets/prio_low.png" alt="Low Priority">`;
+                            case "medium":
+                                return `<img src="../Assets/prio_medium_orang.png" alt="Medium Priority">`;
+                            case "urgent":
+                                return `<img src="../Assets/prio_urgent.png" alt="Urgent Priority">`;
+                            default:
+                                return task.priority;
+                        }
+                    })()}</p>
                 </div>
             </div>
         </div>
@@ -405,7 +382,7 @@ function generateUserEditHTML() {
 
 function createUserElement(user, index, isChecked) {
     return `
-        <div class="contact">
+        <div class="contact ${isChecked ? 'checked' : ''}">
            <div class="user-contact">
              <div class="user-avatar" style="background-color: ${user.color};">${user.initialien}</div>
              <span>${user.name}</span>
@@ -469,13 +446,14 @@ function createSubtaskHTML(subtask, index) {
                             <span class="subtask-text">${subtask}</span>
                         </div>
                         <div class="images-container">
-                           <img 
-                               id="edit-subtask-img" 
-                               onclick="editSubtask(${index})" 
-                               src="../Assets/edit_black.png" 
-                               alt="Edit Icon"
-                           />
-                           <hr>
+                           <button class="edit-btn" onclick="editSubtask(${index})">
+                               <img 
+                                    id="edit-subtask-img"
+                                    src="../Assets/edit_black.png" 
+                                    alt="Edit Icon"
+                               />
+                           </button>
+                           <hr style="height: 24px;">
                            <button class="delete-btn" onclick="deleteSubtask(${index})">
                                <img 
                                    id="delete-subtask" 

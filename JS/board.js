@@ -12,8 +12,10 @@ function loadTasks(columnId) {
 
     tasks.forEach(task => {
         container.innerHTML += renderTask(task);
+        updateArrowIcons(columnId, task.id);
     });
     updateTaskVisibilityById(columnId);
+    
 }
 
 // Retrieves the priority text (e.g., "Low", "Medium") from a task element.
@@ -433,40 +435,62 @@ document.querySelectorAll('.task-container').forEach((taskContainer) => {
     taskContainer.addEventListener('dragleave', removeHighlight);
 });
 
+// Main function to move the task
 function moveTask(taskId, direction, event) {
-    if (event) event.stopPropagation(); // Prevent modal opening
-
+    if (event) event.stopPropagation();
     const columns = ['todo', 'in-progress', 'await-feedback', 'done'];
     const tasks = getAllTasks();
     const task = findTaskById(tasks, taskId);
-
     if (!task) return;
+    const currentColumnIndex = findCurrentColumnIndex(columns, taskId);
+    const targetColumnIndex = calculateTargetColumnIndex(currentColumnIndex, direction, columns.length);
+    if (targetColumnIndex === null) return;
+    const currentColumn = columns[currentColumnIndex];
+    const targetColumn = columns[targetColumnIndex];
+    moveTaskBetweenColumns(taskId, task, currentColumn, targetColumn);
+    refreshUII(currentColumn, targetColumn);
+}
 
-    const currentColumnIndex = columns.findIndex(column => {
+// Function to find the current column index of the task
+function findCurrentColumnIndex(columns, taskId) {
+    return columns.findIndex(column => {
         const columnTasks = JSON.parse(localStorage.getItem(column)) || [];
         return columnTasks.some(t => t.id === taskId);
     });
+}
 
-    let targetColumnIndex = direction === 'previous' 
-        ? currentColumnIndex - 1 
-        : currentColumnIndex + 1;
+// Function to calculate the target column index
+function calculateTargetColumnIndex(currentIndex, direction, totalColumns) {
+    let targetIndex = direction === 'previous' ? currentIndex - 1 : currentIndex + 1;
+    return (targetIndex < 0 || targetIndex >= totalColumns) ? null : targetIndex;
+}
 
-    if (targetColumnIndex < 0 || targetColumnIndex >= columns.length) return;
-
-    const currentColumn = columns[currentColumnIndex];
-    const targetColumn = columns[targetColumnIndex];
-
-    // Remove from current column
+// Function to move the task between columns
+function moveTaskBetweenColumns(taskId, task, currentColumn, targetColumn) {
     let currentTasks = JSON.parse(localStorage.getItem(currentColumn)) || [];
     currentTasks = currentTasks.filter(t => t.id !== taskId);
     localStorage.setItem(currentColumn, JSON.stringify(currentTasks));
 
-    // Add to target column
+    // Add task to the target column
     let targetTasks = JSON.parse(localStorage.getItem(targetColumn)) || [];
     targetTasks.push(task);
     localStorage.setItem(targetColumn, JSON.stringify(targetTasks));
+}
 
-    // Refresh UI
+// Function to refresh the UI
+function refreshUII(currentColumn, targetColumn) {
     loadTasks(currentColumn);
     loadTasks(targetColumn);
+}
+
+function updateArrowIcons(columnId, taskId) {
+    const taskElement = document.getElementById(taskId);
+    const arrowRightIcon = taskElement.querySelector('.arrow-right-icon');
+    const arrowLeftIcon = taskElement.querySelector('.arrow-left-icon');
+    if (columnId === 'todo') {
+        arrowRightIcon.style.display = 'none';
+    }
+    if (columnId === 'done') {
+        arrowLeftIcon.style.display = 'none';
+    } 
 }

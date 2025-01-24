@@ -167,9 +167,8 @@ function renderUserList(loadedContacts, selectedUsers) {
 
     loadedContacts.forEach((user, index) => {
         const isChecked = isUserSelected(user, selectedUsers);
-        const userElement = createUserElement(user, index);
-        const userElementadd = createUserElement(isChecked);
-        contactList.innerHTML += userElement,userElementadd;
+        const userElement = createUserElement(user, index, isChecked);
+        contactList.innerHTML += userElement;
     });
 }
 
@@ -201,8 +200,8 @@ function addUserToTask(userName, userColor) {
 // Toggles user selection for the task when a checkbox is clicked.
 function checkBoxUserTask(index) {
     const user = loadedContacts[index];
+    const contactElement = document.querySelectorAll('.contact')[index];
     const checkbox = document.querySelectorAll('.contact input[type="checkbox"]')[index];
-
     if (!user) {
         console.error(`User not found at index ${index}`);
         return;
@@ -210,9 +209,11 @@ function checkBoxUserTask(index) {
     if (checkbox.checked) {
         if (!selectedUsers.some(u => u.name === user.name)) {
             selectedUsers.push(user);
+            contactElement.classList.add('checked');
         }
     } else {
         selectedUsers = selectedUsers.filter(u => u.name !== user.name);
+        contactElement.classList.remove('checked'); 
     }
     addedUsers();
 }
@@ -310,8 +311,10 @@ function editSubtask(index) {
            <button onclick="deleteSubtask(${index})">
                <img src="../Assets/delete_black.png" alt="Cancel"/>
            </button>   
-           <hr>
-            <img id="edit-subtask-img" onclick="saveSubtask(${index})" src="../Assets/check_blue.png" alt="Save"/>
+           <hr style="height: 24px;">
+           <button id="edit-subtask-img" onclick="saveSubtask(${index})">
+               <img src="../Assets/check_blue.png" alt="Save"/>
+           </button>  
         </div>       
         
     `;
