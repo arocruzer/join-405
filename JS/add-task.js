@@ -14,6 +14,9 @@ let selectedCategory = "";
 const categorySelect = document.getElementById("categorySelect");
 const selectedCategoryElement = document.getElementById("selected-category");
 let body = document.getElementById("body");
+let title = document.getElementById("title-input");
+let description = document.getElementById("description");
+let date =  document.getElementById("date-input");
 
 renderSubtasks();
 
@@ -97,10 +100,10 @@ function addedUsers() {
   });
 }
 function clearTask() {
-  document.getElementById("title-input").value = "";
-  document.getElementById("description").value = "";
+  title.value = "";
+  description.value = "";
   document.getElementById("addedUers").innerHTML = "";
-  document.getElementById("date-input").value = "";
+  date.value = "";
   document.getElementById("newSubtask").value = "";
   document.getElementById("subtaskLabels").innerHTML = "";
   document.getElementById("selected-category").innerHTML =
@@ -299,16 +302,26 @@ function saveTaskToLocalStorage(columnId, newTask) {
   localStorage.setItem(columnId, JSON.stringify(tasks));
 }
 
+function checkAddTaks() {
+  let titleError = document.getElementById("title-error");
+  let descriptionError = document.getElementById("description-error");
+  if (title.value < 1) {
+    titleError.style.display = "flex"
+    titleError.innerHTML = "Bitte Fügen Sie title hinzu"
+  }
+  if (description.value < 1) {
+    descriptionError.innerHTML = "Bitte Fügen Sie Beschreibung hinzu"
+    descriptionError.style.display = "flex"
+  }
+}
+
 function addTask() {
   const title = getFormInputValue("title-input");
   const description = getFormInputValue("description");
   const dueDate = getFormInputValue("date-input");
   const priority = selectedPriority || "medium";
   const category = selectedCategory;
-  if (!title || !dueDate || !priority || !category) {
-    alert("Bitte füllen Sie alle Pflichtfelder aus.");
-    return;
-  }
+
   const newTask = createNewTask(
     title,
     description,

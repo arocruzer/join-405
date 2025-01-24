@@ -9,6 +9,7 @@ async function userLogIn() {
 
   emailError.innerHTML = "";
   passwordError.innerHTML = "";
+  await fetchAndStoreTasks();
 
   let user = loadedContacts.find((u) => u.email === email.value);
 
@@ -27,10 +28,10 @@ async function userLogIn() {
     emailError.style.display = "flex"
     emailError.innerHTML = "User not found. Please check your email.";
   }
-  await loadAllTasks();
 }
 
 async function guestLogin() {
+  await fetchAndStoreTasks();
   let guestUser = {
     name: "",
     email: null,
@@ -40,5 +41,4 @@ async function guestLogin() {
   localStorage.setItem("loggedInUser", JSON.stringify(guestUser));
   window.location.href = "../HTML/summary.html";
   getUserLogo();
-  await loadAllTasks();
 }

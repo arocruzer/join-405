@@ -37,10 +37,12 @@
                 <div class="input-containers">
                   <p>Title<span>*</span></p>
                   <input class="title-input" type="text" placeholder="Enter a title" id="title-input"/>
+                  <div class="erorr-msg" id="title-error"></div>
                 </div>
                 <div class="input-containers">
                   <p>Description</p>
                   <textarea class="description-input" placeholder="Enter a Description" id="description"></textarea>
+                  <div class="erorr-msg description-error" id="description-error"></div>
                 </div>
                 <div class="input-containers" id="input-contacts">
                   <p>Assigned to</p>
@@ -101,7 +103,7 @@
               </div>
               <div class="clear-addTask-container">
                 <button onclick="clearTask()" class="clear-btn">Clear <img src="../Assets/iconoir_cancel.png" alt=""/></button>
-                <button onclick="addTask()" class="creatTask-btn">Creat Task <img src="../Assets/check.png" alt=""/></button>
+                <button onclick="checkAddTaks()" class="creatTask-btn">Creat Task <img src="../Assets/check.png" alt=""/></button>
               </div>
             </div>
           </div>
