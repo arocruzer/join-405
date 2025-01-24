@@ -15,6 +15,13 @@ function renderAddedUsers(color, initials) {
                 ${initials}
             </div>`;
 }
+function renderAddedUsersPlaceholder(countText) {
+    return `
+      <div class="initials-circle" style="background-color: gray;">
+        ${countText}
+      </div>
+    `;
+  }
 
 function regardsGastTemplate(greeting, userName) {
   return `<h2>${greeting}</h2> <h1>${userName}</h1>`;

@@ -17,13 +17,17 @@ let body = document.getElementById("body");
 let title = document.getElementById("title-input");
 let description = document.getElementById("description");
 let date =  document.getElementById("date-input");
+let titleError = document.getElementById("title-error");
+let descriptionError = document.getElementById("description-error");
+let dateError = document.getElementById("date-error");
+let categoryError = document.getElementById("category-error");
 
 renderSubtasks();
 
 function openDropDownMenuUser() {
   switch (contacState) {
     case 1:
-      concatList.style.display = "block";
+      concatList.style.display = "flex";
       dropDownArrowContacts.src = "../Assets/arrow_drop_downaa.png";
       contacState = 2;
       addUserToTask();
@@ -72,16 +76,17 @@ function addUserToTask() {
 
 function checkBoxUserTask(index) {
   const user = loadedContacts[index];
-  const checkbox = document.querySelectorAll('.contact input[type="checkbox"]')[
-    index
-  ];
+  const checkbox = document.querySelectorAll('.contact input[type="checkbox"]')[index];
+  let choosedUserContainer = document.querySelectorAll('.contact')[index];
 
   if (checkbox.checked) {
     if (!selectedUsers.includes(user)) {
       selectedUsers.push(user);
+      choosedUserContainer.classList.add('selected-user');
     }
   } else {
     selectedUsers = selectedUsers.filter((u) => u !== user);
+    choosedUserContainer.classList.remove('selected-user');
   }
 
   addedUsers();
@@ -89,16 +94,24 @@ function checkBoxUserTask(index) {
 
 function addedUsers() {
   let addedUsers = document.getElementById("addedUers");
+  let maxVisibleUsers = 4;
   addedUsers.innerHTML = "";
 
-  selectedUsers.forEach((user) => {
+
+  selectedUsers.slice(0, maxVisibleUsers).forEach((user) => {
     let initials = user.initialien;
 
     let color = user.color;
 
     addedUsers.innerHTML += renderAddedUsers(color, initials);
+    
   });
+  if (selectedUsers.length > maxVisibleUsers) {
+    let remainingCount = selectedUsers.length - maxVisibleUsers;
+    addedUsers.innerHTML += renderAddedUsersPlaceholder(`+${remainingCount}`);
+  }
 }
+
 function clearTask() {
   title.value = "";
   description.value = "";
@@ -119,6 +132,7 @@ function selectCategory(category) {
   selectedCategory = category;
   selectedCategoryElement.innerText = category;
   categorySelect.style.display = "none";
+  categoryError.style.display = "none";
   state = 1;
   dropDownArrowCategory.src = "../Assets/arrow_drop_downaa (1).png";
 }
@@ -302,9 +316,11 @@ function saveTaskToLocalStorage(columnId, newTask) {
   localStorage.setItem(columnId, JSON.stringify(tasks));
 }
 
+function isCategorySelected() {
+  return selectedCategory !== ""; 
+}
+
 function checkAddTaks() {
-  let titleError = document.getElementById("title-error");
-  let descriptionError = document.getElementById("description-error");
   if (title.value < 1) {
     titleError.style.display = "flex"
     titleError.innerHTML = "Bitte Fügen Sie title hinzu"
@@ -313,6 +329,27 @@ function checkAddTaks() {
     descriptionError.innerHTML = "Bitte Fügen Sie Beschreibung hinzu"
     descriptionError.style.display = "flex"
   }
+  if (date.value < 1) {
+    dateError.style.display = "flex"
+    dateError.innerHTML = "Bitte datum auswählen"
+  }
+  if (!isCategorySelected()) {
+    categoryError.style.display = "flex"
+    categoryError.innerHTML = "Please choose a category of task"
+  }
+   addTaskMsg();
+}
+
+function clearTitleError() {
+  titleError.innerHTML = "";
+}
+
+function clearDescriptionError() {
+  descriptionError.innerHTML = "";
+}
+
+function clearDateError() {
+  dateError.innerHTML = "";
 }
 
 function addTask() {
@@ -347,3 +384,14 @@ body.onclick = function (event) {
     categoryState = 1;
   }
 };
+
+function addTaskMsg() {
+  let msgContainer = document.getElementById("add-task-msg");
+
+    msgContainer.style.display = "flex";
+    setTimeout(() => {
+      msgContainer.style.display = "none";
+      addTask();
+      window.location.href = "/HTML/board.html";
+    }, 2000); 
+}

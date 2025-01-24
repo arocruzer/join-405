@@ -32,6 +32,10 @@
 }
 
 .btn-prio-urgent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
   height: 41px;
   width: 121px;
   background-color: #ffffff;
@@ -41,6 +45,10 @@
 }
 
 .btn-prio-medium {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
   height: 41px;
   width: 121px;
   background-color: #ffa800;
@@ -50,6 +58,10 @@
 }
 
 .btn-prio-low {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
   height: 41px;
   width: 121px;
   background-color: #ffffff;
@@ -280,14 +292,21 @@ input::placeholder {
   overflow: auto;
   overflow-x: hidden;
   width: 100%;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .contact {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 0 16px;
   z-index: 5;
+}
+
+.contact:hover{
+  cursor: pointer;
 }
 
 .name-and-img {
@@ -383,6 +402,17 @@ input::placeholder {
   top: 120px;
 }
 
+.category-error{
+  top: 80px;
+  padding-left: 0;
+}
+
+.selected-user{
+  background-color: #2a3647;
+  border-radius: 10px;
+  color: white;
+}
+
 @media (max-width: 1190px) {
   .form-container {
     gap: 10px;
@@ -420,6 +450,7 @@ input::placeholder {
     padding-top: 48px;
     padding-left: 10px;
     padding-right: 10px;
+    /* width: 100% */
   }
 
   .form-container {
@@ -480,6 +511,12 @@ input::placeholder {
   }
 }
 
+@media(max-width: 520px){
+  .hero{
+    width: 100%;
+  }
+}
+
 @media (max-width: 450px) {
   .form-left {
     width: 100%;
@@ -497,6 +534,11 @@ input::placeholder {
     width: 100%;
   }
 }
+.form-container{
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
 
 @media (max-width: 370px) {
   .btn-prio-urgent {
@@ -509,6 +551,14 @@ input::placeholder {
 
   .btn-prio-low {
     width: 80px;
+  }
+  .clear-btn{
+    height: 46px;
+    width: 90px;
+  }
+  .creatTask-btn{
+    height: 46px;
+    width: 140px;
   }
 }
 
