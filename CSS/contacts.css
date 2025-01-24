@@ -782,6 +782,13 @@
   background-color: rgb(193, 192, 192);
 }
 
+.darkgray-bg {
+  background-color: #2A3647;
+  border-radius: 10px;
+  color: white;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
 .flying-div{
   position: absolute;
   bottom: -100px;
