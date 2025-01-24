@@ -878,7 +878,8 @@
   }
   
   .contacts-list::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(90deg, #858585, #898989); /* Farbverlauf beim Hover
+    background: linear-gradient(90deg, #858585, #898989); 
+  }
 }
 
 @media screen and (min-width: 1150px) {
