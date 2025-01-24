@@ -403,7 +403,6 @@
 
 .cross-close:hover {
   transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
   border-radius: 15px;
   cursor: pointer;
 }
@@ -549,6 +548,9 @@
   height: 30px;
   padding-left: 16px;
   padding-right: 24px;
+  font-size: 12px;
+  width: 422px;
+  text-align: center;
 }
 
 .input-fields-add input {
@@ -718,7 +720,6 @@
 
 .close-cross-desktop:hover {
   transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
   border-radius: 15px;
   cursor: pointer;
 }
