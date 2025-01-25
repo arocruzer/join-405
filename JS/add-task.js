@@ -59,37 +59,37 @@ function addUserToTask() {
 
   loadedContacts.forEach((user, index) => {
     let isChecked = selectedUsers.includes(user) ? "checked" : "";
+    let selectedClass = selectedUsers.includes(user) ? "selected-user" : "";
 
-    let initials = user.initialien;
+    let initials = user.initialien; 
+    let color = user.color; 
 
-    let color = user.color;
-
-    concatList.innerHTML += renderAddToTaskContacts(
-      color,
-      initials,
-      user,
-      index,
-      isChecked
-    );
-  });
+    concatList.innerHTML += renderAddToTaskContacts(color, initials, user, index, isChecked, selectedClass);
+  }); 
 }
 
-function checkBoxUserTask(index) {
+function checkBoxUserTask(index, event) {
+  event.stopPropagation(); 
+
   const user = loadedContacts[index];
-  const checkbox = document.querySelectorAll('.contact input[type="checkbox"]')[index];
-  let choosedUserContainer = document.querySelectorAll('.contact')[index];
+  const contactElement = document.querySelectorAll('.contact')[index];
+  const checkbox = contactElement.querySelector('input[type="checkbox"]');
+
+  if (event.target.tagName !== "INPUT") {
+    checkbox.checked = !checkbox.checked;
+  }
 
   if (checkbox.checked) {
     if (!selectedUsers.includes(user)) {
       selectedUsers.push(user);
-      choosedUserContainer.classList.add('selected-user');
     }
+    contactElement.classList.add('selected-user');
   } else {
     selectedUsers = selectedUsers.filter((u) => u !== user);
-    choosedUserContainer.classList.remove('selected-user');
+    contactElement.classList.remove('selected-user');
   }
 
-  addedUsers();
+  addedUsers(); 
 }
 
 function addedUsers() {

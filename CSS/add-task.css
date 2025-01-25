@@ -236,8 +236,6 @@ input::placeholder {
   display: flex;
   flex-direction: column;
   height: 100px;
-  position: absolute;
-  top: 80px;
   overflow-y: auto;
   gap: 8px;
 }

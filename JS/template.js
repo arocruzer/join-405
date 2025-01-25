@@ -1,14 +1,15 @@
 function renderAddToTaskContacts(color, initials, user, index, isChecked) {
-  return `<div class="contact">
-                <div class="name-and-img">
-                    <div class="initials-circle" style="background-color: ${color};">
-                        ${initials}
-                    </div>
-                    <p>${user.name}</p>
-                </div>
-                <input onclick="checkBoxUserTask(${index})" type="checkbox" ${isChecked} name="checkbox">
-            </div>`;
-}
+    return `
+      <div class="contact ${isChecked ? "selected-user" : ""}" onclick="checkBoxUserTask(${index}, event)">
+        <div class="name-and-img">
+          <div class="initials-circle" style="background-color: ${color};">
+            ${initials}
+          </div>
+          <p>${user.name}</p>
+        </div>
+        <input onclick="checkBoxUserTask(${index}, event)" type="checkbox" ${isChecked} name="checkbox">
+      </div>`;
+  }
 function renderAddedUsers(color, initials) {
   return `
             <div class="initials-circle" style="background-color: ${color};">
@@ -507,24 +508,24 @@ function createEditAndDeleteButtonsHTML() {
     `;
 }
 
-function getDueDateTemplate(priorityIcon, formattedDate, priority) {
-    const priorityClass = getPriorityClass(priority);
+function getDueDateTemplate(priorityIcon, formattedDate, priorityText) {
+    const priorityClass = getPriorityClass(priorityText.toLowerCase());
     return `
-                              <div class="task-info">
-                          <div class="prio">
-                            <div class="${priorityClass}">
-                              <img class="prio-img" src="${priorityIcon}" />
-                            </div>
-                            <div class="status">
-                              <h4>1</h4>
-                              <p>Urgent</p>
-                            </div>
-                          </div>
-                          <hr style="height: 102px; display: inline-block; border: 1px solid #d1d1d1;"/>
-                          <div class="date">
-                            <h3>${formattedDate}</h3>
-                            <p>Upcoming Deadline</p>
-                          </div>
-                        </div>
-      `;
+      <div class="task-info">
+        <div class="prio">
+          <div class="${priorityClass}">
+            <img class="prio-img" src="${priorityIcon}" />
+          </div>
+          <div class="status">
+            <h4>1</h4>
+            <p>${priorityText}</p>
+          </div>
+        </div>
+        <hr style="height: 102px; display: inline-block; border: 1px solid #d1d1d1;" />
+        <div class="date">
+          <h3>${formattedDate}</h3>
+          <p>Upcoming Deadline</p>
+        </div>
+      </div>
+    `;
   }
