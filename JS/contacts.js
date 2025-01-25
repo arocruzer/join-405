@@ -172,8 +172,8 @@ function editContact(index){
         let editedContact = createNewContact(nameInput, mailInput, phoneInput);
         loadedContacts[index] = editedContact;
         renderContacts();
-        closeEditContactOverlay();
-        closeContactDetailsOverlay();
+        closeEditContactOverlay(index);
+        // closeContactDetailsOverlay();
     } return
 }
 
@@ -213,7 +213,7 @@ function validateEditPhone(phonenumber){
 function deleteContact(index){
     loadedContacts.splice(index, 1);
     renderContacts();
-    closeEditContactOverlay();
+    closeEditContactOverlay(index);
     closeContactDetailsOverlay();
 }
 

@@ -283,8 +283,8 @@ function HTMLEditOverlayDesktop(index){
                 <input class="input-layout-desktop input-phone" value="${loadedContacts[index].phone}" placeholder="Phone" type="tel" id="edit-input-phone-id">
                 <div id="phone-error-id" class="input-layout error-message"></div>
                 <div class="delete-save-buttons-desktop">
-                    <button onclick="deleteContact()" class="overlay-delete-button-desktop">Delete</button>
-                    <button onclick="editContact()" class="overlay-save-button-desktop">Save<i class="fa-sharp-duotone fa-solid fa-check save-padding"></i></button>
+                    <button onclick="deleteContact(${index})" class="overlay-delete-button-desktop">Delete</button>
+                    <button onclick="editContact(${index})" class="overlay-save-button-desktop">Save<i class="fa-sharp-duotone fa-solid fa-check save-padding"></i></button>
                 </div>
             </div>
         </div>
