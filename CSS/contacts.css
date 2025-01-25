@@ -135,7 +135,7 @@
 
 .contact-details-wrapper {
   position: sticky;
-  height: 100vh;
+  /* height: 100vh; */
   overflow: hidden;
   margin-top: 4px;
   padding: 32px 16px;
