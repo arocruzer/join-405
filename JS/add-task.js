@@ -2,8 +2,11 @@ let dropDownArrowContacts = document.getElementById("drop-down-arrow-contacts");
 let dropDownArrowCategory = document.getElementById("drop-down");
 let concatList = document.getElementById("contact-list");
 let btnUrgent = document.getElementById("btn-urgent");
+let imgUrgent = document.getElementById("urgent-img");
 let btnMedium = document.getElementById("btn-medium");
+let imgMedium = document.getElementById("medium-img");
 let btnLow = document.getElementById("btn-low");
+let imgLow = document.getElementById("low-img");
 let addSubtaskBtn = document.getElementById("add-subtask-btn");
 let subtaskList = [];
 let selectedUsers = [];
@@ -122,9 +125,11 @@ function clearTask() {
   document.getElementById("selected-category").innerHTML =
     "Select task category";
   btnMedium.style.backgroundColor = "#FFA800";
-  btnMedium.src = "../Assets/prio_line_orange.png";
+  imgMedium.src = "../Assets/prio_medium.png";
   btnLow.style.backgroundColor = "#ffffff";
+  imgLow.src = "../Assets/prio_low.png"
   btnUrgent.style.backgroundColor = "#ffffff";
+  imgUrgent.src = "../Assets/prio_urgent.png";
 }
 
 // Auswahl der Kategorie und Dropdown schließen
@@ -178,9 +183,9 @@ function setButtonStyles(priority, bgColor) {
 }
 
 function setImageSources([urgentImgSrc, mediumImgSrc, lowImgSrc]) {
-  document.getElementById("urgent-img").src = urgentImgSrc;
-  document.getElementById("medium-img").src = mediumImgSrc;
-  document.getElementById("low-img").src = lowImgSrc;
+  imgUrgent.src = urgentImgSrc;
+  imgMedium.src = mediumImgSrc;
+  imgLow.src = lowImgSrc;
 }
 
 function toggleButtonVisibility(forceShow) {
@@ -321,24 +326,31 @@ function isCategorySelected() {
 }
 
 function checkAddTaks() {
-  if (title.value < 1) {
-    titleError.style.display = "flex"
-    titleError.innerHTML = "Bitte Fügen Sie title hinzu"
+    let valid = true; 
+    if (title.value.length < 1) {
+      titleError.style.display = "flex";
+      titleError.innerHTML = "Bitte Fügen Sie einen Titel hinzu";
+      valid = false; 
+    }
+    if (description.value.length < 1) {
+      descriptionError.innerHTML = "Bitte Fügen Sie eine Beschreibung hinzu";
+      descriptionError.style.display = "flex";
+      valid = false; 
+    }
+    if (date.value.length < 1) {
+      dateError.style.display = "flex";
+      dateError.innerHTML = "Bitte ein Datum auswählen";
+      valid = false;
+    }
+    if (!isCategorySelected()) {
+      categoryError.style.display = "flex";
+      categoryError.innerHTML = "Bitte wählen Sie eine Kategorie für die Aufgabe aus";
+      valid = false;
+    }
+    if (valid) {
+      addTaskMsg(); 
+    }
   }
-  if (description.value < 1) {
-    descriptionError.innerHTML = "Bitte Fügen Sie Beschreibung hinzu"
-    descriptionError.style.display = "flex"
-  }
-  if (date.value < 1) {
-    dateError.style.display = "flex"
-    dateError.innerHTML = "Bitte datum auswählen"
-  }
-  if (!isCategorySelected()) {
-    categoryError.style.display = "flex"
-    categoryError.innerHTML = "Please choose a category of task"
-  }
-   addTaskMsg();
-}
 
 function clearTitleError() {
   titleError.innerHTML = "";
