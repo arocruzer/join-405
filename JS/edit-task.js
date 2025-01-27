@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function enableUserEdit() {
     const modalAssignedUsers = document.getElementById('modalAssignedUsers');
     modalAssignedUsers.innerHTML = generateUserEditHTML();
-    renderDropdownUsers(loadedContacts, selectedUsers);
+    renderDropdownUsersTask(loadedContacts, selectedUsers);
 }
 
 // Retrieves the currently selected task object from localStorage.
@@ -141,7 +141,7 @@ function getCurrentTask() {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    renderDropdownUsers(loadedContacts, selectedUsers);
+    renderDropdownUsersTask(loadedContacts, selectedUsers);
     addedUsers();
 });
 
@@ -173,7 +173,7 @@ function renderUserList(loadedContacts, selectedUsers) {
 }
 
 // Combines user rendering and dropdown menu preparation for assigned users.
-function renderDropdownUsers(loadedContacts, selectedUsers) {
+function renderDropdownUsersTask(loadedContacts, selectedUsers) {
     clearContactList();
     renderUserList(loadedContacts, selectedUsers);
 }
@@ -198,13 +198,19 @@ function addUserToTask(userName, userColor) {
 }
 
 // Toggles user selection for the task when a checkbox is clicked.
-function checkBoxUserTask(index) {
+function checkBoxUserTask(index, event) {
+    if (event && event.target.tagName === "INPUT") {
+        event.stopPropagation();
+    }
     const user = loadedContacts[index];
     const contactElement = document.querySelectorAll('.contact')[index];
     const checkbox = document.querySelectorAll('.contact input[type="checkbox"]')[index];
     if (!user) {
         console.error(`User not found at index ${index}`);
         return;
+    }
+    if (!event || event.target.tagName !== "INPUT") {
+        checkbox.checked = !checkbox.checked;
     }
     if (checkbox.checked) {
         if (!selectedUsers.some(u => u.name === user.name)) {
@@ -213,10 +219,11 @@ function checkBoxUserTask(index) {
         }
     } else {
         selectedUsers = selectedUsers.filter(u => u.name !== user.name);
-        contactElement.classList.remove('checked'); 
+        contactElement.classList.remove('checked');
     }
     addedUsers();
 }
+
 
 // Renders the currently added users as avatars in the modal
 function addedUsers() {
