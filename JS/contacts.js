@@ -119,10 +119,21 @@ function validateEmail(mail) {
 }
 
 function validatePhone(phone) {
-    let error = document.getElementById('phone-error');
-    let isValid = Math.abs(phone).toString().length >= 8;
-    error.innerHTML = isValid ? "" : "ungültige Telefonnummer";
-    return isValid;
+    const phoneError = document.getElementById('phone-error');
+    phoneError.innerHTML = "";
+
+    if (phone === "") {
+        return true;
+    }
+
+    const digitCount = Math.abs(phone).toString().length;
+    let isValid = digitCount >= 8;
+
+    if (!isValid) {
+        phoneError.innerHTML = "ungültige Telefonnummer";
+        return false;
+    }
+    return true;
 }
 
 function createNewContact(name, mail, phone) {
@@ -183,9 +194,13 @@ function validateEditEmail(mail){
 
 function validateEditPhone(phonenumber){
     const phoneError = document.getElementById('phone-error-id');
-    const digitCount = Math.abs(phonenumber).toString().length;
     phoneError.innerHTML = "";
 
+    if (phonenumber === "") {
+        return true;
+    } 
+
+    const digitCount = Math.abs(phonenumber).toString().length;
     if(digitCount < 8){
         phoneError.innerHTML = "ungültige Telefonnummer";
         return false;
