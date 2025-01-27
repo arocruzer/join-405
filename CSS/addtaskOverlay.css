@@ -1,53 +1,38 @@
-.hero-overlay {
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 12%;
-  background-color: #2d3e502a;
-  width: 88%;
-  height: 100vh;
-}
-.addtask-overlay {
-  background-color: white;
-  border-radius: 30px;
-  width: 1110px;
-  padding: 30px;
-}
-hero.prio-container-overlay {
+hero.prio-container {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.prio-btn-container-overlay {
+.prio-btn-container {
   display: flex;
   justify-content: space-between;
   padding-bottom: 16px;
 }
 
-.hero-overlay {
+.hero {
   display: none;
   padding-top: 110px;
   padding-left: 96px;
   animation: overlaySlideIn 1s;
 }
 
-.form-container-overlay {
+.form-container {
   display: flex;
   justify-content: space-between;
   padding-top: 48px;
   width: 100%;
 }
 
-.form-left-overlay {
+.form-left {
   width: 440px;
 }
 
-.form-right-overlay {
+.form-right {
   width: 440px;
 }
 
-.btn-prio-urgent-overlay {
+.btn-prio-urgent {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,7 +45,7 @@ hero.prio-container-overlay {
   border-radius: 8px;
 }
 
-.btn-prio-medium-overlay {
+.btn-prio-medium {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -73,7 +58,7 @@ hero.prio-container-overlay {
   border-radius: 8px;
 }
 
-.btn-prio-low-overlay {
+.btn-prio-low {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -86,7 +71,7 @@ hero.prio-container-overlay {
   border-radius: 8px;
 }
 
-.clear-addTask-container-overlay {
+.clear-addTask-container {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -94,7 +79,7 @@ hero.prio-container-overlay {
   gap: 8px;
 }
 
-.clear-btn-overlay {
+.clear-btn {
   height: 56px;
   width: 110px;
   border: solid #2a3647;
@@ -107,7 +92,7 @@ hero.prio-container-overlay {
   font-size: 21px;
 }
 
-.creatTask-btn-overlay {
+.creatTask-btn {
   height: 56px;
   width: 183px;
   color: white;
@@ -121,35 +106,35 @@ hero.prio-container-overlay {
   font-size: 21px;
 }
 
-span-overlay {
+span {
   color: #ff8190;
 }
 
-.title-input-overlay {
+.title-input {
   height: 40px;
   border: 1px solid #d1d1d1;
   border-radius: 10px;
   padding-left: 21px;
 }
 
-.add-subtask-overlay {
+.add-subtask {
   position: absolute;
   right: 16px;
 }
 
-.linie-overlay {
+.linie {
   display: none;
   position: absolute;
   right: 44px;
   color: #d1d1d1;
 }
 
-.cancle-subtask-overlay {
+.cancle-subtask {
   position: absolute;
   right: 50px;
 }
 
-.subtask-input-overlay {
+.subtask-input {
   height: 40px;
   border: 1px solid #d1d1d1;
   border-radius: 10px;
@@ -157,7 +142,7 @@ span-overlay {
   width: 100%;
 }
 
-button-overlay {
+button {
   border: none;
   background: none;
   padding-block: 0;
@@ -168,7 +153,7 @@ input::placeholder {
   font-size: 16px;
 }
 
-.input-containers-overlay {
+.input-containers {
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -178,7 +163,7 @@ input::placeholder {
   width: 100%;
 }
 
-.description-input-overlay {
+.description-input {
   height: 88px;
   border: 1px solid #d1d1d1;
   border-radius: 10px;
@@ -186,14 +171,14 @@ input::placeholder {
   font-size: 16px;
 }
 
-.date-input-overlay {
+.date-input {
   height: 40px;
   border: 1px solid #d1d1d1;
   border-radius: 10px;
   padding: 0 21px;
 }
 
-.drop-down-overlay {
+.drop-down {
   height: 48px;
   border: 1px solid #d1d1d1;
   display: flex;
@@ -206,12 +191,13 @@ input::placeholder {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.drop-down-arrow-overlay {
+.drop-down-arrow {
   height: 20px;
   padding-right: 16px;
 }
 
-.category-options-overlay {
+/* Dropdown-Inhalt */
+.category-options {
   width: 100%;
   border-radius: 8px;
   background-color: white;
@@ -219,36 +205,40 @@ input::placeholder {
   z-index: 10;
   padding: 5px 0;
   border: none;
+  /* Entfernt den Rahmen */
   position: absolute;
   top: 80px;
 }
 
-.category-options-ovrelay div {
+.category-options div {
   padding: 10px;
   cursor: pointer;
   border: none;
+  /* Kein Rahmen um die Optionen */
   border-radius: 0;
 }
 
-.category-options-overlay div:hover {
+.category-options div:hover {
   background-color: #f0f0f0;
 }
 
-.title-arrow-overlay {
+.title-arrow{
   align-items: center;
 }
 
+
+/* Versteckt */
 .hidden {
   display: none;
 }
 
-.subtask-overlay {
+.subtask {
   display: flex;
   justify-content: space-between;
   width: 360px;
 }
 
-.subtask-label-container-overlay {
+.subtask-label-container {
   display: flex;
   flex-direction: column;
   height: 100px;
@@ -256,7 +246,7 @@ input::placeholder {
   gap: 8px;
 }
 
-.subtask-label-overlay {
+.subtask-label {
   padding: 5px 10px;
   border-radius: 15px;
   font-size: 14px;
@@ -265,38 +255,38 @@ input::placeholder {
   gap: 5px;
 }
 
-.subtask-label-overlay button {
+.subtask-label button {
   background: none;
   border: none;
   cursor: pointer;
   font-size: 12px;
 }
 
-.images-container-overlay {
+.images-container {
   display: none;
   justify-content: space-between;
-  width: 60px;
+  width: 60px
 }
 
-.subtask-label-overlay:hover .images-container-overlay {
+.subtask-label:hover .images-container {
   display: flex;
 }
 
-.subtask-label-overlay:hover {
+.subtask-label:hover {
   background-color: rgba(128, 128, 128, 0.151);
 }
 
-.subtask-label-overlay:hover input {
+.subtask-label:hover input {
   background-color: rgba(128, 128, 128, 0);
 }
 
-.subtask-label-overlay input {
+.subtask-label input {
   border: none;
   background-color: #f6f7f8;
   width: 300px;
 }
 
-.contact-list-container-overlay {
+.contact-list-container {
   display: none;
   height: 250px;
   background-color: white;
@@ -310,7 +300,7 @@ input::placeholder {
   gap: 5px;
 }
 
-.contact-overlay {
+.contact {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -319,18 +309,18 @@ input::placeholder {
   z-index: 5;
 }
 
-.contact-overlay:hover {
+.contact:hover{
   cursor: pointer;
 }
 
-.name-and-img-overlay {
+.name-and-img {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 16px;
 }
 
-.initials-circle-overlay {
+.initials-circle {
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -344,22 +334,22 @@ input::placeholder {
   text-transform: uppercase;
 }
 
-.subtask-container-overlay {
+.subtask-container {
   display: flex;
   align-items: center;
   border: solid 1px #d1d1d1;
   border-radius: 10px;
 }
 
-.subtask-container-overlay input {
+.subtask-container input {
   border: none;
 }
 
-hr {
+hr{
   height: 340px;
 }
 
-.plus-img-overlay {
+.plus-img {
   position: absolute;
   right: 16px;
   height: 24px;
@@ -370,89 +360,91 @@ hr {
   width: 10px;
 }
 
+/* Track */
 ::-webkit-scrollbar-track {
   border-radius: 10px;
 }
 
+/* Handle */
 ::-webkit-scrollbar-thumb {
   background: #a8a8a8;
   border-radius: 10px;
 }
 
-#add-task-img-overlay {
+#add-task-img {
   background-image: url(../Assets/img/add-task_w_L.png);
 }
 
-#add-task-button-overlay {
+#add-task-button {
   background-color: #091931;
   color: white;
 }
 
-#confirmButton-overlay {
+#confirmButton {
   display: none;
 }
 
-#cancelButton-overlay {
+#cancelButton {
   display: none;
 }
 
-.add-clear-task -overlay {
+.add-clear-task {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   padding-top: 146px;
 }
 
-.required-overlay {
+.required {
   display: none;
 }
 
-.confirm-subtask-overlay {
+.confirm-subtask {
   display: none;
 }
 
-.erorr-msg {
+.erorr-msg{
   top: 70px;
 }
-.description-error-overlay {
+.description-error{
   top: 110px;
 }
 
-.category-error-overlay {
+.category-error{
   top: 80px;
   padding-left: 0;
 }
 
-.selected-user-overlay {
+.selected-user{
   background-color: #2a3647;
   border-radius: 10px;
   color: white;
 }
 
 @media (max-width: 1290px) {
-  .form-container-overlay {
+  .form-container {
     gap: 10px;
   }
 }
 
 @media (max-width: 1040px) {
-  .btn-prio-urgent-overlay {
+  .btn-prio-urgent {
     width: 90px;
   }
 
-  .btn-prio-medium-overlay {
+  .btn-prio-medium {
     width: 90px;
   }
 
-  .btn-prio-low-overlay {
+  .btn-prio-low {
     width: 90px;
   }
 
-  .subtask-overlay {
+  .subtask {
     width: 100%;
   }
 
-  .subtask-overlay input {
+  .subtask input {
     width: 100%;
   }
 }
@@ -462,7 +454,7 @@ hr {
     overflow-y: auto;
   }
 
-  .form-container-overlay {
+  .form-container {
     flex-direction: column;
   }
 
@@ -470,109 +462,111 @@ hr {
     display: none;
   }
 
-  .btn-prio-urgent-overlay {
+  .btn-prio-urgent {
     width: 121px;
   }
 
-  .btn-prio-medium-overlay {
+  .btn-prio-medium {
     width: 121px;
   }
 
-  .btn-prio-low-overlay {
+  .btn-prio-low {
     width: 121px;
   }
 
-  #main-content-overlay {
+  #main-content {
     align-items: center;
   }
 
-  .add-clear-task-overlay {
+  .add-clear-task {
+    /*  display: none; */
     position: sticky;
     background-color: #f6f7f8;
     bottom: 0px;
     padding: 10px;
   }
 
-  .add-clear-task-overlay p {
+  .add-clear-task p {
     display: none;
   }
 
-  .required-overlay {
+  .required {
     display: block;
   }
 
-  #nav-bar-overlay {
+  #nav-bar {
     box-shadow: none;
   }
 
-  .title-arrow-overlay {
+  .title-arrow {
     position: sticky;
     top: 82px;
     background-color: #f6f7f8;
     z-index: 1000;
   }
-  .hero-overlay {
-    display: none !important;
+  .hero{
+      display: none !important;
   }
 }
 
 @media screen and (min-width: 830px) {
-  #add-task-button-overlay {
+  #add-task-button {
     border-radius: 0;
   }
 }
 
-@media (max-width: 520px) {
-  .hero-overlay {
+@media(max-width: 520px){
+  .hero{
     width: 100%;
   }
 }
 
 @media (max-width: 490px) {
-  .form-left-overlay {
+  .form-left {
     width: 100%;
   }
 
-  .form-right-overlay {
+  .form-right {
     width: 100%;
   }
 
-  .subtask-overlay {
+  .subtask {
     width: 100%;
   }
 
-  .subtask-overlay input {
+  .subtask input {
     width: 100%;
   }
-  .prio-btn-container-overlay {
+  .prio-btn-container{
     gap: 5px;
   }
 }
-.form-container-overlay {
+.form-container{
   padding-left: 30px;
   padding-right: 30px;
 }
 
+
 @media (max-width: 370px) {
-  .btn-prio-urgent-overlay {
+  .btn-prio-urgent {
     width: 80px;
     gap: 5px;
   }
 
-  .btn-prio-medium-overlay {
+  .btn-prio-medium {
     width: 80px;
     gap: 5px;
   }
 
-  .btn-prio-low-overlay {
+  .btn-prio-low {
     width: 80px;
     gap: 5px;
   }
-  .clear-btn-overlay {
+  .clear-btn{
     height: 46px;
     width: 90px;
   }
-  .creatTask-btn-overlay {
+  .creatTask-btn{
     height: 46px;
     width: 140px;
   }
@@ -586,14 +580,14 @@ hr {
 
 @keyframes overlaySlideIn {
   0% {
-    right: -100%;
-    top: 0;
-    transform: translate(100%, 0);
+    right: -100%; 
+    top: 0; 
+    transform: translate(100%, 0); 
   }
 
   100% {
-    right: 0;
-    top: 0;
-    transform: translate(0, 0);
+    right: 0; 
+    top: 0; 
+    transform: translate(0, 0); 
   }
 }

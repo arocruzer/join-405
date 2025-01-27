@@ -1,387 +1,388 @@
-let dropDownArrowContactsOverlay = document.getElementById("drop-down-arrow-contacts-overlay");
-let dropDownArrowCategoryOverlay = document.getElementById("drop-down-overlay");
-let concatListOverlay = document.getElementById("contact-list-overlay");
-let btnUrgentOverlay = document.getElementById("btn-urgent-overlay");
-let imgUrgentOverlay = document.getElementById("urgent-img-overlay");
-let btnMediumOverlay = document.getElementById("btn-medium-overlay");
-let imgMediumOverlay = document.getElementById("medium-img-overlay");
-let btnLowOverlay = document.getElementById("btn-low-overlay");
-let imgLowOverlay = document.getElementById("low-img-overlay");
-let addSubtaskBtnOverlay = document.getElementById("add-subtask-btn-overlay");
-let subtaskListOverlay = [];
-let selectedPriorityOverlay = "";
-let contacStateOverlay = 1;
-let categoryStateOverlay = 1;
-let selectedCategoryOverlay = "";
-const categorySelectOverlay = document.getElementById("categorySelect-overlay");
-const selectedCategoryElementOverlay = document.getElementById("selected-category-overlay");
-let bodyOverlay = document.getElementById("body-overlay");
-let titleOverlay = document.getElementById("title-input-overlay");
-let descriptionOverlay = document.getElementById("description-overlay");
-let dateOverlay =  document.getElementById("date-input-overlay");
-let titleErrorOverlay = document.getElementById("title-error-overlay");
-let descriptionErrorOverlay = document.getElementById("description-error-overlay");
-let dateErrorOverlay = document.getElementById("date-error-overlay");
-let categoryErrorOverlay = document.getElementById("category-error-overlay");
 
-renderSubtasksOverlay();
+let dropDownArrowContacts = document.getElementById("drop-down-arrow-contacts");
+let dropDownArrowCategory = document.getElementById("drop-down");
+let concatList = document.getElementById("contact-list");
+let btnUrgent = document.getElementById("btn-urgent");
+let imgUrgent = document.getElementById("urgent-img");
+let btnMedium = document.getElementById("btn-medium");
+let imgMedium = document.getElementById("medium-img");
+let btnLow = document.getElementById("btn-low");
+let imgLow = document.getElementById("low-img");
+let addSubtaskBtn = document.getElementById("add-subtask-btn");
+let subtaskList = [];
+let selectedPriority = "";
+let contacState = 1;
+let categoryState = 1;
+let selectedCategory = "";
+const categorySelect = document.getElementById("categorySelect");
+const selectedCategoryElement = document.getElementById("selected-category");
+let body = document.getElementById("body");
+let title = document.getElementById("title-input");
+let description = document.getElementById("description");
+let date =  document.getElementById("date-input");
+let titleError = document.getElementById("title-error");
+let descriptionError = document.getElementById("description-error");
+let dateError = document.getElementById("date-error");
+let categoryError = document.getElementById("category-error");
 
-function openDropDownMenuUserOverlay() {
-  switch (contacStateOverlay) {
+renderSubtasks();
+
+function openDropDownMenuUser() {
+  switch (contacState) {
     case 1:
-      concatListOverlay.style.display = "flex";
-      dropDownArrowContactsOverlay.src = "../Assets/arrow_drop_downaa.png";
-      contacStateOverlay = 2;
-      addUserToTaskOverlay();
+      concatList.style.display = "flex";
+      dropDownArrowContacts.src = "../Assets/arrow_drop_downaa.png";
+      contacState = 2;
+      addUserToTask();
       break;
     case 2:
-      concatListOverlay.style.display = "none";
-      dropDownArrowContactsOverlay.src = "../Assets/arrow_drop_downaa (1).png";
-      contacStateOverlay = 1;
+      concatList.style.display = "none";
+      dropDownArrowContacts.src = "../Assets/arrow_drop_downaa (1).png";
+      contacState = 1;
       break;
   }
 }
 
-function openDropDownMenuCategoryOverlay() {
-  switch (categoryStateOverlay) {
+function openDropDownMenuCategory() {
+  switch (categoryState) {
     case 1:
-      categorySelectOverlay.style.display = "block";
-      dropDownArrowCategoryOverlay.src = "../Assets/arrow_drop_downaa.png";
-      categoryStateOverlay = 2;
+      categorySelect.style.display = "block";
+      dropDownArrowCategory.src = "../Assets/arrow_drop_downaa.png";
+      categoryState = 2;
       break;
     case 2:
-      categorySelectOverlay.style.display = "none";
-      dropDownArrowCategoryOverlay.src = "../Assets/arrow_drop_downaa (1).png";
-      categoryStateOverlay = 1;
+      categorySelect.style.display = "none";
+      dropDownArrowCategory.src = "../Assets/arrow_drop_downaa (1).png";
+      categoryState = 1;
       break;
   }
 }
-function addUserToTaskOverlay() {
-  concatListOverlay.innerHTML = "";
+function addUserToTask() {
+  concatList.innerHTML = "";
 
   loadedContacts.forEach((user, index) => {
-    let isCheckedOverlay = selectedUsersOverlay.includes(user) ? "checked" : "";
-    let selectedClassOverlay = selectedUsersOverlay.includes(user) ? "selected-user" : "";
+    let isChecked = selectedUsers.includes(user) ? "checked" : "";
+    let selectedClass = selectedUsers.includes(user) ? "selected-user" : "";
 
-    let initialsOverlay = user.initialien; 
-    let colorOverlay = user.color; 
+    let initials = user.initialien; 
+    let color = user.color; 
 
-    concatListOverlay.innerHTML += renderAddToTaskContactsOverlay(colorOverlay, initialsOverlay, user, index, isCheckedOverlay, selectedClassOverlay);
+    concatList.innerHTML += renderAddToTaskContacts(color, initials, user, index, isChecked, selectedClass);
   }); 
 }
 
-function checkBoxUserTaskOverlay(index, event) {
+function checkBoxUserTask(index, event) {
   event.stopPropagation(); 
 
   const user = loadedContacts[index];
-  const contactElementOverlay = document.querySelectorAll('.contact-overlay')[index];
-  const checkboxOverlay = contactElementOverlay.querySelector('input[type="checkbox"]');
+  const contactElement = document.querySelectorAll('.contact')[index];
+  const checkbox = contactElement.querySelector('input[type="checkbox"]');
 
   if (event.target.tagName !== "INPUT") {
     checkbox.checked = !checkbox.checked;
   }
 
   if (checkbox.checked) {
-    if (!selectedUsersOverlay.includes(user)) {
-      selectedUsersOverlay.push(user);
+    if (!selectedUsers.includes(user)) {
+      selectedUsers.push(user);
     }
-    contactElementOverlay.classList.add('selected-user-overlay');
+    contactElement.classList.add('selected-user');
   } else {
-    selectedUsersOverlay = selectedUsersOverlay.filter((u) => u !== user);
-    contactElementOverlay.classList.remove('selected-user-overlay');
+    selectedUsers = selectedUsers.filter((u) => u !== user);
+    contactElement.classList.remove('selected-user');
   }
 
-  addedUsersOverlay(); 
+  addedUsers(); 
 }
 
-function addedUsersOverlay() {
-  let addedUsersOverlay = document.getElementById("addedUers-overlay");
-  let maxVisibleUsersOverlay = 4;
-  addedUsersOverlay.innerHTML = "";
+function addedUsers() {
+  let addedUsers = document.getElementById("addedUers");
+  let maxVisibleUsers = 4;
+  addedUsers.innerHTML = "";
 
 
-  selectedUsersOverlay.slice(0, maxVisibleUsersOverlay).forEach((user) => {
-    let initialsOverlay = user.initialien;
+  selectedUsers.slice(0, maxVisibleUsers).forEach((user) => {
+    let initials = user.initialien;
 
-    let colorOverlay = user.color;
+    let color = user.color;
 
-    addedUsersOverlay.innerHTML += renderAddedUsersOverlay(colorOverlay, initialsOverlay);
+    addedUsers.innerHTML += renderAddedUsers(color, initials);
     
   });
-  if (selectedUsersOverlay.length > maxVisibleUsersOverlay) {
-    let remainingCountOverlay = selectedUsersOverlay.length - maxVisibleUsersOverlay;
-    addedUsersOverlay.innerHTML += renderAddedUsersPlaceholderOverlay(`+${remainingCountOverlay}`);
+  if (selectedUsers.length > maxVisibleUsers) {
+    let remainingCount = selectedUsers.length - maxVisibleUsers;
+    addedUsers.innerHTML += renderAddedUsersPlaceholder(`+${remainingCount}`);
   }
 }
 
-function clearTaskOverlay() {
-    titleOverlay.value = "";
-    descriptionOverlay.value = "";
-    document.getElementById("addedUers-overlay").innerHTML = "";
-    dateOverlay.value = "";
-    document.getElementById("newSubtask-overlay").value = "";
-    document.getElementById("subtaskLabels-overlay").innerHTML = "";
-    document.getElementById("selected-category-overlay").innerHTML =
+function clearTask() {
+    title.value = "";
+    description.value = "";
+    document.getElementById("addedUers").innerHTML = "";
+    date.value = "";
+    document.getElementById("newSubtask").value = "";
+    document.getElementById("subtaskLabels").innerHTML = "";
+    document.getElementById("selected-category").innerHTML =
       "Select task category";
-    btnMediumOverlay.style.backgroundColor = "#FFA800";
-    imgMediumOverlay.src = "../Assets/prio_medium.png";
-    btnLowOverlay.style.backgroundColor = "#ffffff";
-    imgLowoverlay.src = "../Assets/prio_low.png"
-    btnUrgentOverlay.style.backgroundColor = "#ffffff";
-    imgUrgentOverlay.src = "../Assets/prio_urgent.png";
+    btnMedium.style.backgroundColor = "#FFA800";
+    imgMedium.src = "../Assets/prio_medium.png";
+    btnLow.style.backgroundColor = "#ffffff";
+    imgLow.src = "../Assets/prio_low.png"
+    btnUrgent.style.backgroundColor = "#ffffff";
+    imgUrgent.src = "../Assets/prio_urgent.png";
   }
 
 // Auswahl der Kategorie und Dropdown schließen
-function selectCategoryOverlay(categoryOverlay) {
-  selectedCategoryOverlay = categoryOverlay;
-  selectedCategoryElementOverlay.innerText = categoryOverlay;
-  categorySelectOverlay.style.display = "none";
-  categoryErrorOverlay.style.display = "none";
-  stateOverlay = 1;
-  dropDownArrowCategoryOverlay.src = "../Assets/arrow_drop_downaa (1).png";
+function selectCategory(category) {
+  selectedCategory = category;
+  selectedCategoryElement.innerText = category;
+  categorySelect.style.display = "none";
+  categoryError.style.display = "none";
+  state = 1;
+  dropDownArrowCategory.src = "../Assets/arrow_drop_downaa (1).png";
 }
 
-function changeColorPrioBtnOverlay(priorityOverlay) {
-  let imgSourcesOverlay = {
-    urgentOverlay: [
+function changeColorPrioBtn(priority) {
+  let imgSources = {
+    urgent: [
       "../Assets/prio_arrow_white.png",
       "../Assets/prio_line_orange.png",
       "../Assets/prio_low.png",
     ],
-    mediumOverlay: [
+    medium: [
       "../Assets/prio_urgent.png",
       "../Assets/prio_medium.png",
       "../Assets/prio_low.png",
     ],
-    lowOverlay: [
+    low: [
       "../Assets/prio_urgent.png",
       "../Assets/prio_line_orange.png",
       "../Assets/prio_arrowDown_white.png",
     ],
   };
 
-  let bgColorsOverlay = { urgentOverlay: "#FF3B30", mediumOverlay: "#FFA800", lowOverlay: "#4CD964" };
+  let bgColors = { urgent: "#FF3B30", medium: "#FFA800", low: "#4CD964" };
 
-  resetButtonStylesOverlay();
-  selectedPriorityOverlay = priorityOverlay;
-  setButtonStylesOverlay(priorityOverlay, bgColors[priorityOverlay]);
-  setImageSourcesOverlay(imgSources[priorityOverlay]);
+  resetButtonStyles();
+  selectedPriority = priority;
+  setButtonStyles(priority, bgColors[priority]);
+  setImageSources(imgSources[priority]);
 }
 
-function resetButtonStylesOverlay() {
-  btnUrgentOverlay.style.backgroundColor =
-    btnMediumOverlay.style.backgroundColor =
-    btnLowOverlay.style.backgroundColor =
+function resetButtonStyles() {
+  btnUrgent.style.backgroundColor =
+    btnMedium.style.backgroundColor =
+    btnLow.style.backgroundColor =
       "#ffffff";
 }
 
-function setButtonStylesOverlay(priorityOverlay, bgColorOverlay) {
-  if (priorityOverlay === "urgent-overlay") btnUrgentOverlay.style.backgroundColor = bgColorOverlay;
-  else if (priorityOverlay === "medium-overlay") btnMediumOverlay.style.backgroundColor = bgColorOverlay;
-  else if (priorityOverlay === "low-overlay") btnLowOverlay.style.backgroundColor = bgColorOverlay;
+function setButtonStyles(priority, bgColor) {
+  if (priority === "urgent") btnUrgent.style.backgroundColor = bgColor;
+  else if (priority === "medium") btnMedium.style.backgroundColor = bgColor;
+  else if (priority === "low") btnLow.style.backgroundColor = bgColor;
 }
 
-function setImageSourcesOverlay([urgentImgSrcOverlay, mediumImgSrcOverlay, lowImgSrcOverlay]) {
-  imgUrgentOverlay.src = urgentImgSrcOverlay;
-  imgMediumOveraly.src = mediumImgSrcOverlay;
-  imgLowOverlay.src = lowImgSrcOverlay;
+function setImageSources([urgentImgSrc, mediumImgSrc, lowImgSrc]) {
+  imgUrgent.src = urgentImgSrc;
+  imgMedium.src = mediumImgSrc;
+  imgLow.src = lowImgSrc;
 }
 
-function toggleButtonVisibilityOverlay(forceShow) {
-  const taskInputOverlay = document.getElementById("newSubtask-overlay");
-  const confirmButtonOverlay = document.getElementById("confirmButton-overlay");
-  const cancelButtonOverlay = document.getElementById("cancelButton-overlay");
-  const plusButtonOverlay = document.getElementById("plusButton-overlay");
-  const linieOverlay = document.getElementById("linie-overlay");
-  linieOverlay.style.display = "none";
-  confirmButtonOverlay.style.display = "none";
-  cancelButtonOverlay.style.display = "none";
-  plusButtonOverlay.style.display = "inline";
+function toggleButtonVisibility(forceShow) {
+  const taskInput = document.getElementById("newSubtask");
+  const confirmButton = document.getElementById("confirmButton");
+  const cancelButton = document.getElementById("cancelButton");
+  const plusButton = document.getElementById("plusButton");
+  const linie = document.getElementById("linie");
+  linie.style.display = "none";
+  confirmButton.style.display = "none";
+  cancelButton.style.display = "none";
+  plusButton.style.display = "inline";
 
-  if (forceShow || taskInputOverlay.value.trim()) {
-    confirmButtonOverlay.style.display = "inline";
-    cancelButtonOverlay.style.display = "inline";
-    linieOverlay.style.display = "inline";
-    plusButtonOverlay.style.display = "none";
+  if (forceShow || taskInput.value.trim()) {
+    confirmButton.style.display = "inline";
+    cancelButton.style.display = "inline";
+    linie.style.display = "inline";
+    plusButton.style.display = "none";
   }
 }
 
-function addSubtaskOverlay() {
-  const taskInputOverlay = document.getElementById("newSubtask-overlay");
-  const taskValueOverlay = taskInputOverlay.value.trim();
-  if (taskValueOverlay === "") return;
+function addSubtask() {
+  const taskInput = document.getElementById("newSubtask");
+  const taskValue = taskInput.value.trim();
+  if (taskValue === "") return;
 
-  subtaskList.push(taskValueOverlay);
-  renderSubtasksOverlay();
+  subtaskList.push(taskValue);
+  renderSubtasks();
 
-  taskInputOverlay.value = "";
-  toggleButtonVisibilityOverlay();
+  taskInput.value = "";
+  toggleButtonVisibility();
 }
 
-function cancelSubtaskOverlay() {
-  document.getElementById("newSubtask-overlay").value = "";
-  toggleButtonVisibilityOverlay();
+function cancelSubtask() {
+  document.getElementById("newSubtask").value = "";
+  toggleButtonVisibility();
 }
 
-function renderSubtasksOverlay() {
-  const subtaskContainerOverlay = document.getElementById("subtaskLabels-overlay");
-  if (subtaskContainerOverlay) {
-  subtaskContainerOverlay.innerHTML = "";
-  subtaskListOverlay.forEach((subtaskOverlay, index) => {
-    subtaskContainerOverlay.innerHTML += getSubtasksTemplateOverlay(subtaskOverlay, index);
+function renderSubtasks() {
+  const subtaskContainer = document.getElementById("subtaskLabels");
+  if (subtaskContainer) {
+  subtaskContainer.innerHTML = "";
+  subtaskList.forEach((subtask, index) => {
+    subtaskContainer.innerHTML += getSubtasksTemplate(subtask, index);
   });}
 }
 
-function editSubtaskOverlay(index) {
-  let editSubtaksOverlay = document.getElementById(`edit-subtask-img-overlay-${index}`);
-  let deleteSubtaskOverlay = document.getElementById(`delete-subtask-overlay-${index}`);
-  let imagesContainerOverlay = document.getElementById(`images-container-overlay-${index}`);
-  let confrimEditOverlay = document.getElementById(`confirm-subtask-overlay-${index}`);
+function editSubtask(index) {
+  let editSubtaks = document.getElementById(`edit-subtask-img-${index}`);
+  let deleteSubtask = document.getElementById(`delete-subtask-${index}`);
+  let imagesContainer = document.getElementById(`images-container-${index}`);
+  let confrimEdit = document.getElementById(`confirm-subtask-${index}`);
 
-  editSubtaksOverlay.style.display = "none";
-  confrimEditOverlay.style.display = "flex";
-  deleteSubtaskOverlay.src = "../Assets/delete.png";
-  imagesContainerOverlay.style.flexDirection = "row-reverse-overlay";
+  editSubtaks.style.display = "none";
+  confrimEdit.style.display = "flex";
+  deleteSubtask.src = "../Assets/delete.png";
+  imagesContainer.style.flexDirection = "row-reverse";
 
-  inputOnFocusOverlay(index);
+  inputOnFocus(index);
 }
-function inputOnFocusOverlay(index) {
-  let editSubtaskOverlay = document.getElementById(`edit-subtask-overlay-${index}`);
-  let subtaskListOverlay = document.getElementById(`subtask-list-overlay-${index}`);
-  let subtaskLabelOverlay = document.getElementById(`subtask-label-overlay-${index}`);
-  let lengthOverlay = editSubtaskOverlay.value.length;
+function inputOnFocus(index) {
+  let editSubtask = document.getElementById(`edit-subtask-${index}`);
+  let subtaskList = document.getElementById(`subtask-list-${index}`);
+  let subtaskLabel = document.getElementById(`subtask-label-${index}`);
+  let length = editSubtask.value.length;
 
-  editSubtaskOverlay.focus();
-  editSubtaskOverlay.setSelectionRangeOverlay(length, length);
-  editSubtaskOverlay.style.backgroundColor = "white";
-  subtaskLabelOverlay.style.backgroundColor = "white";
-  subtaskListOverlay.style.borderBottom = "1px solid #29abe2";
+  editSubtask.focus();
+  editSubtask.setSelectionRange(length, length);
+  editSubtask.style.backgroundColor = "white";
+  subtaskLabel.style.backgroundColor = "white";
+  subtaskList.style.borderBottom = "1px solid #29abe2";
 }
-function confirmSubtaskOverlay(index) {
-  const editInputOverlay = document.getElementById(`edit-subtask-overlay-${index}`);
-  const updatedValueOverlay = editInputOverlay.value.trim();
+function confirmSubtask(index) {
+  const editInput = document.getElementById(`edit-subtask-${index}`);
+  const updatedValue = editInput.value.trim();
 
-  if (updatedValueOverlay) {
-    subtaskListOverlay[index] = updatedValueOverlay;
-    renderSubtasksOverlay();
+  if (updatedValue) {
+    subtaskList[index] = updatedValue;
+    renderSubtasks();
   }
 }
 
-function cancelSubtaskOverlay() {
-  subtaskInputOverlay.value = "";
-  addSubtaskBtnOverlay.style.display = "inline-overlay";
-  document.getElementById("confirm-subtask-btn-overlay").style.display = "none";
-  document.getElementById("cancel-subtask-btn-overlay").style.display = "none";
+function cancelSubtask() {
+  subtaskInput.value = "";
+  addSubtaskBtn.style.display = "inline";
+  document.getElementById("confirm-subtask-btn").style.display = "none";
+  document.getElementById("cancel-subtask-btn").style.display = "none";
 }
 
-function deleteSubtaskOverlay(index) {
-  subtaskListOverlay.splice(index, 1);
-  renderSubtasksOverlay();
+function deleteSubtask(index) {
+  subtaskList.splice(index, 1);
+  renderSubtasks();
 }
 
-function getFormInputValueOverlay(inputIdOverlay) {
-  return document.getElementById(inputIdOverlay).value.trim();
+function getFormInputValue(inputId) {
+  return document.getElementById(inputId).value.trim();
 }
 
-function countSubtasksOverlay(subtaskListOverlay) {
-  const totalSubtasksOverlay = subtaskListOverlay.length;
-  const completedSubtasksOverlay = subtaskListOverlay.filter(
-    (subtaskOverlay) => subtaskOverlay.completed
+function countSubtasks(subtaskList) {
+  const totalSubtasks = subtaskList.length;
+  const completedSubtasks = subtaskList.filter(
+    (subtask) => subtask.completed
   ).length;
-  return { completedSubtasksOverlay, totalSubtasksOverlay };
+  return { completedSubtasks, totalSubtasks };
 }
 
-function createNewTaskOverlay(
-  titleOverlay,
-  descriptionOverlay,
-  dueDateOverlay,
-  priorityOverlay,
-  categoryOverlay,
-  subtaskListOverlay,
-  selectedUsersOverlay
+function createNewTask(
+  title,
+  description,
+  dueDate,
+  priority,
+  category,
+  subtaskList,
+  selectedUsers
 ) {
-  const { completedSubtasksOverlay, totalSubtasksOverlay } = countSubtasksOverlay(subtaskListOverlay);
+  const { completedSubtasks, totalSubtasks } = countSubtasks(subtaskList);
   return {
-    id: `task-overlay-${Date.now()}`,
-    titleOverlay,
-    descriptionOverlay,
-    dueDateOverlay,
-    priorityOverlay,
-    categoryOverlay,
-    subtasksOverlay: subtaskListOverlay,
-    completedSubtasksOverlay,
-    totalSubtasksOverlay,
-    assignedUsersOverlay: selectedUsersOverlay,
+    id: `task-${Date.now()}`,
+    title,
+    description,
+    dueDate,
+    priority,
+    category,
+    subtasks: subtaskList,
+    completedSubtasks,
+    totalSubtasks,
+    assignedUsers: selectedUsers,
   };
 }
 
-function saveTaskToLocalStorageOverlay(columnId, newTask) {
-  const tasksOverlay = JSON.parse(localStorage.getItem(columnId)) || [];
-  tasksOverlay.push(newTask);
-  localStorage.setItem(columnId, JSON.stringify(tasksOverlay));
+function saveTaskToLocalStorage(columnId, newTask) {
+  const tasks = JSON.parse(localStorage.getItem(columnId)) || [];
+  tasks.push(newTask);
+  localStorage.setItem(columnId, JSON.stringify(tasks));
 }
 
-function isCategorySelectedOverlay() {
-  return selectedCategoryOverlay !== ""; 
+function isCategorySelected() {
+  return selectedCategory !== ""; 
 }
 
-function checkAddTaksOverlay() {
-    let validOverlay = true; 
-    if (titleOverlay.value.length < 1) {
-      titleErrorOverlay.style.display = "flex";
-      titleErrorOverlay.innerHTML = "Bitte Fügen Sie einen Titel hinzu";
-      validOverlay = false; 
+function checkAddTaks() {
+    let valid = true; 
+    if (title.value.length < 1) {
+      titleError.style.display = "flex";
+      titleError.innerHTML = "Bitte Fügen Sie einen Titel hinzu";
+      valid = false; 
     }
-    if (descriptionOverlay.value.length < 1) {
-      descriptionErrorOverlay.innerHTML = "Bitte Fügen Sie eine Beschreibung hinzu";
-      descriptionErrorOverlay.style.display = "flex";
-      validOverlay = false; 
+    if (description.value.length < 1) {
+      descriptionError.innerHTML = "Bitte Fügen Sie eine Beschreibung hinzu";
+      descriptionError.style.display = "flex";
+      valid = false; 
     }
-    if (dateOverlay.value.length < 1) {
-      dateErrorOverlay.style.display = "flex";
-      dateErrorOverlay.innerHTML = "Bitte ein Datum auswählen";
-      validOverlay = false;
+    if (date.value.length < 1) {
+      dateError.style.display = "flex";
+      dateError.innerHTML = "Bitte ein Datum auswählen";
+      valid = false;
     }
-    if (!isCategorySelectedOverlay()) {
-      categoryErrorOverlay.style.display = "flex";
-      categoryErrorOverlay.innerHTML = "Bitte wählen Sie eine Kategorie für die Aufgabe aus";
-      validOverlay = false;
+    if (!isCategorySelected()) {
+      categoryError.style.display = "flex";
+      categoryError.innerHTML = "Bitte wählen Sie eine Kategorie für die Aufgabe aus";
+      valid = false;
     }
-    if (validOverlay) {
-      addTaskMsgOverlay(); 
+    if (valid) {
+      addTaskMsg(); 
     }
   }
 
-function clearTitleErrorOverlay() {
+function clearTitleError() {
   titleError.innerHTML = "";
 }
 
-function clearDescriptionErrorOverlay() {
-  descriptionErrorOverlay.innerHTML = "";
+function clearDescriptionError() {
+  descriptionError.innerHTML = "";
 }
 
-function clearDateErrorOverlay() {
-  dateErrorOverlay.innerHTML = "";
+function clearDateError() {
+  dateError.innerHTML = "";
 }
 
-function addTaskOverlay() {
-  const titleOverlay = getFormInputValue("title-input-overlay");
-  const descriptionOverlay = getFormInputValue("description-overlay");
-  const dueDateOverlay = getFormInputValue("date-input-overlay");
-  const priorityOverlay = selectedPriorityOverlay || "medium-overlay";
-  const categoryOverlay = selectedCategoryOverlay;
+function addTask() {
+  const title = getFormInputValue("title-input");
+  const description = getFormInputValue("description");
+  const dueDate = getFormInputValue("date-input");
+  const priority = selectedPriority || "medium";
+  const category = selectedCategory;
 
-  const newTaskOverlay = createNewTaskOverlay(
-    titleOverlay,
-    descriptionOverlay,
-    dueDateOverlay,
-    priorityOverlay,
-    categoryOverlay,
-    subtaskListOverlay,
-    selectedUsersOverlay
+  const newTask = createNewTask(
+    title,
+    description,
+    dueDate,
+    priority,
+    category,
+    subtaskList,
+    selectedUsers
   );
-  const currentColumnOverlay = localStorage.getItem("currentColumn") || "todo";
-  saveTaskToLocalStorageOverlay(currentColumn, newTask);
+  const currentColumn = localStorage.getItem("currentColumn") || "todo";
+  saveTaskToLocalStorage(currentColumn, newTask);
   window.location.href = "board.html";
 }
 
@@ -391,7 +392,7 @@ function addTaskMsg() {
     msgContainer.style.display = "flex";
     setTimeout(() => {
       msgContainer.style.display = "none";
-      addTaskOverlay();
+      addTask();
       closeOverlay();
     }, 2000); 
 }

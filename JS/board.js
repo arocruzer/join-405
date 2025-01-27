@@ -436,6 +436,16 @@ document.querySelectorAll('.task-container').forEach((taskContainer) => {
     taskContainer.addEventListener('dragleave', removeHighlight);
 });
 
+function closeOverlay() {
+    let hero = document.getElementById("hero");
+    hero.style.display = "none"
+}
+
+function renderAddTask() {
+    let hero = document.getElementById("hero");
+    hero.style.display = "block"
+}
+
 // Main function to move the task
 function moveTask(taskId, direction, event) {
     if (event) event.stopPropagation();
