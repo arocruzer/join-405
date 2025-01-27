@@ -24,6 +24,7 @@ body {
   margin-top: 110px;
   margin-left: 91px;
   margin-right: 110px;
+  max-width: 1200px;
 }
 
 .header-board {
@@ -127,7 +128,7 @@ body {
 
 .column-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   margin-bottom: 10px;
 }
@@ -387,13 +388,11 @@ body {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  overflow-y: auto;
   padding: 20px;
 }
 
 .modal-content {
   background-color: white;
-  padding: 32px;
   border-radius: 20px;
   max-width: 530px;
   width: 100%;
@@ -404,6 +403,12 @@ body {
   transform: translate(-50%, -50%);
   top: 50%;
   left: 50%;
+  height: auto;
+  overflow-y: auto;
+  padding-left: 32px;
+  padding-right: 32px;
+  padding-top: 32px;
+  max-height: 80vh;
 }
 
 .task-modal {
@@ -411,7 +416,6 @@ body {
   flex-direction: column;
   gap: 24px;
   max-height: 650px;
-  overflow-x: auto;
   padding-right: 12px;
 }
 
@@ -496,6 +500,7 @@ body {
   display: flex;
   justify-content: space-around;
   flex-direction: column;
+  align-items: center;
 }
 
 .user-item {
@@ -529,8 +534,12 @@ body {
 .modal-footer {
   display: flex;
   justify-content: flex-end;
-  align-items: center;
   gap: 10px;
+  position: sticky;
+  bottom: 0;
+  background-color: white;
+  padding-bottom: 40px;
+  padding-top: 10px;
 }
 
 .delete-button,
@@ -672,9 +681,7 @@ textarea {
   padding: 5px 10px;
   border-radius: 15px;
   font-size: 14px;
-  display: inline-flex;
-  align-items: center;
-  gap: 30px;
+  word-wrap: break-word;
 }
 
 .subtusk-input {
@@ -857,10 +864,8 @@ textarea {
 .contact-list-container {
   max-height: 160px;
   overflow-y: auto;
-  border: 1px solid #ccc;
   background-color: #fff;
   padding: 8px;
-  border-radius: 4px;
 }
 
 .contact {
@@ -979,13 +984,13 @@ textarea {
 }
 
 .subtask-label {
-  padding: 5px 10px;
+  padding: 5px 30px;
   border-radius: 15px;
   font-size: 14px;
-  display: inline-flex;
-  align-items: center;
+  display: flex;
   justify-content: space-around;
-  gap: 5px;
+  word-wrap: break-word;
+  width: 100%;
 }
 
 .subtask-label button {
@@ -999,7 +1004,10 @@ textarea {
   display: none;
   display: flex;
   justify-content: space-between;
-  width: 60px
+  width: 60px;
+  margin-left: 2px;
+  gap: 12px;
+  align-items: center;
 }
 
 .subtask-label:hover .images-container {
@@ -1017,13 +1025,21 @@ textarea {
 .subtask-label input {
   border: none;
   background-color: #f6f7f8;
-  width: 300px;
+  width: 70%;
 }
 
 .prio-container {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+.subtask-text{
+  overflow-wrap: anywhere;
+}
+
+.contact.checked {
+  background-color: #e0f7fa;
+  border-color: #00acc1;
 }
 
 .btn-prio-urgent {
@@ -1167,6 +1183,10 @@ textarea.description-input {
   padding: 30px;
 }
 
+.task-buttons{
+  display: none;
+}
+
 @media(max-width: 1380px){
 .addtask-overlay{
   width: 100%;
@@ -1290,6 +1310,9 @@ textarea.description-input {
 }
 
 @media (max-width: 490px) {
+  .task-modal{
+    gap: 15px;
+  }
   .subtask {
     width: 230px;
   }
@@ -1312,7 +1335,7 @@ textarea.description-input {
 
 @media (max-width: 385px) {
   .user-story-card {
-    width: 200px;
+    width: 230px;
   }
 
   .board-container {
@@ -1327,7 +1350,9 @@ textarea.description-input {
   }
 
   .modal-content {
-    padding: 13px;
+    padding-left: 13px;
+    padding-right: 13px;
+    padding-top: 13px;
   }
   .images-container{
     height: 17px;
@@ -1336,12 +1361,55 @@ textarea.description-input {
 }
 
 @media (max-width: 360px) {
+  .btn-prio-low{
+    width: 110px;
+  }
+  .btn-prio-medium{
+    width: 110px;
+  }
+  .btn-prio-urgent{
+    width: 110px;
+  }
+  .drop-down{
+    font-size: 14px;
+  }
+  .user-contact span {
+    font-size: 14px;
+  }
+  .subtask-label {
+    padding: 5px 15px;
+  }
   .subtask {
-    width: 180px;
+    width: 165px;
   }
 
   .prio-btn-container {
     gap: 5px;
   }
 
+}
+
+@media (max-width: 830px) {
+  .task-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+  }
+  .move-btn {
+      font-size: 12px;
+      border: none;
+      border-radius: 4px;
+      background-color: #ffffff;
+      color: white;
+      cursor: pointer;
+  }
+  .move-btn:hover {
+      background-color: #80c7e5;
+  }
+  .arrow-right-icon{
+    transform: rotate(90deg);
+  }
+  .arrow-left-icon{
+    transform: rotate(-90deg);
+  }
 }

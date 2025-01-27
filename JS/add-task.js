@@ -407,3 +407,12 @@ function addTaskMsg() {
       window.location.href = "/HTML/board.html";
     }, 2000); 
 }
+
+function toggleSubtaskCompletion(index) {
+  const checkbox = document.getElementById(`subtask-checkbox-${index}`);
+  if (checkbox.checked) {
+      subtaskList[index].completed = true;
+  } else {
+      subtaskList[index].completed = false;
+  }
+}
