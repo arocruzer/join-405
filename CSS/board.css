@@ -1173,8 +1173,11 @@ textarea.description-input {
   top: 0;
   left: 180px;
   background-color: #2d3e502a;
-  width: 88%;
+  width: calc(100% - 180px);
   height: 100vh;
+  padding-left: 0 !important;
+  z-index: 1000;
+  padding-right: 100px;
 }
 .addtask-overlay{
   background-color: white;
