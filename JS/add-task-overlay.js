@@ -385,12 +385,12 @@ function addTaskOverlay() {
   window.location.href = "board.html";
 }
 
-function addTaskMsgOverlay() {
-  let msgContainerOverlay = document.getElementById("add-task-msg-overlay");
+function addTaskMsg() {
+  let msgContainer = document.getElementById("add-task-msg");
 
-    msgContainerOverlay.style.display = "flex";
+    msgContainer.style.display = "flex";
     setTimeout(() => {
-      msgContainerOverlay.style.display = "none";
+      msgContainer.style.display = "none";
       addTaskOverlay();
       closeOverlay();
     }, 2000); 
