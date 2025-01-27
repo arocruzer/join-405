@@ -386,7 +386,7 @@ hr{
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  padding-top: 146px;
+  padding-top: 10px;
 }
 
 .required {
@@ -502,7 +502,7 @@ hr{
     position: sticky;
     top: 82px;
     background-color: #f6f7f8;
-    z-index: 1000;
+    z-index: 1;
   }
 }
 

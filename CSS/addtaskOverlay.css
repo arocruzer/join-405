@@ -375,11 +375,6 @@ hero.prio-container {
     background-image: url(../Assets/img/add-task_w_L.png);
   }
   
-  #add-task-button {
-    background-color: #091931;
-    color: white;
-  }
-  
   #confirmButton {
     display: none;
   }
