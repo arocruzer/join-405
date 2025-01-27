@@ -87,7 +87,8 @@ function updateTaskVisibilityById(columnId) {
 // Redirects the user to the task creation page and stores the current column in localStorage.
 function openInputPage(columnId) {
     localStorage.setItem('currentColumn', columnId);
-    window.location.href = "/HTML/add-task.html";
+    /*window.location.href = "/HTML/add-task.html";*/
+     renderAddTask();
 }
 
 // Filters and displays tasks based on a search input (tasks must match the search text).
