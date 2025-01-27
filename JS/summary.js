@@ -121,29 +121,15 @@ function getPriorityClass(priority) {
   return `prio-${priority}`; 
 }
 
-function getPriorityText(priority) {
-  switch (priority) {
-    case "urgent":
-      return "Urgent";
-    case "medium":
-      return "Medium";
-    case "low":
-      return "Low";
-    default:
-      return "Unknown";
-  }
-}
-
 function displayNextDueTask() {
   const nextTask = getNextDueTask();
   const nextDueElement = document.getElementById("task-info");
 
   if (nextTask && nextDueElement) {
-    const priorityIcon = getPriorityIcon(nextTask.priority); 
-    const formattedDate = formatDateLong(nextTask.dueDate); 
-    const priorityText = getPriorityText(nextTask.priority); 
-
-    nextDueElement.innerHTML = getDueDateTemplate(priorityIcon, formattedDate, priorityText);
+    const priorityIcon = getPriorityIcon(nextTask.priority);
+    const formattedDate = formatDateLong(nextTask.dueDate);
+    const priority = nextTask.priority;
+    nextDueElement.innerHTML = getDueDateTemplate(priorityIcon, formattedDate, priority);
   } else if (nextDueElement) {
     nextDueElement.innerHTML = "<p>Keine anstehenden Aufgaben gefunden.</p>";
   }

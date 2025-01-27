@@ -87,8 +87,7 @@ function updateTaskVisibilityById(columnId) {
 // Redirects the user to the task creation page and stores the current column in localStorage.
 function openInputPage(columnId) {
     localStorage.setItem('currentColumn', columnId);
-    /* window.location.href = "/HTML/add-task.html"; */
-    renderAddTask();
+    window.location.href = "/HTML/add-task.html";
 }
 
 // Filters and displays tasks based on a search input (tasks must match the search text).
@@ -494,13 +493,4 @@ function updateArrowIcons(columnId, taskId) {
     if (columnId === 'done') {
         arrowLeftIcon.style.display = 'none';
     } 
-}
-function closeOverlay() {
-    let hero = document.getElementById("hero");
-    hero.style.display = "none"
-}
-
-function renderAddTask() {
-    let hero = document.getElementById("hero");
-    hero.style.display = "block"
 }

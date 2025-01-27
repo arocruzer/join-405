@@ -28,7 +28,7 @@
             <hr width="88px" color="#29ABE2" size="3" />
           </div>
         </div>
-        <form oninput="allowSignup()" onsubmit="addUser(); return false;">
+        <form onsubmit="checkSignUp(event); return false;">
           <div class="input-box">
             <input type="text" id="name" placeholder="Name" required />
             <img class="input-img" src="../Assets/person.png" alt="" />
@@ -74,7 +74,7 @@
             <div class="erorr-msg" id="repeat-password-error"></div>
           </div>
           <div class="checkbox-container">
-            <input type="checkbox" name="" id="checkbox" required />
+            <input type="checkbox" name="" id="" required />
             <h4>
               I accept the
               <a href="../HTML/privacy-policy.html" target="_blank"
@@ -83,7 +83,7 @@
             </h4>
           </div>
           <div class="login-signup-container">
-            <button type="submit" id="signup" class="signup-btn">Sign up</button>
+            <button class="signup-btn">Sign up</button>
           </div>
         </form>
       </div>

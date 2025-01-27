@@ -1,28 +1,20 @@
 function renderAddToTaskContacts(color, initials, user, index, isChecked) {
-    return `
-      <div class="contact ${isChecked ? "selected-user" : ""}" onclick="checkBoxUserTask(${index}, event)">
-        <div class="name-and-img">
-          <div class="initials-circle" style="background-color: ${color};">
-            ${initials}
-          </div>
-          <p>${user.name}</p>
-        </div>
-        <input onclick="checkBoxUserTask(${index}, event)" type="checkbox" ${isChecked} name="checkbox">
-      </div>`;
-  }
+  return `<div class="contact">
+                <div class="name-and-img">
+                    <div class="initials-circle" style="background-color: ${color};">
+                        ${initials}
+                    </div>
+                    <p>${user.name}</p>
+                </div>
+                <input onclick="checkBoxUserTask(${index})" type="checkbox" ${isChecked} name="checkbox">
+            </div>`;
+}
 function renderAddedUsers(color, initials) {
   return `
             <div class="initials-circle" style="background-color: ${color};">
                 ${initials}
             </div>`;
 }
-function renderAddedUsersPlaceholder(countText) {
-    return `
-      <div class="initials-circle" style="background-color: gray;">
-        ${countText}
-      </div>
-    `;
-  }
 
 function regardsGastTemplate(greeting, userName) {
   return `<h2>${greeting}</h2> <h1>${userName}</h1>`;
@@ -239,7 +231,7 @@ function HTMLEditOverlay(index){
         <div class="overlay-edit-contact">
             <div class="middle-avatar">${loadedContacts[index].initialien}</div>
             <div class="upper-half">
-                <div class="cross-close" onclick="closeEditContactOverlay(${index})">X</div>
+                <div class="cross-close" onclick="closeEditContactOverlay()">X</div>
                 <div class="edit-contact-title">
                     <h1>Edit contact</h1>
                     <div class="blue-line"></div>
@@ -275,7 +267,7 @@ function HTMLEditOverlayDesktop(index){
             </div>
         </div>
         <div class="right-part">
-        <img onclick="closeEditContactOverlay(${index})" class="close-cross-desktop" src="../Assets/close.svg" alt="">
+        <img onclick="closeEditContactOverlay()" class="close-cross-desktop" src="../Assets/close.svg" alt="">
             <div class="input-fields-desktop">
                 <input class="input-layout-desktop input-person" value="${loadedContacts[index].name}" placeholder="Name" type="text" id="edit-input-name-id">
                 <div id="name-error-id" class="input-layout error-message"></div>
@@ -284,8 +276,8 @@ function HTMLEditOverlayDesktop(index){
                 <input class="input-layout-desktop input-phone" value="${loadedContacts[index].phone}" placeholder="Phone" type="tel" id="edit-input-phone-id">
                 <div id="phone-error-id" class="input-layout error-message"></div>
                 <div class="delete-save-buttons-desktop">
-                    <button onclick="deleteContact(${index})" class="overlay-delete-button-desktop">Delete</button>
-                    <button onclick="editContact(${index})" class="overlay-save-button-desktop">Save<i class="fa-sharp-duotone fa-solid fa-check save-padding"></i></button>
+                    <button onclick="deleteContact()" class="overlay-delete-button-desktop">Delete</button>
+                    <button onclick="editContact()" class="overlay-save-button-desktop">Save<i class="fa-sharp-duotone fa-solid fa-check save-padding"></i></button>
                 </div>
             </div>
         </div>
@@ -501,110 +493,24 @@ function createEditAndDeleteButtonsHTML() {
     `;
 }
 
-function getDueDateTemplate(priorityIcon, formattedDate, priorityText) {
-    const priorityClass = getPriorityClass(priorityText.toLowerCase());
+function getDueDateTemplate(priorityIcon, formattedDate, priority) {
+    const priorityClass = getPriorityClass(priority);
     return `
-      <div class="task-info">
-        <div class="prio">
-          <div class="${priorityClass}">
-            <img class="prio-img" src="${priorityIcon}" />
-          </div>
-          <div class="status">
-            <h4>1</h4>
-            <p>${priorityText}</p>
-          </div>
-        </div>
-        <hr style="height: 102px; display: inline-block; border: 1px solid #d1d1d1;" />
-        <div class="date">
-          <h3>${formattedDate}</h3>
-          <p>Upcoming Deadline</p>
-        </div>
-      </div>
-    `;
+                              <div class="task-info">
+                          <div class="prio">
+                            <div class="${priorityClass}">
+                              <img class="prio-img" src="${priorityIcon}" />
+                            </div>
+                            <div class="status">
+                              <h4>1</h4>
+                              <p>Urgent</p>
+                            </div>
+                          </div>
+                          <hr style="height: 102px; display: inline-block; border: 1px solid #d1d1d1;"/>
+                          <div class="date">
+                            <h3>${formattedDate}</h3>
+                            <p>Upcoming Deadline</p>
+                          </div>
+                        </div>
+      `;
   }
-
-/* function getAddTaskTemplate() {
-    return `
-        <div class="addtask-overlay">
-        <div class="title-arrow">
-          <h1>Add Task</h1>
-          <button id="close-overlay" onclick="closeOverlay()">X</button>
-        </div>
-        <div class="form-container">
-          <div class="form-left">
-            <div class="input-containers">
-              <p>Title<span>*</span></p>
-              <input class="title-input" type="text" placeholder="Enter a title" id="title-input" onchange="clearTitleError()"/>
-              <div class="erorr-msg" id="title-error"></div>
-            </div>
-            <div class="input-containers">
-              <p>Description</p>
-              <textarea class="description-input" placeholder="Enter a Description" id="description" onchange="clearDescriptionError()"></textarea>
-              <div class="erorr-msg description-error" id="description-error"></div>
-            </div>
-            <div class="input-containers" id="input-contacts">
-              <p>Assigned to</p>
-              <div onclick="openDropDownMenuUser(), addUserToTask()" class="drop-down">
-                <div>Select contacts to assign</div>
-                <div>
-                  <img class="drop-down-arrow" id="drop-down-arrow-contacts" src="../Assets/arrow_drop_downaa (1).png" alt="Arrow down"/>
-                </div>
-              </div>
-              <div class="contact-list-container" id="contact-list"></div>
-              <div id="addedUers"></div>
-            </div>
-          </div>
-          <hr />
-          <div class="form-right">
-            <div class="input-containers">
-              <p>Due date<span>*</span></p>
-              <input class="date-input" type="date" id="date-input" onchange="clearDateError()"/>
-              <div class="erorr-msg" id="date-error"></div>
-            </div>
-            <div class="prio-container">
-              <p>Prio</p>
-              <div class="prio-btn-container">
-                <button onclick="changeColorPrioBtn('urgent')" id="btn-urgent" class="btn-prio-urgent">Urgent<img id="urgent-img" src="../Assets/prio_urgent.png" alt="Urgent"/></button>
-                <button onclick="changeColorPrioBtn('medium')" id="btn-medium" class="btn-prio-medium">Medium<img id="medium-img" src="../Assets/prio_medium.png" alt="Medium"/></button>
-                <button onclick="changeColorPrioBtn('low')" id="btn-low" class="btn-prio-low">Low<img id="low-img" src="../Assets/prio_low.png" alt="Low"/></button>
-              </div>
-            </div>
-            <div class="input-containers" id="input-category">
-              <p>Category<span>*</span></p>
-              <div class="drop-down" onclick="openDropDownMenuCategory()">
-                <div id="selected-category">Select task category</div>
-                  <img class="drop-down-arrow" id="drop-down" src="../Assets/arrow_drop_downaa (1).png" alt="Arrow down"/>
-                  <div class="erorr-msg category-error" id="category-error"></div>
-              </div>
-              <div class="category-options hidden" id="categorySelect">
-                <div onclick="selectCategory('Technical Task')">
-                  Technical Task
-                </div>
-                <div onclick="selectCategory('User Story')">User Story</div>
-              </div>
-            </div>
-            <div class="input-containers">
-              <p>Subtasks</p>
-              <div class="subtask-container">
-                <input oninput="toggleButtonVisibility()" class="subtask-input" type="text" placeholder="Add new subtask" id="newSubtask"/>
-                <img onclick="toggleButtonVisibility(true)" id="plusButton" class="plus-img" src="../Assets/Subtasks +.png" alt=""/>
-                <button class="add-subtask" id="confirmButton" onclick="addSubtask()"><img src="../Assets/check_blue.png" alt="" /></button>
-                <span class="linie" id="linie" onclick="cancelSubtask()">|</span>
-                <button class="cancle-subtask" id="cancelButton" onclick="cancelSubtask()"><img src="../Assets/iconoir_cancel.png" alt="" /></button>
-              </div>
-              <div id="subtaskLabels" class="subtask-label-container"></div>
-              <p class="required">This field is required<span>*</span></p>
-            </div>
-          </div>
-        </div>
-        <div class="add-clear-task">
-          <div>
-            <p>This field is required<span>*</span></p>
-          </div>
-          <div class="clear-addTask-container">
-            <button onclick="clearTask()" class="clear-btn">Clear <img src="../Assets/iconoir_cancel.png" alt=""/></button>
-            <button onclick="checkAddTaks()" class="creatTask-btn">Creat Task <img src="../Assets/check.png" alt=""/></button>
-          </div>
-        </div>
-      </div>`
-} */

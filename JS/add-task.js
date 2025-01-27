@@ -2,11 +2,8 @@ let dropDownArrowContacts = document.getElementById("drop-down-arrow-contacts");
 let dropDownArrowCategory = document.getElementById("drop-down");
 let concatList = document.getElementById("contact-list");
 let btnUrgent = document.getElementById("btn-urgent");
-let imgUrgent = document.getElementById("urgent-img");
 let btnMedium = document.getElementById("btn-medium");
-let imgMedium = document.getElementById("medium-img");
 let btnLow = document.getElementById("btn-low");
-let imgLow = document.getElementById("low-img");
 let addSubtaskBtn = document.getElementById("add-subtask-btn");
 let subtaskList = [];
 let selectedUsers = [];
@@ -17,20 +14,13 @@ let selectedCategory = "";
 const categorySelect = document.getElementById("categorySelect");
 const selectedCategoryElement = document.getElementById("selected-category");
 let body = document.getElementById("body");
-let title = document.getElementById("title-input");
-let description = document.getElementById("description");
-let date =  document.getElementById("date-input");
-let titleError = document.getElementById("title-error");
-let descriptionError = document.getElementById("description-error");
-let dateError = document.getElementById("date-error");
-let categoryError = document.getElementById("category-error");
 
 renderSubtasks();
 
 function openDropDownMenuUser() {
   switch (contacState) {
     case 1:
-      concatList.style.display = "flex";
+      concatList.style.display = "block";
       dropDownArrowContacts.src = "../Assets/arrow_drop_downaa.png";
       contacState = 2;
       addUserToTask();
@@ -62,74 +52,63 @@ function addUserToTask() {
 
   loadedContacts.forEach((user, index) => {
     let isChecked = selectedUsers.includes(user) ? "checked" : "";
-    let selectedClass = selectedUsers.includes(user) ? "selected-user" : "";
 
-    let initials = user.initialien; 
-    let color = user.color; 
+    let initials = user.initialien;
 
-    concatList.innerHTML += renderAddToTaskContacts(color, initials, user, index, isChecked, selectedClass);
-  }); 
+    let color = user.color;
+
+    concatList.innerHTML += renderAddToTaskContacts(
+      color,
+      initials,
+      user,
+      index,
+      isChecked
+    );
+  });
 }
 
-function checkBoxUserTask(index, event) {
-  event.stopPropagation(); 
-
+function checkBoxUserTask(index) {
   const user = loadedContacts[index];
-  const contactElement = document.querySelectorAll('.contact')[index];
-  const checkbox = contactElement.querySelector('input[type="checkbox"]');
-
-  if (event.target.tagName !== "INPUT") {
-    checkbox.checked = !checkbox.checked;
-  }
+  const checkbox = document.querySelectorAll('.contact input[type="checkbox"]')[
+    index
+  ];
 
   if (checkbox.checked) {
     if (!selectedUsers.includes(user)) {
       selectedUsers.push(user);
     }
-    contactElement.classList.add('selected-user');
   } else {
     selectedUsers = selectedUsers.filter((u) => u !== user);
-    contactElement.classList.remove('selected-user');
   }
 
-  addedUsers(); 
+  addedUsers();
 }
 
 function addedUsers() {
   let addedUsers = document.getElementById("addedUers");
-  let maxVisibleUsers = 4;
   addedUsers.innerHTML = "";
 
-
-  selectedUsers.slice(0, maxVisibleUsers).forEach((user) => {
+  selectedUsers.forEach((user) => {
     let initials = user.initialien;
 
     let color = user.color;
 
     addedUsers.innerHTML += renderAddedUsers(color, initials);
-    
   });
-  if (selectedUsers.length > maxVisibleUsers) {
-    let remainingCount = selectedUsers.length - maxVisibleUsers;
-    addedUsers.innerHTML += renderAddedUsersPlaceholder(`+${remainingCount}`);
-  }
 }
-
 function clearTask() {
-  title.value = "";
-  description.value = "";
+  document.getElementById("title-input").value = "";
+  document.getElementById("description").value = "";
   document.getElementById("addedUers").innerHTML = "";
-  date.value = "";
+  document.getElementById("date-input").value = "";
   document.getElementById("newSubtask").value = "";
   document.getElementById("subtaskLabels").innerHTML = "";
   document.getElementById("selected-category").innerHTML =
     "Select task category";
   btnMedium.style.backgroundColor = "#FFA800";
-  imgMedium.src = "../Assets/prio_medium.png";
+  btnMedium.src = "../Assets/prio_line_orange.png";
   btnLow.style.backgroundColor = "#ffffff";
-  imgLow.src = "../Assets/prio_low.png"
   btnUrgent.style.backgroundColor = "#ffffff";
-  imgUrgent.src = "../Assets/prio_urgent.png";
 }
 
 // Auswahl der Kategorie und Dropdown schließen
@@ -137,7 +116,6 @@ function selectCategory(category) {
   selectedCategory = category;
   selectedCategoryElement.innerText = category;
   categorySelect.style.display = "none";
-  categoryError.style.display = "none";
   state = 1;
   dropDownArrowCategory.src = "../Assets/arrow_drop_downaa (1).png";
 }
@@ -183,9 +161,9 @@ function setButtonStyles(priority, bgColor) {
 }
 
 function setImageSources([urgentImgSrc, mediumImgSrc, lowImgSrc]) {
-  imgUrgent.src = urgentImgSrc;
-  imgMedium.src = mediumImgSrc;
-  imgLow.src = lowImgSrc;
+  document.getElementById("urgent-img").src = urgentImgSrc;
+  document.getElementById("medium-img").src = mediumImgSrc;
+  document.getElementById("low-img").src = lowImgSrc;
 }
 
 function toggleButtonVisibility(forceShow) {
@@ -331,56 +309,16 @@ function saveTaskToLocalStorage(columnId, newTask) {
   localStorage.setItem(columnId, JSON.stringify(tasks));
 }
 
-function isCategorySelected() {
-  return selectedCategory !== ""; 
-}
-
-function checkAddTaks() {
-    let valid = true; 
-    if (title.value.length < 1) {
-      titleError.style.display = "flex";
-      titleError.innerHTML = "Bitte Fügen Sie einen Titel hinzu";
-      valid = false; 
-    }
-    if (description.value.length < 1) {
-      descriptionError.innerHTML = "Bitte Fügen Sie eine Beschreibung hinzu";
-      descriptionError.style.display = "flex";
-      valid = false; 
-    }
-    if (date.value.length < 1) {
-      dateError.style.display = "flex";
-      dateError.innerHTML = "Bitte ein Datum auswählen";
-      valid = false;
-    }
-    if (!isCategorySelected()) {
-      categoryError.style.display = "flex";
-      categoryError.innerHTML = "Bitte wählen Sie eine Kategorie für die Aufgabe aus";
-      valid = false;
-    }
-    if (valid) {
-      addTaskMsg(); 
-    }
-  }
-
-function clearTitleError() {
-  titleError.innerHTML = "";
-}
-
-function clearDescriptionError() {
-  descriptionError.innerHTML = "";
-}
-
-function clearDateError() {
-  dateError.innerHTML = "";
-}
-
 function addTask() {
   const title = getFormInputValue("title-input");
   const description = getFormInputValue("description");
   const dueDate = getFormInputValue("date-input");
   const priority = selectedPriority || "medium";
   const category = selectedCategory;
-
+  if (!title || !dueDate || !priority || !category) {
+    alert("Bitte füllen Sie alle Pflichtfelder aus.");
+    return;
+  }
   const newTask = createNewTask(
     title,
     description,
@@ -406,14 +344,3 @@ body.onclick = function (event) {
     categoryState = 1;
   }
 };
-
-function addTaskMsg() {
-  let msgContainer = document.getElementById("add-task-msg");
-
-    msgContainer.style.display = "flex";
-    setTimeout(() => {
-      msgContainer.style.display = "none";
-      addTask();
-      window.location.href = "/HTML/board.html";
-    }, 2000); 
-}

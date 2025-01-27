@@ -41,10 +41,6 @@ function getRandomColor() {
 }
 
 function openContactDetailsOverlay(index){
-    const allContacts = document.querySelectorAll('[id^="contact-id-"]');
-    allContacts.forEach(contact => {
-        contact.classList.remove('darkgray-bg');
-    });
     if (window.innerWidth < 1180) {
         document.getElementById('contacts').classList.add('d-none');
         let contentRef = document.getElementById('contact-details-wrapper-id');
@@ -58,7 +54,6 @@ function openContactDetailsOverlay(index){
         let content = document.getElementById('edit-contact-details-overlay-id');
         content.innerHTML = HTMLEditOverlayDesktop(index);
     } 
-    document.getElementById(`contact-id-${index}`).classList.add('darkgray-bg');
 }
 
 function closeContactDetailsOverlay(){
@@ -66,11 +61,6 @@ function closeContactDetailsOverlay(){
     let contentRef = document.getElementById('contact-details-wrapper-id');
     contentRef.classList.add('contact-detail-hidden');
     renderContactDetailPage();
-    const allContacts = document.querySelectorAll('[id^="contact-id-"]');
-    allContacts.forEach(contact => {
-        contact.classList.remove('darkgray-bg');
-    });
-    
 }
 
 function OpenAddContactOverlay(){
@@ -103,7 +93,7 @@ function addNewContact(){
 }
 
 function validateName(name){
-    const nameRegex = /^[a-zA-ZäöüßÄÖÜéèêñáàäâëç\s]+$/u;
+    const nameRegex = /^[a-zA-ZäöüßÄÖÜ\s]+$/;
     const nameError = document.getElementById('name-error');
     nameError.innerHTML = "";
     if (!nameRegex.test(name)) {
@@ -129,7 +119,7 @@ function validatePhone(phonenumber){
     const digitCount = Math.abs(phonenumber).toString().length;
     phoneError.innerHTML = "";
 
-    if(digitCount < 8 && digitCount !=0){
+    if(digitCount < 8){
         phoneError.innerHTML = "ungültige Telefonnummer";
         return false;
     } return true;
@@ -155,10 +145,9 @@ function openEditContactOverlay(){
     contentRef.classList.remove('d-none');
 }
 
-function closeEditContactOverlay(index){
+function closeEditContactOverlay(){
     let contentRef = document.getElementById('edit-contact-details-overlay-id');
     contentRef.classList.add('d-none');
-    openContactDetailsOverlay(index);
 }
 
 function editContact(index){
@@ -172,8 +161,8 @@ function editContact(index){
         let editedContact = createNewContact(nameInput, mailInput, phoneInput);
         loadedContacts[index] = editedContact;
         renderContacts();
-        closeEditContactOverlay(index);
-        // closeContactDetailsOverlay();
+        closeEditContactOverlay();
+        closeContactDetailsOverlay();
     } return
 }
 
@@ -213,7 +202,7 @@ function validateEditPhone(phonenumber){
 function deleteContact(index){
     loadedContacts.splice(index, 1);
     renderContacts();
-    closeEditContactOverlay(index);
+    closeEditContactOverlay();
     closeContactDetailsOverlay();
 }
 
