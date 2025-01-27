@@ -1,4 +1,4 @@
-let dropDownArrowContacts = document.getElementById("drop-down-arrow-contacts");
+/*let dropDownArrowContacts = document.getElementById("drop-down-arrow-contacts");
 let dropDownArrowCategory = document.getElementById("drop-down");
 let concatList = document.getElementById("contact-list");
 let btnUrgent = document.getElementById("btn-urgent");
@@ -395,4 +395,4 @@ function addTaskMsg() {
       closeOverlay();
     }, 2000); 
 }
-
+*/
