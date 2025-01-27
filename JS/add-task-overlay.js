@@ -9,7 +9,6 @@ let btnLow = document.getElementById("btn-low");
 let imgLow = document.getElementById("low-img");
 let addSubtaskBtn = document.getElementById("add-subtask-btn");
 let subtaskList = [];
-let selectedUsers = [];
 let selectedPriority = "";
 let contacState = 1;
 let categoryState = 1;
@@ -116,21 +115,21 @@ function addedUsers() {
 }
 
 function clearTask() {
-  title.value = "";
-  description.value = "";
-  document.getElementById("addedUers").innerHTML = "";
-  date.value = "";
-  document.getElementById("newSubtask").value = "";
-  document.getElementById("subtaskLabels").innerHTML = "";
-  document.getElementById("selected-category").innerHTML =
-    "Select task category";
-  btnMedium.style.backgroundColor = "#FFA800";
-  imgMedium.src = "../Assets/prio_medium.png";
-  btnLow.style.backgroundColor = "#ffffff";
-  imgLow.src = "../Assets/prio_low.png"
-  btnUrgent.style.backgroundColor = "#ffffff";
-  imgUrgent.src = "../Assets/prio_urgent.png";
-}
+    title.value = "";
+    description.value = "";
+    document.getElementById("addedUers").innerHTML = "";
+    date.value = "";
+    document.getElementById("newSubtask").value = "";
+    document.getElementById("subtaskLabels").innerHTML = "";
+    document.getElementById("selected-category").innerHTML =
+      "Select task category";
+    btnMedium.style.backgroundColor = "#FFA800";
+    imgMedium.src = "../Assets/prio_medium.png";
+    btnLow.style.backgroundColor = "#ffffff";
+    imgLow.src = "../Assets/prio_low.png"
+    btnUrgent.style.backgroundColor = "#ffffff";
+    imgUrgent.src = "../Assets/prio_urgent.png";
+  }
 
 // Auswahl der Kategorie und Dropdown schließen
 function selectCategory(category) {
@@ -226,21 +225,12 @@ function cancelSubtask() {
 
 function renderSubtasks() {
   const subtaskContainer = document.getElementById("subtaskLabels");
+  if (subtaskContainer) {
   subtaskContainer.innerHTML = "";
   subtaskList.forEach((subtask, index) => {
     subtaskContainer.innerHTML += getSubtasksTemplate(subtask, index);
-  });
+  });}
 }
-
-function toggleSubtaskCompletion(index) {
-  const checkbox = document.getElementById(`subtask-checkbox-${index}`);
-  if (checkbox.checked) {
-      subtaskList[index].completed = true;
-  } else {
-      subtaskList[index].completed = false;
-  }
-}
-
 
 function editSubtask(index) {
   let editSubtaks = document.getElementById(`edit-subtask-img-${index}`);
@@ -395,18 +385,6 @@ function addTask() {
   window.location.href = "board.html";
 }
 
-body.onclick = function (event) {
-  if (!event.target.closest("#input-contacts") && !event.target.closest("#input-category")) {
-    concatList.style.display = "none";
-    dropDownArrowContacts.src = "../Assets/arrow_drop_downaa (1).png";
-    contacState = 1;
-
-    categorySelect.style.display = "none";
-    dropDownArrowCategory.src = "../Assets/arrow_drop_downaa (1).png";
-    categoryState = 1;
-  }
-};
-
 function addTaskMsg() {
   let msgContainer = document.getElementById("add-task-msg");
 
@@ -414,6 +392,7 @@ function addTaskMsg() {
     setTimeout(() => {
       msgContainer.style.display = "none";
       addTask();
-      window.location.href = "/HTML/board.html";
+      closeOverlay();
     }, 2000); 
 }
+

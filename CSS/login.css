@@ -67,6 +67,19 @@ button {
   font-size: 21px;
 }
 
+.signup-btn {
+  height: 49px;
+  width: 91px;
+  color: white;
+  background-color: #2a3647;
+  border: solid #2a3647;
+  border-radius: 8px;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .guest-login {
   height: 51px;
   width: 180px;

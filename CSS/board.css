@@ -1172,6 +1172,36 @@ textarea.description-input {
 .contact.checked {
   background-color: #e0f7fa;
   border-color: #00acc1;
+.hero{
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 12%;
+  background-color: #2d3e502a;
+  width: 88%;
+  height: 100vh;
+}
+.addtask-overlay{
+  background-color: white;
+  border-radius: 30px;
+  width: 1110px;
+  padding: 30px;
+}
+
+@media(max-width: 1380px){
+.addtask-overlay{
+  width: 100%;
+}
+}
+
+@media(max-width: 1220px){
+  .hero{
+    padding-left: 10px;
+  }
+  .form-container{
+    flex-direction: row !important;
+    align-items: flex-start !important;
+  }
 }
 
 @media (max-width: 768px) {
