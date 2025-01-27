@@ -9,12 +9,31 @@ function renderAddToTaskContacts(color, initials, user, index, isChecked) {
                 <input onclick="checkBoxUserTask(${index})" type="checkbox" ${isChecked} name="checkbox">
             </div>`;
 }
+
+function renderAddToTaskContactsOverlay(colorOverlay, initialsOverlay, user, index, isCheckedOverlay) {
+    return `<div class="contact">
+                  <div class="name-and-img">
+                      <div class="initials-circle" style="background-color: ${colorOverlay};">
+                          ${initialsOverlay}
+                      </div>
+                      <p>${user.name}</p>
+                  </div>
+                  <input onclick="checkBoxUserTask(${index})" type="checkbox" ${isCheckedOverlay} name="checkbox">
+              </div>`;
+  }
 function renderAddedUsers(color, initials) {
   return `
             <div class="initials-circle" style="background-color: ${color};">
                 ${initials}
             </div>`;
 }
+
+function renderAddedUsersOverlay(colorOverlay, initialsOverlay) {
+    return `
+              <div class="initials-circle" style="background-color: ${colorOverlay};">
+                  ${initialsOverlay}
+              </div>`;
+  }
 
 function regardsGastTemplate(greeting, userName) {
   return `<h2>${greeting}</h2> <h1>${userName}</h1>`;
@@ -212,6 +231,28 @@ function getSubtasksTemplate(subtask, index) {
                     <div class="subtask">
                         <div>
                             <input id="edit-subtask-${index}" class="edit-subtask" type="text" value="${subtask}" onfocus="editSubtask(${index})">
+                        </div>
+                        <div class="images-container" id="images-container-${index}">
+                            <img class="edit-subtask-img" id="edit-subtask-img-${index}" onclick="editSubtask(${index})" src="../Assets/edit.png" alt="Edit Icon">
+                            <img class="confirm-subtask" id="confirm-subtask-${index}" onclick="confirmSubtask(${index})" src="../Assets/check_blue.png" style="display: none;">
+                            <button class="delete-btn" onclick="deleteSubtask(${index})">
+                                <img id="delete-subtask-${index}" src="../Assets/delete.png" alt="delete Icon">
+                            </button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>`;
+}
+
+function getSubtasksTemplateOverlay(subtaskOverlay, index) {
+    return `
+        <div class="subtask-label" id="subtask-label-${index}">
+            <ul id="subtask-list-${index}">
+                <li>
+                    <div class="subtask">
+                        <div>
+                            <input id="edit-subtask-${index}" class="edit-subtask" type="text" value="${subtaskOverlay}" onfocus="editSubtask(${index})">
                         </div>
                         <div class="images-container" id="images-container-${index}">
                             <img class="edit-subtask-img" id="edit-subtask-img-${index}" onclick="editSubtask(${index})" src="../Assets/edit.png" alt="Edit Icon">
