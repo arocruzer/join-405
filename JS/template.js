@@ -390,13 +390,15 @@ function generateUserEditHTML() {
 
 function createUserElement(user, index, isChecked) {
     return `
-        <div class="contact">
-          <div class="user-avatar" style="background-color: ${user.color};">${user.initialien}</div>
-          <span>${user.name}</span>
+        <div class="contact ${isChecked ? 'checked' : ''}" onclick="checkBoxUserTask(${index})">
+           <div class="user-contact">
+             <div class="user-avatar" style="background-color: ${user.color};">${user.initialien}</div>
+             <span>${user.name}</span>
+           </div>
           <input 
             type="checkbox" 
             ${isChecked ? 'checked' : ''} 
-            onclick="checkBoxUserTask(${index})"
+            onclick="checkBoxUserTask(${index},  event)"
           />
         </div>
     `;

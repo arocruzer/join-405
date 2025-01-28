@@ -172,6 +172,7 @@ function addUserToTask(userName, userColor) {
     selectedUsers.push({ name: userName, color: userColor });
     renderAssignedUsers(selectedUsers);
 }
+
 // Toggles user selection for the task when a checkbox is clicked.
 function checkBoxUserTask(index, event) {
     if (event && event.target.tagName === "INPUT") {
@@ -198,6 +199,8 @@ function checkBoxUserTask(index, event) {
     }
     addedUsers();
 }
+
+
 // Renders the currently added users as avatars in the modal
 function addedUsers() {
     const addedUsersContainer = document.getElementById("addedUsers");
