@@ -85,9 +85,52 @@ function updateTaskVisibilityById(columnId) {
 // Redirects the user to the task creation page and stores the current column in localStorage.
 function openInputPage(columnId) {
     localStorage.setItem('currentColumn', columnId);
-    /* window.location.href = "/HTML/add-task.html"; */
+        // CSS-Datei laden, wenn sie nicht vorhanden ist
+        if (!document.querySelector('link[href="../CSS/addtaskOverlay.css"]')) {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = '../CSS/addtaskOverlay.css';
+            link.id = 'overlay-css';
+            document.head.appendChild(link);
+        }
+
+        // JS-Datei laden, wenn sie nicht vorhanden ist
+        if (!document.querySelector('script[src="../JS/add-task-overlay.js"]')) {
+            const script = document.createElement('script');
+            script.src = '../JS/add-task-overlay.js';
+            script.id = 'overlay-js';
+            document.body.appendChild(script);
+        } 
     renderAddTask();
 }
+
+function closeOverlay() {
+    const hero = document.getElementById("hero");
+    hero.style.display = "none";
+    closeTaskOverlay();
+    setTimeout(() => {
+        location.reload();
+    }, 10);
+
+}
+
+
+function closeTaskOverlay() {
+    let hero = document.getElementById("hero");
+    if (hero) {
+        hero.style.display = "none";
+        const overlayCss = document.getElementById('overlay-css');
+        if (overlayCss) {
+            overlayCss.remove();
+        }
+
+        const overlayJs = document.getElementById('overlay-js');
+        if (overlayJs) {
+            overlayJs.remove();
+        }
+    }
+}
+
 
 // Filters and displays tasks based on a search input (tasks must match the search text).
 function searchFromSearchTaskInput() {
@@ -435,10 +478,7 @@ document.querySelectorAll('.task-container').forEach((taskContainer) => {
     taskContainer.addEventListener('dragleave', removeHighlight);
 });
 
-function closeOverlay() {
-    let hero = document.getElementById("hero");
-    hero.style.display = "none"
-}
+
 
 function renderAddTask() {
     let hero = document.getElementById("hero");
@@ -499,3 +539,4 @@ function updateArrowIcons(columnId, taskId) {
         arrowLeftIcon.style.display = 'none';
     } 
 }
+
