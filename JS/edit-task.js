@@ -173,13 +173,19 @@ function addUserToTask(userName, userColor) {
     renderAssignedUsers(selectedUsers);
 }
 // Toggles user selection for the task when a checkbox is clicked.
-function checkBoxUserTask(index) {
+function checkBoxUserTask(index, event) {
+    if (event && event.target.tagName === "INPUT") {
+        event.stopPropagation();
+    }
     const user = loadedContacts[index];
     const contactElement = document.querySelectorAll('.contact')[index];
     const checkbox = document.querySelectorAll('.contact input[type="checkbox"]')[index];
     if (!user) {
         console.error(`User not found at index ${index}`);
         return;
+    }
+    if (!event || event.target.tagName !== "INPUT") {
+        checkbox.checked = !checkbox.checked;
     }
     if (checkbox.checked) {
         if (!selectedUsers.some(u => u.name === user.name)) {
@@ -188,7 +194,7 @@ function checkBoxUserTask(index) {
         }
     } else {
         selectedUsers = selectedUsers.filter(u => u.name !== user.name);
-        contactElement.classList.remove('checked'); 
+        contactElement.classList.remove('checked');
     }
     addedUsers();
 }
