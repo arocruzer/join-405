@@ -12,6 +12,7 @@ function loadTasks(columnId) {
 
   tasks.forEach((task) => {
     container.innerHTML += renderTask(task);
+    updateArrowIcons(columnId, task.id);
   });
   updateTaskVisibilityById(columnId);
 }
