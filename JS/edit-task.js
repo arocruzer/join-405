@@ -229,19 +229,28 @@ function checkBoxUserTask(index, event) {
 function addedUsers() {
     const addedUsersContainer = document.getElementById("addedUsers");
     addedUsersContainer.innerHTML = "";
-    selectedUsers.forEach(user => {
-        const nameParts = user.name.split(' ');
-        const initials = nameParts.length > 1 
-            ? nameParts[0][0] + nameParts[1][0]
-            : nameParts[0][0];
+    selectedUsers.forEach((user, index) => {
+        if (index < 4) {
+            const nameParts = user.name.split(' ');
+            const initials = nameParts.length > 1 
+                ? nameParts[0][0] + nameParts[1][0]
+                : nameParts[0][0];      
+            addedUsersContainer.innerHTML += `
+                <div class="user-avatar" style="background-color: ${user.color};">
+                    ${initials.toUpperCase()}
+                </div>
+            `;
+        }
+    });
+    if (selectedUsers.length > 4) {
         addedUsersContainer.innerHTML += `
-            <div class="user-avatar" style="background-color: ${user.color};">
-                ${initials.toUpperCase()}
+            <div class="user-avatar remaining-users-circle">
+                +${selectedUsers.length - 4}
             </div>
         `;
-    });
-    
+    }
 }
+
 
 // Toggles the visibility of the dropdown menu for user selection.
 function openDropDownMenuUser() {
