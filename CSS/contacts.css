@@ -304,6 +304,9 @@
   display: flex;
   justify-content: flex-end;
   position: relative;
+  position: absolute;
+  top: 85%;
+  right: 5%;
 }
 
 .three-points-menu {
@@ -323,6 +326,8 @@
   width: 116px;
   background-color: #ffffff;
   position: absolute;
+  top: -50px;
+  right: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
