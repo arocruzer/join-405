@@ -567,14 +567,14 @@ function refreshUII(currentColumn, targetColumn) {
   loadTasks(targetColumn);
 }
 
-function toggleTaskIcons(taskId, columnId) {
-  const taskElement = document.getElementById(taskId);
-  const arrowRightIcon = taskElement.querySelector(".arrow-right-icon");
-  const arrowLeftIcon = taskElement.querySelector(".arrow-left-icon");
-
-  if (columnId === "todo") {
-    arrowLeftIcon.style.display = "none";
-  } else if (columnId === "done") {
-    arrowRightIcon.style.display = "none";
-  }
+function updateArrowIcons(columnId, taskId) {
+    const taskElement = document.getElementById(taskId);
+    const arrowRightIcon = taskElement.querySelector('.arrow-right-icon');
+    const arrowLeftIcon = taskElement.querySelector('.arrow-left-icon');
+    if (columnId === 'todo') {
+        arrowRightIcon.style.display = 'none';
+    }
+    if (columnId === 'done') {
+        arrowLeftIcon.style.display = 'none';
+    } 
 }
