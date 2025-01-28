@@ -571,6 +571,7 @@ hero.prio-container {
     #main-content {
       width: auto;
     }
+
   }
 
   @keyframes overlaySlideIn {
