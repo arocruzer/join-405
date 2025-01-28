@@ -344,3 +344,23 @@ body.onclick = function (event) {
     categoryState = 1;
   }
 };
+
+function addTaskMsg() {
+  let msgContainer = document.getElementById("add-task-msg");
+
+    msgContainer.style.display = "flex";
+    setTimeout(() => {
+      msgContainer.style.display = "none";
+      addTask();
+      window.location.href = "/HTML/board.html";
+    }, 2000); 
+}
+
+function toggleSubtaskCompletion(index) {
+  const checkbox = document.getElementById(`subtask-checkbox-${index}`);
+  if (checkbox.checked) {
+      subtaskList[index].completed = true;
+  } else {
+      subtaskList[index].completed = false;
+  }
+}

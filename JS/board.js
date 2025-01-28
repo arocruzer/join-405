@@ -323,6 +323,7 @@ function deleteTask() {
         tasks = tasks.filter(task => task.id !== currentTaskId);
         localStorage.setItem(column, JSON.stringify(tasks));
         loadTasks(column);
+        loadTasks(column);
     });
     closeTaskModal();
 }

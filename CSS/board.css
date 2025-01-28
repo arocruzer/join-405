@@ -24,7 +24,7 @@ body {
   margin-top: 110px;
   margin-left: 91px;
   margin-right: 110px;
-  max-width:1200px
+  max-width: 1200px;
 }
 
 .header-board {
@@ -128,7 +128,7 @@ body {
 
 .column-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   margin-bottom: 10px;
 }
@@ -404,7 +404,6 @@ body {
   left: 50%;
   height: auto;
   overflow-y: auto;
-  position: relative;
   padding-left: 32px;
   padding-right: 32px;
   padding-top: 32px;
@@ -540,6 +539,11 @@ body {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
+  position: sticky;
+  bottom: 0;
+  background-color: white;
+  padding-bottom: 40px;
+  padding-top: 10px;
 }
 
 .delete-button,
@@ -1039,6 +1043,14 @@ textarea {
   flex-direction: column;
   gap: 10px;
 }
+.subtask-text{
+  overflow-wrap: anywhere;
+}
+
+.contact.checked {
+  background-color: #e0f7fa;
+  border-color: #00acc1;
+}
 
 .btn-prio-urgent {
   height: 41px;
@@ -1192,6 +1204,26 @@ textarea.description-input {
   padding: 30px;
 }
 
+.task-buttons{
+  display: none;
+}
+
+@media(max-width: 1380px){
+.addtask-overlay{
+  width: 100%;
+}
+}
+
+@media(max-width: 1220px){
+  .hero{
+    padding-left: 10px;
+  }
+  .form-container{
+    flex-direction: row !important;
+    align-items: flex-start !important;
+  }
+}
+
 @media (max-width: 768px) {
   .modal-body {
     width: 95%;
@@ -1307,7 +1339,7 @@ textarea.description-input {
 }
 
 @media (max-width: 490px) {
-  .task-modal {
+  .task-modal{
     gap: 15px;
   }
   .subtask {
@@ -1367,19 +1399,15 @@ textarea.description-input {
   .btn-prio-urgent{
     width: 110px;
   }
-
   .drop-down{
     font-size: 14px;
   }
-
   .user-contact span {
     font-size: 14px;
   }
-
   .subtask-label {
     padding: 5px 15px;
   }
-
   .subtask {
     width: 165px;
   }
@@ -1388,10 +1416,6 @@ textarea.description-input {
     gap: 5px;
   }
 
-}
-
-.task-buttons {
-  display: none;
 }
 
 @media (max-width: 830px) {
