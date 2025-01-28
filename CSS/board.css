@@ -1038,8 +1038,9 @@ textarea {
 }
 
 .contact.checked {
-  background-color: #e0f7fa;
-  border-color: #00acc1;
+    background-color: #2A3647;
+    color: white;
+    margin-bottom: 5px;
 }
 
 .btn-prio-urgent {
