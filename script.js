@@ -30,34 +30,28 @@ function userCheck() {
 }
 
 async function loadAllContacts(path = "") {
-  let savedContacts = localStorage.getItem('contacts');
-  loadedContacts = savedContacts ? JSON.parse(savedContacts) : [];
-  if (typeof renderContacts === "function") renderContacts();
+  let response = await fetch(BASE_URL + path + ".json");
+  let responsToJason = await response.json();
 
-  if (!savedContacts) { 
-      try {
-          let response = await fetch(BASE_URL + path + ".json");
-          let usersArray = Object.values((await response.json()).users);
-          loadedContacts = usersArray.map(formatContact);
-          saveContactsToLocalStorage();
-          if (typeof renderContacts === "function") renderContacts();
-      } catch (error) {
-          console.error("Fehler beim Laden der Kontakte aus der Datenbank:", error);
-      }
-  }
-}
-
-function formatContact(x) {
-  let [vorname, nachname] = x.name.split(" ");
-  return {
+  loadedContacts = [];
+  const usersArray = Object.values(responsToJason.users);
+  usersArray.forEach((x) => {
+    let [vorname, nachname] = x.name.split(" ");
+    let initialien = vorname[0] + (nachname ? nachname[0] : "");
+    const user = {
       color: x.color,
       name: x.name,
       email: x.email,
       password: x.password,
       phone: x.phone,
-      letter: x.name[0].toUpperCase(),
-      initialien: vorname[0] + (nachname ? nachname[0] : ""),
-  };
+      letter: x.name.trim().charAt(0),
+      initialien: initialien,
+    };
+    loadedContacts.push(user);
+  });
+  if (typeof renderContacts === "function") {
+    renderContacts(contacts);
+  }
 }
 
 async function fetchAndStoreTasks() {
