@@ -444,7 +444,7 @@ function closeOverlay() {
 
 function renderAddTask() {
     let hero = document.getElementById("hero");
-    hero.style.display = "block"
+    hero.style.display = "flex"
 }
 
 // Main function to move the task

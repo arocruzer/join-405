@@ -1,3 +1,8 @@
+function saveContactsToLocalStorage() {
+    localStorage.setItem('contacts', JSON.stringify(loadedContacts));
+}
+
+
 function renderContacts() {
     let contentRef = document.getElementById('contacts');
     if (!contentRef) return;
@@ -76,68 +81,60 @@ function closeAddContactOverlay(){
     document.getElementById('add-contact-div-overlay-id').classList.add('d-none');
 }
 
-function addNewContact(){   
-    let nameInput = document.getElementById('add-input-name-id').value;
-    let mailInput = document.getElementById('add-input-mail-id').value
-    let phoneInput = document.getElementById('add-input-phone-id').value
-
-    let isValid = validateName(nameInput) && validateEmail(mailInput) && validatePhone(phoneInput);
-    
-    if (isValid){
-        let newContact = createNewContact(nameInput, mailInput, phoneInput);
-        loadedContacts.push(newContact);
+function addNewContact() {
+    let name = document.getElementById('add-input-name-id').value;
+    let mail = document.getElementById('add-input-mail-id').value;
+    let phone = document.getElementById('add-input-phone-id').value;
+    if (validateName(name) && validateEmail(mail) && validatePhone(phone)) {
+        loadedContacts.push(createNewContact(name, mail, phone));
+        saveContactsToLocalStorage();
         renderContacts();
         closeAddContactOverlay();
         startAnimation();
-    }return;
-}
-
-function validateName(name){
-    const nameRegex = /^[a-zA-ZäöüßÄÖÜ\s]+$/;
-    const nameError = document.getElementById('name-error');
-    nameError.innerHTML = "";
-    if (!nameRegex.test(name)) {
-      nameError.innerHTML = "Bitte einen gültigen Namen eingeben"
-      return false;
-    } else {
-        return true;
     }
 }
 
-function validateEmail(mail){
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const mailError = document.getElementById('mail-error');
-    mailError.innerHTML = "";
-    if(!emailRegex.test(mail)){
-        mailError.innerHTML = "ungültiges Email Format";
-        return false;
-    } return true;
+function validateName(name) {
+    const regex = /^[a-zA-ZäöüßÄÖÜéèêñáàäâëç\s]+$/u;
+    let error = document.getElementById('name-error');
+    error.innerHTML = regex.test(name) ? "" : "Bitte einen gültigen Namen eingeben";
+    return regex.test(name);
 }
 
-function validatePhone(phonenumber){
+function validateEmail(mail) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    let error = document.getElementById('mail-error');
+    error.innerHTML = regex.test(mail) ? "" : "ungültiges Email Format";
+    return regex.test(mail);
+}
+
+function validatePhone(phone) {
     const phoneError = document.getElementById('phone-error');
-    const digitCount = Math.abs(phonenumber).toString().length;
     phoneError.innerHTML = "";
 
-    if(digitCount < 8){
+    if (phone === "") {
+        return true;
+    }
+
+    const digitCount = Math.abs(phone).toString().length;
+    let isValid = digitCount >= 8;
+
+    if (!isValid) {
         phoneError.innerHTML = "ungültige Telefonnummer";
         return false;
-    } return true;
+    }
+    return true;
 }
 
-function createNewContact(name, mail, phone){
+function createNewContact(name, mail, phone) {
     let [vorname, nachname] = name.split(" ");
-    let initialien = vorname[0] + (nachname ? nachname[0] : ""); 
-
-    let newContact = 
-    {
+    return {
         name: name,
         email: mail,
         phone: phone,
         letter: vorname[0].toUpperCase(),
-        initialien: initialien
-    }
-    return newContact;
+        initialien: vorname[0] + (nachname ? nachname[0] : ""),
+    };
 }
 
 function openEditContactOverlay(){
@@ -150,20 +147,16 @@ function closeEditContactOverlay(){
     contentRef.classList.add('d-none');
 }
 
-function editContact(index){
-    let nameInput = document.getElementById('edit-input-name-id').value;
-    let mailInput = document.getElementById('edit-input-mail-id').value
-    let phoneInput = document.getElementById('edit-input-phone-id').value;
-
-    let isValid = validateEditName(nameInput) && validateEditEmail(mailInput) && validateEditPhone(phoneInput);
-
-    if (isValid) {
-        let editedContact = createNewContact(nameInput, mailInput, phoneInput);
-        loadedContacts[index] = editedContact;
+function editContact(index) {
+    let name = document.getElementById('edit-input-name-id').value;
+    let mail = document.getElementById('edit-input-mail-id').value;
+    let phone = document.getElementById('edit-input-phone-id').value;
+    if (validateEditName(name) && validateEditEmail(mail) && validateEditPhone(phone)) {
+        loadedContacts[index] = createNewContact(name, mail, phone);
+        saveContactsToLocalStorage();
         renderContacts();
-        closeEditContactOverlay();
-        closeContactDetailsOverlay();
-    } return
+        closeEditContactOverlay(index);
+    }
 }
 
 function validateEditName(name){
@@ -190,17 +183,22 @@ function validateEditEmail(mail){
 
 function validateEditPhone(phonenumber){
     const phoneError = document.getElementById('phone-error-id');
-    const digitCount = Math.abs(phonenumber).toString().length;
     phoneError.innerHTML = "";
 
+    if (phonenumber === "") {
+        return true;
+    } 
+
+    const digitCount = Math.abs(phonenumber).toString().length;
     if(digitCount < 8){
         phoneError.innerHTML = "ungültige Telefonnummer";
         return false;
     } return true;
 }
 
-function deleteContact(index){
+function deleteContact(index) {
     loadedContacts.splice(index, 1);
+    saveContactsToLocalStorage();
     renderContacts();
     closeEditContactOverlay();
     closeContactDetailsOverlay();

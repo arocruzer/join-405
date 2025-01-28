@@ -396,3 +396,9 @@ function addTaskMsg() {
       closeOverlay();
     }, 2000); 
 }
+
+document.getElementById('add-task-mobile').addEventListener('click', () => {
+  if (window.innerWidth < 830) {
+      window.location.href = '../HTML/add-task.html';
+  }
+});
