@@ -137,13 +137,18 @@ function validatePhone(phone) {
 }
 
 function createNewContact(name, mail, phone) {
-    let [vorname, nachname] = name.split(" ");
+    const capitalizeWords = str => 
+        str.split(" ")
+           .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+           .join(" ");
+    let formattedName = capitalizeWords(name);
+    let [vorname, nachname] = formattedName.split(" ");
     return {
-        name: name,
+        name: formattedName,
         email: mail,
         phone: phone,
-        letter: vorname[0].toUpperCase(),
-        initialien: vorname[0] + (nachname ? nachname[0] : ""),
+        letter: vorname ? vorname[0].toUpperCase() : "",
+        initialien: (vorname ? vorname[0].toUpperCase() : "") + (nachname ? nachname[0].toUpperCase() : ""),
     };
 }
 
