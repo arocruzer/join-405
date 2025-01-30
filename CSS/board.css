@@ -1410,6 +1410,13 @@ textarea.description-input {
     margin-right: 35px;
   }
 }
+@media (max-width: 830px){
+  #frame {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+}
 
 @media (min-width: 315px) and (max-width: 830px) {
   #main-container {
