@@ -294,13 +294,6 @@ function HTMLEditOverlayDesktop(index){
 }
 
 function renderTask(task) {
-    if (!Array.isArray(task.subtasks)) {
-        task.subtasks = [];
-    }
-    if (!Array.isArray(task.completedSubtasks)) {
-        task.completedSubtasks = [];
-    }
-
     return `
         <div class="user-card" draggable="true" id="${task.id}" ondragstart="drag(event)" onclick="openTaskDetails('${task.id}')">
             <div class="user-story-card todo">
@@ -319,22 +312,34 @@ function renderTask(task) {
                 <p>${task.description}</p>
                 <div class="progress-container">
                     <div class="progress-bar">
-                        <div class="progress" style="width: ${task.subtasks.length > 0 ? (task.completedSubtasks.length / task.subtasks.length) * 100 : 0}%"></div>
+                        <div class="progress" style="width: ${
+                            (Array.isArray(task.subtasks) && task.subtasks.length > 0
+                                ? (Array.isArray(task.completedSubtasks) 
+                                    ? (task.completedSubtasks.length / task.subtasks.length) * 100 
+                                    : 0)
+                                : 0)
+                        }%"></div>
                     </div>
-                    <span class="subtasks">${task.completedSubtasks.length}/${task.subtasks.length} Subtasks</span>
+                    <span class="subtasks">${
+                        (Array.isArray(task.completedSubtasks) ? task.completedSubtasks.length : 0)}/${
+                        (Array.isArray(task.subtasks) ? task.subtasks.length : 0)
+                    } Subtasks</span>
                 </div>
                 <div class="user-container">
                     <div class="user-avatar-container">
-                        ${task.assignedUsers.slice(0, 4).map(user => {
-                            const initials = user.name.split(' ').map(n => n[0]).join('').toUpperCase();
-                            return `<div class="user-avatar" style="background-color: ${user.color};">${initials}</div>`;
-                        }).join('')}
-                        ${task.assignedUsers.length > 4
+                        ${Array.isArray(task.assignedUsers) 
+                            ? task.assignedUsers.slice(0, 4).map(user => {
+                                const initials = user.name.split(' ').map(n => n[0]).join('').toUpperCase();
+                                return `<div class="user-avatar" style="background-color: ${user.color};">${initials}</div>`;
+                            }).join('') 
+                            : ''
+                        }
+                        ${Array.isArray(task.assignedUsers) && task.assignedUsers.length > 4
                             ? `<div class="user-avatar remaining-users-circle">+${task.assignedUsers.length - 4}</div>`
                             : ''}
                     </div>
                     <p>${(() => {
-                        switch (task.priority.toLowerCase()) {
+                        switch (task.priority?.toLowerCase()) {
                             case "low":
                                 return `<img src="../Assets/prio_low.png" alt="Low Priority">`;
                             case "medium":
@@ -342,7 +347,7 @@ function renderTask(task) {
                             case "urgent":
                                 return `<img src="../Assets/prio_urgent.png" alt="Urgent Priority">`;
                             default:
-                                return task.priority;
+                                return task.priority || "No Priority";
                         }
                     })()}</p>
                 </div>
@@ -452,39 +457,6 @@ function createAddSubtaskHTML() {
     `;
 }
 
-function createSubtaskHTML(subtask, index) {
-    return `
-        <div class="subtask-label" id="subtask-${index}">
-            <ul id="subtask-list">
-                <li>
-                    <div class="subtask">
-                        <div>
-                            <span class="subtask-text">${subtask}</span>
-                        </div>
-                        <div class="images-container">
-                           <img 
-                               id="edit-subtask-img" 
-                               onclick="editSubtask(${index})" 
-                               src="../Assets/edit_black.png" 
-                               alt="Edit Icon"
-                           />
-                           <hr>
-                           <button class="delete-btn" onclick="deleteSubtask(${index})">
-                               <img 
-                                   id="delete-subtask" 
-                                   src="../Assets/delete_black.png" 
-                                   alt="Delete Icon"
-                               />
-                           </button>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    `;
-}
-
-
 function createSaveButtonHTML() {
     return `
         <button onclick="saveTaskChanges()" class="okTask-btn" id="oktaskBtn">
@@ -529,89 +501,3 @@ function getDueDateTemplate(priorityIcon, formattedDate, priorityText) {
       </div>
     `;
   }
-
-/* function getAddTaskTemplate() {
-    return `
-        <div class="addtask-overlay">
-        <div class="title-arrow">
-          <h1>Add Task</h1>
-          <button id="close-overlay" onclick="closeOverlay()">X</button>
-        </div>
-        <div class="form-container">
-          <div class="form-left">
-            <div class="input-containers">
-              <p>Title<span>*</span></p>
-              <input class="title-input" type="text" placeholder="Enter a title" id="title-input" onchange="clearTitleError()"/>
-              <div class="erorr-msg" id="title-error"></div>
-            </div>
-            <div class="input-containers">
-              <p>Description</p>
-              <textarea class="description-input" placeholder="Enter a Description" id="description" onchange="clearDescriptionError()"></textarea>
-              <div class="erorr-msg description-error" id="description-error"></div>
-            </div>
-            <div class="input-containers" id="input-contacts">
-              <p>Assigned to</p>
-              <div onclick="openDropDownMenuUser(), addUserToTask()" class="drop-down">
-                <div>Select contacts to assign</div>
-                <div>
-                  <img class="drop-down-arrow" id="drop-down-arrow-contacts" src="../Assets/arrow_drop_downaa (1).png" alt="Arrow down"/>
-                </div>
-              </div>
-              <div class="contact-list-container" id="contact-list"></div>
-              <div id="addedUers"></div>
-            </div>
-          </div>
-          <hr />
-          <div class="form-right">
-            <div class="input-containers">
-              <p>Due date<span>*</span></p>
-              <input class="date-input" type="date" id="date-input" onchange="clearDateError()"/>
-              <div class="erorr-msg" id="date-error"></div>
-            </div>
-            <div class="prio-container">
-              <p>Prio</p>
-              <div class="prio-btn-container">
-                <button onclick="changeColorPrioBtn('urgent')" id="btn-urgent" class="btn-prio-urgent">Urgent<img id="urgent-img" src="../Assets/prio_urgent.png" alt="Urgent"/></button>
-                <button onclick="changeColorPrioBtn('medium')" id="btn-medium" class="btn-prio-medium">Medium<img id="medium-img" src="../Assets/prio_medium.png" alt="Medium"/></button>
-                <button onclick="changeColorPrioBtn('low')" id="btn-low" class="btn-prio-low">Low<img id="low-img" src="../Assets/prio_low.png" alt="Low"/></button>
-              </div>
-            </div>
-            <div class="input-containers" id="input-category">
-              <p>Category<span>*</span></p>
-              <div class="drop-down" onclick="openDropDownMenuCategory()">
-                <div id="selected-category">Select task category</div>
-                  <img class="drop-down-arrow" id="drop-down" src="../Assets/arrow_drop_downaa (1).png" alt="Arrow down"/>
-                  <div class="erorr-msg category-error" id="category-error"></div>
-              </div>
-              <div class="category-options hidden" id="categorySelect">
-                <div onclick="selectCategory('Technical Task')">
-                  Technical Task
-                </div>
-                <div onclick="selectCategory('User Story')">User Story</div>
-              </div>
-            </div>
-            <div class="input-containers">
-              <p>Subtasks</p>
-              <div class="subtask-container">
-                <input oninput="toggleButtonVisibility()" class="subtask-input" type="text" placeholder="Add new subtask" id="newSubtask"/>
-                <img onclick="toggleButtonVisibility(true)" id="plusButton" class="plus-img" src="../Assets/Subtasks +.png" alt=""/>
-                <button class="add-subtask" id="confirmButton" onclick="addSubtask()"><img src="../Assets/check_blue.png" alt="" /></button>
-                <span class="linie" id="linie" onclick="cancelSubtask()">|</span>
-                <button class="cancle-subtask" id="cancelButton" onclick="cancelSubtask()"><img src="../Assets/iconoir_cancel.png" alt="" /></button>
-              </div>
-              <div id="subtaskLabels" class="subtask-label-container"></div>
-              <p class="required">This field is required<span>*</span></p>
-            </div>
-          </div>
-        </div>
-        <div class="add-clear-task">
-          <div>
-            <p>This field is required<span>*</span></p>
-          </div>
-          <div class="clear-addTask-container">
-            <button onclick="clearTask()" class="clear-btn">Clear <img src="../Assets/iconoir_cancel.png" alt=""/></button>
-            <button onclick="checkAddTaks()" class="creatTask-btn">Creat Task <img src="../Assets/check.png" alt=""/></button>
-          </div>
-        </div>
-      </div>`
-} */

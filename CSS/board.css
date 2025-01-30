@@ -499,9 +499,12 @@ body {
 
 .subtask-list {
   display: flex;
-  justify-content: space-around;
   flex-direction: column;
-  align-items: center;
+}
+.subtask-edit-input{
+  width: 100%;
+  border:none;
+  font-size: 16px;
 }
 
 .user-item {
@@ -654,6 +657,12 @@ textarea {
   justify-content: center;
   gap: 12px;
 }
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+  display: block;
+}
 
 .drop-down {
   background-color: #ffffff;
@@ -665,7 +674,6 @@ textarea {
   align-items: center;
   cursor: pointer;
 }
-
 .subtask-container {
   display: flex;
   width: 100%;
@@ -932,6 +940,44 @@ textarea {
   margin-bottom: 10px;
   gap: 10px;
 }
+.images-container img{
+  height: 17px;
+}
+
+.subtask-items{
+  display: flex;
+  width: 100%;
+  position: relative;
+  padding-bottom: 10px;
+}
+.subtask-edit-items{
+  display: flex;
+  width: 100%;
+  position: relative;
+  padding: 12px;
+}
+.subtask-edit-items :focus{
+  border-bottom: 1px solid #29abe2 !important;
+  padding-bottom: 6px;
+  border: none; 
+}
+.edit-delete-subtask{
+  border: none;
+  background-color: white;
+  position: absolute;
+  right: 17px;
+}
+.edit-pen-subtask{
+  border: none;
+  background-color: white;
+  position: absolute;
+  right: 50px;
+}
+.linie-subtask{
+  position: absolute;
+  right: 42px;
+  color: black;
+}
 
 .subtask-text-input {
   flex: 1;
@@ -1166,6 +1212,8 @@ textarea.description-input {
 
 .subtask-text{
   overflow-wrap: anywhere;
+  padding-left: 18px;
+  max-width: 350px;
 }
 
 .contact.checked {
@@ -1306,7 +1354,21 @@ textarea.description-input {
     gap: 6px;
   }
 }
-
+@media (max-width: 550px){
+   .subtask-text{
+    padding-left: 12px;
+    max-width: 300px;
+   }
+   .subtask-edit-input{
+    width: 86%;
+   }
+}
+@media (max-width: 500px){
+  .subtask-text{
+   padding-left: 12px;
+   max-width: 250px;
+  }
+}
 @media (max-width: 490px) {
   .task-modal {
     gap: 15px;
@@ -1325,13 +1387,30 @@ textarea.description-input {
   .subtask-text{
     font-size: 12px;
   }
+  .subtask-edit-input{
+    width: 70%;
+    font-size: 12px;
+  }
 
+}
+@media (max-width: 450px){
+  .subtask-text{
+   padding-left: 2px;
+   max-width: 200px;
+  }
+  .subtask-edit-items{
+    padding: 10px 0px;
+   }
 }
 
 @media (max-width: 395px) {
   .subtask {
     width: 200px;
   }
+  .subtask-text{
+    padding-left: 0px;
+    max-width: 150px;
+   }
 }
 
 @media (max-width: 385px) {

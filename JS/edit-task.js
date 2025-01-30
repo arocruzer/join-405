@@ -251,22 +251,77 @@ function enableSubtaskEdit() {
         return;
     }
     subtaskList = task.subtasks || [];
+    completedSubtasktask= task.completedSubtasks || [];
     modalSubtasks.innerHTML = createAddSubtaskHTML();
     renderExistingSubtasks();
 }
 // Renders the existing subtasks in the modal for editing.
+// Renders the existing subtasks in the modal for editing with checkboxes.
 function renderExistingSubtasks() {
     const subtaskListContainer = document.getElementById('subtaskList');
     if (!subtaskListContainer) {
         console.error('Element "subtaskList" nicht gefunden!');
         return;
     }
-    subtaskListContainer.innerHTML = '';
+
+    subtaskListContainer.innerHTML = ''; // Löscht vorherige Inhalte
+
     subtaskList.forEach((subtask, index) => {
-        const subtaskHTML = createSubtaskHTML(subtask, index);
+        const isChecked = completedSubtasktask.includes(index); // Prüft, ob Subtask erledigt ist
+
+        const subtaskHTML = `
+            <div class="subtask-items" id="subtask-${index}">
+                <input type="checkbox" class="hidden" id="subtask-checkbox-${index}" ${isChecked ? 'checked' : ''} 
+                    onchange="toggleSubtaskIdCompletion(${index})">
+                <span class="subtask-text">${subtask}</span>
+                 <button class="edit-pen-subtask"> 
+                   <img 
+                               id="edit-subtask-img" 
+                               onclick="editSubtask(${index})" 
+                               src="../Assets/edit_black.png" 
+                               alt="Edit Icon"
+                    />
+                 </button>
+                 <span class="linie-subtask">|</span>
+                 <button class="edit-delete-subtask">
+                    <img 
+                                
+                                id="delete-subtask" 
+                                onclick="deleteSubtask(${index})"
+                                src="../Assets/delete_black.png" 
+                                alt="Delete Icon"
+                    />
+                 </button>
+                
+                
+               
+                        
+            </div>
+        `;
+
         subtaskListContainer.insertAdjacentHTML('beforeend', subtaskHTML);
     });
 }
+
+function toggleSubtaskIdCompletion(subtaskIndex) {
+    const task = getCurrentTask();
+    if (!task) return;
+
+    if (!Array.isArray(task.completedSubtasks)) {
+        task.completedSubtasks = [];
+    }
+
+    if (task.completedSubtasks.includes(subtaskIndex)) {
+        task.completedSubtasks = task.completedSubtasks.filter(i => i !== subtaskIndex);
+    } else {
+        task.completedSubtasks.push(subtaskIndex);
+    }
+
+    updateTaskInLocalStorage(task);
+    renderExistingSubtasks();
+}
+
+
 // Adds a new subtask to the task and updates the UI.
 function addSubtasks() {
     const newSubtaskInput = document.getElementById('newSubtask');
@@ -280,27 +335,41 @@ function addSubtasks() {
     newSubtaskInput.value = '';
     toggleButtonVisibility(false);
 }
-// Deletes a subtask at the specified index.
 function deleteSubtask(index) {
     subtaskList.splice(index, 1);
+    completedSubtasktask = completedSubtasktask.filter(i => i !== index);
+    completedSubtasktask = completedSubtasktask.map(i => (i > index ? i - 1 : i));
+    const task = getCurrentTask();
+    if (task) {
+        task.subtasks = subtaskList;
+        task.completedSubtasks = completedSubtasktask;
+        updateTaskInLocalStorage(task);
+    }
     renderExistingSubtasks();
 }
+
 // Enables inline editing for a specific subtask.
 function editSubtask(index) {
     const subtaskItem = document.getElementById(`subtask-${index}`);
     const subtaskText = subtaskList[index];
     subtaskItem.innerHTML = `
-        <input type="text" value="${subtaskText}" id="editSubtaskInput-${index}" class="subtask-edit-input"/>
-        <div class="images-container" id="images-container">
-           
-           <button onclick="deleteSubtask(${index})">
-               <img src="../Assets/delete_black.png" alt="Cancel"/>
-           </button>   
-           <hr style="height: 24px;">
-           <button id="edit-subtask-img" onclick="saveSubtask(${index})">
-               <img src="../Assets/check_blue.png" alt="Save"/>
-           </button>  
-        </div>       
+       <div class="subtask-edit-items">
+          <input type="text" value="${subtaskText}" id="editSubtaskInput-${index}" class="subtask-edit-input"/>
+        <button class="edit-pen-subtask"> 
+            <img
+                onclick="deleteSubtask(${index})" 
+                src="../Assets/delete_black.png" alt="Cancel"
+            />   
+        </button>
+        <span class="linie-subtask">|</span>
+        <button class="edit-delete-subtask">
+            <img 
+                id="edit-subtask-img" onclick="saveSubtask(${index})"
+                src="../Assets/check_blue.png" alt="Save"
+            />  
+        </button>      
+        
+       </div>
         
     `;
 }
@@ -315,11 +384,13 @@ function saveSubtask(index) {
     subtaskList[index] = updatedText;
     renderExistingSubtasks();
 }
+
 // Cancels the inline editing of a subtask and reverts to the original text.
 function cancelEditSubtask(index, originalText) {
     subtaskList[index] = originalText;
     renderExistingSubtasks();
 }
+
 // Toggles the visibility of subtask-related buttons depending on input state.
 function toggleButtonVisibility(forceShow) {
     const taskInput = document.getElementById('newSubtask');
@@ -365,9 +436,9 @@ function addSaveAndCancelButtons(isEditMode) {
     }
 }
 function saveTaskChanges() {
+    if (!validateModalInputs()) return;
     const updatedTask = gatherUpdatedTaskDetails();
     updateTaskInLocalStorage(updatedTask);
-    updateProgressBar(updatedTask);
     refreshBoard();
     closeTaskModal();
 }
@@ -415,30 +486,32 @@ function gatherSubtasks() {
 }
 // Counts the number of completed subtasks based on checkboxes in the modal.
 function countCompletedSubtasks(subtasks) {
-    return subtasks.filter((_, index) => 
-        document.getElementById(`subtask-checkbox-${index}`)?.checked
-    ).length;
+    return subtasks
+        .map((_, index) => index) // Erstellt eine Liste aller Indizes
+        .filter(index => document.getElementById(`subtask-checkbox-${index}`)?.checked); // Speichert nur die erledigten Subtask-Indizes
 }
+
 // Updates the task in localStorage with the latest changes.
 function updateTaskInLocalStorage(updatedTask) {
     const columns = ['todo', 'in-progress', 'await-feedback', 'done'];
+
     for (const column of columns) {
-        const tasks = JSON.parse(localStorage.getItem(column)) || [];
+        let tasks = JSON.parse(localStorage.getItem(column)) || [];
         const taskIndex = tasks.findIndex(task => task.id === updatedTask.id);
+
         if (taskIndex !== -1) {
             tasks[taskIndex] = {
                 ...tasks[taskIndex],
                 ...updatedTask,
-                totalSubtasks: updatedTask.subtasks.length,
-                completedSubtasks: updatedTask.subtasks.filter((_, index) => 
-                    document.getElementById(`subtask-checkbox-${index}`)?.checked
-                ).length,
+                completedSubtasks: updatedTask.completedSubtasks // Speichert die erledigten Subtasks als Liste der Indizes
             };
             localStorage.setItem(column, JSON.stringify(tasks));
             break;
         }
     }
 }
+
+
 // Refreshes the modal with the updated task details after changes are saved.
 function reloadTaskDetails() {
     closeTaskModal();
@@ -466,4 +539,28 @@ function toggleModalLayout(isEditMode) {
         priorityElement.classList.remove('modalsPriority');
         priorityElement.classList.add('modalPriority');
     }
+}
+
+function validateModalInputs() {
+    let isValid = true;
+    ['editTitle', 'editDescription'].forEach(id => {
+        const input = document.getElementById(id);
+        const container = input.parentElement;
+        if (!input.value.trim()) {
+            isValid = false;
+            container.innerHTML += `<span class="error-message" style="color: red; font-size: 12px;">${
+                id === 'editTitle' ? "Bitte fügen Sie einen Titel hinzu" : "Bitte fügen Sie eine Beschreibung hinzu"
+            }</span>`;
+        } else {
+            container.style.borderColor = '';
+            removeError(container);
+        }
+    });
+
+    return isValid;
+}
+
+function removeError(container) {
+    const error = container.querySelector('.error-message');
+    if (error) error.remove();
 }
