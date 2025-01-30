@@ -401,3 +401,57 @@ document.getElementById('add-task-mobile').addEventListener('click', () => {
       window.location.href = '../HTML/add-task.html';
   }
 });
+
+// Redirects the user to the task creation page and stores the current column in localStorage.
+// function openInputPage(columnId) {
+//   localStorage.setItem("currentColumn", columnId);
+//   if (window.innerWidth <= 830) {
+//     window.location.href = "add-task.html";
+//     return;
+//   } else {
+//     if (!document.querySelector('link[href="../CSS/addtaskOverlay.css"]')) {
+//       const link = document.createElement("link");
+//       link.rel = "stylesheet";
+//       link.href = "../CSS/addtaskOverlay.css";
+//       link.id = "overlay-css";
+//       document.head.appendChild(link);
+//     }
+//     if (!document.querySelector('script[src="../JS/add-task-overlay.js"]')) {
+//       const script = document.createElement("script");
+//       script.src = "../JS/add-task-overlay.js";
+//       script.id = "overlay-js";
+//       document.body.appendChild(script);
+//     }
+//     renderAddTask();
+//   }
+// }
+
+// function closeOverlay() {
+//   const hero = document.getElementById("hero");
+//   hero.style.display = "none";
+//   closeTaskOverlay();
+//   setTimeout(() => {
+//     location.reload();
+//   }, 10);
+// }
+
+// function closeTaskOverlay() {
+//   let hero = document.getElementById("hero");
+//   if (hero) {
+//     hero.style.display = "none";
+//     const overlayCss = document.getElementById("overlay-css");
+//     if (overlayCss) {
+//       overlayCss.remove();
+//     }
+
+//     const overlayJs = document.getElementById("overlay-js");
+//     if (overlayJs) {
+//       overlayJs.remove();
+//     }
+//   }
+// }
+
+function renderAddTask() {
+  let hero = document.getElementById("hero");
+  hero.style.display = "flex";
+}

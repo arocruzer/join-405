@@ -89,55 +89,6 @@ function updateTaskVisibilityById(columnId) {
   taskList.style.display = visibleTasks.length === 0 ? "block" : "none";
 }
 
-// Redirects the user to the task creation page and stores the current column in localStorage.
-// function openInputPage(columnId) {
-//   localStorage.setItem("currentColumn", columnId);
-//   if (window.innerWidth <= 830) {
-//     window.location.href = "add-task.html";
-//     return;
-//   } else {
-//     if (!document.querySelector('link[href="../CSS/addtaskOverlay.css"]')) {
-//       const link = document.createElement("link");
-//       link.rel = "stylesheet";
-//       link.href = "../CSS/addtaskOverlay.css";
-//       link.id = "overlay-css";
-//       document.head.appendChild(link);
-//     }
-//     if (!document.querySelector('script[src="../JS/add-task-overlay.js"]')) {
-//       const script = document.createElement("script");
-//       script.src = "../JS/add-task-overlay.js";
-//       script.id = "overlay-js";
-//       document.body.appendChild(script);
-//     }
-//     renderAddTask();
-//   }
-// }
-
-// function closeOverlay() {
-//   const hero = document.getElementById("hero");
-//   hero.style.display = "none";
-//   closeTaskOverlay();
-//   setTimeout(() => {
-//     location.reload();
-//   }, 10);
-// }
-
-// function closeTaskOverlay() {
-//   let hero = document.getElementById("hero");
-//   if (hero) {
-//     hero.style.display = "none";
-//     const overlayCss = document.getElementById("overlay-css");
-//     if (overlayCss) {
-//       overlayCss.remove();
-//     }
-
-//     const overlayJs = document.getElementById("overlay-js");
-//     if (overlayJs) {
-//       overlayJs.remove();
-//     }
-//   }
-// }
-
 // Filters and displays tasks based on a search input (tasks must match the search text).
 function searchFromSearchTaskInput() {
   const searchInput = document.querySelector("#searchTask");
@@ -444,7 +395,6 @@ function updateLocalStorage(sourceTaskContainer, targetTaskContainer, taskId) {
 function refreshUI(sourceTaskContainer, targetTaskContainer) {
   const sourceColumnId = sourceTaskContainer.closest(".column").id;
   const targetColumnId = targetTaskContainer.closest(".column").id;
-
   loadTasks(sourceColumnId);
   loadTasks(targetColumnId);
 }
@@ -452,11 +402,6 @@ function refreshUI(sourceTaskContainer, targetTaskContainer) {
 document.querySelectorAll(".task-container").forEach((taskContainer) => {
   taskContainer.addEventListener("dragleave", removeHighlight);
 });
-
-function renderAddTask() {
-  let hero = document.getElementById("hero");
-  hero.style.display = "flex";
-}
 
 function moveTask(taskId, direction, event) {
   if (event) event.stopPropagation();
@@ -574,8 +519,6 @@ function createSubtaskText(subtask) {
   return subtaskText;
 }
 
-
-
 function toggleSubtaskCompletion(taskId, subtaskIndex) {
   const columnId = findTaskColumn(taskId);
   let tasks = JSON.parse(localStorage.getItem(columnId)) || [];
@@ -594,7 +537,6 @@ function toggleSubtaskCompletion(taskId, subtaskIndex) {
       taskElement.outerHTML = renderTask(task);
   }
 }
-
 
 // Funktion zur Ermittlung der Spalte, in der sich eine Task befindet
 function findTaskColumn(taskId) {

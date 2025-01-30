@@ -9,28 +9,35 @@ function renderAddToTaskContacts(color, initials, user, index, isChecked) {
         </div>
         <input onclick="checkBoxUserTask(${index}, event)" type="checkbox" ${isChecked} name="checkbox">
       </div>`;
-  }
+}
+
+
 function renderAddedUsers(color, initials) {
   return `
             <div class="initials-circle" style="background-color: ${color};">
                 ${initials}
             </div>`;
 }
+
+
 function renderAddedUsersPlaceholder(countText) {
     return `
       <div class="initials-circle" style="background-color: gray;">
         ${countText}
       </div>
     `;
-  }
+}
+
 
 function regardsGastTemplate(greeting, userName) {
   return `<h2>${greeting}</h2> <h1>${userName}</h1>`;
 }
 
+
 function regardsUserTemplate(greeting, userName) {
     return `<h2>${greeting},</h2> <h1>${userName}</h1>`;
 }
+
 
 function renderUserLogo(initials, color, user) {
     return `<div>
@@ -42,7 +49,6 @@ function renderUserLogo(initials, color, user) {
             </div>`;
 }
 
-//Contacts-Functions
 
 function renderCurrentLetter(currentLetter){
     return `
@@ -53,6 +59,7 @@ function renderCurrentLetter(currentLetter){
     <div class="contacts-container" id="contact-container-${currentLetter}">    
     </div>`;
 }
+
 
 function renderCurrentContacts(index, initialien) {
     return `
@@ -65,6 +72,7 @@ function renderCurrentContacts(index, initialien) {
         </div>
     `;
 }
+
 
 function renderContactDetailPage(){
     let contentRef = document.getElementById('contact-details-wrapper-id');
@@ -80,6 +88,7 @@ function renderContactDetailPage(){
     <div class="edit-contact-details-overlay d-none" id="edit-contact-details-overlay-id"></div>
     `;
 }
+
 
 function HTMLopenContactDetailsOverlayMobile(index){
     return`
@@ -118,6 +127,7 @@ function HTMLopenContactDetailsOverlayMobile(index){
     `;
 }
 
+
 function HTMLopenContactDetailsOverlay(index){
     return`
     <div class="contact-detail-title-wrapper">
@@ -155,6 +165,7 @@ function HTMLopenContactDetailsOverlay(index){
 `;
 }
 
+
 function HTMLOpenAddContactOverlay(){
     return`
     <div class="overlay-edit-contact">
@@ -181,6 +192,7 @@ function HTMLOpenAddContactOverlay(){
     </div>
     `;
 }
+
 
 function HTMLOpenAddContactOverlayDesktop(){
     return`
@@ -212,6 +224,7 @@ function HTMLOpenAddContactOverlayDesktop(){
     </div>`;
 }
 
+
 function getSubtasksTemplate(subtask, index) {
     return `
         <div class="subtask-label" id="subtask-label-${index}">
@@ -233,6 +246,7 @@ function getSubtasksTemplate(subtask, index) {
             </ul>
         </div>`;
 }
+
 
 function HTMLEditOverlay(index){
     return`
@@ -263,6 +277,7 @@ function HTMLEditOverlay(index){
     `;
 }
 
+
 function HTMLEditOverlayDesktop(index){
     return`
     <div class="overlay-edit-contact-desktop">
@@ -292,6 +307,7 @@ function HTMLEditOverlayDesktop(index){
     </div>
     `;
 }
+
 
 function renderTask(task) {
     return `
@@ -355,7 +371,6 @@ function renderTask(task) {
         </div>
     `;
 }
-
 
 
 function generatePriorityButtons(currentPriority) {
@@ -457,6 +472,7 @@ function createAddSubtaskHTML() {
     `;
 }
 
+
 function createSaveButtonHTML() {
     return `
         <button onclick="saveTaskChanges()" class="okTask-btn" id="oktaskBtn">
@@ -480,6 +496,7 @@ function createEditAndDeleteButtonsHTML() {
     `;
 }
 
+
 function getDueDateTemplate(priorityIcon, formattedDate, priorityText) {
     const priorityClass = getPriorityClass(priorityText.toLowerCase());
     return `
@@ -500,4 +517,63 @@ function getDueDateTemplate(priorityIcon, formattedDate, priorityText) {
         </div>
       </div>
     `;
-  }
+}
+
+
+function generateTitleEditHTML(titleText) {
+    return `
+        <div class="input-containers">
+            <p>Title</p>
+            <input class="title-input" type="text" placeholder="Enter a title" id="editTitle" value="${titleText}"/>
+        </div>`;
+}
+
+
+function generateDescriptionEditHTML(descriptionText) {
+    return `
+        <div class="input-containers">
+            <p>Description</p>
+            <textarea class="description-input" placeholder="Enter a Description" id="editDescription">${descriptionText}</textarea>
+        </div>`;
+}
+
+
+function generateDueDateEditHTML(dueDateText) {
+    const formattedDate = formatDateForInput(dueDateText);
+    return `
+        <div class="input-containers">
+            <input class="date-input" type="date" id="editDueDate" value="${formattedDate}" />
+        </div>`;
+}
+
+
+function generateSubtaskHTML(subtask, index, isChecked) {
+    return `
+        <div class="subtask-items" id="subtask-${index}">
+            <input type="checkbox" class="hidden" id="subtask-checkbox-${index}" ${isChecked ? 'checked' : ''} 
+                onchange="toggleSubtaskIdCompletion(${index})">
+            <span class="subtask-text">${subtask}</span>
+            <button class="edit-pen-subtask"> 
+                <img id="edit-subtask-img" onclick="editSubtask(${index})" src="../Assets/edit_black.png" alt="Edit Icon"/>
+            </button>
+            <span class="linie-subtask">|</span>
+            <button class="edit-delete-subtask">
+                <img id="delete-subtask" onclick="deleteSubtask(${index})" src="../Assets/delete_black.png" alt="Delete Icon"/>
+            </button>
+        </div>`;
+}
+
+
+function generateEditSubtaskHTML(subtaskText, index) {
+    return `
+        <div class="subtask-edit-items">
+            <input type="text" value="${subtaskText}" id="editSubtaskInput-${index}" class="subtask-edit-input"/>
+            <button class="edit-pen-subtask">
+                <img onclick="deleteSubtask(${index})" src="../Assets/delete_black.png" alt="Cancel"/>
+            </button>
+            <span class="linie-subtask">|</span>
+            <button class="edit-delete-subtask">
+                <img id="edit-subtask-img" onclick="saveSubtask(${index})" src="../Assets/check_blue.png" alt="Save"/>
+            </button>
+        </div>`;
+}
