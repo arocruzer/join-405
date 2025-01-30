@@ -32,6 +32,7 @@ function userCheck() {
 async function loadAllContacts(path = "") {
   let savedContacts = localStorage.getItem('contacts');
   loadedContacts = savedContacts ? JSON.parse(savedContacts) : [];
+  
   if (typeof renderContacts === "function") renderContacts();
 
   if (!savedContacts) { 
@@ -39,7 +40,11 @@ async function loadAllContacts(path = "") {
           let response = await fetch(BASE_URL + path + ".json");
           let usersArray = Object.values((await response.json()).users);
           loadedContacts = usersArray.map(formatContact);
-          saveContactsToLocalStorage();
+          
+          if (typeof saveContactsToLocalStorage === "function") {
+              saveContactsToLocalStorage();
+          }
+
           if (typeof renderContacts === "function") renderContacts();
       } catch (error) {
           console.error("Fehler beim Laden der Kontakte aus der Datenbank:", error);
