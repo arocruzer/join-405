@@ -553,13 +553,16 @@ function generateSubtaskHTML(subtask, index, isChecked) {
             <input type="checkbox" class="hidden" id="subtask-checkbox-${index}" ${isChecked ? 'checked' : ''} 
                 onchange="toggleSubtaskIdCompletion(${index})">
             <span class="subtask-text">${subtask}</span>
-            <button class="edit-pen-subtask"> 
+            <div class="icons-show">
+               <button class="edit-pen-subtask"> 
                 <img id="edit-subtask-img" onclick="editSubtask(${index})" src="../Assets/edit_black.png" alt="Edit Icon"/>
-            </button>
-            <span class="linie-subtask">|</span>
-            <button class="edit-delete-subtask">
+               </button>
+               <span class="linie-subtask">|</span>
+               <button class="edit-delete-subtask">
                 <img id="delete-subtask" onclick="deleteSubtask(${index})" src="../Assets/delete_black.png" alt="Delete Icon"/>
-            </button>
+               </button>
+            </div>
+            
         </div>`;
 }
 
@@ -577,3 +580,4 @@ function generateEditSubtaskHTML(subtaskText, index) {
             </button>
         </div>`;
 }
+

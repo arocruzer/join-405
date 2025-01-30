@@ -948,7 +948,8 @@ textarea {
   display: flex;
   width: 100%;
   position: relative;
-  padding-bottom: 10px;
+  padding-bottom: 5px;
+  padding-top: 5px;
 }
 .subtask-edit-items{
   display: flex;
@@ -958,7 +959,7 @@ textarea {
 }
 .subtask-edit-items :focus{
   border-bottom: 1px solid #29abe2 !important;
-  padding-bottom: 6px;
+  padding-bottom: 11px;
   border: none; 
 }
 .edit-delete-subtask{
@@ -1220,6 +1221,8 @@ textarea.description-input {
   background-color: #2A3647;
   color: white;
   margin-bottom: 5px;
+  padding: 6px;
+  border-radius: 8px;
 }
 
 .hero{
@@ -1239,6 +1242,14 @@ textarea.description-input {
   border-radius: 30px;
   width: 1110px;
   padding: 30px;
+}
+.icons-show{
+  display: none;
+}
+.subtask-items:hover{
+  .icons-show{
+    display: flex;
+  }
 }
 
 @media (max-width: 768px) {
