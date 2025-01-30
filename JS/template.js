@@ -294,6 +294,13 @@ function HTMLEditOverlayDesktop(index){
 }
 
 function renderTask(task) {
+    if (!Array.isArray(task.subtasks)) {
+        task.subtasks = [];
+    }
+    if (!Array.isArray(task.completedSubtasks)) {
+        task.completedSubtasks = [];
+    }
+
     return `
         <div class="user-card" draggable="true" id="${task.id}" ondragstart="drag(event)" onclick="openTaskDetails('${task.id}')">
             <div class="user-story-card todo">
@@ -312,9 +319,9 @@ function renderTask(task) {
                 <p>${task.description}</p>
                 <div class="progress-container">
                     <div class="progress-bar">
-                        <div class="progress" style="width: ${task.totalSubtasks > 0 ? (task.completedSubtasks / task.totalSubtasks) * 100 : 0}%"></div>
+                        <div class="progress" style="width: ${task.subtasks.length > 0 ? (task.completedSubtasks.length / task.subtasks.length) * 100 : 0}%"></div>
                     </div>
-                    <span class="subtasks">${task.completedSubtasks}/${task.totalSubtasks} Subtasks</span>
+                    <span class="subtasks">${task.completedSubtasks.length}/${task.subtasks.length} Subtasks</span>
                 </div>
                 <div class="user-container">
                     <div class="user-avatar-container">
@@ -343,6 +350,7 @@ function renderTask(task) {
         </div>
     `;
 }
+
 
 
 function generatePriorityButtons(currentPriority) {

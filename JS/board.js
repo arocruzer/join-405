@@ -59,14 +59,10 @@ function createTaskObject(taskElement, taskId) {
     description: taskElement.querySelector("p").innerText,
     priority: priorityText,
     priorityIcon: getPriorityIcon(priorityText),
-    completedSubtasks: parseInt(
-      taskElement.querySelector(".subtasks").innerText.split("/")[0]
-    ),
-    totalSubtasks: parseInt(
-      taskElement.querySelector(".subtasks").innerText.split("/")[1]
-    ),
     category: taskElement.querySelector(".category-label").innerText.trim(),
     assignedUsers: getAssignedUsers(taskElement),
+    subtasks: taskElement.subtasks || [],
+    completedSubtasks: taskElement.completedSubtasks || []
   };
 }
 
@@ -94,53 +90,53 @@ function updateTaskVisibilityById(columnId) {
 }
 
 // Redirects the user to the task creation page and stores the current column in localStorage.
-function openInputPage(columnId) {
-  localStorage.setItem("currentColumn", columnId);
-  if (window.innerWidth <= 830) {
-    window.location.href = "add-task.html";
-    return;
-  } else {
-    if (!document.querySelector('link[href="../CSS/addtaskOverlay.css"]')) {
-      const link = document.createElement("link");
-      link.rel = "stylesheet";
-      link.href = "../CSS/addtaskOverlay.css";
-      link.id = "overlay-css";
-      document.head.appendChild(link);
-    }
-    if (!document.querySelector('script[src="../JS/add-task-overlay.js"]')) {
-      const script = document.createElement("script");
-      script.src = "../JS/add-task-overlay.js";
-      script.id = "overlay-js";
-      document.body.appendChild(script);
-    }
-    renderAddTask();
-  }
-}
+// function openInputPage(columnId) {
+//   localStorage.setItem("currentColumn", columnId);
+//   if (window.innerWidth <= 830) {
+//     window.location.href = "add-task.html";
+//     return;
+//   } else {
+//     if (!document.querySelector('link[href="../CSS/addtaskOverlay.css"]')) {
+//       const link = document.createElement("link");
+//       link.rel = "stylesheet";
+//       link.href = "../CSS/addtaskOverlay.css";
+//       link.id = "overlay-css";
+//       document.head.appendChild(link);
+//     }
+//     if (!document.querySelector('script[src="../JS/add-task-overlay.js"]')) {
+//       const script = document.createElement("script");
+//       script.src = "../JS/add-task-overlay.js";
+//       script.id = "overlay-js";
+//       document.body.appendChild(script);
+//     }
+//     renderAddTask();
+//   }
+// }
 
-function closeOverlay() {
-  const hero = document.getElementById("hero");
-  hero.style.display = "none";
-  closeTaskOverlay();
-  setTimeout(() => {
-    location.reload();
-  }, 10);
-}
+// function closeOverlay() {
+//   const hero = document.getElementById("hero");
+//   hero.style.display = "none";
+//   closeTaskOverlay();
+//   setTimeout(() => {
+//     location.reload();
+//   }, 10);
+// }
 
-function closeTaskOverlay() {
-  let hero = document.getElementById("hero");
-  if (hero) {
-    hero.style.display = "none";
-    const overlayCss = document.getElementById("overlay-css");
-    if (overlayCss) {
-      overlayCss.remove();
-    }
+// function closeTaskOverlay() {
+//   let hero = document.getElementById("hero");
+//   if (hero) {
+//     hero.style.display = "none";
+//     const overlayCss = document.getElementById("overlay-css");
+//     if (overlayCss) {
+//       overlayCss.remove();
+//     }
 
-    const overlayJs = document.getElementById("overlay-js");
-    if (overlayJs) {
-      overlayJs.remove();
-    }
-  }
-}
+//     const overlayJs = document.getElementById("overlay-js");
+//     if (overlayJs) {
+//       overlayJs.remove();
+//     }
+//   }
+// }
 
 // Filters and displays tasks based on a search input (tasks must match the search text).
 function searchFromSearchTaskInput() {
@@ -238,42 +234,6 @@ function renderAssignedUsers(users) {
     .join("");
 }
 
-// Updates the progress bar of a task based on the completed and total subtasks.
-function updateProgressBar(task) {
-  const progressElement = document.querySelector(
-    `#${task.id} .progress-bar .progress`
-  );
-  const percentage =
-    task.totalSubtasks > 0
-      ? (task.completedSubtasks / task.totalSubtasks) * 100
-      : 0;
-  progressElement.style.width = `${percentage}%`;
-
-  const subtasksElement = document.querySelector(`#${task.id} .subtasks`);
-  subtasksElement.innerText = `${task.completedSubtasks}/${task.totalSubtasks} Subtasks`;
-}
-
-// Updates the completion state of a subtask and reflects the changes in localStorage and the UI.
-function updateSubtaskCompletion(taskId, index) {
-  const checkboxId = `subtask-${taskId}-${index}`;
-  const checkboxElement = document.getElementById(checkboxId);
-  const allColumns = ["todo", "in-progress", "await-feedback", "done"];
-  for (const column of allColumns) {
-    let tasks = JSON.parse(localStorage.getItem(column)) || [];
-    const taskIndex = tasks.findIndex((task) => task.id === taskId);
-    if (taskIndex !== -1) {
-      if (checkboxElement.checked) {
-        tasks[taskIndex].completedSubtasks++;
-      } else {
-        tasks[taskIndex].completedSubtasks--;
-      }
-      localStorage.setItem(column, JSON.stringify(tasks));
-      updateProgressBar(tasks[taskIndex]);
-      break;
-    }
-  }
-}
-
 // Sets the style of an element based on the task's category (e.g., User Story, Technical Task).
 function setCategoryStyle(elementId, category) {
   const element = document.getElementById(elementId);
@@ -307,7 +267,6 @@ function openTaskDetails(taskId) {
     updateModalContent(task);
     document.getElementById("taskModal").style.display = "block";
     toggleModalLayout(false);
-    updateProgressBar(task);
     addSaveAndCancelButtons(false);
   }
 }
@@ -366,28 +325,6 @@ function updateModalAssignedUsers(task) {
   document.getElementById("modalAssignedUsers").innerHTML = renderAssignedUsers(
     task.assignedUsers
   );
-}
-
-function updateModalSubtasks(task) {
-  const subtaskList = document.getElementById("modalSubtasks");
-  if (Array.isArray(task.subtasks) && task.subtasks.length > 0) {
-    subtaskList.innerHTML = task.subtasks
-      .map(
-        (subtask, index) => `
-            <label class="subtasks-label">
-                <input type="checkbox" id="subtask-${task.id}-${index}"
-                       ${task.completedSubtasks > index ? "checked" : ""}
-                       onchange="updateSubtaskCompletion('${
-                         task.id
-                       }', ${index})">
-                ${subtask}
-            </label>
-        `
-      )
-      .join("");
-  } else {
-    subtaskList.innerHTML = "<p>Keine Subtasks verfügbar</p>";
-  }
 }
 
 // Closes the task details modal.
@@ -578,4 +515,95 @@ function updateArrowIcons(columnId, taskId) {
     if (columnId === 'done') {
         arrowLeftIcon.style.display = 'none';
     } 
+}
+
+function updateModalSubtasks(task) {
+  const subtasksContainer = document.getElementById("modalSubtasks");
+  if (!subtasksContainer) return;
+
+  subtasksContainer.innerHTML = "";
+
+  if (!Array.isArray(task.completedSubtasks)) {
+      task.completedSubtasks = [];
+  }
+
+  if (!Array.isArray(task.subtasks) || task.subtasks.length === 0) {
+      displayNoSubtasksMessage(subtasksContainer);
+      return;
+  }
+
+  renderSubtasks(task, subtasksContainer);
+}
+
+function displayNoSubtasksMessage(container) {
+  container.innerHTML = "<p>Keine Subtasks vorhanden</p>";
+}
+
+function renderSubtasks(task, container) {
+  task.subtasks.forEach((subtask, index) => {
+      const subtaskElement = createSubtaskElement(task, subtask, index);
+      container.appendChild(subtaskElement);
+  });
+}
+
+function createSubtaskElement(task, subtask, index) {
+  const subtaskElement = document.createElement("div");
+  subtaskElement.classList.add("subtask-item");
+
+  const checkbox = createCheckbox(task, index);
+  const subtaskText = createSubtaskText(subtask);
+
+  subtaskElement.appendChild(checkbox);
+  subtaskElement.appendChild(subtaskText);
+
+  return subtaskElement;
+}
+
+function createCheckbox(task, index) {
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.checked = task.completedSubtasks.includes(index);
+  checkbox.addEventListener("change", () => toggleSubtaskCompletion(task.id, index));
+  return checkbox;
+}
+
+function createSubtaskText(subtask) {
+  const subtaskText = document.createElement("span");
+  subtaskText.textContent = subtask;
+  subtaskText.style.marginLeft = "10px";
+  return subtaskText;
+}
+
+
+
+function toggleSubtaskCompletion(taskId, subtaskIndex) {
+  const columnId = findTaskColumn(taskId);
+  let tasks = JSON.parse(localStorage.getItem(columnId)) || [];
+  const task = tasks.find((t) => t.id === taskId);
+  if (!Array.isArray(task.completedSubtasks)) {
+      task.completedSubtasks = [];
+  }
+  if (task.completedSubtasks.includes(subtaskIndex)) {
+      task.completedSubtasks = task.completedSubtasks.filter((i) => i !== subtaskIndex);
+  } else {
+      task.completedSubtasks.push(subtaskIndex);
+  }
+  localStorage.setItem(columnId, JSON.stringify(tasks));
+  const taskElement = document.getElementById(taskId);
+  if (taskElement) {
+      taskElement.outerHTML = renderTask(task);
+  }
+}
+
+
+// Funktion zur Ermittlung der Spalte, in der sich eine Task befindet
+function findTaskColumn(taskId) {
+  const columns = ["todo", "in-progress", "await-feedback", "done"];
+  for (let column of columns) {
+      let tasks = JSON.parse(localStorage.getItem(column)) || [];
+      if (tasks.some(task => task.id === taskId)) {
+          return column;
+      }
+  }
+  return null;
 }
