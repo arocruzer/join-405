@@ -549,3 +549,18 @@ function findTaskColumn(taskId) {
   }
   return null;
 }
+
+// Redirects the user to the task creation page and stores the current column in localStorage.
+function openInputPage(columnId) {
+   localStorage.setItem("currentColumn", columnId);
+   if (window.innerWidth <= 830) {
+     window.location.href = "add-task.html";
+     return;
+     } 
+     renderAddTask();
+}
+
+function renderAddTask() {
+  let hero = document.getElementById("hero");
+  hero.style.display = "flex";
+}
