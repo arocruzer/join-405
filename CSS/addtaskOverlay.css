@@ -270,7 +270,7 @@ hero.prio-container {
   
   .contact-list-container-overlay {
     display: none;
-    height: 223px;
+    height: 160px;
     background-color: white;
     z-index: 1000;
     position: absolute;
