@@ -62,9 +62,6 @@ button {
 .signup-btn {
   height: 49px;
   width: 91px;
-  color: white;
-  background-color: #f7f7f7;
-  border: solid #f7f7f7;
   border-radius: 8px;
   font-size: 16px;
   display: flex;
@@ -108,6 +105,7 @@ a {
   align-items: center;
   flex-direction: row;
   gap: 8px;
+  padding-top: 10px;
 }
 
 .checkbox-container h4 {

@@ -349,7 +349,6 @@ input:focus {
     flex-direction: row-reverse;
     justify-content: start;
     width: unset;
-    max-width: 1920px;
   }
 
   h5 {

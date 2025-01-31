@@ -294,6 +294,10 @@ a {
     background-color: #f6f7f8;
   }
 
+  50%{
+    background-color: #f6f7f8;
+  }
+
   100% {
     background-color: transparent;
     color: transparent;
@@ -387,7 +391,7 @@ a {
   }
 
   .info-todo {
-    flex-direction: column;
+    gap: 14px;
   }
 
   .task-date-info {
@@ -399,11 +403,55 @@ a {
   }
 
   .tasks-status-container {
-    flex-direction: column;
+    gap: 14px;
   }
 
   .title-summary {
     align-items: center;
+  }
+}
+
+@media (max-width: 400px) {
+  .info{
+    width: 100%;
+  }
+  .info-todo{
+    width: 100%;
+    justify-content: center;
+  }
+  .info-container{
+    width: 140px;
+    height: 100px;
+  }
+  .pen-img{
+    width: 50px;
+    height: 50px;
+  }
+  .hover-pen-img{
+    width: 50px;
+    height: 50px;
+  }
+  .done-img{
+    width: 50px;
+    height: 50px;
+  }
+  .done-img-hover{
+    width: 50px;
+    height: 50px;
+  }
+  .task-status{
+    width: 96px;
+    height: 96px;
+  }
+  h4{
+    font-size: 38px;
+  }
+  h3{
+    font-size: 14px;
+  }
+  .prio{
+    gap: 10px;
+    padding-left: 10px;
   }
 }
 

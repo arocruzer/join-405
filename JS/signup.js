@@ -44,22 +44,30 @@ function addUser() {
   repeatPassword.value = "";
 }
 
+
+
 function allowSignup() {
   let userName = document.getElementById("name");
   let email = document.getElementById("email");
   let checkbox = document.getElementById("checkbox");
   let signupBtn = document.getElementById("signup");
 
-  if (
-    userName.value.trim().length > 1 && email.value.includes("@") && checkbox.checked && checkSignUp()) {
-    signupBtn.style.backgroundColor = "#2a3647"; 
+  if (userName.value.trim().length > 1 && isValidEmail(email.value) && checkbox.checked && checkSignUp()) {
+    signupBtn.style.backgroundColor = "#2a3647";
     signupBtn.style.border = "solid #2a3647";
+    signupBtn.style.color = "white";
     signupBtn.disabled = false;
-  }else{
-    signupBtn.style.backgroundColor = " #f7f7f7"; 
-    signupBtn.style.border = "solid #f7f7f7";
+  } else {
+    signupBtn.style.backgroundColor = "";
+    signupBtn.style.border = "";
+    signupBtn.style.color = "";
     signupBtn.disabled = true;
   }
+}
+
+function isValidEmail(email) {
+  let emailPattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return emailPattern.test(email);
 }
 
 async function postUser(newUser) {

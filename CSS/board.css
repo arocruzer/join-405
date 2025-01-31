@@ -1339,6 +1339,13 @@ textarea.description-input {
   }
 }
 
+@media(max-width: 1300px){
+  .addtask-overlay{
+    width: 100%;
+    padding: 10px;
+  }
+}
+
 @media (min-width: 315px) and (max-width: 830px) {
   #main-container {
     overflow-y: auto;
