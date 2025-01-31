@@ -1260,6 +1260,9 @@ textarea.description-input {
   padding-bottom: 5px;
   padding-top: 5px;
 }
+span{
+  color: red;
+}
 
 .subtask-add-items:hover{
   background-color: #f3f3f3;
