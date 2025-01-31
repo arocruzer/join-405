@@ -20,16 +20,7 @@ hero.prio-container {
   .form-container {
     display: flex;
     justify-content: space-between;
-    padding-top: 48px;
     width: 100%;
-  }
-  
-  .form-left {
-    width: 440px;
-  }
-  
-  .form-right {
-    width: 440px;
   }
   
   .btn-prio-urgent {
@@ -106,10 +97,6 @@ hero.prio-container {
     font-size: 21px;
   }
   
-  span {
-    color: #ff8190;
-  }
-  
   .title-input {
     height: 40px;
     border: 1px solid #d1d1d1;
@@ -121,8 +108,8 @@ hero.prio-container {
     position: absolute;
     right: 16px;
   }
-  
-  .linie {
+
+  .linie-overlay {
     display: none;
     position: absolute;
     right: 44px;
@@ -232,30 +219,25 @@ hero.prio-container {
     display: none;
   }
   
-  .subtask {
+  .subtask-overlay {
     display: flex;
     justify-content: space-between;
-    width: 360px;
   }
   
   .subtask-label-container {
     display: flex;
-    flex-direction: column;
     height: 100px;
     overflow-y: auto;
     gap: 8px;
   }
   
-  .subtask-label {
+  .subtask-label-overlay {
     padding: 5px 10px;
     border-radius: 15px;
     font-size: 14px;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
   }
   
-  .subtask-label button {
+  .subtask-label-overlay button {
     background: none;
     border: none;
     cursor: pointer;
@@ -268,27 +250,27 @@ hero.prio-container {
     width: 60px
   }
   
-  .subtask-label:hover .images-container {
+  .subtask-label-overlay:hover .images-container {
     display: flex;
   }
   
-  .subtask-label:hover {
+  .subtask-label-overlay:hover {
     background-color: rgba(128, 128, 128, 0.151);
   }
   
-  .subtask-label:hover input {
+  .subtask-label-overlay:hover input {
     background-color: rgba(128, 128, 128, 0);
   }
   
-  .subtask-label input {
+  .subtask-label-overlay input {
     border: none;
-    background-color: #f6f7f8;
+    background-color: white;
     width: 300px;
   }
   
-  .contact-list-container {
+  .contact-list-container-overlay {
     display: none;
-    height: 250px;
+    height: 160px;
     background-color: white;
     z-index: 1000;
     position: absolute;
@@ -300,7 +282,7 @@ hero.prio-container {
     gap: 5px;
   }
   
-  .contact {
+  .contact-overlay {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -309,7 +291,7 @@ hero.prio-container {
     z-index: 5;
   }
   
-  .contact:hover{
+  .contact-overlay:hover{
     cursor: pointer;
   }
   
@@ -345,10 +327,6 @@ hero.prio-container {
     border: none;
   }
   
-  hr{
-    height: 340px;
-  }
-  
   .plus-img {
     position: absolute;
     right: 16px;
@@ -375,19 +353,35 @@ hero.prio-container {
     background-image: url(../Assets/img/add-task_w_L.png);
   }
   
-  #confirmButton {
+  #confirmButton-Overlay {
     display: none;
   }
   
-  #cancelButton {
+  #cancelButton-overlay {
     display: none;
+  }
+
+  .input-overlay{
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+
+  .span-overlay {
+    background-color: #000000;
+    padding: 3px;
+    border-radius: 50%;
+    width: 1px;
+    height: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
   .add-clear-task {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    padding-top: 146px;
   }
   
   .required {
@@ -414,6 +408,9 @@ hero.prio-container {
     background-color: #2a3647;
     border-radius: 10px;
     color: white;
+  }
+  .line-overlay{
+    color: #2a3647;
   }
   
   @media (max-width: 1290px) {
@@ -459,10 +456,6 @@ hero.prio-container {
   
     .form-container {
       flex-direction: column;
-    }
-  
-    hr {
-      display: none;
     }
   
     .btn-prio-urgent {
@@ -542,7 +535,7 @@ hero.prio-container {
       width: 100%;
     }
     .prio-btn-container{
-      gap: 5px;
+      justify-content: space-around;
     }
   }
   .form-container{

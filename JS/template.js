@@ -11,6 +11,18 @@ function renderAddToTaskContacts(color, initials, user, index, isChecked) {
       </div>`;
 }
 
+function renderAddToTaskContactsOverlay(colorOverlay, initialsOverlay, user, index, isCheckedOverlay) {
+    return `
+      <div class="contact-overlay ${isCheckedOverlay ? "selected-user" : ""}" onclick="checkBoxUserTaskOverlay(${index}, event)">
+        <div class="name-and-img">
+          <div class="initials-circle" style="background-color: ${colorOverlay};">
+            ${initialsOverlay}
+          </div>
+          <p>${user.name}</p>
+        </div>
+        <input onclick="checkBoxUserTaskOverlay(${index}, event)" type="checkbox" ${isCheckedOverlay} name="checkbox">
+      </div>`;
+}
 
 function renderAddedUsers(color, initials) {
   return `
@@ -18,6 +30,13 @@ function renderAddedUsers(color, initials) {
                 ${initials}
             </div>`;
 }
+
+function renderAddedUsersOverlay(colorOverlay, initialsOverlay) {
+    return `
+              <div class="initials-circle" style="background-color: ${colorOverlay};">
+                  ${initialsOverlay}
+              </div>`;
+  }
 
 
 function renderAddedUsersPlaceholder(countText) {
@@ -237,6 +256,30 @@ function getSubtasksTemplate(subtask, index) {
                         <div class="images-container" id="images-container-${index}">
                             <img class="edit-subtask-img" id="edit-subtask-img-${index}" onclick="editSubtask(${index})" src="../Assets/edit.png" alt="Edit Icon">
                             <img class="confirm-subtask" id="confirm-subtask-${index}" onclick="confirmSubtask(${index})" src="../Assets/check_blue.png" style="display: none;">
+                            <button class="delete-btn" onclick="deleteSubtask(${index})">
+                                <img id="delete-subtask-${index}" src="../Assets/delete.png" alt="delete Icon">
+                            </button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>`;
+}
+
+function getSubtasksTemplateOverlay(subtask, index) {
+    return `
+        <div class="subtask-label-overlay" id="subtask-label-${index}">
+            <ul id="subtask-list-${index}">
+                <li>
+                    <div class="subtask-overlay">
+                        <div class="input-overlay">
+                            <span class="span-overlay"></span>
+                            <input id="edit-subtask-${index}" class="edit-subtask" type="text" value="${subtask}" onfocus="editSubtaskOverlay(${index})">
+                        </div>
+                        <div class="images-container" id="images-container-${index}">
+                            <img class="edit-subtask-img" id="edit-subtask-img-${index}" onclick="editSubtaskOverlay(${index})" src="../Assets/edit.png" alt="Edit Icon">
+                            <img class="confirm-subtask" id="confirm-subtask-${index}" onclick="confirmSubtask(${index})" src="../Assets/check_blue.png" style="display: none;">
+                            <span class="line-overlay" id="delete-subtask-${index}">|</span>
                             <button class="delete-btn" onclick="deleteSubtask(${index})">
                                 <img id="delete-subtask-${index}" src="../Assets/delete.png" alt="delete Icon">
                             </button>
@@ -550,8 +593,10 @@ function generateDueDateEditHTML(dueDateText) {
 function generateSubtaskHTML(subtask, index, isChecked) {
     return `
         <div class="subtask-items" id="subtask-${index}">
+          <div class="subtask-add-items">
             <input type="checkbox" class="hidden" id="subtask-checkbox-${index}" ${isChecked ? 'checked' : ''} 
                 onchange="toggleSubtaskIdCompletion(${index})">
+            <span class="span-overlay"></span>
             <span class="subtask-text">${subtask}</span>
             <div class="icons-show">
                <button class="edit-pen-subtask"> 
@@ -562,7 +607,7 @@ function generateSubtaskHTML(subtask, index, isChecked) {
                 <img id="delete-subtask" onclick="deleteSubtask(${index})" src="../Assets/delete_black.png" alt="Delete Icon"/>
                </button>
             </div>
-            
+          </div>
         </div>`;
 }
 

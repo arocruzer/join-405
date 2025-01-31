@@ -1213,7 +1213,7 @@ textarea.description-input {
 
 .subtask-text{
   overflow-wrap: anywhere;
-  padding-left: 18px;
+  padding-left: 4px;
   max-width: 350px;
 }
 
@@ -1249,6 +1249,32 @@ textarea.description-input {
 .subtask-items:hover{
   .icons-show{
     display: flex;
+    align-items: center;
+  }
+}
+
+.subtask-add-items{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+
+.subtask-add-items:hover{
+  background-color: #f3f3f3;
+  border-radius: 8px;
+  .icons-show{
+    background-color:  #f3f3f3;
+  }
+  .edit-delete-subtask{
+    background-color:  #f3f3f3;
+  }
+  .edit-pen-subtask{
+    background-color:  #f3f3f3;
+  }
+  .linie-subtask{
+    background-color:  #f3f3f3;
   }
 }
 
@@ -1311,6 +1337,22 @@ textarea.description-input {
     width: 85%;
     margin-left: 12px;
   }
+  .add-clear-task{
+    padding-top: 2px;
+  }
+  .form-container{
+    padding-top: 46px;
+  }
+  .form-left{
+    width: 440px;
+  }
+  
+  .form-right{
+    width: 440px;
+  }
+  hr {
+    height: 340px;
+  }
 
 }
 
@@ -1329,6 +1371,36 @@ textarea.description-input {
     gap: 15px;
     padding-bottom: 60px;
   }
+  .form-container{
+    flex-direction: column;
+    align-items: center;
+    padding-top: 8px;
+  }
+  .addtask-overlay{
+    width: 800px;
+  }
+  
+  .form-left{
+    width: 100%;
+  }
+  
+  .form-right{
+    width: 100%;
+  }
+  hr {
+    height: 1px;
+  }
+  
+}
+@media (max-width: 1050px){
+  .addtask-overlay {
+    width: 700px;
+  }
+}
+@media (max-width: 935px){
+  .addtask-overlay {
+    width: 600px;
+  }
 }
 
 @media (max-width: 1500px) {
@@ -1337,6 +1409,13 @@ textarea.description-input {
     margin-left: 35px;
     margin-right: 35px;
   }
+}
+@media (max-width: 830px){
+  #frame {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
 }
 
 @media(max-width: 1300px){
@@ -1349,7 +1428,6 @@ textarea.description-input {
 @media (min-width: 315px) and (max-width: 830px) {
   #main-container {
     overflow-y: auto;
-    max-height: 100vh;
   }
 
   .board-container {
@@ -1374,7 +1452,7 @@ textarea.description-input {
 }
 @media (max-width: 550px){
    .subtask-text{
-    padding-left: 12px;
+    padding-left: 4px;
     max-width: 300px;
    }
    .subtask-edit-input{
@@ -1383,7 +1461,7 @@ textarea.description-input {
 }
 @media (max-width: 500px){
   .subtask-text{
-   padding-left: 12px;
+   padding-left: 4px;
    max-width: 250px;
   }
 }
@@ -1426,7 +1504,7 @@ textarea.description-input {
     width: 200px;
   }
   .subtask-text{
-    padding-left: 0px;
+    padding-left: 2px;
     max-width: 150px;
    }
 }
