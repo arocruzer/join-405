@@ -1278,6 +1278,11 @@ textarea.description-input {
   }
 }
 
+.msg-container{
+  position: absolute;
+  top: 50%;
+}
+
 @media (max-width: 768px) {
   .modal-body {
     width: 95%;

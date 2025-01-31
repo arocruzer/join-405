@@ -369,7 +369,7 @@ function renderTask(task) {
                 </div>
                 <h4>${task.title}</h4>
                 <p>${task.description}</p>
-                <div class="progress-container" style="display: ${Array.isArray(task.completedSubtasks) && task.completedSubtasks.length > 0 ? 'block' : 'none'};">
+                <div class="progress-container" style="display: ${Array.isArray(task.completedSubtasks) && task.completedSubtasks.length > 0 ? 'flex' : 'none'};">
                     <div class="progress-bar">
                         <div class="progress" style="width: ${
                             (Array.isArray(task.subtasks) && task.subtasks.length > 0
