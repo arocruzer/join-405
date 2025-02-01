@@ -1,14 +1,6 @@
 let dropDownArrowContactsOverlay = document.getElementById("drop-down-arrow-contacts-overlay");
 let dropDownArrowCategory = document.getElementById("drop-down");
 let concatListOverlay = document.getElementById("contact-listOverlay");
-let btnUrgent = document.getElementById("btn-urgent-overlay");
-let imgUrgent = document.getElementById("urgent-img-overlay");
-let btnMedium = document.getElementById("btn-medium-overlay");
-let imgMedium = document.getElementById("medium-img-overlay");
-let btnLow = document.getElementById("btn-low-overlay");
-let imgLow = document.getElementById("low-img-overlay");
-let addSubtaskBtn = document.getElementById("add-subtask-btn");
-let subtaskListOverlay = [];
 let selectedPriorityOverlay = "";
 let contacStateOverlay = 1;
 let categoryState = 1;
@@ -25,8 +17,11 @@ let dateError = document.getElementById("date-error");
 let categoryError = document.getElementById("category-error");
 let selectedUsersAddTask = [];
 
-renderSubtasksOverlay();
+/* renderSubtasksOverlay(); */
 
+/**
+ * Öffnet das Dropdown-Menü für die Benutzerliste und wechselt zwischen den Zuständen.
+ */
 function openDropDownMenuUserOverlay() {
   switch (contacStateOverlay) {
     case 1:
@@ -43,6 +38,9 @@ function openDropDownMenuUserOverlay() {
   }
 }
 
+/**
+ * Öffnet das Dropdown-Menü für die Kategorien und wechselt zwischen den Zuständen.
+ */
 function openDropDownMenuCategory() {
   switch (categoryState) {
     case 1:
@@ -57,6 +55,10 @@ function openDropDownMenuCategory() {
       break;
   }
 }
+
+/**
+ * Fügt dem Task-Overlay Benutzer zur Aufgabe hinzu.
+ */
 function addUserToTaskOverlay() {
   concatListOverlay.innerHTML = "";
 
@@ -71,6 +73,11 @@ function addUserToTaskOverlay() {
   }); 
 }
 
+/**
+ * Handelt das Klickereignis auf die Checkbox eines Benutzers und fügt den Benutzer bei Bedarf der Liste hinzu oder entfernt ihn.
+ * @param {number} index Der Index des Benutzers in der Liste.
+ * @param {Event} event Das Klickereignis.
+ */
 function checkBoxUserTaskOverlay(index, event) {
   event.stopPropagation(); 
 
@@ -95,6 +102,9 @@ function checkBoxUserTaskOverlay(index, event) {
   addedUsersOverlay(); 
 }
 
+/**
+ * Aktualisiert die Anzeige der hinzugefügten Benutzer im Overlay.
+ */
 function addedUsersOverlay() {
   let addedUsersOverlay = document.getElementById("addedUersOverlay");
   let maxVisibleUsersOverlay = 4;
@@ -115,6 +125,9 @@ function addedUsersOverlay() {
   }
 }
 
+/**
+ * Setzt das Formular zurück, einschließlich der hinzugefügten Benutzer, Titel, Beschreibung und anderen Eingabefelder.
+ */
 function clearTask() {
     selectedUsersAddTask = [];
     title.value = "";
@@ -133,7 +146,10 @@ function clearTask() {
     imgUrgent.src = "../Assets/prio_urgent.png";
   }
 
-// Auswahl der Kategorie und Dropdown schließen
+/**
+ * Wählt eine Kategorie aus und schließt das Dropdown-Menü.
+ * @param {string} category Die ausgewählte Kategorie.
+ */
 function selectCategory(category) {
   selectedCategory = category;
   selectedCategoryElement.innerText = category;
@@ -143,184 +159,44 @@ function selectCategory(category) {
   dropDownArrowCategory.src = "../Assets/arrow_drop_downaa (1).png";
 }
 
-function changeColorPrioBtnOverlay(priority) {
-  let imgSourcesOverlay = {
-    urgent: [
-      "../Assets/prio_arrow_white.png",
-      "../Assets/prio_line_orange.png",
-      "../Assets/prio_low.png",
-    ],
-    medium: [
-      "../Assets/prio_urgent.png",
-      "../Assets/prio_medium.png",
-      "../Assets/prio_low.png",
-    ],
-    low: [
-      "../Assets/prio_urgent.png",
-      "../Assets/prio_line_orange.png",
-      "../Assets/prio_arrowDown_white.png",
-    ],
-  };
-
-  let bgColorsOverlay = { urgent: "#FF3B30", medium: "#FFA800", low: "#4CD964" };
-
-  resetButtonStylesOverlay();
-  selectedPriorityOverlay = priority;
-  setButtonStylesOverlay(priority, bgColorsOverlay[priority]);
-  setImageSourcesOverlay(imgSourcesOverlay[priority]);
-}
-
-function resetButtonStylesOverlay() {
-  btnUrgent.style.backgroundColor =
-    btnMedium.style.backgroundColor =
-    btnLow.style.backgroundColor =
-      "#ffffff";
-}
-
-function setButtonStylesOverlay(priority, bgColorOverlay) {
-  if (priority === "urgent") btnUrgent.style.backgroundColor = bgColorOverlay;
-  else if (priority === "medium") btnMedium.style.backgroundColor = bgColorOverlay;
-  else if (priority === "low") btnLow.style.backgroundColor = bgColorOverlay;
-}
-
-function setImageSourcesOverlay([urgentImgSrc, mediumImgSrc, lowImgSrc]) {
-  imgUrgent.src = urgentImgSrc;
-  imgMedium.src = mediumImgSrc;
-  imgLow.src = lowImgSrc;
-}
-
-function toggleButtonVisibilityOverlay(forceShow) {
-  const taskInputOverlay = document.getElementById("newSubtaskOverlay");
-  const confirmButtonOverlay = document.getElementById("confirmButton-overlay");
-  const cancelButtonOverlay = document.getElementById("cancelButton-overlay");
-  const plusButtonOverlay = document.getElementById("confirm-subtask-btn-overlay");
-  const linieOverlay = document.getElementById("linie-overlay");
-  linieOverlay.style.display = "none";
-  confirmButtonOverlay.style.display = "none";
-  cancelButtonOverlay.style.display = "none";
-  plusButtonOverlay.style.display = "inline";
-
-  if (forceShow || taskInputOverlay.value.trim()) {
-    confirmButtonOverlay.style.display = "inline";
-    cancelButtonOverlay.style.display = "inline";
-    linieOverlay.style.display = "inline";
-    plusButtonOverlay.style.display = "none";
-  }
-}
-
-function addSubtask() {
-  const taskInput = document.getElementById("newSubtaskOverlay");
-  const taskValue = taskInput.value.trim();
-  if (taskValue === "") return;
-
-  subtaskListOverlay.push(taskValue);
-  renderSubtasksOverlay();
-
-  taskInput.value = "";
-  toggleButtonVisibilityOverlay();
-}
-
-function cancelSubtaskOverlay() {
-  document.getElementById("newSubtaskOverlay").value = "";
-  toggleButtonVisibilityOverlay();
-}
-
-function renderSubtasksOverlay() {
-  const subtaskContainer = document.getElementById("subtaskLabels");
-  if (subtaskContainer) {
-  subtaskContainer.innerHTML = "";
-  subtaskListOverlay.forEach((subtask, index) => {
-    subtaskContainer.innerHTML += getSubtasksTemplateOverlay(subtask, index);
-  });}
-}
-
-function editSubtaskOverlay(index) {
-  let editSubtaks = document.getElementById(`edit-subtask-img-${index}`);
-  let deleteSubtask = document.getElementById(`delete-subtask-${index}`);
-  let imagesContainer = document.getElementById(`images-container-${index}`);
-  let confrimEdit = document.getElementById(`confirm-subtask-${index}`);
-
-  editSubtaks.style.display = "none";
-  confrimEdit.style.display = "flex";
-  deleteSubtask.src = "../Assets/delete.png";
-  imagesContainer.style.flexDirection = "row-reverse";
-
-  inputOnFocus(index);
-}
-function inputOnFocus(index) {
-  let editSubtaskOverlay = document.getElementById(`edit-subtask-${index}`);
-  let subtaskListOverlay = document.getElementById(`subtask-list-${index}`);
-  let subtaskLabel = document.getElementById(`subtask-label-${index}`);
-  let length = editSubtaskOverlay.value.length;
-
-  editSubtaskOverlay.focus();
-  editSubtaskOverlay.setSelectionRange(length, length);
-  editSubtaskOverlay.style.backgroundColor = "white";
-  subtaskLabel.style.backgroundColor = "white";
-  subtaskListOverlay.style.borderBottom = "1px solid #29abe2";
-}
-
-function confirmSubtask(index) {
-  const editInput = document.getElementById(`edit-subtask-${index}`);
-  const updatedValue = editInput.value.trim();
-
-  if (updatedValue) {
-    subtaskListOverlay[index] = updatedValue;
-    renderSubtasksOverlay();
-  }
-}
-
-function deleteSubtask(index) {
-  subtaskListOverlay.splice(index, 1);
-  renderSubtasksOverlay();
-}
-
-function getFormInputValue(inputId) {
-  return document.getElementById(inputId).value.trim();
-}
-
-function countSubtasks(subtaskListOverlay) {
-  const totalSubtasks = subtaskListOverlay.length;
-  const completedSubtasks = subtaskListOverlay.filter(
-    (subtask) => subtask.completed
-  ).length;
-  return { completedSubtasks, totalSubtasks };
-}
-
-function createNewTask(
-  title,
-  description,
-  dueDate,
-  priority,
-  category,
-  subtaskListOverlay,
-  selectedUsersAddTask
- ) {
+/**
+ * Erstellt eine neue Aufgabe mit den angegebenen Parametern.
+ * @param {string} title Der Titel der Aufgabe.
+ * @param {string} description Die Beschreibung der Aufgabe.
+ * @param {string} dueDate Das Fälligkeitsdatum der Aufgabe.
+ * @param {string} priority Die Priorität der Aufgabe.
+ * @param {string} category Die Kategorie der Aufgabe.
+ * @param {Array} subtaskListOverlay Die Liste der Unteraufgaben.
+ * @param {Array} selectedUsersAddTask Die Liste der zugewiesenen Benutzer.
+ * @returns {Object} Das neue Aufgabenobjekt.
+ */
+function createNewTask(title, description, dueDate, priority, category, subtaskListOverlay, selectedUsersAddTask) {
   const { completedSubtasks, totalSubtasks } = countSubtasks(subtaskListOverlay);
-  return {
-    id: `task-${Date.now()}`,
-    title,
-    description,
-    dueDate,
-    priority,
-    category,
-    subtasks: subtaskListOverlay,
-    completedSubtasks,
-    totalSubtasks,
-    assignedUsers: selectedUsersAddTask,
-  };
+  return {id: `task-${Date.now()}`,title,description,dueDate,priority,category,subtasks: subtaskListOverlay,completedSubtasks,totalSubtasks,assignedUsers: selectedUsersAddTask,};
 }
 
+/**
+ * Speichert eine neue Aufgabe im lokalen Speicher.
+ * @param {string} columnId Die ID der Spalte, in der die Aufgabe gespeichert werden soll.
+ * @param {Object} newTask Die neue Aufgabe.
+ */
 function saveTaskToLocalStorageOverlay(columnId, newTask) {
   const tasks = JSON.parse(localStorage.getItem(columnId)) || [];
   tasks.push(newTask);
   localStorage.setItem(columnId, JSON.stringify(tasks));
 }
 
+/**
+ * Überprüft, ob eine Kategorie ausgewählt wurde.
+ * @returns {boolean} True, wenn eine Kategorie ausgewählt wurde, andernfalls false.
+ */
 function isCategorySelected() {
   return selectedCategory !== ""; 
 }
 
+/**
+ * Überprüft, ob alle Eingabefelder korrekt ausgefüllt sind, um die Aufgabe hinzuzufügen.
+ */
 function checkAddTaks() {
     let valid = true; 
     if (title.value.length < 1) {
@@ -348,18 +224,30 @@ function checkAddTaks() {
     }
   }
 
+  /**
+ * Löscht die Fehlermeldung für den Titel.
+ */
 function clearTitleError() {
   titleError.innerHTML = "";
 }
 
+/**
+ * Löscht die Fehlermeldung für die Beschreibung.
+ */
 function clearDescriptionError() {
   descriptionError.innerHTML = "";
 }
 
+/**
+ * Löscht die Fehlermeldung für das Datum.
+ */
 function clearDateError() {
   dateError.innerHTML = "";
 }
 
+/**
+ * Fügt eine neue Aufgabe hinzu, nachdem die Validierung erfolgt ist.
+ */
 function addTask() {
   const title = getFormInputValue("title-input");
   const description = getFormInputValue("description");
@@ -381,6 +269,9 @@ function addTask() {
   window.location.href = "board.html";
 }
 
+/**
+ * Zeigt eine Bestätigungsmeldung an, dass die Aufgabe hinzugefügt wurde.
+ */
 function addTaskMsg() {
   let msgContainer = document.getElementById("add-task-msg");
 
@@ -398,6 +289,9 @@ document.getElementById('add-task-mobile').addEventListener('click', () => {
   }
 });
 
+/**
+ * Schließt das Overlay und setzt alle Felder zurück.
+ */
 function closeOverlay() {
   selectedUsersAddTask = [];
   title.value = "";
