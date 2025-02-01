@@ -417,31 +417,12 @@ function renderTask(task) {
 
 
 function generatePriorityButtons(currentPriority) {
-    return `
+    return` 
         <div class="prio-btn-container">
-            <button 
-                id="btn-urgent" 
-                class="btn-prio-urgent ${currentPriority === 'urgent' ? 'active' : ''}" 
-                onclick="changeColorPrioBtn('urgent')">
-                Urgent
-                <img id="urgent-img" src="../Assets/prio_urgent.png" alt="Urgent" />
-            </button>
-            <button 
-                id="btn-medium" 
-                class="btn-prio-medium ${currentPriority === 'medium' ? 'active' : ''}" 
-                onclick="changeColorPrioBtn('medium')">
-                Medium
-                <img id="medium-img" src="../Assets/prio_medium_Basis.png" alt="Medium" />
-            </button>
-            <button 
-                id="btn-low" 
-                class="btn-prio-low ${currentPriority === 'low' ? 'active' : ''}" 
-                onclick="changeColorPrioBtn('low')">
-                Low
-                <img id="low-img" src="../Assets/prio_low.png" alt="Low" />
-            </button>
-        </div>
-    `;
+            <button id="btn-urgent" class="btn-prio-urgent ${currentPriority === 'urgent' ? 'active' : ''}" onclick="changeColorPrioBtn('urgent')">Urgent<img id="urgent-img" src="../Assets/prio_urgent.png" alt="Urgent" /></button>
+            <button id="btn-medium" class="btn-prio-medium ${currentPriority === 'medium' ? 'active' : ''}" onclick="changeColorPrioBtn('medium')">Medium<img id="medium-img" src="../Assets/prio_medium_Basis.png" alt="Medium"/></button>
+            <button id="btn-low" class="btn-prio-low ${currentPriority === 'low' ? 'active' : ''}" onclick="changeColorPrioBtn('low')">Low <img id="low-img" src="../Assets/prio_low.png" alt="Low" /></button>
+        </div>`
 }
 
 

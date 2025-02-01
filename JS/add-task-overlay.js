@@ -17,6 +17,9 @@ let dateError = document.getElementById("date-error");
 let categoryError = document.getElementById("category-error");
 let selectedUsersAddTask = [];
 
+/**
+ * Öffnet oder schließt das Dropdown-Menü für die Benutzerüberlagerung.
+ */
 function openDropDownMenuUserOverlay() {
   switch (contacStateOverlay) {
     case 1:
@@ -32,7 +35,9 @@ function openDropDownMenuUserOverlay() {
       break;
   }
 }
-
+/**
+ * Öffnet oder schließt das Dropdown-Menü für die Kategorieauswahl.
+ */
 function openDropDownMenuCategory() {
   switch (categoryState) {
     case 1:
@@ -47,6 +52,10 @@ function openDropDownMenuCategory() {
       break;
   }
 }
+
+/**
+ * Fügt Benutzer zur Aufgabenüberlagerung hinzu.
+ */
 function addUserToTaskOverlay() {
   concatListOverlay.innerHTML = "";
 
@@ -61,6 +70,11 @@ function addUserToTaskOverlay() {
   }); 
 }
 
+/**
+ * Verarbeitet das Anklicken eines Benutzers in der Aufgabenüberlagerung.
+ * @param {number} index - Der Index des Benutzers in der Liste.
+ * @param {Event} event - Das auslösende Event.
+ */
 function checkBoxUserTaskOverlay(index, event) {
   event.stopPropagation(); 
 
@@ -85,6 +99,9 @@ function checkBoxUserTaskOverlay(index, event) {
   addedUsersOverlay(); 
 }
 
+/**
+ * Aktualisiert die Anzeige der hinzugefügten Benutzer in der Aufgabenüberlagerung.
+ */
 function addedUsersOverlay() {
   let addedUsersOverlay = document.getElementById("addedUersOverlay");
   let maxVisibleUsersOverlay = 4;
@@ -104,6 +121,9 @@ function addedUsersOverlay() {
   }
 }
 
+/**
+ * Setzt das Formular zur Erstellung einer Aufgabe zurück.
+ */
 function clearTask() {
     selectedUsersAddTask = [];
     title.value = "";
@@ -121,7 +141,10 @@ function clearTask() {
     imgUrgent.src = "../Assets/prio_urgent.png";
   }
 
-// Auswahl der Kategorie und Dropdown schließen
+/**
+ * Wählt eine Kategorie aus und schließt das Dropdown-Menü.
+ * @param {string} category - Die ausgewählte Kategorie.
+ */
 function selectCategory(category) {
   selectedCategory = category;
   selectedCategoryElement.innerText = category;
@@ -131,15 +154,18 @@ function selectCategory(category) {
   dropDownArrowCategory.src = "../Assets/arrow_drop_downaa (1).png";
 }
 
-function createNewTask(
-  title,
-  description,
-  dueDate,
-  priority,
-  category,
-  subtaskListOverlay,
-  selectedUsersAddTask
- ) {
+/**
+ * Erstellt eine neue Aufgabe.
+ * @param {string} title - Der Titel der Aufgabe.
+ * @param {string} description - Die Beschreibung der Aufgabe.
+ * @param {string} dueDate - Das Fälligkeitsdatum der Aufgabe.
+ * @param {string} priority - Die Priorität der Aufgabe.
+ * @param {string} category - Die Kategorie der Aufgabe.
+ * @param {Array} subtaskListOverlay - Die Liste der Unteraufgaben.
+ * @param {Array} selectedUsersAddTask - Die Liste der zugewiesenen Benutzer.
+ * @returns {Object} Die erstellte Aufgabe.
+ */
+function createNewTask(title, description, dueDate, priority, category, subtaskListOverlay, selectedUsersAddTask) {
   const { completedSubtasks, totalSubtasks } = countSubtasks(subtaskListOverlay);
   return {
     id: `task-${Date.now()}`,
@@ -155,36 +181,48 @@ function createNewTask(
   };
 }
 
+/**
+ * Speichert eine Aufgabe in LocalStorage.
+ * @param {string} columnId - Die ID der Spalte, in der die Aufgabe gespeichert werden soll.
+ * @param {Object} newTask - Die zu speichernde Aufgabe.
+ */
 function saveTaskToLocalStorageOverlay(columnId, newTask) {
   const tasks = JSON.parse(localStorage.getItem(columnId)) || [];
   tasks.push(newTask);
   localStorage.setItem(columnId, JSON.stringify(tasks));
 }
 
+/**
+ * Prüft, ob eine Kategorie ausgewählt wurde.
+ * @returns {boolean} True, wenn eine Kategorie ausgewählt wurde, sonst false.
+ */
 function isCategorySelected() {
   return selectedCategory !== ""; 
 }
 
+/**
+ * Überprüft, ob alle erforderlichen Felder zum Erstellen einer Aufgabe ausgefüllt sind.
+ */
 function checkAddTaks() {
     let valid = true; 
     if (title.value.length < 1) {
       titleError.style.display = "flex";
-      titleError.innerHTML = "Bitte Fügen Sie einen Titel hinzu";
+      titleError.innerHTML = "Please add a title";
       valid = false; 
     }
     if (description.value.length < 1) {
-      descriptionError.innerHTML = "Bitte Fügen Sie eine Beschreibung hinzu";
+      descriptionError.innerHTML = "Please add a description";
       descriptionError.style.display = "flex";
       valid = false; 
     }
     if (date.value.length < 1) {
       dateError.style.display = "flex";
-      dateError.innerHTML = "Bitte ein Datum auswählen";
+      dateError.innerHTML = "Please select a date";
       valid = false;
     }
     if (!isCategorySelected()) {
       categoryError.style.display = "flex";
-      categoryError.innerHTML = "Bitte wählen Sie eine Kategorie für die Aufgabe aus";
+      categoryError.innerHTML = "Please select a category for the task";
       valid = false;
     }
     if (valid) {
@@ -192,18 +230,30 @@ function checkAddTaks() {
     }
   }
 
+/**
+ * Löscht die Fehlermeldung für den Titel.
+ */
 function clearTitleError() {
   titleError.innerHTML = "";
 }
 
+/**
+ * Löscht die Fehlermeldung für die Beschreibung.
+ */
 function clearDescriptionError() {
   descriptionError.innerHTML = "";
 }
 
+/**
+ * Löscht die Fehlermeldung für das Datum.
+ */
 function clearDateError() {
   dateError.innerHTML = "";
 }
 
+/**
+ * Erstellt eine neue Aufgabe und speichert sie.
+ */
 function addTask() {
   const title = getFormInputValue("title-input");
   const description = getFormInputValue("description");
@@ -225,6 +275,9 @@ function addTask() {
   window.location.href = "board.html";
 }
 
+/**
+ * Zeigt eine Nachricht an, wenn eine Aufgabe erfolgreich hinzugefügt wurde.
+ */
 function addTaskMsg() {
   let msgContainer = document.getElementById("add-task-msg");
 
@@ -242,6 +295,9 @@ document.getElementById('add-task-mobile').addEventListener('click', () => {
   }
 });
 
+/**
+ * Schließt das Overlay für die Aufgabenerstellung.
+ */
 function closeOverlay() {
   selectedUsersAddTask = [];
   title.value = "";

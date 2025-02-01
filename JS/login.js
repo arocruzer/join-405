@@ -1,7 +1,15 @@
+/**
+ * Holt die URL-Parameter und extrahiert den Wert des Parameters "msg".
+ * @type {URLSearchParams}
+ */
 const urlParams = new URLSearchParams(window.location.search);
 const msg = urlParams.get("msg");
 let msgBox = document.getElementById("msgBox");
 
+/**
+ * Führt den Login-Vorgang für den Benutzer durch, überprüft die E-Mail und das Passwort und leitet den Benutzer weiter.
+ * @async
+ */
 async function userLogIn() {
   let emailError = document.getElementById("email-error");
   let passwordError = document.getElementById("password-error");
@@ -29,6 +37,10 @@ async function userLogIn() {
   }
 }
 
+/**
+ * Führt den Login-Vorgang für einen Gastbenutzer durch, lädt die Aufgaben und leitet den Gast weiter.
+ * @async
+ */
 async function guestLogin() {
   await fetchAndStoreTasks();
   let guestUser = {

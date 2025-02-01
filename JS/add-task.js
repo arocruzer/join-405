@@ -1,12 +1,6 @@
 let dropDownArrowContacts = document.getElementById("drop-down-arrow-contacts");
 let dropDownArrowCategory = document.getElementById("drop-down");
 let concatList = document.getElementById("contact-list");
-let btnUrgent = document.getElementById("btn-urgent");
-let imgUrgent = document.getElementById("urgent-img");
-let btnMedium = document.getElementById("btn-medium");
-let imgMedium = document.getElementById("medium-img");
-let btnLow = document.getElementById("btn-low");
-let imgLow = document.getElementById("low-img");
 let addSubtaskBtn = document.getElementById("add-subtask-btn");
 let subtaskList = [];
 let selectedUsers = [];
@@ -142,51 +136,6 @@ function selectCategory(category) {
   dropDownArrowCategory.src = "../Assets/arrow_drop_downaa (1).png";
 }
 
-function changeColorPrioBtn(priority) {
-  let imgSources = {
-    urgent: [
-      "../Assets/prio_arrow_white.png",
-      "../Assets/prio_line_orange.png",
-      "../Assets/prio_low.png",
-    ],
-    medium: [
-      "../Assets/prio_urgent.png",
-      "../Assets/prio_medium.png",
-      "../Assets/prio_low.png",
-    ],
-    low: [
-      "../Assets/prio_urgent.png",
-      "../Assets/prio_line_orange.png",
-      "../Assets/prio_arrowDown_white.png",
-    ],
-  };
-
-  let bgColors = { urgent: "#FF3B30", medium: "#FFA800", low: "#4CD964" };
-
-  resetButtonStyles();
-  selectedPriority = priority;
-  setButtonStyles(priority, bgColors[priority]);
-  setImageSources(imgSources[priority]);
-}
-
-function resetButtonStyles() {
-  btnUrgent.style.backgroundColor =
-    btnMedium.style.backgroundColor =
-    btnLow.style.backgroundColor =
-      "#ffffff";
-}
-
-function setButtonStyles(priority, bgColor) {
-  if (priority === "urgent") btnUrgent.style.backgroundColor = bgColor;
-  else if (priority === "medium") btnMedium.style.backgroundColor = bgColor;
-  else if (priority === "low") btnLow.style.backgroundColor = bgColor;
-}
-
-function setImageSources([urgentImgSrc, mediumImgSrc, lowImgSrc]) {
-  imgUrgent.src = urgentImgSrc;
-  imgMedium.src = mediumImgSrc;
-  imgLow.src = lowImgSrc;
-}
 
 function toggleButtonVisibility(forceShow) {
   const taskInput = document.getElementById("newSubtask");

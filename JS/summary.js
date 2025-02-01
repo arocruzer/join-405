@@ -1,9 +1,16 @@
+/**
+ * Icons für die Prioritätsstufen von Aufgaben
+ * @constant {Object}
+ */
 const priorityIcons = {
   urgent: "../Assets/prio_arrow_white.png",
   medium: "../Assets/prio_medium.png",
   low: "../Assets/prio_arrowDown_white.png",
 };
 
+/**
+ * Initialisiert das Dashboard und lädt alle notwendigen Daten.
+ */
 function initSummary() {
   loadTasksFromLocalStorage();
   displayTaskCounts();
@@ -12,6 +19,9 @@ function initSummary() {
   time();
 }
 
+/**
+ * Bestimmt die aktuelle Tageszeit und zeigt die entsprechende Begrüßung an.
+ */
 function time() {
   let date = new Date();
   let hour = date.getHours();
@@ -28,9 +38,10 @@ function time() {
   }
   renderRegardsUser(greeting);
 }
+
 /**
- * 
- * @param {string} greeting Function time() returns string with time of day
+ * Zeigt eine personalisierte Begrüßung für den eingeloggten Benutzer an.
+ * @param {string} greeting - Die Begrüßung basierend auf der Tageszeit.
  */
 function renderRegardsUser(greeting) {
   let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
@@ -44,6 +55,9 @@ function renderRegardsUser(greeting) {
   }
 }
 
+/**
+ * Lädt gespeicherte Aufgaben aus dem Local Storage.
+ */
 function loadTasksFromLocalStorage() {
   allTasks = {
     todo: JSON.parse(localStorage.getItem("todo")) || [],
@@ -53,9 +67,9 @@ function loadTasksFromLocalStorage() {
   };
 }
 /**
- * 
- * @param {} category 
- * @returns 
+ * Gibt die Anzahl der Aufgaben in einer bestimmten Kategorie zurück.
+ * @param {string} category - Der Name der Aufgaben-Kategorie.
+ * @returns {number} - Anzahl der Aufgaben in der Kategorie.
  */
 function getTaskCount(category) {
   if (allTasks[category]) {
@@ -65,6 +79,9 @@ function getTaskCount(category) {
   return 0;
 }
 
+/**
+ * Zeigt die Anzahl der Aufgaben für jede Kategorie an.
+ */
 function displayTaskCounts() {
   const todoCount = getTaskCount("todo");
   const inProgressCount = getTaskCount("inProgress");
@@ -77,6 +94,10 @@ function displayTaskCounts() {
   document.getElementById("doneCount").innerHTML = doneCount;
 }
 
+/**
+ * Gibt die Gesamtzahl aller Aufgaben zurück.
+ * @returns {number} - Gesamtanzahl der Aufgaben.
+ */
 function getTotalTaskCount() {
   let totalCount = 0;
   for (const category in allTasks) {
@@ -86,6 +107,10 @@ function getTotalTaskCount() {
   }
   return totalCount;
 }
+
+/**
+ * Zeigt die Gesamtanzahl aller Aufgaben auf der Benutzeroberfläche an.
+ */
 function displayTotalTaskCount() {
   let totalCount = getTotalTaskCount();
   let totalCountElement = document.getElementById("totalTaskCount");
@@ -96,6 +121,10 @@ function displayTotalTaskCount() {
   }
 }
 
+/**
+ * Gibt die nächste anstehende Aufgabe basierend auf dem Fälligkeitsdatum zurück.
+ * @returns {Object|null} - Die nächste Aufgabe oder null, falls keine vorhanden ist.
+ */
 function getNextDueTask() {
   let allTasksCombined = [
     ...allTasks.todo,
@@ -111,6 +140,11 @@ function getNextDueTask() {
   return tasksWithDueDate[0] || null;
 }
 
+/**
+ * Formatiert ein Datum als lesbare Zeichenkette.
+ * @param {string} dateString - Das Datum als String.
+ * @returns {string} - Formatiertes Datum im Langformat.
+ */
 function formatDateLong(dateString) {
   let date = new Date(dateString);
   return date.toLocaleDateString("en-US", {
@@ -120,14 +154,29 @@ function formatDateLong(dateString) {
   });
 }
 
+/**
+ * Gibt das passende Icon für eine Priorität zurück.
+ * @param {string} priority - Die Priorität (urgent, medium, low).
+ * @returns {string} - Pfad zum entsprechenden Icon.
+ */
 function getPriorityIcon(priority) {
   return priorityIcons[priority];
 }
 
+/**
+ * Gibt die CSS-Klasse für eine Priorität zurück.
+ * @param {string} priority - Die Priorität.
+ * @returns {string} - CSS-Klassenname.
+ */
 function getPriorityClass(priority) {
   return `prio-${priority}`; 
 }
 
+/**
+ * Gibt den Text für eine Priorität zurück.
+ * @param {string} priority - Die Priorität.
+ * @returns {string} - Textbeschreibung der Priorität.
+ */
 function getPriorityText(priority) {
   switch (priority) {
     case "urgent":
@@ -141,6 +190,9 @@ function getPriorityText(priority) {
   }
 }
 
+/**
+ * Zeigt die nächste anstehende Aufgabe an.
+ */
 function displayNextDueTask() {
   const nextTask = getNextDueTask();
   const nextDueElement = document.getElementById("task-info");
