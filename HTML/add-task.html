@@ -66,6 +66,9 @@
                 <div class="prio-container">
                   <p>Prio</p>
                   <div class="prio-btn-container" id="prio-container">
+                    <button onclick="changeColorPrioBtn('urgent')" id="btn-urgent" class="btn-prio-urgent">Urgent<img id="urgent-img" src="../Assets/prio_urgent.png" alt="Urgent"/></button>
+                    <button onclick="changeColorPrioBtn('medium')" id="btn-medium" class="btn-prio-medium">Medium<img id="medium-img" src="../Assets/prio_medium.png" alt="Medium"/></button>
+                    <button onclick="changeColorPrioBtn('low')" id="btn-low" class="btn-prio-low">Low<img id="low-img" src="../Assets/prio_low.png" alt="Low"/></button>
                   </div>
                 </div>
                 <div class="input-containers" id="input-category">
@@ -113,9 +116,8 @@
         <div class="msg-box" id="msgBox">You added task sucsessfuly</div>
       </div>
       <div id="nav-bar" w3-include-html="../HTML/nav-bar.html"></div>
-      <script src="../JS/template.js"></script>
       <script src="../JS/add-task.js"></script>
-      <script src="../JS/add-task-prio.js"></script>
+      <script src="../JS/template.js"></script>
     </div>
   </body>
 </html>
