@@ -8,7 +8,6 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  overflow: hidden;
 }
 
 header {
@@ -28,7 +27,7 @@ button {
 .hero {
   align-items: center !important;
   padding: 0 !important;
-  padding-top: 60px !important;
+  padding-top: 50px !important;
 }
 
 .signup-window {
@@ -90,6 +89,7 @@ footer {
   padding-top: 42px;
   height: 35px;
   width: 246px;
+  padding-bottom: 40px;
 }
 
 a {

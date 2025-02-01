@@ -28,7 +28,10 @@ function time() {
   }
   renderRegardsUser(greeting);
 }
-
+/**
+ * 
+ * @param {string} greeting Function time() returns string with time of day
+ */
 function renderRegardsUser(greeting) {
   let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
   let userName = loggedInUser ? loggedInUser.name : "";
@@ -49,7 +52,11 @@ function loadTasksFromLocalStorage() {
     done: JSON.parse(localStorage.getItem("done")) || [],
   };
 }
-
+/**
+ * 
+ * @param {} category 
+ * @returns 
+ */
 function getTaskCount(category) {
   if (allTasks[category]) {
     return allTasks[category].length;

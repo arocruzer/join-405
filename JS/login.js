@@ -1,7 +1,6 @@
 const urlParams = new URLSearchParams(window.location.search);
 const msg = urlParams.get("msg");
 let msgBox = document.getElementById("msgBox");
-let hero = document.getElementById("body");
 
 async function userLogIn() {
   let emailError = document.getElementById("email-error");

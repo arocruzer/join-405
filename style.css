@@ -26,25 +26,20 @@ a {
 }
 
 #main-content {
-
   width: calc(100vw - 234px);
   max-width: calc(1440px - 234px);
   display: flex;
   flex-direction: column;
-  /* height: 100vh; */
 }
 
 #frame {
   display: unset;
   background-color: #f6f7f8;
   width: 100%;
-  /*   max-width: 1440px;  Mihael */
-  /* padding: 67px 122px;  von Mihael auskommentieret*/
   justify-content: space-between;
   overflow-y: hidden;
-  /*von Martin */
   height: 100vh;
-  /*von Martin */
+
 }
 
 h1 {
@@ -100,7 +95,7 @@ button {
 .hero {
   padding-left: 16px;
   padding-right: 16px;
-  padding-top: 48px;
+  padding-top: 110px;
   display: flex;
   justify-content: center;
   align-items: flex-start;

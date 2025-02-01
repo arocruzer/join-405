@@ -24,7 +24,6 @@ button {
 .hero {
   align-items: center;
   height: 100vh;
-  padding: 0;
 }
 
 .login-window {
@@ -96,6 +95,7 @@ footer {
   padding-top: 42px;
   height: 35px;
   width: 246px;
+  padding-bottom: 40px;
 }
 
 a {

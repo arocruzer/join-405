@@ -28,49 +28,25 @@
             <hr width="88px" color="#29ABE2" size="3" />
           </div>
         </div>
-        <form oninput="allowSignup()" onsubmit="addUser(); return false;">
+        <form onchange="checkName()" oninput="allowSignup()" onsubmit="addUser(); return false;">
           <div class="input-box">
-            <input type="text" id="name" placeholder="Name" required />
+            <input oninput="checkName()" type="text" id="name" placeholder="Name" required />
             <img class="input-img" src="../Assets/person.png" alt="" />
             <div class="erorr-msg" id="name-error"></div>
           </div>
           <div class="input-box">
-            <input type="email" id="email" placeholder="Email" required />
+            <input onchange="checkEmail()" type="email" id="email" placeholder="Email" required />
             <img class="input-img" src="../Assets/mail (1).png" alt="" />
             <div class="erorr-msg" id="email-error"></div>
           </div>
           <div class="input-box">
-            <input
-              oninput="changePasswordImg()"
-              type="password"
-              id="password"
-              placeholder="Password"
-              required
-            />
-            <img
-              class="input-img"
-              onclick="showPassword()"
-              id="show-password-img"
-              src="../Assets/lock.png"
-              alt=""
-            />
+            <input onchange="checkPassword()" oninput="changePasswordImg()" type="password" id="password" placeholder="Password" required/>
+            <img class="input-img" onclick="showPassword()" id="show-password-img" src="../Assets/lock.png" alt=""/>
             <div class="erorr-msg" id="password-error"></div>
           </div>
           <div class="input-box">
-            <input
-              oninput="changePasswordImg()"
-              type="password"
-              id="repeat-password"
-              placeholder="Confirm Password"
-              required
-            />
-            <img
-              class="input-img"
-              onclick="showRepeatPassowrd()"
-              id="show-repeat-password-img"
-              src="../Assets/lock.png"
-              alt=""
-            />
+            <input onchange="checkRepeatPassword()" oninput="changePasswordImg()" type="password" id="repeat-password" placeholder="Confirm Password" required/>
+            <img class="input-img" onclick="showRepeatPassowrd()" id="show-repeat-password-img" src="../Assets/lock.png" alt=""/>
             <div class="erorr-msg" id="repeat-password-error"></div>
           </div>
           <div class="checkbox-container">

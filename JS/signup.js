@@ -1,31 +1,59 @@
-function checkSignUp() {
-  let password = document.getElementById("password");
-  let repeatPassword = document.getElementById("repeat-password");
-  let passwordError = document.getElementById("password-error");
-  let repeatPasswordError = document.getElementById("repeat-password-error");
   let userNameError = document.getElementById("name-error")
+  let emailError = document.getElementById("email-error");
 
-  passwordError.innerHTML = "";
-  repeatPasswordError.innerHTML = "";
-  if (userName.value.length === 0) {
-    userNameError.style.display = "flex";
-    userNameError.innerHTML = "Please enter your name"
+
+  function checkSignUp() {
+    let isNameValid = checkName();
+    let isEmailValid = checkEmail();
+    let isPasswordValid = checkPassword();
+    let isRepeatPasswordValid = checkRepeatPassword();
+  
+    return isNameValid && isEmailValid && isPasswordValid && isRepeatPasswordValid;
   }
-
-  if (password.value.length < 8) {
-    passwordError.style.display = "flex";
-    passwordError.innerHTML = "Password must have at least 8 characters.";
-    return false;
+  
+  function checkName() {
+    if (userName.value.length === 0) {
+      userNameError.style.display = "flex";
+      userNameError.innerHTML = "Please enter your name";
+      return false;
+    } else {
+      userNameError.innerHTML = "";
+      return true;
+    }
   }
-
-  if (password.value !== repeatPassword.value) {
-    repeatPasswordError.style.display = "flex";
-    repeatPasswordError.innerHTML = "Your passwords don't match. Please try again.";
-    return false;
+  
+  function checkEmail() {
+    if (!isValidEmail(email.value)) {
+      emailError.style.display = "flex";
+      emailError.innerHTML = "Please enter a valid email address.";
+      return false;
+    } else {
+      emailError.innerHTML = "";
+      return true;
+    }
   }
-
-  return true;
-}
+  
+  function checkPassword() {
+    if (password.value.length < 8) {
+      passwordError.style.display = "flex";
+      passwordError.innerHTML = "Password must have at least 8 characters.";
+      return false;
+    } else {
+      passwordError.innerHTML = "";
+      return true;
+    }
+  }
+  
+  function checkRepeatPassword() {
+    if (password.value !== repeatPassword.value) {
+      repeatPasswordError.style.display = "flex";
+      repeatPasswordError.innerHTML = "Your passwords don't match. Please try again.";
+      return false;
+    } else {
+      repeatPasswordError.innerHTML = "";
+      return true;
+    }
+  }
 
 function addUser() {
   const newUser = {
