@@ -13,6 +13,11 @@ let showRepeatPasswordImg = document.getElementById("show-repeat-password-img");
 let regardsUser = document.getElementById("regardsUser");
 let colors = ["#007bff", "#ffa500", "#800080", "#d8bfd8", "#ff69b4", "#28a745", "#ff6347", "#20b2aa"];
 
+/**
+ * Initialisiert die Seite, indem alle erforderlichen Inhalte geladen werden.
+ * Lädt Kontakte, Benutzerlogo und überprüft den Status des Benutzers.
+ * @async
+ */
 async function init() {
   await includeHTML();
   await loadAllContacts();
@@ -20,6 +25,10 @@ async function init() {
   inOrOut();
 }
 
+/**
+ * Überprüft, ob der Benutzer eingeloggt ist.
+ * Wenn ja, wird die `init`-Funktion aufgerufen, andernfalls wird der Benutzer zur Login-Seite weitergeleitet.
+ */
 function userCheck() {
   let status = JSON.parse(localStorage.getItem("loggedInUser"));
   if (status) {
@@ -29,6 +38,12 @@ function userCheck() {
   }
 }
 
+/**
+ * Lädt alle Kontakte aus dem lokalen Speicher oder von der Firebase-Datenbank.
+ * Wenn keine Kontakte im lokalen Speicher vorhanden sind, werden sie aus der Datenbank geladen.
+ * @async
+ * @param {string} [path=""] - Der Pfad zu den Kontakten in der Datenbank.
+ */
 async function loadAllContacts(path = "") {
   let savedContacts = localStorage.getItem('contacts');
   loadedContacts = savedContacts ? JSON.parse(savedContacts) : [];
@@ -52,6 +67,11 @@ async function loadAllContacts(path = "") {
   }
 }
 
+/**
+ * Formatiert ein Kontaktobjekt, um sicherzustellen, dass alle Daten im richtigen Format vorliegen.
+ * @param {Object} x - Das Kontaktobjekt.
+ * @returns {Object} Das formatierte Kontaktobjekt.
+ */
 function formatContact(x) {
   let [vorname, nachname] = x.name.split(" ");
   return {
@@ -65,6 +85,10 @@ function formatContact(x) {
   };
 }
 
+/**
+ * Ruft die Aufgaben von der Firebase-Datenbank ab und speichert sie im lokalen Speicher.
+ * @async
+ */
 async function fetchAndStoreTasks() {
   try {
     let response = await fetch(`${BASE_URL}/tasks.json`);
@@ -77,6 +101,10 @@ async function fetchAndStoreTasks() {
   }
 }
 
+/**
+ * Speichert Aufgaben im lokalen Speicher.
+ * @param {Array} loadedTasks - Die geladenen Aufgaben.
+ */
 function saveTasksInLocalStorage(loadedTasks) {
   localStorage.setItem("await-feedback",JSON.stringify(loadedTasks[0]["-OHEHGcS4ouKKz4lJ0nr"].awaitFeedback));
   localStorage.setItem("todo",JSON.stringify(loadedTasks[0]["-OHEHGcS4ouKKz4lJ0nr"].todo));
@@ -85,6 +113,9 @@ function saveTasksInLocalStorage(loadedTasks) {
   console.log(loadedTasks[0]["-OHEHGcS4ouKKz4lJ0nr"].awaitFeedback);
 }
 
+/**
+ * Ändert das Symbol zum Anzeigen des Passworts, je nachdem, ob das Passwort-Feld gefüllt ist oder nicht.
+ */
 function changePasswordImg() {
   if (password && password.value) {
     showPasswordImg.src = "../Assets/visibility_off.png";
@@ -103,6 +134,9 @@ function changePasswordImg() {
   }
 }
 
+/**
+ * Zeigt das Passwort an oder versteckt es basierend auf dem aktuellen Zustand des Passwort-Felds.
+ */
 function showPassword() {
   if (password && password.type === "password" && password.value.length >= 1) {
     password.type = "text";
@@ -113,6 +147,9 @@ function showPassword() {
   }
 }
 
+/**
+ * Zeigt das wiederholte Passwort an oder versteckt es basierend auf dem aktuellen Zustand des Wiederholungs-Passwort-Felds.
+ */
 function showRepeatPassowrd() {
   if (
     repeatPassword &&
@@ -127,6 +164,10 @@ function showRepeatPassowrd() {
   }
 }
 
+/**
+ * Lädt HTML-Dateien, die in der Seite eingebunden werden sollen, asynchron.
+ * @async
+ */
 async function includeHTML() {
   let includeElements = document.querySelectorAll("[w3-include-html]");
   for (let i = 0; i < includeElements.length; i++) {
@@ -141,6 +182,11 @@ async function includeHTML() {
   }
 }
 
+/**
+ * Lädt den Inhalt einer Seite in das Haupt-Element der Seite.
+ * @async
+ * @param {string} page - Der Name der Seite, die geladen werden soll.
+ */
 async function loadContent(page) {
   console.log(page);
   let element = document.getElementById("main-content");
@@ -152,6 +198,9 @@ async function loadContent(page) {
   }
 }
 
+/**
+ * Ruft das Benutzerlogo ab und zeigt es an.
+ */
 function getUserLogo() {
   let userLogo = document.getElementById("user-button");
   let user = JSON.parse(localStorage.getItem("loggedInUser"));
@@ -168,6 +217,9 @@ function getUserLogo() {
   }
 }
 
+/**
+ * Versteckt das Animationselement nach einer kurzen Verzögerung, wenn es noch nicht angezeigt wurde.
+ */
 document.addEventListener("DOMContentLoaded", () => {
   const isAnimationShown = localStorage.getItem("welcomeAnimationShown");
   const animationDiv = document.getElementById("animation");
@@ -185,10 +237,16 @@ document.addEventListener("DOMContentLoaded", () => {
     animationDiv.style.display = "none";
   }
 });
+
+/**
+ * Überprüft die Fenstergröße und ändert die Anzeige des mobilen Elements.
+ * @event window#resize
+ * @listens window#resize
+ */
 document.addEventListener("DOMContentLoaded", () => {
   let isMobile = window.innerWidth <= 830;
   let isAnimationShowSummary = localStorage.getItem("welcomeAnimationShowSummary");
-  let regardDiv = document.getElementById("regardsUser");
+  let regardDiv = document.getElementById("regardsUserMobile");
   if (!regardDiv) {
     return;
   }
@@ -205,7 +263,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-
+/**
+ * Fügt einen Klick-Effekt zu einem Element hinzu.
+ * @param {string} elementId - Die ID des Elements, das den Klick-Effekt erhalten soll.
+ */
 function addClickEffect(elementId) {
   let element = document.getElementById(elementId);
   if (element) {
@@ -226,6 +287,10 @@ function addClickEffect(elementId) {
 addClickEffect("login-click-privacy");
 addClickEffect("login-click-legal");
 
+/**
+ * Überprüft, ob ein Benutzer eingeloggt ist.
+ * Wenn nicht, wird der Benutzer zur Login-Seite weitergeleitet.
+ */
 function checkIfLoggedIn() {
   let loggedUser = localStorage.getItem('loggedInUser');
   console.log(loggedUser);

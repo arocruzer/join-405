@@ -37,6 +37,7 @@ function time() {
     greeting = "Hello";
   }
   renderRegardsUser(greeting);
+  renderRegardsUserMobile(greeting);
 }
 
 /**
@@ -54,6 +55,41 @@ function renderRegardsUser(greeting) {
     regardsUser.innerHTML = regardsUserTemplate(greeting, userName);
   }
 }
+
+function renderRegardsUserMobile(greeting) {
+  let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+  let userName = loggedInUser ? loggedInUser.name : "";
+  let regardsUser = document.getElementById("regardsUserMobile");
+
+  if (regardsUser && userName == "") {
+    regardsUser.innerHTML = regardsGastTemplate(greeting, userName);
+  } else {
+    regardsUser.innerHTML = regardsUserTemplate(greeting, userName);
+  }
+}
+
+/**
+ * Überwacht Änderungen der Fenstergröße und passt die Sichtbarkeit des Elements mit der ID "regardsUserMobile" an.
+ * Wenn das Fenster eine Breite von weniger als oder gleich 830px hat, wird das Element sichtbar gemacht.
+ * Andernfalls wird es ausgeblendet.
+ * 
+ * @event window#resize
+ * @listens window#resize
+ */
+window.addEventListener("resize", () => {
+  let isMobile = window.innerWidth <= 830;
+  let regardDiv = document.getElementById("regardsUserMobile");
+
+  if (!regardDiv) {
+    return;
+  }
+
+  if (isMobile) {
+    regardDiv.style.display = "flex";
+  } else {
+    regardDiv.style.display = "none";
+  }
+});
 
 /**
  * Lädt gespeicherte Aufgaben aus dem Local Storage.
