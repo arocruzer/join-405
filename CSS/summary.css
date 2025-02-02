@@ -117,6 +117,7 @@ span {
   display: flex;
   flex-direction: row;
   gap: 28px;
+  padding-bottom: 40px;
 }
 
 .task-status {
@@ -148,10 +149,16 @@ span {
   font-weight: 500;
 }
 
-/* .info-container:hover {
-  background-color: #2a3647;
-  color: white;
-} */
+.regards-mobile h1 {
+  font-size: 64px;
+  font-weight: 700;
+  color: #29abe2;
+}
+
+.regards-mobile h2 {
+  font-size: 47px;
+  font-weight: 500;
+}
 
 #info-container-left:hover {
   background-color: #2a3647;
@@ -266,6 +273,12 @@ a {
   justify-content: center;
 }
 
+.regards-mobile{
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+}
 @media (max-width: 1430px) {
   h1 {
     font-size: 47px;
@@ -305,7 +318,7 @@ a {
 }
 
 @media screen and (max-width: 830px) {
-  .regards {
+  .regards-mobile {
     position: absolute;
     top: 0;
     height: 100%;

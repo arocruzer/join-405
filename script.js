@@ -12,6 +12,8 @@ let showPasswordImg = document.getElementById("show-password-img");
 let showRepeatPasswordImg = document.getElementById("show-repeat-password-img");
 let regardsUser = document.getElementById("regardsUser");
 let colors = ["#007bff", "#ffa500", "#800080", "#d8bfd8", "#ff69b4", "#28a745", "#ff6347", "#20b2aa"];
+let isPasswordVisible = false;
+let isRepeatPasswordVisible = false;
 
 /**
  * Initialisiert die Seite, indem alle erforderlichen Inhalte geladen werden.
@@ -118,15 +120,22 @@ function saveTasksInLocalStorage(loadedTasks) {
  */
 function changePasswordImg() {
   if (password && password.value) {
-    showPasswordImg.src = "../Assets/visibility_off.png";
+    showPasswordImg.src = isPasswordVisible 
+      ? "../Assets/visibility.png" 
+      : "../Assets/visibility_off.png";
     showPasswordImg.style.cursor = "pointer";
   } else if (showPasswordImg) {
     showPasswordImg.src = "../Assets/lock.png";
     showPasswordImg.style.cursor = "default";
   }
+}
 
-  if (repeatPassword && repeatPassword.value && showRepeatPasswordImg) {
-    showRepeatPasswordImg.src = "../Assets/visibility_off.png";
+
+function changeRepeatPasswordImg() {
+  if (repeatPassword && repeatPassword.value) {
+    showRepeatPasswordImg.src = isRepeatPasswordVisible 
+      ? "../Assets/visibility.png" 
+      : "../Assets/visibility_off.png";
     showRepeatPasswordImg.style.cursor = "pointer";
   } else if (showRepeatPasswordImg) {
     showRepeatPasswordImg.src = "../Assets/lock.png";
@@ -138,12 +147,12 @@ function changePasswordImg() {
  * Zeigt das Passwort an oder versteckt es basierend auf dem aktuellen Zustand des Passwort-Felds.
  */
 function showPassword() {
-  if (password && password.type === "password" && password.value.length >= 1) {
-    password.type = "text";
-    showPasswordImg.src = "../Assets/visibility.png";
-  } else if (password && password.value.length >= 1) {
-    password.type = "password";
-    showPasswordImg.src = "../Assets/visibility_off.png";
+  if (password && password.value.length >= 1) {
+    isPasswordVisible = !isPasswordVisible;
+    password.type = isPasswordVisible ? "text" : "password";
+    showPasswordImg.src = isPasswordVisible 
+      ? "../Assets/visibility.png" 
+      : "../Assets/visibility_off.png";
   }
 }
 
@@ -151,16 +160,12 @@ function showPassword() {
  * Zeigt das wiederholte Passwort an oder versteckt es basierend auf dem aktuellen Zustand des Wiederholungs-Passwort-Felds.
  */
 function showRepeatPassowrd() {
-  if (
-    repeatPassword &&
-    repeatPassword.type === "password" &&
-    repeatPassword.value.length >= 1
-  ) {
-    repeatPassword.type = "text";
-    showRepeatPasswordImg.src = "../Assets/visibility.png";
-  } else if (repeatPassword && repeatPassword.value.length >= 1) {
-    repeatPassword.type = "password";
-    showRepeatPasswordImg.src = "../Assets/visibility_off.png";
+  if (repeatPassword && repeatPassword.value.length >= 1) {
+    isRepeatPasswordVisible = !isRepeatPasswordVisible;
+    repeatPassword.type = isRepeatPasswordVisible ? "text" : "password";
+    showRepeatPasswordImg.src = isRepeatPasswordVisible 
+      ? "../Assets/visibility.png" 
+      : "../Assets/visibility_off.png";
   }
 }
 

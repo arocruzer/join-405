@@ -56,6 +56,10 @@ function renderRegardsUser(greeting) {
   }
 }
 
+/**
+ * Zeigt eine personalisierte Begrüßung in Mobile Ansicht für den eingeloggten Benutzer an.
+ * @param {string} greeting - Die Begrüßung basierend auf der Tageszeit.
+ */
 function renderRegardsUserMobile(greeting) {
   let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
   let userName = loggedInUser ? loggedInUser.name : "";
@@ -69,29 +73,6 @@ function renderRegardsUserMobile(greeting) {
 }
 
 /**
- * Überwacht Änderungen der Fenstergröße und passt die Sichtbarkeit des Elements mit der ID "regardsUserMobile" an.
- * Wenn das Fenster eine Breite von weniger als oder gleich 830px hat, wird das Element sichtbar gemacht.
- * Andernfalls wird es ausgeblendet.
- * 
- * @event window#resize
- * @listens window#resize
- */
-window.addEventListener("resize", () => {
-  let isMobile = window.innerWidth <= 830;
-  let regardDiv = document.getElementById("regardsUserMobile");
-
-  if (!regardDiv) {
-    return;
-  }
-
-  if (isMobile) {
-    regardDiv.style.display = "flex";
-  } else {
-    regardDiv.style.display = "none";
-  }
-});
-
-/**
  * Lädt gespeicherte Aufgaben aus dem Local Storage.
  */
 function loadTasksFromLocalStorage() {
@@ -102,6 +83,7 @@ function loadTasksFromLocalStorage() {
     done: JSON.parse(localStorage.getItem("done")) || [],
   };
 }
+
 /**
  * Gibt die Anzahl der Aufgaben in einer bestimmten Kategorie zurück.
  * @param {string} category - Der Name der Aufgaben-Kategorie.
