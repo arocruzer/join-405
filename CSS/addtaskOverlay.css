@@ -36,7 +36,7 @@ hero.prio-container {
     border-radius: 8px;
   }
   
-  .btn-prio-medium {
+  .btn-prio-medium-overlay {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -226,7 +226,7 @@ hero.prio-container {
   
   .subtask-label-container {
     display: flex;
-    height: 100px;
+    height: 60px;
     overflow-y: auto;
     gap: 8px;
   }
@@ -411,6 +411,9 @@ hero.prio-container {
   }
   .line-overlay{
     color: #2a3647;
+  }
+  .span{
+    color: red;
   }
   
   @media (max-width: 1290px) {

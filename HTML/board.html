@@ -17,6 +17,8 @@
   <link rel="stylesheet" href="../CSS/board.css" />
   <link rel="stylesheet" href="../CSS/header.css" />
   <link rel="stylesheet" href="../CSS/addtaskOverlay.css" />
+  <link rel="stylesheet" href="../CSS/responsive-board.css" />
+  <link rel="stylesheet" href="../CSS/assets-board.css" />
   
 
   <script src="../script.js"></script>
@@ -25,6 +27,10 @@
   <script src="../JS/header.js"></script>
   <script src="../JS/template.js"></script>
   <script src="../JS/edit-task.js"></script>
+  <script src="../JS/edit-task-subtask.js"></script>
+  <script src="../JS/edit-task-user.js"></script>
+  <script src="../JS/open-task.js"></script>
+  <script src="../JS/template-board.js"></script>
 
     <title>Board</title>
   </head>
@@ -45,13 +51,11 @@
                 type="text"
                 id="search"
                 placeholder="Find Task"
-                oninput="searchFromSearchInput()"
-              />
+                oninput="searchFromSearchInput()"/>
               <img
                 class="search-icon"
                 src="../Assets/search.png"
-                alt="search-icon"
-              />
+                alt="search-icon"/>
             </div>
           </div>
           <div class="header-board" id="sectionBoardPlus">
@@ -62,13 +66,11 @@
                   type="text"
                   id="searchTask"
                   placeholder="Find Task"
-                  oninput="searchFromSearchTaskInput()"
-                />
+                  oninput="searchFromSearchTaskInput()"/>
                 <img
                   class="search-icon"
                   src="../Assets/search.png"
-                  alt="search-icon"
-                />
+                  alt="search-icon"/>
               </div>
 
               <div onclick="openInputPage('todo')" class="add-task-board-plus">
@@ -82,8 +84,7 @@
               class="column"
               id="todo"
               ondragover="allowDrop(event)"
-              ondrop="drop(event)"
-            >
+              ondrop="handleDrop(event)">
               <div class="column-header">
                 <h2>To Do</h2>
                 <button onclick="openInputPage('todo')" class="add-task">
@@ -99,8 +100,7 @@
               class="column"
               id="in-progress"
               ondragover="allowDrop(event)"
-              ondrop="drop(event)"
-            >
+              ondrop="handleDrop(event)">
               <div class="column-header">
                 <h2>In Progress</h2>
                 <button onclick="openInputPage('in-progress')" class="add-task">
@@ -112,21 +112,19 @@
               </div>
               <div
                 class="task-container in-progress"
-                id="in-progress-tasks"
-              ></div>
+                id="in-progress-tasks">
+              </div>
             </div>
             <div
               class="column"
               id="await-feedback"
               ondragover="allowDrop(event)"
-              ondrop="drop(event)"
-            >
+              ondrop="handleDrop(event)">
               <div class="column-header">
                 <h2>Await Feedback</h2>
                 <button
                   onclick="openInputPage('await-feedback')"
-                  class="add-task"
-                >
+                  class="add-task">
                   +
                 </button>
               </div>
@@ -142,8 +140,7 @@
               class="column"
               id="done"
               ondragover="allowDrop(event)"
-              ondrop="drop(event)"
-            >
+              ondrop="handleDrop(event)">
               <div class="column-header">
                 <h2>Done</h2>
                 <div></div>
@@ -188,12 +185,12 @@
           <div class="form-container">
             <div class="form-left">
               <div class="input-containers">
-                <p>Title<span>*</span></p>
+                <p>Title<span class="span">*</span></p>
                 <input class="title-input" type="text" placeholder="Enter a title" id="title-input" onchange="clearTitleError()"/>
                 <div class="erorr-msg" id="title-error"></div>
               </div>
               <div class="input-containers">
-                <p>Description<span>*</span></p>
+                <p>Description<span class="span">*</span></p>
                 <textarea class="description-input" placeholder="Enter a Description" id="description" onchange="clearDescriptionError()"></textarea>
                 <div class="erorr-msg description-error" id="description-error"></div>
               </div>
@@ -212,7 +209,7 @@
             <hr />
             <div class="form-right">
               <div class="input-containers">
-                <p>Due date<span>*</span></p>
+                <p>Due date<span class="span">*</span></p>
                 <input class="date-input" type="date" id="date-input" onchange="clearDateError()"/>
                 <div class="erorr-msg" id="date-error"></div>
               </div>
@@ -220,7 +217,7 @@
                 <p>Prio</p>
                 <div class="prio-btn-container">
                   <button onclick="changeColorPrioBtnOverlay('urgent')" id="btn-urgent-overlay" class="btn-prio-urgent">Urgent<img id="urgent-img-overlay" src="../Assets/prio_urgent.png" alt="Urgent"/></button>
-                  <button onclick="changeColorPrioBtnOverlay('medium')" id="btn-medium-overlay" class="btn-prio-medium">Medium<img id="medium-img-overlay" src="../Assets/prio_medium.png" alt="Medium"/></button>
+                  <button onclick="changeColorPrioBtnOverlay('medium')" id="btn-medium-overlay" class="btn-prio-medium-overlay">Medium<img id="medium-img-overlay" src="../Assets/prio_medium.png" alt="Medium"/></button>
                   <button onclick="changeColorPrioBtnOverlay('low')" id="btn-low-overlay" class="btn-prio-low">Low<img id="low-img-overlay" src="../Assets/prio_low.png" alt="Low"/></button>
                 </div>
               </div>
@@ -273,6 +270,7 @@
       <script src="../JS/add-task-overlay.js"></script>
       <script src="../JS/add-task-overlay-subtask.js"></script>
       <script src="../JS/add-task-overlay-prio.js"></script>
+      <script src="../JS/template-board.js"></script>
     </div>
   </body>
 </html>
