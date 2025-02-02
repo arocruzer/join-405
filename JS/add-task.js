@@ -108,7 +108,6 @@ function addedUsers() {
   let maxVisibleUsers = 4;
   addedUsers.innerHTML = "";
 
-
   selectedUsers.slice(0, maxVisibleUsers).forEach((user) => {
     let initials = user.initialien;
 

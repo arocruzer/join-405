@@ -130,7 +130,9 @@ function changePasswordImg() {
   }
 }
 
-
+/**
+ * Ändert das Symbol zum Anzeigen des wiederholten Passworts, je nachdem, ob das Passwort-Feld gefüllt ist oder nicht.
+ */
 function changeRepeatPasswordImg() {
   if (repeatPassword && repeatPassword.value) {
     showRepeatPasswordImg.src = isRepeatPasswordVisible 
