@@ -8,16 +8,15 @@
  * @returns {string} - HTML string of the contact element.
  */
 function renderAddToTaskContacts(color, initials, user, index, isChecked) {
-    return `
-      <div class="contact ${isChecked ? "selected-user" : ""}" onclick="checkBoxUserTask(${index}, event)">
-        <div class="name-and-img">
-          <div class="initials-circle" style="background-color: ${color};">
-            ${initials}
-          </div>
-          <p>${user.name}</p>
-        </div>
-        <input onclick="checkBoxUserTask(${index}, event)" type="checkbox" ${isChecked} name="checkbox">
-      </div>`;
+    return `<div class="contact ${isChecked ? "selected-user" : ""}" onclick="checkBoxUserTask(${index}, event)">
+                <div class="name-and-img">
+                    <div class="initials-circle" style="background-color: ${color};">
+                        ${initials}
+                    </div>
+                    <p>${user.name}</p>
+                </div>
+                <input onclick="checkBoxUserTask(${index}, event)" type="checkbox" ${isChecked} name="checkbox">
+            </div>`;
 }
 
 /**
@@ -27,8 +26,7 @@ function renderAddToTaskContacts(color, initials, user, index, isChecked) {
  * @returns {string} - HTML string of the initials circle.
  */
 function renderAddedUsers(color, initials) {
-    return `
-            <div class="initials-circle" style="background-color: ${color};">
+    return `<div class="initials-circle" style="background-color: ${color};">
                 ${initials}
             </div>`;
 }
@@ -39,11 +37,9 @@ function renderAddedUsers(color, initials) {
  * @returns {string} - HTML string of the placeholder element.
  */
 function renderAddedUsersPlaceholder(countText) {
-    return `
-      <div class="initials-circle" style="background-color: gray;">
-        ${countText}
-      </div>
-    `;
+    return `<div class="initials-circle" style="background-color: gray;">
+                ${countText}
+            </div>`;
 }
 
 /**
@@ -89,13 +85,12 @@ function renderUserLogo(initials, color, user) {
  * @returns {string} - Das generierte HTML.
  */
 function renderCurrentLetter(currentLetter) {
-    return `
-    <div class="contacts-section-header">
-        <h3>${currentLetter}</h3>
-        <div class="seperation-line"></div>
-    </div>
-    <div class="contacts-container" id="contact-container-${currentLetter}">    
-    </div>`;
+    return `<div class="contacts-section-header">
+                    <h3>${currentLetter}</h3>
+                <div class="seperation-line"></div>
+            </div>
+            <div class="contacts-container" id="contact-container-${currentLetter}">    
+            </div>`;
 }
 
 /**
@@ -105,14 +100,13 @@ function renderCurrentLetter(currentLetter) {
  * @returns {string} - Das generierte HTML.
  */
 function renderCurrentContacts(index, initialien) {
-    return `
-        <div class="contact" id="contact-id-${index}" onclick="openContactDetailsOverlay(${index})">
-            <div class="contact-avatar">${initialien}</div>
-            <div class="contact-avatar-infos">
-                <span>${loadedContacts[index].name}</span>
-                <a href="mailto:${loadedContacts[index].email}">${loadedContacts[index].email}</a>
+    return `<div class="contact" id="contact-id-${index}" onclick="openContactDetailsOverlay(${index})">
+                <div class="contact-avatar">${initialien}</div>
+                <div class="contact-avatar-infos">
+                    <span>${loadedContacts[index].name}</span>
+                    <a href="mailto:${loadedContacts[index].email}">${loadedContacts[index].email}</a>
+                </div>
             </div>
-        </div>
     `;
 }
 
@@ -130,8 +124,7 @@ function renderContactDetailPage() {
             <p>Better with a team</p>  
         </div>
     </div>  
-    <div class="edit-contact-details-overlay d-none" id="edit-contact-details-overlay-id"></div>
-    `;
+    <div class="edit-contact-details-overlay d-none" id="edit-contact-details-overlay-id"></div>`;
 }
 
 /**
@@ -172,8 +165,7 @@ function HTMLopenContactDetailsOverlayMobile(index) {
                     <span>Delete</span>
                 </div>
             </div>
-        </div>
-    `;
+        </div>`;
 }
 
 /**
@@ -213,9 +205,7 @@ function HTMLopenContactDetailsOverlay(index) {
         <a href="#">${loadedContacts[index].email}</a>
         <h5>Phone</h5>
         <a href="#">${loadedContacts[index].phone}</a>
-    </div>
-   
-`;
+    </div>`;
 }
 
 /**
@@ -245,8 +235,7 @@ function HTMLOpenAddContactOverlay() {
                 <button onclick="addNewContact()" class="create-button">Create contact<i class="fa-sharp-duotone fa-solid fa-check"></i></button>
             </div>
         </div>
-    </div>
-    `;
+    </div>`;
 }
 
 /**
@@ -341,8 +330,7 @@ function HTMLEditOverlay(index) {
                     </div>
                 </div>
             </div>
-        </div>
-    `;
+        </div>`;
 }
 
 /**
@@ -377,8 +365,7 @@ function HTMLEditOverlayDesktop(index) {
                 </div>
             </div>
         </div>
-    </div>
-    `;
+    </div>`;
 }
 
 /**
@@ -407,6 +394,5 @@ function getDueDateTemplate(priorityIcon, formattedDate, priorityText) {
           <h3>${formattedDate}</h3>
           <p>Upcoming Deadline</p>
         </div>
-      </div>
-    `;
+      </div>`;
 }

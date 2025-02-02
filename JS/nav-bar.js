@@ -1,3 +1,9 @@
+/**
+ * Lädt ein rechtliches Dokument für das Benutzer-Menü und setzt den Inhalt in den "main-content"-Bereich.
+ * 
+ * @param {string} htmlPage - Der Name der HTML-Seite (ohne Erweiterung), die geladen werden soll.
+ * @returns {Promise<void>} Ein Promise, das bei Abschluss des Ladevorgangs aufgelöst wird.
+ */
 async function loadLegalDocumentUsrMenu(htmlPage) {
     const response = await fetch('../HTML/' + htmlPage + '.html');
     const htmlContent = await response.text();
@@ -8,6 +14,12 @@ async function loadLegalDocumentUsrMenu(htmlPage) {
     toggleUsrMenu();
 }
 
+/**
+ * Lädt ein rechtliches Dokument und setzt den Inhalt in den "main-content"-Bereich.
+ * 
+ * @param {string} htmlPage - Der Name der HTML-Seite (ohne Erweiterung), die geladen werden soll.
+ * @returns {Promise<void>} Ein Promise, das bei Abschluss des Ladevorgangs aufgelöst wird.
+ */
 async function loadLegalDocument(htmlPage) {
     const response = await fetch('../HTML/' + htmlPage + '.html');
     const htmlContent = await response.text();
@@ -17,6 +29,10 @@ async function loadLegalDocument(htmlPage) {
     `;
 }
 
+/**
+ * Überprüft, ob der Benutzer eingeloggt ist, und passt das Design der Navigation und des Menüs an.
+ * Ändert die CSS-Klassen von verschiedenen Elementen, um den Status eines eingeloggten Benutzers darzustellen.
+ */
 function inOrOut() {
     let status = JSON.parse(localStorage.getItem("loggedInUser"));
     

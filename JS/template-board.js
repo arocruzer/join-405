@@ -1,12 +1,20 @@
+/**
+ * Erzeugt HTML für einen "OK"-Button, um Änderungen an einer Aufgabe zu speichern.
+ * 
+ * @returns {string} Das HTML für den "OK"-Button.
+ */
 function createSaveButtonHTML() {
     return `
         <button onclick="saveTaskChanges()" class="okTask-btn" id="oktaskBtn">
             OK <img src="../Assets/check.png" alt="Save">
-        </button>
-    `;
+        </button>`;
 }
 
-
+/**
+ * Erzeugt HTML für die "Edit" und "Delete" Buttons einer Aufgabe.
+ * 
+ * @returns {string} Das HTML für die Buttons zum Bearbeiten und Löschen der Aufgabe.
+ */
 function createEditAndDeleteButtonsHTML() {
     return `
         <div onclick="deleteTask()" class="delete-button">
@@ -21,7 +29,12 @@ function createEditAndDeleteButtonsHTML() {
     `;
 }
 
-
+/**
+ * Erzeugt HTML für das Bearbeiten des Titels einer Aufgabe.
+ * 
+ * @param {string} titleText - Der aktuelle Titel der Aufgabe, der im Eingabefeld angezeigt werden soll.
+ * @returns {string} Das HTML für das Titel-Bearbeitungsfeld.
+ */
 function generateTitleEditHTML(titleText) {
     return `
         <div class="input-containers">
@@ -30,7 +43,12 @@ function generateTitleEditHTML(titleText) {
         </div>`;
 }
 
-
+/**
+ * Erzeugt HTML für das Bearbeiten der Beschreibung einer Aufgabe.
+ * 
+ * @param {string} descriptionText - Die aktuelle Beschreibung der Aufgabe, die im Textbereich angezeigt werden soll.
+ * @returns {string} Das HTML für das Beschreibung-Bearbeitungsfeld.
+ */
 function generateDescriptionEditHTML(descriptionText) {
     return `
         <div class="input-containers">
@@ -39,7 +57,12 @@ function generateDescriptionEditHTML(descriptionText) {
         </div>`;
 }
 
-
+/**
+ * Erzeugt HTML für das Bearbeiten des Fälligkeitsdatums einer Aufgabe.
+ * 
+ * @param {string} dueDateText - Das aktuelle Fälligkeitsdatum der Aufgabe, das im Datumsfeld angezeigt werden soll.
+ * @returns {string} Das HTML für das Fälligkeitsdatum-Bearbeitungsfeld.
+ */
 function generateDueDateEditHTML(dueDateText) {
     const formattedDate = formatDateForInput(dueDateText);
     return `
@@ -48,7 +71,14 @@ function generateDueDateEditHTML(dueDateText) {
         </div>`;
 }
 
-
+/**
+ * Erzeugt HTML für eine Subtask mit einer Checkbox, Text und den Bearbeitungs-/Lösch-Buttons.
+ * 
+ * @param {string} subtask - Der Text der Subtask.
+ * @param {number} index - Der Index der Subtask, um sie eindeutig zu identifizieren.
+ * @param {boolean} isChecked - Gibt an, ob die Subtask als erledigt markiert ist.
+ * @returns {string} Das generierte HTML für die Subtask.
+ */
 function generateSubtaskHTML(subtask, index, isChecked) {
     return `
         <div class="subtask-items" id="subtask-${index}">
@@ -70,7 +100,13 @@ function generateSubtaskHTML(subtask, index, isChecked) {
         </div>`;
 }
 
-
+/**
+ * Erzeugt HTML für die Bearbeitung einer Subtask.
+ * 
+ * @param {string} subtaskText - Der Text der Subtask, die bearbeitet wird.
+ * @param {number} index - Der Index der Subtask, um sie eindeutig zu identifizieren.
+ * @returns {string} Das generierte HTML für das Bearbeitungsformular der Subtask.
+ */
 function generateEditSubtaskHTML(subtaskText, index) {
     return `
         <div class="subtask-edit-items">
@@ -85,47 +121,37 @@ function generateEditSubtaskHTML(subtaskText, index) {
         </div>`;
 }
 
-
+/**
+ * Erzeugt HTML für das Hinzufügen einer neuen Subtask.
+ * 
+ * @returns {string} Das generierte HTML für das Eingabefeld und die Schaltflächen zum Hinzufügen einer Subtask.
+ */
 function createAddSubtaskHTML() {
     return `
         <div class="add-subtask-container">
             <div class="subtask-container">
-                <input 
-                    oninput="toggleButtonVisibility()" 
-                    class="subtask-input" 
-                    type="text" 
-                    placeholder="Add new subtask" 
-                    id="newSubtask"
-                />
-                <img 
-                    onclick="toggleButtonVisibility(true)" 
-                    id="plusButton" 
-                    class="plus-img" 
-                    src="../Assets/Subtasks +.png" 
-                    alt="Add"
-                />
-                <button 
-                    class="add-subtask" 
-                    id="confirmButton" 
-                    onclick="addSubtasks()"
-                >
+                <input oninput="toggleButtonVisibility()" class="subtask-input" type="text" placeholder="Add new subtask" id="newSubtask">
+                <img onclick="toggleButtonVisibility(true)" id="plusButton" class="plus-img" src="../Assets/Subtasks +.png" alt="Add" />
+                <button class="add-subtask" id="confirmButton" onclick="addSubtasks()">
                     <img src="../Assets/check_blue.png" alt="Confirm"/>
                 </button>
                 <span class="linie" id="linie" onclick="cancelSubtask()">|</span>
-                <button 
-                    class="cancel-subtask" 
-                    id="cancelTask" 
-                    onclick="cancelSubtask()"
-                >
+                <button class="cancel-subtask" id="cancelTask" onclick="cancelSubtask()">
                     <img src="../Assets/iconoir_cancel.png" alt="Cancel"/>
                 </button>
             </div>
         </div>
-        <div id="subtaskList" class="subtask-list"></div>
-    `;
+        <div id="subtaskList" class="subtask-list"></div>`;
 }
 
-
+/**
+ * Erzeugt HTML für ein Benutzer-Element mit einem Kontrollkästchen und einem Avatar.
+ * 
+ * @param {Object} user - Das Benutzerobjekt, das die Informationen über den Benutzer enthält.
+ * @param {number} index - Der Index des Benutzers.
+ * @param {boolean} isChecked - Gibt an, ob der Benutzer als ausgewählt markiert ist.
+ * @returns {string} Das generierte HTML für das Benutzer-Element.
+ */
 function createUserElement(user, index, isChecked) {
     return `
         <div class="contact ${isChecked ? 'checked' : ''}" onclick="checkBoxUserTask(${index})">
@@ -142,7 +168,11 @@ function createUserElement(user, index, isChecked) {
     `;
 }
 
-
+/**
+ * Erzeugt HTML für das Benutzerbearbeitungsformular mit einem Dropdown-Menü und der Kontaktliste.
+ * 
+ * @returns {string} Das generierte HTML für das Benutzerbearbeitungsformular.
+ */
 function generateUserEditHTML() {
     return `
         <div onclick="openDropDownMenuUser()" class="drop-down">
@@ -156,7 +186,12 @@ function generateUserEditHTML() {
     `;
 }
 
-
+/**
+ * Erzeugt HTML für die Prioritäts-Buttons, die es dem Benutzer ermöglichen, die Priorität einer Aufgabe zu ändern.
+ * 
+ * @param {string} currentPriority - Die aktuelle Priorität der Aufgabe (z. B. 'urgent', 'medium', 'low').
+ * @returns {string} Das generierte HTML für die Prioritäts-Buttons.
+ */
 function generatePriorityButtons(currentPriority) {
     return` 
         <div class="prio-btn-container">
@@ -166,7 +201,20 @@ function generatePriorityButtons(currentPriority) {
         </div>`
 }
 
-
+/**
+ * Erzeugt HTML für eine Aufgabe mit den zugehörigen Informationen wie Titel, Beschreibung, Fortschritt und Benutzerzuweisungen.
+ * 
+ * @param {Object} task - Das Aufgabenobjekt, das die Details der Aufgabe enthält.
+ * @param {string} task.id - Die ID der Aufgabe.
+ * @param {string} task.category - Die Kategorie der Aufgabe (z.B. "Technical Task" oder "User Story").
+ * @param {string} task.title - Der Titel der Aufgabe.
+ * @param {string} task.description - Die Beschreibung der Aufgabe.
+ * @param {Array} task.subtasks - Die Liste der Subtasks, die der Aufgabe zugeordnet sind.
+ * @param {Array} task.completedSubtasks - Die Liste der abgeschlossenen Subtasks.
+ * @param {Array} task.assignedUsers - Die Benutzer, die der Aufgabe zugewiesen sind.
+ * @param {string} task.priority - Die Priorität der Aufgabe (z.B. "low", "medium", "urgent").
+ * @returns {string} Das generierte HTML für die Aufgabe.
+ */
 function renderTask(task) {
     return `
         <div class="user-card" draggable="true" id="${task.id}" ondragstart="drag(event)" onclick="openTaskDetails('${task.id}')">
@@ -230,7 +278,13 @@ function renderTask(task) {
     `;
 }
 
-
+/**
+ * Erzeugt HTML für die Subtask-Überlagerung mit Bearbeitungs- und Löschen-Optionen.
+ * 
+ * @param {string} subtask - Der Text der Subtask.
+ * @param {number} index - Der Index der Subtask.
+ * @returns {string} Das generierte HTML für die Subtask-Überlagerung.
+ */
 function getSubtasksTemplateOverlay(subtask, index) {
     return `
         <div class="subtask-label-overlay" id="subtask-label-${index}">
@@ -255,7 +309,16 @@ function getSubtasksTemplateOverlay(subtask, index) {
         </div>`;
 }
 
-
+/**
+ * Erzeugt HTML für das Hinzufügen von Benutzern zur Aufgabe im Overlay.
+ * 
+ * @param {string} colorOverlay - Die Hintergrundfarbe des Benutzer-Avatars.
+ * @param {string} initialsOverlay - Die Initialen des Benutzers.
+ * @param {Object} user - Das Benutzerobjekt.
+ * @param {number} index - Der Index des Benutzers.
+ * @param {boolean} isCheckedOverlay - Gibt an, ob der Benutzer ausgewählt wurde.
+ * @returns {string} Das generierte HTML für das Hinzufügen des Benutzers.
+ */
 function renderAddToTaskContactsOverlay(colorOverlay, initialsOverlay, user, index, isCheckedOverlay) {
     return `
       <div class="contact-overlay ${isCheckedOverlay ? "selected-user" : ""}" onclick="checkBoxUserTaskOverlay(${index}, event)">
@@ -269,7 +332,13 @@ function renderAddToTaskContactsOverlay(colorOverlay, initialsOverlay, user, ind
       </div>`;
 }
 
-
+/**
+ * Erzeugt HTML für die hinzugefügten Benutzer im Overlay.
+ * 
+ * @param {string} colorOverlay - Die Hintergrundfarbe des Benutzer-Avatars.
+ * @param {string} initialsOverlay - Die Initialen des Benutzers.
+ * @returns {string} Das generierte HTML für den hinzugefügten Benutzer.
+ */
 function renderAddedUsersOverlay(colorOverlay, initialsOverlay) {
     return `
               <div class="initials-circle" style="background-color: ${colorOverlay};">
