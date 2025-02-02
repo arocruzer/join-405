@@ -1,3 +1,12 @@
+/**
+ * Renders a contact entry for adding a user to a task.
+ * @param {string} color - Background color for the initials circle.
+ * @param {string} initials - Initials of the user.
+ * @param {Object} user - User object containing user details.
+ * @param {number} index - Index of the user in the list.
+ * @param {boolean} isChecked - Whether the checkbox is checked.
+ * @returns {string} - HTML string of the contact element.
+ */
 function renderAddToTaskContacts(color, initials, user, index, isChecked) {
     return `
       <div class="contact ${isChecked ? "selected-user" : ""}" onclick="checkBoxUserTask(${index}, event)">
@@ -11,15 +20,24 @@ function renderAddToTaskContacts(color, initials, user, index, isChecked) {
       </div>`;
 }
 
-
+/**
+ * Renders the user's initials inside a colored circle.
+ * @param {string} color - Background color for the initials circle.
+ * @param {string} initials - Initials of the user.
+ * @returns {string} - HTML string of the initials circle.
+ */
 function renderAddedUsers(color, initials) {
-  return `
+    return `
             <div class="initials-circle" style="background-color: ${color};">
                 ${initials}
             </div>`;
 }
 
-
+/**
+ * Renders a placeholder for added users when there are multiple users.
+ * @param {string} countText - Text indicating the number of additional users.
+ * @returns {string} - HTML string of the placeholder element.
+ */
 function renderAddedUsersPlaceholder(countText) {
     return `
       <div class="initials-circle" style="background-color: gray;">
@@ -28,17 +46,33 @@ function renderAddedUsersPlaceholder(countText) {
     `;
 }
 
-
+/**
+ * Generates an HTML template for a greeting message for guests.
+ * @param {string} greeting - The greeting text.
+ * @param {string} userName - The name of the user.
+ * @returns {string} - HTML string of the greeting template.
+ */
 function regardsGastTemplate(greeting, userName) {
-  return `<h2>${greeting}</h2> <h1>${userName}</h1>`;
+    return `<h2>${greeting}</h2> <h1>${userName}</h1>`;
 }
 
-
+/**
+ * Generates an HTML template for a greeting message for registered users.
+ * @param {string} greeting - The greeting text.
+ * @param {string} userName - The name of the user.
+ * @returns {string} - HTML string of the greeting template.
+ */
 function regardsUserTemplate(greeting, userName) {
     return `<h2>${greeting},</h2> <h1>${userName}</h1>`;
 }
 
-
+/**
+ * Renders the user's logo with initials.
+ * @param {string} initials - User initials.
+ * @param {string} color - Background color for the initials.
+ * @param {Object} user - User object.
+ * @returns {string} - HTML string of the user logo.
+ */
 function renderUserLogo(initials, color, user) {
     return `<div>
                 <div class="name-and-img">
@@ -49,8 +83,12 @@ function renderUserLogo(initials, color, user) {
             </div>`;
 }
 
-
-function renderCurrentLetter(currentLetter){
+/**
+ * Erstellt das HTML für den Abschnitt eines Buchstabens mit Kontakten.
+ * @param {string} currentLetter - Der aktuelle Buchstabe.
+ * @returns {string} - Das generierte HTML.
+ */
+function renderCurrentLetter(currentLetter) {
     return `
     <div class="contacts-section-header">
         <h3>${currentLetter}</h3>
@@ -60,7 +98,12 @@ function renderCurrentLetter(currentLetter){
     </div>`;
 }
 
-
+/**
+ * Erstellt das HTML für einen einzelnen Kontakt.
+ * @param {number} index - Der Index des Kontakts.
+ * @param {string} initialien - Die Initialen des Kontakts.
+ * @returns {string} - Das generierte HTML.
+ */
 function renderCurrentContacts(index, initialien) {
     return `
         <div class="contact" id="contact-id-${index}" onclick="openContactDetailsOverlay(${index})">
@@ -73,8 +116,10 @@ function renderCurrentContacts(index, initialien) {
     `;
 }
 
-
-function renderContactDetailPage(){
+/**
+ * Rendert die Kontakt-Detailseite.
+ */
+function renderContactDetailPage() {
     let contentRef = document.getElementById('contact-details-wrapper-id');
     contentRef.innerHTML = ``;
     contentRef.innerHTML = `
@@ -89,9 +134,13 @@ function renderContactDetailPage(){
     `;
 }
 
-
-function HTMLopenContactDetailsOverlayMobile(index){
-    return`
+/**
+ * Erstellt das HTML für die Kontakt-Detail-Ansicht auf mobilen Geräten.
+ * @param {number} index - Der Index des Kontakts.
+ * @returns {string} - Das generierte HTML.
+ */
+function HTMLopenContactDetailsOverlayMobile(index) {
+    return `
         <div class="contact-detail-title-wrapper">
             <div class="page-title">
                 <h1>Contacts</h1>
@@ -127,9 +176,13 @@ function HTMLopenContactDetailsOverlayMobile(index){
     `;
 }
 
-
-function HTMLopenContactDetailsOverlay(index){
-    return`
+/**
+ * Erstellt das HTML für die Kontakt-Detail-Ansicht auf Desktops.
+ * @param {number} index - Der Index des Kontakts.
+ * @returns {string} - Das generierte HTML.
+ */
+function HTMLopenContactDetailsOverlay(index) {
+    return `
     <div class="contact-detail-title-wrapper">
         <div class="page-title-desktop">
             <h1>Contacts</h1>
@@ -165,9 +218,12 @@ function HTMLopenContactDetailsOverlay(index){
 `;
 }
 
-
-function HTMLOpenAddContactOverlay(){
-    return`
+/**
+ * Erstellt das HTML für das Overlay zum Hinzufügen eines Kontakts.
+ * @returns {string} - Das generierte HTML.
+ */
+function HTMLOpenAddContactOverlay() {
+    return `
     <div class="overlay-edit-contact">
         <div class="middle-avatar">TW</div>
         <div class="upper-half">
@@ -193,9 +249,12 @@ function HTMLOpenAddContactOverlay(){
     `;
 }
 
-
-function HTMLOpenAddContactOverlayDesktop(){
-    return`
+/**
+ * Erstellt das HTML für das Overlay zum Hinzufügen eines Kontakts.
+ * @returns {string} - Das generierte HTML.
+ */
+function HTMLOpenAddContactOverlayDesktop() {
+    return `
     <div class="overlay-edit-contact-desktop">
         <div class="middle-avatar-desktop gray-bg"><img src="../Assets/person.svg" alt=""></div>
         <div class="left-part">
@@ -224,7 +283,12 @@ function HTMLOpenAddContactOverlayDesktop(){
     </div>`;
 }
 
-
+/**
+ * Erstellt das HTML für eine einzelne Subtask-Vorlage.
+ * @param {string} subtask - Der Subtask-Text.
+ * @param {number} index - Der Index des Subtasks.
+ * @returns {string} - Das generierte HTML.
+ */
 function getSubtasksTemplate(subtask, index) {
     return `
         <div class="subtask-label" id="subtask-label-${index}">
@@ -247,9 +311,13 @@ function getSubtasksTemplate(subtask, index) {
         </div>`;
 }
 
-
-function HTMLEditOverlay(index){
-    return`
+/**
+ * Erstellt das HTML für ein Overlay zum Bearbeiten eines Kontakts.
+ * @param {number} index - Der Index des Kontakts.
+ * @returns {string} - Das generierte HTML.
+ */
+function HTMLEditOverlay(index) {
+    return `
         <div class="overlay-edit-contact">
             <div class="middle-avatar">${loadedContacts[index].initialien}</div>
             <div class="upper-half">
@@ -277,9 +345,14 @@ function HTMLEditOverlay(index){
     `;
 }
 
-
-function HTMLEditOverlayDesktop(index){
-    return`
+/**
+ * Generiert HTML für ein Overlay zur Bearbeitung eines Kontakts auf dem Desktop.
+ * 
+ * @param {number} index - Der Index des zu bearbeitenden Kontakts in der `loadedContacts`-Datenstruktur.
+ * @returns {string} Das generierte HTML für das Overlay.
+ */
+function HTMLEditOverlayDesktop(index) {
+    return `
     <div class="overlay-edit-contact-desktop">
         <div class="middle-avatar-desktop">${loadedContacts[index].initialien}</div>
         <div class="left-part">
@@ -308,7 +381,14 @@ function HTMLEditOverlayDesktop(index){
     `;
 }
 
-
+/**
+ * Generiert das HTML-Template für eine Aufgabe mit einem Fälligkeitsdatum und Prioritätsinformationen.
+ * 
+ * @param {string} priorityIcon - Der Pfad zum Icon, das die Priorität der Aufgabe darstellt.
+ * @param {string} formattedDate - Das formatierte Datum, das das Fälligkeitsdatum der Aufgabe darstellt.
+ * @param {string} priorityText - Der Text, der die Priorität der Aufgabe beschreibt (z.B. "High", "Medium", "Low").
+ * @returns {string} Das generierte HTML für die Anzeige der Aufgabe mit Priorität und Fälligkeitsdatum.
+ */
 function getDueDateTemplate(priorityIcon, formattedDate, priorityText) {
     const priorityClass = getPriorityClass(priorityText.toLowerCase());
     return `
