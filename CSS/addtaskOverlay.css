@@ -224,8 +224,7 @@ hero.prio-container {
     justify-content: space-between;
   }
   
-  .subtask-label-container {
-    display: flex;
+  .subtask-label-container-overlay {
     height: 60px;
     overflow-y: auto;
     gap: 8px;
